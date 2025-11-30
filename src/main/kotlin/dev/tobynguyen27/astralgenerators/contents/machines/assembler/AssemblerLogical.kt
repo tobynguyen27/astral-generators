@@ -191,7 +191,9 @@ object AssemblerLogical {
     private fun updateActiveState(level: Level, entity: AssemblerEntity, active: Boolean) {
         val currentState = level.getBlockState(entity.blockPos)
 
-        if(currentState.getValue(Assembler.ACTIVE) == active) { return }
+        if (currentState.getValue(Assembler.ACTIVE) == active) {
+            return
+        }
 
         val newState = currentState.setValue(Assembler.ACTIVE, active)
         level.setBlock(entity.blockPos, newState, 3)
