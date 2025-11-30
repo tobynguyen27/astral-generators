@@ -1,0 +1,15 @@
+{
+  "block.astralgenerators.assembler": "Assembler",
+  "block.astralgenerators.calvar_block": "Calvar Block",
+  "block.astralgenerators.calvar_casing": "Calvar Casing",
+  "item.astralgenerators.astralnomicon": "Astralnomicon",
+  "item.astralgenerators.calvar_dust": "Calvar Dust",
+  "item.astralgenerators.calvar_ingot": "Calvar Ingot",
+  "item.astralgenerators.calvar_nugget": "Calvar Nugget",
+  "item.astralgenerators.calvar_plate": "Calvar Plate",
+  "item.astralgenerators.calvar_rod": "Calvar Rod",
+  "itemGroup.astralgenerators.general": "Astral Generators",
+  "text.capacity": "Capacity",
+  "text.energy": "Energy",
+  "text.stored": "Stored"
+}
