@@ -39,7 +39,7 @@ object BlockRegistry {
                 val modelFactory: (String, ResourceLocation) -> ModelFile = { suffix, fronTexture ->
                     prov
                         .models()
-                        .withExistingParent(name + suffix, prov.modLoc("block/cube_2_layer_front"))
+                        .withExistingParent(name + suffix, prov.modLoc("block/cube_2_layer/front"))
                         .texture("top_north", fronTexture)
                         .texture("all", casingTexture)
                 }
@@ -135,7 +135,7 @@ object BlockRegistry {
                     ctx.entry,
                     prov
                         .models()
-                        .withExistingParent(ctx.name, prov.modLoc("block/cube_2_layer_all"))
+                        .withExistingParent(ctx.name, prov.modLoc("block/cube_2_layer/all"))
                         .texture("bot_all", bottomLayer)
                         .texture("top_all", topLayer),
                 )
