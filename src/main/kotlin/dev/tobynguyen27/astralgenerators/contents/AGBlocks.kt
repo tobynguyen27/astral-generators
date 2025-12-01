@@ -7,6 +7,7 @@ import dev.tobynguyen27.astralgenerators.contents.blocks.HighMagneticCoil
 import dev.tobynguyen27.astralgenerators.contents.blocks.MatrixCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineVent
+import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMController
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlock
@@ -59,6 +60,13 @@ object AGBlocks {
                 ::BoilerControllerBlock,
                 "boiler_casing",
             )
+            .register()
+    val AM_CONTROLLER =
+        BlockRegistry.registerControllerBlock(
+            AMController.ID,
+            ::AMController,
+            "matrix_casing",
+        )
             .register()
 
     val STEAM_TURBINE_VENT: BlockEntry<SteamTurbineVent> =

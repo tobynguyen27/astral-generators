@@ -9,6 +9,7 @@
     "astralgenerators:calvar_block",
     "astralgenerators:assembler",
     "astralgenerators:boiler_controller",
+    "astralgenerators:amalgamation_matrix_controller",
     "astralgenerators:steam_turbine_vent"
   ]
 }

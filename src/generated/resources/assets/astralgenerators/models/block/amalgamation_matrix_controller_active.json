@@ -1,0 +1,7 @@
+{
+  "parent": "astralgenerators:block/cube_2_layer/front",
+  "textures": {
+    "top_north": "astralgenerators:block/machines/amalgamation_matrix_controller_active",
+    "all": "astralgenerators:block/casings/matrix_casing"
+  }
+}
