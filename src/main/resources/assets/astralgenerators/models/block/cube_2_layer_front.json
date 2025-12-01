@@ -1,0 +1,18 @@
+{
+    "parent": "astralgenerators:block/cube_2_layer",
+    "textures": {
+        "particle": "#all",
+        "bot_down": "#all",
+        "bot_up": "#all",
+        "bot_north": "#all",
+        "bot_east": "#all",
+        "bot_south": "#all",
+        "bot_west": "#all",
+        "top_down": "#all",
+        "top_up": "#all",
+        "top_north": "#top_north",
+        "top_east": "#all",
+        "top_south": "#all",
+        "top_west": "#all"
+    }
+}
