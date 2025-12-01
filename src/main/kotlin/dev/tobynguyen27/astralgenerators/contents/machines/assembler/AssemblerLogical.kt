@@ -80,6 +80,7 @@ object AssemblerLogical {
             ) {
                 transaction.commit()
                 blockEntity.CACHED_RECIPE = recipe
+                blockEntity.MAX_PROGRESS = recipe.duration
                 blockEntity.PROGRESS = 0
                 blockEntity.setChanged()
             }
@@ -191,11 +192,11 @@ object AssemblerLogical {
     private fun updateActiveState(level: Level, entity: AssemblerEntity, active: Boolean) {
         val currentState = level.getBlockState(entity.blockPos)
 
-        if (currentState.getValue(Assembler.ACTIVE) == active) {
+        if (currentState.getValue(Assembler.LIT) == active) {
             return
         }
 
-        val newState = currentState.setValue(Assembler.ACTIVE, active)
+        val newState = currentState.setValue(Assembler.LIT, active)
         level.setBlock(entity.blockPos, newState, 3)
 
         entity.setChanged()

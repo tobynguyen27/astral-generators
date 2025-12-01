@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
@@ -27,16 +28,16 @@ class Assembler(properties: Properties) : BaseEntityBlock(properties) {
     companion object {
         const val ID = "assembler"
         val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
-        val ACTIVE: BooleanProperty = BooleanProperty.create("active")
+        val LIT: BooleanProperty = BlockStateProperties.LIT
     }
 
     init {
         registerDefaultState(with(defaultBlockState()) { setValue(FACING, Direction.NORTH) })
-        registerDefaultState(with(defaultBlockState()) { setValue(ACTIVE, false) })
+        registerDefaultState(with(defaultBlockState()) { setValue(LIT, false) })
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING, ACTIVE)
+        builder.add(FACING, LIT)
     }
 
     override fun setPlacedBy(
@@ -49,6 +50,25 @@ class Assembler(properties: Properties) : BaseEntityBlock(properties) {
         if (placer !is Player) return
 
         level.setBlock(pos, level.getBlockState(pos).setValue(FACING, placer.direction.opposite), 3)
+    }
+
+    override fun onRemove(
+        state: BlockState,
+        level: Level,
+        pos: BlockPos,
+        newState: BlockState,
+        isMoving: Boolean,
+    ) {
+        if (state.block != newState.block) {
+            val blockEntity = level.getBlockEntity(pos)
+
+            if (blockEntity is AssemblerEntity) {
+                Containers.dropContents(level, pos, blockEntity.getItems())
+                level.updateNeighbourForOutputSignal(pos, this)
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, isMoving)
     }
 
     override fun use(

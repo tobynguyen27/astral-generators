@@ -55,14 +55,12 @@ class AssemblerEntity(
         // Container
         const val CONTAINER_SIZE = 10
 
-        // Progress
-        private val MAX_PROGRESS: Int = 100
-
         // Data (progress)
         val CONTAINER_DATA_SIZE = 2
     }
 
     // Progress
+    var MAX_PROGRESS: Int = 100
     var PROGRESS: Int = 0
     var CACHED_RECIPE: AssemblerRecipe? = null
 
