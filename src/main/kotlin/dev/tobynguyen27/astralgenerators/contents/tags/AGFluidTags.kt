@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.material.Fluid
 
-object FluidTags {
+object AGFluidTags {
     val STEAM: TagKey<Fluid> =
         TagKey.create(
             ResourceKey.createRegistryKey(ResourceLocation("c", "steam")),
