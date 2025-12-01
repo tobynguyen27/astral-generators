@@ -1,19 +1,22 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.am_controller
 
+import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
-class AMController(properties: BlockBehaviour.Properties): Block(properties) {
+class AMControllerBlock(properties: BlockBehaviour.Properties): BaseEntityBlock(properties) {
 
     companion object {
         const val ID = "amalgamation_matrix_controller"
@@ -45,6 +48,13 @@ class AMController(properties: BlockBehaviour.Properties): Block(properties) {
 
     override fun getRenderShape(state: BlockState): RenderShape {
         return RenderShape.MODEL
+    }
+
+    override fun newBlockEntity(
+        pos: BlockPos,
+        state: BlockState
+    ): BlockEntity {
+        return AGBlockEntities.AM_ENTITY.create(pos, state)
     }
 
 }

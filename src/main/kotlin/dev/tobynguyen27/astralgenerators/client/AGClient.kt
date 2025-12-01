@@ -7,6 +7,7 @@ class AGClient : ClientModInitializer {
     override fun onInitializeClient() {
         BebeClient.initialize()
 
+        AGBlockEntityRenderers.register()
         AGMenuScreens.register()
     }
 }
