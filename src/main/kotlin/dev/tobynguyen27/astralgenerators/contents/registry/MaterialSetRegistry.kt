@@ -20,8 +20,7 @@ object MaterialSetRegistry {
         factory: NonNullFunction<BlockBehaviour.Properties, T>,
         color: Int,
     ): BlockBuilder<T, Registrate> =
-        REGISTRATE.block(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+        BlockRegistry.register(name, factory)
             .blockstate { ctx, prov ->
                 prov.simpleBlock(
                     ctx.entry,

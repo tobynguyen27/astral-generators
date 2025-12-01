@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators
 import com.tterrag.registrate.Registrate
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.AGBlocks
+import dev.tobynguyen27.astralgenerators.contents.AGFluids
 import dev.tobynguyen27.astralgenerators.contents.AGItems
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
 import dev.tobynguyen27.astralgenerators.gui.AGMenus
@@ -31,6 +32,7 @@ object AstralGenerators : ModInitializer {
         registerItemGroups()
         Texts.register()
 
+        AGFluids.register()
         AGItems.register()
         AGBlocks.register()
         AGBlockEntities.register()
