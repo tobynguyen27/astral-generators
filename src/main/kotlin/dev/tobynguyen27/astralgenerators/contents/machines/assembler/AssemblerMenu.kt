@@ -9,7 +9,6 @@ import dev.tobynguyen27.astralgenerators.utils.Identifier
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
-import io.github.cottonmc.cotton.gui.widget.WBar
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.data.Insets
@@ -88,7 +87,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
                 Identifier("textures/gui/widgets/widget_progress_empty.png"),
                 Identifier("textures/gui/widgets/widget_progress_full.png"),
                 1,
-                0
+                0,
             )
         root.add(progressBar, 18, 6, 3, 3)
 
