@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 import dev.tobynguyen27.astralgenerators.gui.AGMenus
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
+import dev.tobynguyen27.astralgenerators.gui.widgets.ProgressBar
 import dev.tobynguyen27.astralgenerators.packets.S2CPackets
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
@@ -83,12 +84,11 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
 
         // Progress bar
         val progressBar =
-            WBar(
+            ProgressBar(
                 Identifier("textures/gui/widgets/widget_progress_empty.png"),
                 Identifier("textures/gui/widgets/widget_progress_full.png"),
                 1,
-                0,
-                WBar.Direction.RIGHT,
+                0
             )
         root.add(progressBar, 18, 6, 3, 3)
 

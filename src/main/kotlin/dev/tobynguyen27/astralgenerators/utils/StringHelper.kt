@@ -19,16 +19,12 @@ object StringHelper {
         return formatter.format(number)
     }
 
-    /**
-     * Calculates the percentage of [a] relative to [b] and returns it as a formatted string.
-     *
-     * The result is formatted to two decimal places (e.g., "25.00"). If [b] is 0.0, the function
-     * returns `"NaN"` to avoid division by zero.
-     */
-    fun calculateFormattedPercentage(a: Double, b: Double): String {
+    fun calculateFormattedPercentage(a: Number, b: Number, pattern: String = "0.00"): String {
         if (b == 0.0) return "NaN"
-        val percentage = (a / b) * 100
-        val format = DecimalFormat("0.00")
-        return "${format.format(percentage)}"
+
+        val percentage = (a.toDouble() / b.toDouble()) * 100
+        val format = DecimalFormat(pattern)
+
+        return format.format(percentage)
     }
 }
