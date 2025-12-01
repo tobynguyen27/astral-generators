@@ -1,0 +1,7 @@
+{
+  "parent": "astralgenerators:block/cube_2_layer/front",
+  "textures": {
+    "top_north": "astralgenerators:block/machines/boiler_controller",
+    "all": "astralgenerators:block/casings/boiler_casing"
+  }
+}

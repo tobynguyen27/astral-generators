@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "astralgenerators:block/machines/side",
+    "front": "astralgenerators:block/machines/assembler_active",
+    "top": "astralgenerators:block/machines/assembler_top_active"
+  }
+}

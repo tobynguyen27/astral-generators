@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "astralgenerators:calvar_casing",
+    "astralgenerators:boiler_casing",
+    "astralgenerators:steam_turbine_casing",
+    "astralgenerators:matrix_casing",
+    "astralgenerators:high_magnetic_coil",
+    "astralgenerators:calvar_block",
+    "astralgenerators:assembler",
+    "astralgenerators:boiler_controller",
+    "astralgenerators:steam_turbine_vent"
+  ]
+}

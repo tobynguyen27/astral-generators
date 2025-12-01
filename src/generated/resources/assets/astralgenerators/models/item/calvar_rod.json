@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astralgenerators:item/base/rod",
+    "layer1": "astralgenerators:item/base/rod_overlay",
+    "layer2": "astralgenerators:item/base/rod_secondary"
+  }
+}

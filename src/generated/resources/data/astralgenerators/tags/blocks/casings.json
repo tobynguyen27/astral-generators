@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "astralgenerators:calvar_casing",
+    "astralgenerators:boiler_casing",
+    "astralgenerators:steam_turbine_casing",
+    "astralgenerators:matrix_casing"
+  ]
+}
