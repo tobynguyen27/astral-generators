@@ -64,12 +64,14 @@ object AGBlocks {
             .register()
     val AM_CONTROLLER =
         BlockRegistry.registerControllerBlock(
-            AMControllerBlock.ID,
-            ::AMControllerBlock,
-            "matrix_casing",
-        ) .blockEntity { type, blockPos, blockState ->
-            AMControllerBlockEntity(type, blockPos, blockState)
-        }.build()
+                AMControllerBlock.ID,
+                ::AMControllerBlock,
+                "matrix_casing",
+            )
+            .blockEntity { type, blockPos, blockState ->
+                AMControllerBlockEntity(type, blockPos, blockState)
+            }
+            .build()
             .register()
 
     val STEAM_TURBINE_VENT: BlockEntry<SteamTurbineVent> =

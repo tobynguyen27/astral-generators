@@ -12,9 +12,10 @@ object AGBlockEntities {
             AGBlocks.ASSEMBLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
-    val AM_ENTITY = BlockEntityEntry.cast<AMControllerBlockEntity>(
-        AGBlocks.AM_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
-    )
+    val AM_ENTITY =
+        BlockEntityEntry.cast<AMControllerBlockEntity>(
+            AGBlocks.AM_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
 
     fun register() {}
 }

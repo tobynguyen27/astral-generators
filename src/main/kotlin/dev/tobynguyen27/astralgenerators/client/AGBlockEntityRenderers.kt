@@ -9,8 +9,7 @@ object AGBlockEntityRenderers {
     fun register() {
         BlockEntityRendererRegistry.register(
             AGBlockEntities.AM_ENTITY.get(),
-            ::AMControllerBlockEntityRenderer
+            ::AMControllerBlockEntityRenderer,
         )
     }
-
 }

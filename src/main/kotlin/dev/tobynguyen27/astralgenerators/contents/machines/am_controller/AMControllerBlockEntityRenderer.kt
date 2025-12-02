@@ -101,15 +101,15 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
         starMat.rotate(time * 0.01, Vector3.X_POS)
 
         ccrs.bind(STAR_RENDER_TYPE, bufferSource, starMat)
-        starModel.render(ccrs )
+        starModel.render(ccrs)
 
         // Space
         val spaceMat = mat.copy()
         spaceMat.scale(-0.028, 0.028, 0.028)
-        spaceMat.rotate(-time * 0.005, Vector3.Y_POS);
-        spaceMat.rotate(time * 0.005, Vector3.Z_POS);
+        spaceMat.rotate(-time * 0.005, Vector3.Y_POS)
+        spaceMat.rotate(time * 0.005, Vector3.Z_POS)
 
         ccrs.bind(SPACE_RENDER_TYPE, bufferSource, spaceMat)
-        spaceModel.render(ccrs )
+        spaceModel.render(ccrs)
     }
 }

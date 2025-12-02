@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
-class AMControllerBlock(properties: BlockBehaviour.Properties): BaseEntityBlock(properties) {
+class AMControllerBlock(properties: BlockBehaviour.Properties) : BaseEntityBlock(properties) {
 
     companion object {
         const val ID = "amalgamation_matrix_controller"
@@ -50,11 +50,7 @@ class AMControllerBlock(properties: BlockBehaviour.Properties): BaseEntityBlock(
         return RenderShape.MODEL
     }
 
-    override fun newBlockEntity(
-        pos: BlockPos,
-        state: BlockState
-    ): BlockEntity {
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return AGBlockEntities.AM_ENTITY.create(pos, state)
     }
-
 }
