@@ -31,7 +31,7 @@ object AGMenus {
             },
         )
 
-    val BASIC_INPUT_BUS =
+    val BASIC_INPUT_BUS: MenuType<BasicInputBusMenu> =
         Registry.register(
             Registry.MENU,
             Identifier(BasicInputBusMenu.ID),
@@ -39,7 +39,7 @@ object AGMenus {
                 BasicInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
             },
         )
-    val ADVANCED_INPUT_BUS =
+    val ADVANCED_INPUT_BUS: MenuType<AdvancedInputBusMenu> =
         Registry.register(
             Registry.MENU,
             Identifier(AdvancedInputBusMenu.ID),
@@ -47,7 +47,7 @@ object AGMenus {
                 AdvancedInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
             },
         )
-    val INDUSTRIAL_INPUT_BUS =
+    val INDUSTRIAL_INPUT_BUS: MenuType<IndustrialInputBusMenu> =
         Registry.register(
             Registry.MENU,
             Identifier(IndustrialInputBusMenu.ID),
