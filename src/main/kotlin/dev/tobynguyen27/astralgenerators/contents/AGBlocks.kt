@@ -12,6 +12,7 @@ import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMContr
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlock
+import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
@@ -61,6 +62,9 @@ object AGBlocks {
                 ::BoilerControllerBlock,
                 "boiler_casing",
             )
+            .blockEntity { type, blockPos, blockState ->
+                BoilerControllerBlockEntity(type, blockPos, blockState)
+            }.build()
             .register()
     val AM_CONTROLLER =
         BlockRegistry.registerControllerBlock(
