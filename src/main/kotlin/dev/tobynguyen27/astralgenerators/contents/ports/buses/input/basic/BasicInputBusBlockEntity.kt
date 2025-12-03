@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.contents.ports.buses.input
+package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic
 
 import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import net.minecraft.core.BlockPos

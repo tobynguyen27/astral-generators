@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.contents.ports.buses.input
+package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic
 
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.ports.BusBlock

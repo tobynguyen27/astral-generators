@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.contents.ports.buses.input
+package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic
 
 import dev.tobynguyen27.astralgenerators.gui.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
