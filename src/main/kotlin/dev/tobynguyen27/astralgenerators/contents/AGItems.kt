@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents
 import com.tterrag.registrate.util.entry.ItemEntry
 import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
 import dev.tobynguyen27.astralgenerators.contents.items.Astralnomicon
+import dev.tobynguyen27.astralgenerators.contents.items.Wrench
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvaRod
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarDust
@@ -15,6 +16,9 @@ object AGItems {
 
     val ASTRALNOMICON: ItemEntry<Astralnomicon> =
         REGISTRATE.item(Astralnomicon.ID, ::Astralnomicon).properties { it.stacksTo(1) }.register()
+
+    val WRENCH: ItemEntry<Wrench> =
+        REGISTRATE.item(Wrench.ID, ::Wrench).properties { it.stacksTo(1) }.register()
 
     val CALVAR_INGOT =
         MaterialSetRegistry.registerAlloyIngot(CalvarIngot.ID, ::CalvarIngot, CalvarColor.PRIMARY)
