@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
@@ -17,6 +18,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
+import net.minecraft.world.WorldlyContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -37,7 +39,7 @@ class AssemblerBlockEntity(
     MenuProvider,
     PropertyDelegateHolder,
     ExtendedScreenHandlerFactory,
-    IInventory {
+    IInventory, WorldlyContainer {
 
     companion object {
         const val ID = "assembler_entity"
@@ -55,6 +57,8 @@ class AssemblerBlockEntity(
 
         // Container
         const val CONTAINER_SIZE = 10
+        private val INPUT_SLOTS = IntArray(CONTAINER_SIZE - 1) {it}
+        private val OUTPUT_SLOT = intArrayOf(CONTAINER_SIZE - 1)
 
         // Data (progress)
         val CONTAINER_DATA_SIZE = 2
@@ -185,5 +189,30 @@ class AssemblerBlockEntity(
         buf.writeLong(fluidStorage.capacity)
         buf.writeLong(fluidStorage.amount)
         buf.writeNbt(fluidStorage.variant.toNbt())
+    }
+
+    // Inventory interact
+    override fun getSlotsForFace(side: Direction): IntArray {
+        if(side == Direction.DOWN) {
+            return OUTPUT_SLOT
+        }
+
+        return INPUT_SLOTS
+    }
+
+    override fun canPlaceItemThroughFace(
+        index: Int,
+        itemStack: ItemStack,
+        direction: Direction?
+    ): Boolean {
+        return direction != Direction.DOWN && index < CONTAINER_SIZE - 1
+    }
+
+    override fun canTakeItemThroughFace(
+        index: Int,
+        stack: ItemStack,
+        direction: Direction
+    ): Boolean {
+        return direction == Direction.DOWN && index == CONTAINER_SIZE - 1
     }
 }
