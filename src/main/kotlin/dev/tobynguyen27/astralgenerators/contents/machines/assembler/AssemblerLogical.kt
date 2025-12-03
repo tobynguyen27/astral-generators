@@ -23,9 +23,9 @@ object AssemblerLogical {
         blockEntity: AssemblerBlockEntity,
     ) {
 
-        if (blockEntity.CACHED_RECIPE === null && blockEntity.SAVED_RECIPE_ID !== null) {
+        if (blockEntity.cachedRecipe === null && blockEntity.savedRecipeId !== null) {
             val recipeManager = level.recipeManager
-            val recipeId = blockEntity.SAVED_RECIPE_ID
+            val recipeId = blockEntity.savedRecipeId
 
             val optionalRecipe = recipeManager.byKey(recipeId!!)
 
@@ -33,14 +33,14 @@ object AssemblerLogical {
                 val recipe = optionalRecipe.get()
 
                 if (recipe is AssemblerRecipe) {
-                    blockEntity.CACHED_RECIPE = recipe
+                    blockEntity.cachedRecipe = recipe
                 }
             }
 
-            blockEntity.SAVED_RECIPE_ID = null
+            blockEntity.savedRecipeId = null
         }
 
-        if (blockEntity.CACHED_RECIPE === null) {
+        if (blockEntity.cachedRecipe === null) {
             updateActiveState(level, blockEntity, false)
             if (blockEntity.inputsStorage.all { it.isResourceBlank }) {
                 return
@@ -48,19 +48,19 @@ object AssemblerLogical {
             startNewCrafting(level, blockEntity)
         } else {
             updateActiveState(level, blockEntity, true)
-            continueCrafting(blockEntity, blockEntity.CACHED_RECIPE!!)
+            continueCrafting(blockEntity, blockEntity.cachedRecipe!!)
         }
     }
 
     private fun continueCrafting(blockEntity: AssemblerBlockEntity, recipe: AssemblerRecipe) {
         if (consumeEnergy(blockEntity, recipe.energyConsumption.toLong())) {
-            blockEntity.PROGRESS++
+            blockEntity.progress++
 
-            if (blockEntity.PROGRESS == recipe.duration) {
+            if (blockEntity.progress == recipe.duration) {
                 finishCrafting(blockEntity, recipe)
             }
         } else {
-            blockEntity.PROGRESS = 0
+            blockEntity.progress = 0
         }
     }
 
@@ -68,8 +68,8 @@ object AssemblerLogical {
         Transaction.openOuter().use { transaction ->
             if (produceItem(transaction, blockEntity, recipe)) {
                 transaction.commit()
-                blockEntity.CACHED_RECIPE = null
-                blockEntity.PROGRESS = 0
+                blockEntity.cachedRecipe = null
+                blockEntity.progress = 0
             }
         }
     }
@@ -97,9 +97,9 @@ object AssemblerLogical {
                     produceItem(transaction, blockEntity, recipe, true)
             ) {
                 transaction.commit()
-                blockEntity.CACHED_RECIPE = recipe
-                blockEntity.MAX_PROGRESS = recipe.duration
-                blockEntity.PROGRESS = 0
+                blockEntity.cachedRecipe = recipe
+                blockEntity.maxProgress = recipe.duration
+                blockEntity.progress = 0
                 blockEntity.setChanged()
             }
         }

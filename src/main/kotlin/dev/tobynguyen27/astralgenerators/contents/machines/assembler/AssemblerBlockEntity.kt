@@ -66,10 +66,10 @@ class AssemblerBlockEntity(
     }
 
     // Progress
-    var MAX_PROGRESS: Int = 100
-    var PROGRESS: Int = 0
-    var CACHED_RECIPE: AssemblerRecipe? = null
-    var SAVED_RECIPE_ID: ResourceLocation? = null
+    var maxProgress: Int = 100
+    var progress: Int = 0
+    var cachedRecipe: AssemblerRecipe? = null
+    var savedRecipeId: ResourceLocation? = null
 
     // Energy
     val energyStorage =
@@ -107,15 +107,15 @@ class AssemblerBlockEntity(
         object : ContainerData {
             override fun get(index: Int): Int {
                 return when (index) {
-                    0 -> MAX_PROGRESS
-                    1 -> PROGRESS
+                    0 -> maxProgress
+                    1 -> progress
                     else -> -1
                 }
             }
 
             override fun set(index: Int, value: Int) {
                 when (index) {
-                    1 -> PROGRESS = value
+                    1 -> progress = value
                 }
             }
 
@@ -136,12 +136,12 @@ class AssemblerBlockEntity(
 
         ContainerHelper.loadAllItems(tag, items)
 
-        MAX_PROGRESS = tag.getInt(MAX_PROGRESS_TAG)
-        PROGRESS = tag.getInt(PROGRESS_TAG)
+        maxProgress = tag.getInt(MAX_PROGRESS_TAG)
+        progress = tag.getInt(PROGRESS_TAG)
         if (tag.contains(SAVED_RECIPE_ID_TAG)) {
             val id = tag.getString(SAVED_RECIPE_ID_TAG)
             if (id.isNotEmpty()) {
-                SAVED_RECIPE_ID = ResourceLocation(id)
+                savedRecipeId = ResourceLocation(id)
             }
         }
 
@@ -156,9 +156,9 @@ class AssemblerBlockEntity(
 
         ContainerHelper.saveAllItems(tag, items)
 
-        tag.putInt(MAX_PROGRESS_TAG, MAX_PROGRESS)
-        tag.putInt(PROGRESS_TAG, PROGRESS)
-        CACHED_RECIPE?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
+        tag.putInt(MAX_PROGRESS_TAG, maxProgress)
+        tag.putInt(PROGRESS_TAG, progress)
+        cachedRecipe?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
 
         super.saveAdditional(tag)
     }
