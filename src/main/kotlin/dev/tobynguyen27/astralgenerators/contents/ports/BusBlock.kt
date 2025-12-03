@@ -14,7 +14,7 @@ abstract class BusBlock(properties: Properties) : BaseEntityBlock(properties) {
         level: Level,
         pos: BlockPos,
         newState: BlockState,
-        isMoving: Boolean
+        isMoving: Boolean,
     ) {
         if (state.block != newState.block) {
             val blockEntity = level.getBlockEntity(pos)

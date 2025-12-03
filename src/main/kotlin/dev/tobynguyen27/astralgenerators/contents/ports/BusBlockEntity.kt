@@ -20,7 +20,7 @@ abstract class BusBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
     size: Int,
-    val type: Type
+    val type: Type,
 ) : BlockEntity(blockEntityType, blockPos, blockState), IInventory, MenuProvider, WorldlyContainer {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
@@ -50,13 +50,13 @@ abstract class BusBlockEntity(
     }
 
     override fun getSlotsForFace(side: Direction): IntArray {
-        return IntArray( containerSize ) { it }
+        return IntArray(containerSize) { it }
     }
 
     override fun canPlaceItemThroughFace(
         index: Int,
         itemStack: ItemStack,
-        direction: Direction?
+        direction: Direction?,
     ): Boolean {
         return type == Type.INPUT
     }
@@ -64,12 +64,13 @@ abstract class BusBlockEntity(
     override fun canTakeItemThroughFace(
         index: Int,
         stack: ItemStack,
-        direction: Direction
+        direction: Direction,
     ): Boolean {
         return type == Type.OUTPUT
     }
 
     enum class Type {
-        INPUT, OUTPUT
+        INPUT,
+        OUTPUT,
     }
 }

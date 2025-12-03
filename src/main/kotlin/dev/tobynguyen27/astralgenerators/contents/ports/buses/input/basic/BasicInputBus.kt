@@ -2,9 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic
 
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.ports.BusBlock
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import net.minecraft.core.BlockPos
-import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player

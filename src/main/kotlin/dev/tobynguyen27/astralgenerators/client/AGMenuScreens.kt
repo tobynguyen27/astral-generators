@@ -19,11 +19,12 @@ object AGMenuScreens {
     }
 
     private fun registerBusBlockScreens() {
-        val screens = arrayOf(
-            AGMenus.BASIC_INPUT_BUS,
-            AGMenus.ADVANCED_INPUT_BUS,
-            AGMenus.INDUSTRIAL_INPUT_BUS
-        )
+        val screens =
+            arrayOf(
+                AGMenus.BASIC_INPUT_BUS,
+                AGMenus.ADVANCED_INPUT_BUS,
+                AGMenus.INDUSTRIAL_INPUT_BUS,
+            )
 
         for (screen in screens) {
             MenuScreens.register(screen) { type, playerInventory, title ->
