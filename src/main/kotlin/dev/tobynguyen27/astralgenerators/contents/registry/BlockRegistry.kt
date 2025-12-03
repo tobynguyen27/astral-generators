@@ -7,7 +7,6 @@ import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
 import dev.tobynguyen27.astralgenerators.contents.tags.AGBlockTags
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.astralgenerators.utils.StringHelper
-import java.util.function.Supplier
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -18,8 +17,17 @@ import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Material
 import net.minecraftforge.client.model.generators.ModelFile
+import java.util.function.Supplier
 
 object BlockRegistry {
+
+    fun <T : Block> registerPortBlock(
+        name: String,
+        factory: NonNullFunction<BlockBehaviour.Properties, T>
+    ): BlockBuilder<T, Registrate> {
+        return register(name, factory).simpleItem()
+            .addLayer { Supplier { RenderType.cutout() } }
+    }
 
     fun <T : Block> registerControllerBlock(
         name: String,

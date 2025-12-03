@@ -24,6 +24,8 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
+import net.minecraft.client.renderer.RenderType
+import java.util.function.Supplier
 
 object AGBlocks {
 
@@ -96,28 +98,25 @@ object AGBlocks {
 
     // Buses
     val BASIC_INPUT_BUS =
-        BlockRegistry.register(BasicInputBus.ID, ::BasicInputBus)
+        BlockRegistry.registerPortBlock(BasicInputBus.ID, ::BasicInputBus)
             .blockEntity { type, blockPos, blockState ->
                 BasicInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
-            .simpleItem()
             .register()
     val ADVANCED_INPUT_BUS =
-        BlockRegistry.register(AdvancedInputBus.ID, ::AdvancedInputBus)
+        BlockRegistry.registerPortBlock(AdvancedInputBus.ID, ::AdvancedInputBus)
             .blockEntity { type, blockPos, blockState ->
                 AdvancedInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
-            .simpleItem()
             .register()
     val INDUSTRIAL_INPUT_BUS =
-        BlockRegistry.register(IndustrialInputBus.ID, ::IndustrialInputBus)
+        BlockRegistry.registerPortBlock(IndustrialInputBus.ID, ::IndustrialInputBus)
             .blockEntity { type, blockPos, blockState ->
                 IndustrialInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
-            .simpleItem()
             .register()
 
     fun register() {}
