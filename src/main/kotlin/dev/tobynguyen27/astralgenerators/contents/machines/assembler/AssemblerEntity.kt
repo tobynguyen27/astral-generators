@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
@@ -57,12 +58,18 @@ class AssemblerEntity(
 
         // Data (progress)
         val CONTAINER_DATA_SIZE = 2
+
+        // Progress
+        const val MAX_PROGRESS_TAG = "assembler_max_progress"
+        const val PROGRESS_TAG = "assembler_progress"
+        const val SAVED_RECIPE_ID_TAG = "saved_recipe_id"
     }
 
     // Progress
     var MAX_PROGRESS: Int = 100
     var PROGRESS: Int = 0
     var CACHED_RECIPE: AssemblerRecipe? = null
+    var SAVED_RECIPE_ID: ResourceLocation? = null
 
     // Energy
     val energyStorage =
@@ -129,6 +136,15 @@ class AssemblerEntity(
 
         ContainerHelper.loadAllItems(tag, items)
 
+        MAX_PROGRESS = tag.getInt(MAX_PROGRESS_TAG)
+        PROGRESS = tag.getInt(PROGRESS_TAG)
+        if (tag.contains(SAVED_RECIPE_ID_TAG)) {
+            val id = tag.getString(SAVED_RECIPE_ID_TAG)
+            if (id.isNotEmpty()) {
+                SAVED_RECIPE_ID = ResourceLocation(id)
+            }
+        }
+
         super.load(tag)
     }
 
@@ -139,6 +155,12 @@ class AssemblerEntity(
         tag.put(FLUID_STORAGE_TYPE_TAG, fluidStorage.variant.toNbt())
 
         ContainerHelper.saveAllItems(tag, items)
+
+        tag.putInt(MAX_PROGRESS_TAG, MAX_PROGRESS)
+        tag.putInt(PROGRESS_TAG, PROGRESS)
+        CACHED_RECIPE?.let {
+            tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString())
+        }
 
         super.saveAdditional(tag)
     }
