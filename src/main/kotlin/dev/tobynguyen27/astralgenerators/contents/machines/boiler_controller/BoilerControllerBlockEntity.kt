@@ -15,26 +15,23 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
-class BoilerControllerBlockEntity(type: BlockEntityType<BoilerControllerBlockEntity>, blockPos: BlockPos, blockState: BlockState):
-    BlockEntity(type, blockPos, blockState), MenuProvider, ExtendedScreenHandlerFactory {
+class BoilerControllerBlockEntity(
+    type: BlockEntityType<BoilerControllerBlockEntity>,
+    blockPos: BlockPos,
+    blockState: BlockState,
+) : BlockEntity(type, blockPos, blockState), MenuProvider, ExtendedScreenHandlerFactory {
     // Menu
     override fun getDisplayName(): Component {
         return TranslatableComponent(blockState.block.descriptionId)
     }
 
-    override fun createMenu(
-        i: Int,
-        inventory: Inventory,
-        player: Player
-    ): AbstractContainerMenu {
-        return BoilerControllerMenu(i, inventory, ContainerLevelAccess.create(player.level, blockPos))
+    override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
+        return BoilerControllerMenu(
+            i,
+            inventory,
+            ContainerLevelAccess.create(player.level, blockPos),
+        )
     }
 
-    override fun writeScreenOpeningData(
-        player: ServerPlayer,
-        packet: FriendlyByteBuf
-    ) {
-
-    }
-
+    override fun writeScreenOpeningData(player: ServerPlayer, packet: FriendlyByteBuf) {}
 }

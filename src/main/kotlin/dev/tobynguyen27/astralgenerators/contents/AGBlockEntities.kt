@@ -18,9 +18,10 @@ object AGBlockEntities {
             AGBlocks.AM_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
-    val BOILER_CONTROLLER: BlockEntityEntry<BoilerControllerBlockEntity> = BlockEntityEntry.cast<BoilerControllerBlockEntity>(
-        AGBlocks.BOILER_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
-    )
+    val BOILER_CONTROLLER: BlockEntityEntry<BoilerControllerBlockEntity> =
+        BlockEntityEntry.cast<BoilerControllerBlockEntity>(
+            AGBlocks.BOILER_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
 
     fun register() {}
 }

@@ -158,9 +158,7 @@ class AssemblerEntity(
 
         tag.putInt(MAX_PROGRESS_TAG, MAX_PROGRESS)
         tag.putInt(PROGRESS_TAG, PROGRESS)
-        CACHED_RECIPE?.let {
-            tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString())
-        }
+        CACHED_RECIPE?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
 
         super.saveAdditional(tag)
     }

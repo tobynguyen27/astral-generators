@@ -64,7 +64,8 @@ object AGBlocks {
             )
             .blockEntity { type, blockPos, blockState ->
                 BoilerControllerBlockEntity(type, blockPos, blockState)
-            }.build()
+            }
+            .build()
             .register()
     val AM_CONTROLLER =
         BlockRegistry.registerControllerBlock(

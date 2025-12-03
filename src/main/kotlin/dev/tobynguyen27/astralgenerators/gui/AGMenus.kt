@@ -17,13 +17,14 @@ object AGMenus {
             },
         )
 
-    val BOILER_CONTROLLER: ExtendedScreenHandlerType<BoilerControllerMenu> = Registry.register(
-        Registry.MENU,
-        Identifier(BoilerControllerMenu.ID),
-        ExtendedScreenHandlerType { syncId, inventory, buf ->
-            BoilerControllerMenu(syncId, inventory, buf)
-        },
-    )
+    val BOILER_CONTROLLER: ExtendedScreenHandlerType<BoilerControllerMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(BoilerControllerMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                BoilerControllerMenu(syncId, inventory, buf)
+            },
+        )
 
     fun register() {}
 }

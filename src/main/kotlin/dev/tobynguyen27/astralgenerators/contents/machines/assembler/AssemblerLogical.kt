@@ -23,7 +23,7 @@ object AssemblerLogical {
         blockEntity: AssemblerEntity,
     ) {
 
-        if(blockEntity.CACHED_RECIPE === null && blockEntity.SAVED_RECIPE_ID !== null) {
+        if (blockEntity.CACHED_RECIPE === null && blockEntity.SAVED_RECIPE_ID !== null) {
             val recipeManager = level.recipeManager
             val recipeId = blockEntity.SAVED_RECIPE_ID
 

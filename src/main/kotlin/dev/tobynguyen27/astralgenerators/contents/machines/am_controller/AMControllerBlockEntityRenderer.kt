@@ -97,10 +97,14 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
         // White dwarf
         renderStar(ccrs, mat.copy(), bufferSource, time)
         renderSpace(ccrs, mat.copy(), bufferSource, time)
-
     }
 
-    private fun renderStar(ccrs: CCRenderState,mat: Matrix4, bufferSource: MultiBufferSource, time: Double) {
+    private fun renderStar(
+        ccrs: CCRenderState,
+        mat: Matrix4,
+        bufferSource: MultiBufferSource,
+        time: Double,
+    ) {
         mat.scale(0.2)
         mat.rotate(time * 0.02, Vector3.Y_POS)
         mat.rotate(time * 0.01, Vector3.X_POS)
@@ -109,7 +113,12 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
         starModel.render(ccrs)
     }
 
-    private fun renderSpace(ccrs: CCRenderState,mat: Matrix4, bufferSource: MultiBufferSource, time: Double) {
+    private fun renderSpace(
+        ccrs: CCRenderState,
+        mat: Matrix4,
+        bufferSource: MultiBufferSource,
+        time: Double,
+    ) {
         mat.scale(-0.028, 0.028, 0.028)
         mat.rotate(-time * 0.005, Vector3.Y_POS)
         mat.rotate(time * 0.005, Vector3.Z_POS)

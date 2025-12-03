@@ -56,7 +56,7 @@ class BoilerControllerBlock(properties: BlockBehaviour.Properties) : BaseEntityB
         pos: BlockPos,
         player: Player,
         hand: InteractionHand,
-        hit: BlockHitResult
+        hit: BlockHitResult,
     ): InteractionResult {
         if (!level.isClientSide) {
             player.openMenu(state.getMenuProvider(level, pos))
