@@ -14,14 +14,21 @@ object AGMenuScreens {
         MenuScreens.register(AGMenus.BOILER_CONTROLLER) { type, playerInventory, title ->
             BoilerControllerScreen(type, playerInventory, title)
         }
-        MenuScreens.register(AGMenus.BASIC_INPUT_BUS) { type, playerInventory, title ->
-            BusBlockScreen(type, playerInventory, title)
-        }
-        MenuScreens.register(AGMenus.ADVANCED_INPUT_BUS) { type, playerInventory, title ->
-            BusBlockScreen(type, playerInventory, title)
-        }
-        MenuScreens.register(AGMenus.INDUSTRIAL_INPUT_BUS) { type, playerInventory, title ->
-            BusBlockScreen(type, playerInventory, title)
+
+        registerBusBlockScreens()
+    }
+
+    private fun registerBusBlockScreens() {
+        val screens = arrayOf(
+            AGMenus.BASIC_INPUT_BUS,
+            AGMenus.ADVANCED_INPUT_BUS,
+            AGMenus.INDUSTRIAL_INPUT_BUS
+        )
+
+        for (screen in screens) {
+            MenuScreens.register(screen) { type, playerInventory, title ->
+                BusBlockScreen(type, playerInventory, title)
+            }
         }
     }
 }
