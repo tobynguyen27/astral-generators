@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screens.MenuScreens
 
-@Environment(EnvType.CLIENT)
 object AGMenuScreens {
     fun register() {
         MenuScreens.register(AGMenus.ASSEMBLER_MENU) { type, playerInventory, title ->
