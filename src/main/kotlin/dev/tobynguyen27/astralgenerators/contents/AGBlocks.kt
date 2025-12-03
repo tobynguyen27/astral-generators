@@ -15,6 +15,8 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBus
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
@@ -86,6 +88,16 @@ object AGBlocks {
                 Identifier("block/casings/steam_turbine_casing"),
                 Identifier("block/steam_turbine_vent"),
             )
+            .register()
+
+    // Buses
+    val BASIC_INPUT_BUS =
+        BlockRegistry.register(BasicInputBus.ID, ::BasicInputBus)
+            .blockEntity { type, blockPos, blockState ->
+                BasicInputBusBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .simpleItem()
             .register()
 
     fun register() {}
