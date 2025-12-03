@@ -13,7 +13,7 @@ class IndustrialInputBusBlockEntity(
     type: BlockEntityType<*>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE) {
+) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Type.INPUT) {
 
     companion object {
         const val CONTAINER_SIZE = 25
