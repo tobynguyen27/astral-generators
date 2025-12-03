@@ -17,21 +17,6 @@ class IndustrialInputBus(properties: Properties) : BusBlock(properties) {
         const val ID = "industrial_input_bus"
     }
 
-    override fun use(
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
-    ): InteractionResult {
-        if (!level.isClientSide) {
-            player.openMenu(state.getMenuProvider(level, pos))
-        }
-
-        return InteractionResult.SUCCESS
-    }
-
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return AGBlockEntities.INDUSTRIAL_INPUT_BUS.create(pos, state)
     }

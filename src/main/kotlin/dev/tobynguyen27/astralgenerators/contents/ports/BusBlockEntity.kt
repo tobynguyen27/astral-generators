@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports
 
 import dev.tobynguyen27.astralgenerators.utils.IInventory
+import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
@@ -21,9 +22,10 @@ abstract class BusBlockEntity(
     blockState: BlockState,
     size: Int,
     val type: Type,
-) : BlockEntity(blockEntityType, blockPos, blockState), IInventory, MenuProvider, WorldlyContainer {
+) : BlockEntity(blockEntityType, blockPos, blockState), IInventory, MenuProvider, WorldlyContainer, RenderAttachmentBlockEntity {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
+    var casingBlock: BlockState? = null
 
     override fun getItems(): NonNullList<ItemStack> {
         return items
@@ -67,6 +69,10 @@ abstract class BusBlockEntity(
         direction: Direction,
     ): Boolean {
         return type == Type.OUTPUT
+    }
+
+    override fun getRenderAttachmentData(): BusModelClientData {
+        return BusModelClientData(type, casingBlock)
     }
 
     enum class Type {
