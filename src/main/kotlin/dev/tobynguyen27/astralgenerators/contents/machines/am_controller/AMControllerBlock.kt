@@ -51,6 +51,6 @@ class AMControllerBlock(properties: BlockBehaviour.Properties) : BaseEntityBlock
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return AGBlockEntities.AM_ENTITY.create(pos, state)
+        return AGBlockEntities.AM_CONTROLLER.create(pos, state)
     }
 }

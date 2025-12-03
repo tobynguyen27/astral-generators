@@ -94,13 +94,13 @@ class Assembler(properties: Properties) : BaseEntityBlock(properties) {
         if (level.isClientSide) {
             return createTickerHelper(
                 blockEntityType,
-                AGBlockEntities.ASSEMBLER_ENTITY.get(),
+                AGBlockEntities.ASSEMBLER.get(),
                 AssemblerLogical::clientTick,
             )
         }
         return createTickerHelper(
             blockEntityType,
-            AGBlockEntities.ASSEMBLER_ENTITY.get(),
+            AGBlockEntities.ASSEMBLER.get(),
             AssemblerLogical::serverTick,
         )
     }
@@ -108,5 +108,5 @@ class Assembler(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState): RenderShape = RenderShape.MODEL
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
-        AGBlockEntities.ASSEMBLER_ENTITY.create(pos, state)
+        AGBlockEntities.ASSEMBLER.create(pos, state)
 }

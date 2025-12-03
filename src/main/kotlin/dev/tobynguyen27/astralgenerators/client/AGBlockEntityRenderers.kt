@@ -8,7 +8,7 @@ object AGBlockEntityRenderers {
 
     fun register() {
         BlockEntityRendererRegistry.register(
-            AGBlockEntities.AM_ENTITY.get(),
+            AGBlockEntities.AM_CONTROLLER.get(),
             ::AMControllerBlockEntityRenderer,
         )
     }

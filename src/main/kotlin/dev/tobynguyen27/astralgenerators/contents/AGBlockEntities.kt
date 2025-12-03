@@ -8,17 +8,17 @@ import net.minecraft.core.Registry
 
 object AGBlockEntities {
 
-    val ASSEMBLER_ENTITY =
+    val ASSEMBLER: BlockEntityEntry<AssemblerEntity> =
         BlockEntityEntry.cast<AssemblerEntity>(
             AGBlocks.ASSEMBLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
-    val AM_ENTITY =
+    val AM_CONTROLLER: BlockEntityEntry<AMControllerBlockEntity> =
         BlockEntityEntry.cast<AMControllerBlockEntity>(
             AGBlocks.AM_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
-    val BOILER_CONTROLLER = BlockEntityEntry.cast<BoilerControllerBlockEntity>(
+    val BOILER_CONTROLLER: BlockEntityEntry<BoilerControllerBlockEntity> = BlockEntityEntry.cast<BoilerControllerBlockEntity>(
         AGBlocks.BOILER_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE)
     )
 
