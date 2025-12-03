@@ -15,8 +15,12 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBus
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBus
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBus
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBus
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
@@ -95,6 +99,22 @@ object AGBlocks {
         BlockRegistry.register(BasicInputBus.ID, ::BasicInputBus)
             .blockEntity { type, blockPos, blockState ->
                 BasicInputBusBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .simpleItem()
+            .register()
+    val ADVANCED_INPUT_BUS =
+        BlockRegistry.register(AdvancedInputBus.ID, ::AdvancedInputBus)
+            .blockEntity { type, blockPos, blockState ->
+                AdvancedInputBusBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .simpleItem()
+            .register()
+    val INDUSTRIAL_INPUT_BUS =
+        BlockRegistry.register(IndustrialInputBus.ID, ::IndustrialInputBus)
+            .blockEntity { type, blockPos, blockState ->
+                IndustrialInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .simpleItem()

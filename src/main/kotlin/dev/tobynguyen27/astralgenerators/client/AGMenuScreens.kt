@@ -17,5 +17,11 @@ object AGMenuScreens {
         MenuScreens.register(AGMenus.BASIC_INPUT_BUS) { type, playerInventory, title ->
             BusBlockScreen(type, playerInventory, title)
         }
+        MenuScreens.register(AGMenus.ADVANCED_INPUT_BUS) { type, playerInventory, title ->
+            BusBlockScreen(type, playerInventory, title)
+        }
+        MenuScreens.register(AGMenus.INDUSTRIAL_INPUT_BUS) { type, playerInventory, title ->
+            BusBlockScreen(type, playerInventory, title)
+        }
     }
 }

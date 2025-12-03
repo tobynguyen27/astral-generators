@@ -4,7 +4,9 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusBlockEntity
 import net.minecraft.core.Registry
 
 object AGBlockEntities {
@@ -28,6 +30,14 @@ object AGBlockEntities {
     val BASIC_INPUT_BUS: BlockEntityEntry<BasicInputBusBlockEntity> =
         BlockEntityEntry.cast<BasicInputBusBlockEntity>(
             AGBlocks.BASIC_INPUT_BUS.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val ADVANCED_INPUT_BUS: BlockEntityEntry<AdvancedInputBusBlockEntity> =
+        BlockEntityEntry.cast<AdvancedInputBusBlockEntity>(
+            AGBlocks.ADVANCED_INPUT_BUS.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val INDUSTRIAL_INPUT_BUS: BlockEntityEntry<IndustrialInputBusBlockEntity> =
+        BlockEntityEntry.cast<IndustrialInputBusBlockEntity>(
+            AGBlocks.INDUSTRIAL_INPUT_BUS.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
     fun register() {}

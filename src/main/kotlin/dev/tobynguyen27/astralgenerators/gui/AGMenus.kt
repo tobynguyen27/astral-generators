@@ -2,7 +2,9 @@ package dev.tobynguyen27.astralgenerators.gui
 
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerMenu
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.BasicInputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusMenu
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.core.Registry
@@ -35,6 +37,22 @@ object AGMenus {
             Identifier(BasicInputBusMenu.ID),
             MenuType { syncId, inventory ->
                 BasicInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
+            },
+        )
+    val ADVANCED_INPUT_BUS =
+        Registry.register(
+            Registry.MENU,
+            Identifier(AdvancedInputBusMenu.ID),
+            MenuType { syncId, inventory ->
+                AdvancedInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
+            },
+        )
+    val INDUSTRIAL_INPUT_BUS =
+        Registry.register(
+            Registry.MENU,
+            Identifier(IndustrialInputBusMenu.ID),
+            MenuType { syncId, inventory ->
+                IndustrialInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
             },
         )
 
