@@ -10,8 +10,8 @@ import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineVent
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlock
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
-import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerEntity
-import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlock
+import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerController
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
@@ -51,15 +51,15 @@ object AGBlocks {
     val ASSEMBLER: BlockEntry<Assembler> =
         BlockRegistry.registerSingleMachineBlock(Assembler.ID, ::Assembler)
             .blockEntity { type, blockPos, blockState ->
-                AssemblerEntity(type, blockPos, blockState)
+                AssemblerBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
 
     val BOILER_CONTROLLER =
         BlockRegistry.registerControllerBlock(
-                BoilerControllerBlock.ID,
-                ::BoilerControllerBlock,
+                BoilerController.ID,
+                ::BoilerController,
                 "boiler_casing",
             )
             .blockEntity { type, blockPos, blockState ->

@@ -62,7 +62,7 @@ class Assembler(properties: Properties) : BaseEntityBlock(properties) {
         if (state.block != newState.block) {
             val blockEntity = level.getBlockEntity(pos)
 
-            if (blockEntity is AssemblerEntity) {
+            if (blockEntity is AssemblerBlockEntity) {
                 Containers.dropContents(level, pos, blockEntity.getItems())
                 level.updateNeighbourForOutputSignal(pos, this)
             }

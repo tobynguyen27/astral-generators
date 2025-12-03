@@ -13,14 +13,14 @@ object AssemblerLogical {
         level: Level,
         blockPos: BlockPos,
         blockState: BlockState,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
     ) {}
 
     fun serverTick(
         level: Level,
         blockPos: BlockPos,
         blockState: BlockState,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
     ) {
 
         if (blockEntity.CACHED_RECIPE === null && blockEntity.SAVED_RECIPE_ID !== null) {
@@ -52,7 +52,7 @@ object AssemblerLogical {
         }
     }
 
-    private fun continueCrafting(blockEntity: AssemblerEntity, recipe: AssemblerRecipe) {
+    private fun continueCrafting(blockEntity: AssemblerBlockEntity, recipe: AssemblerRecipe) {
         if (consumeEnergy(blockEntity, recipe.energyConsumption.toLong())) {
             blockEntity.PROGRESS++
 
@@ -64,7 +64,7 @@ object AssemblerLogical {
         }
     }
 
-    private fun finishCrafting(blockEntity: AssemblerEntity, recipe: AssemblerRecipe) {
+    private fun finishCrafting(blockEntity: AssemblerBlockEntity, recipe: AssemblerRecipe) {
         Transaction.openOuter().use { transaction ->
             if (produceItem(transaction, blockEntity, recipe)) {
                 transaction.commit()
@@ -74,7 +74,7 @@ object AssemblerLogical {
         }
     }
 
-    private fun startNewCrafting(level: Level, blockEntity: AssemblerEntity) {
+    private fun startNewCrafting(level: Level, blockEntity: AssemblerBlockEntity) {
         val optionalRecipe =
             level.recipeManager.getRecipeFor(AssemblerRecipe.Type, blockEntity, level)
 
@@ -107,7 +107,7 @@ object AssemblerLogical {
 
     private fun produceItem(
         transaction: Transaction,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
         recipe: AssemblerRecipe,
         simulate: Boolean = false,
     ): Boolean {
@@ -133,7 +133,7 @@ object AssemblerLogical {
 
     private fun consumeItems(
         transaction: Transaction,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
         recipe: AssemblerRecipe,
     ): Boolean {
         val itemInputs = recipe.itemInputs
@@ -171,7 +171,7 @@ object AssemblerLogical {
 
     private fun consumeFluid(
         transaction: Transaction,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
         amountToConsume: Long,
         variantToConsume: FluidVariant,
     ): Boolean {
@@ -181,7 +181,7 @@ object AssemblerLogical {
         return consumedAmount == amountToConsume
     }
 
-    private fun consumeEnergy(blockEntity: AssemblerEntity, amountToConsume: Long): Boolean {
+    private fun consumeEnergy(blockEntity: AssemblerBlockEntity, amountToConsume: Long): Boolean {
         Transaction.openOuter().use { transaction ->
             val consumedAmount = blockEntity.energyStorage.extract(amountToConsume, transaction)
 
@@ -197,7 +197,7 @@ object AssemblerLogical {
 
     private fun canConsumeEnergy(
         transaction: Transaction,
-        blockEntity: AssemblerEntity,
+        blockEntity: AssemblerBlockEntity,
         amountToConsume: Long,
     ): Boolean {
         transaction.openNested().use {
@@ -207,7 +207,7 @@ object AssemblerLogical {
         }
     }
 
-    private fun updateActiveState(level: Level, entity: AssemblerEntity, active: Boolean) {
+    private fun updateActiveState(level: Level, entity: AssemblerBlockEntity, active: Boolean) {
         val currentState = level.getBlockState(entity.blockPos)
 
         if (currentState.getValue(Assembler.LIT) == active) {

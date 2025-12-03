@@ -24,8 +24,8 @@ class AssemblerRecipe(
     val itemOutput: ItemOutput,
     val energyConsumption: Int,
     val duration: Int,
-) : Recipe<AssemblerEntity> {
-    override fun matches(container: AssemblerEntity, level: Level): Boolean {
+) : Recipe<AssemblerBlockEntity> {
+    override fun matches(container: AssemblerBlockEntity, level: Level): Boolean {
         if (container.energyStorage.amount < energyConsumption) {
             return false
         }
@@ -56,7 +56,7 @@ class AssemblerRecipe(
         return true
     }
 
-    override fun assemble(container: AssemblerEntity): ItemStack {
+    override fun assemble(container: AssemblerBlockEntity): ItemStack {
         return resultItem.copy()
     }
 

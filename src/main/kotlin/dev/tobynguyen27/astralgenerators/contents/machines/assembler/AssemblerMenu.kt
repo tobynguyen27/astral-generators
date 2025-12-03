@@ -22,8 +22,8 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
         AGMenus.ASSEMBLER_MENU,
         syncId,
         playerInventory,
-        getBlockInventory(ctx, AssemblerEntity.CONTAINER_SIZE),
-        getBlockPropertyDelegate(ctx, AssemblerEntity.CONTAINER_DATA_SIZE),
+        getBlockInventory(ctx, AssemblerBlockEntity.CONTAINER_SIZE),
+        getBlockPropertyDelegate(ctx, AssemblerBlockEntity.CONTAINER_DATA_SIZE),
     ) {
 
     // Client
@@ -111,7 +111,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
         if (!world.isClientSide) {
             ctx.execute { world, blockPos ->
                 val blockEntity =
-                    world.getBlockEntity(blockPos) as? AssemblerEntity ?: return@execute
+                    world.getBlockEntity(blockPos) as? AssemblerBlockEntity ?: return@execute
 
                 val energyAmount = blockEntity.energyStorage.amount
                 this.lastEnergyAmount = energyAmount
@@ -132,7 +132,8 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
         }
 
         ctx.execute { world, blockPos ->
-            val blockEntity = world.getBlockEntity(blockPos) as? AssemblerEntity ?: return@execute
+            val blockEntity =
+                world.getBlockEntity(blockPos) as? AssemblerBlockEntity ?: return@execute
 
             val energyAmount = blockEntity.energyStorage.amount
             if (energyAmount != this.lastEnergyAmount) {

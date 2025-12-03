@@ -28,8 +28,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import team.reborn.energy.api.base.SimpleEnergyStorage
 
-class AssemblerEntity(
-    type: BlockEntityType<AssemblerEntity>,
+class AssemblerBlockEntity(
+    type: BlockEntityType<AssemblerBlockEntity>,
     blockPos: BlockPos,
     blockState: BlockState,
 ) :

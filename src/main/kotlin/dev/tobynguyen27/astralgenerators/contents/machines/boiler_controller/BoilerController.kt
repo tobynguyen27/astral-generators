@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class BoilerControllerBlock(properties: BlockBehaviour.Properties) : BaseEntityBlock(properties) {
+class BoilerController(properties: BlockBehaviour.Properties) : BaseEntityBlock(properties) {
     companion object {
         const val ID = "boiler_controller"
 
