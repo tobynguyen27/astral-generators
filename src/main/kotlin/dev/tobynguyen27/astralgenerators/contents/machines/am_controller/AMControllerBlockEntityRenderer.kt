@@ -27,7 +27,7 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
         private val STAR_TEXTURE = Identifier("textures/obj/star.png")
         private val SPACE_TEXTURE = Identifier("textures/obj/space.png")
 
-        val STAR_RENDER_TYPE =
+        val STAR_RENDER_TYPE: RenderType.CompositeRenderType =
             RenderType.create(
                 Identifier("star").toString(),
                 DefaultVertexFormat.NEW_ENTITY,
@@ -44,7 +44,7 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
                     .createCompositeState(true),
             )
 
-        val SPACE_RENDER_TYPE =
+        val SPACE_RENDER_TYPE: RenderType.CompositeRenderType =
             RenderType.create(
                 Identifier("space").toString(),
                 DefaultVertexFormat.NEW_ENTITY,
@@ -95,21 +95,26 @@ class AMControllerBlockEntityRenderer(ctx: BlockEntityRendererProvider.Context) 
         mat.translate(0.0, 2.0, -2.0)
 
         // White dwarf
-        val starMat = mat.copy()
-        starMat.scale(0.2)
-        starMat.rotate(time * 0.02, Vector3.Y_POS)
-        starMat.rotate(time * 0.01, Vector3.X_POS)
+        renderStar(ccrs, mat.copy(), bufferSource, time)
+        renderSpace(ccrs, mat.copy(), bufferSource, time)
 
-        ccrs.bind(STAR_RENDER_TYPE, bufferSource, starMat)
+    }
+
+    private fun renderStar(ccrs: CCRenderState,mat: Matrix4, bufferSource: MultiBufferSource, time: Double) {
+        mat.scale(0.2)
+        mat.rotate(time * 0.02, Vector3.Y_POS)
+        mat.rotate(time * 0.01, Vector3.X_POS)
+
+        ccrs.bind(STAR_RENDER_TYPE, bufferSource, mat)
         starModel.render(ccrs)
+    }
 
-        // Space
-        val spaceMat = mat.copy()
-        spaceMat.scale(-0.028, 0.028, 0.028)
-        spaceMat.rotate(-time * 0.005, Vector3.Y_POS)
-        spaceMat.rotate(time * 0.005, Vector3.Z_POS)
+    private fun renderSpace(ccrs: CCRenderState,mat: Matrix4, bufferSource: MultiBufferSource, time: Double) {
+        mat.scale(-0.028, 0.028, 0.028)
+        mat.rotate(-time * 0.005, Vector3.Y_POS)
+        mat.rotate(time * 0.005, Vector3.Z_POS)
 
-        ccrs.bind(SPACE_RENDER_TYPE, bufferSource, spaceMat)
+        ccrs.bind(SPACE_RENDER_TYPE, bufferSource, mat)
         spaceModel.render(ccrs)
     }
 }
