@@ -38,6 +38,11 @@ dependencies {
         exclude group: "io.github.fabricators_of_create"
     }
 
+    // API
+    modImplementation("maven.modrinth:jade:${project.jade_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
+
     include modImplementation("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
     include modImplementation("me.alphamode:ForgeTags:${project.forge_tags_version}")
     include modImplementation("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}") {
@@ -49,7 +54,6 @@ dependencies {
     modLocalRuntime("com.terraformersmc:modmenu:${project.modmenu_version}") {
         exclude group: "net.fabricmc"
     }
-    modLocalRuntime("maven.modrinth:jade:${project.jade_version}")
     modLocalRuntime("maven.modrinth:jade-addons-fabric:${project.jade_addons_version}")
     modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}")
     modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") {
