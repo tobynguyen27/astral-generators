@@ -39,7 +39,8 @@ class AssemblerBlockEntity(
     MenuProvider,
     PropertyDelegateHolder,
     ExtendedScreenHandlerFactory,
-    IInventory, WorldlyContainer {
+    IInventory,
+    WorldlyContainer {
 
     companion object {
         const val ID = "assembler_entity"
@@ -57,7 +58,7 @@ class AssemblerBlockEntity(
 
         // Container
         const val CONTAINER_SIZE = 10
-        private val INPUT_SLOTS = IntArray(CONTAINER_SIZE - 1) {it}
+        private val INPUT_SLOTS = IntArray(CONTAINER_SIZE - 1) { it }
         private val OUTPUT_SLOT = intArrayOf(CONTAINER_SIZE - 1)
 
         // Data (progress)
@@ -193,7 +194,7 @@ class AssemblerBlockEntity(
 
     // Inventory interact
     override fun getSlotsForFace(side: Direction): IntArray {
-        if(side == Direction.DOWN) {
+        if (side == Direction.DOWN) {
             return OUTPUT_SLOT
         }
 
@@ -203,7 +204,7 @@ class AssemblerBlockEntity(
     override fun canPlaceItemThroughFace(
         index: Int,
         itemStack: ItemStack,
-        direction: Direction?
+        direction: Direction?,
     ): Boolean {
         return direction != Direction.DOWN && index < CONTAINER_SIZE - 1
     }
@@ -211,7 +212,7 @@ class AssemblerBlockEntity(
     override fun canTakeItemThroughFace(
         index: Int,
         stack: ItemStack,
-        direction: Direction
+        direction: Direction,
     ): Boolean {
         return direction == Direction.DOWN && index == CONTAINER_SIZE - 1
     }
