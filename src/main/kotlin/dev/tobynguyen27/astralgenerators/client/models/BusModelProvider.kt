@@ -11,8 +11,8 @@ class BusModelProvider : ModelResourceProvider {
 
     companion object {
         private val BASIC_INPUT_BUS_MODEL = Identifier("block/basic_input_bus")
-        private val ADVANCED_INPUT_BUS_MODEL = Identifier("block/basic_input_bus")
-        private val INDUSTRIAL_INPUT_BUS_MODEL = Identifier("block/basic_input_bus")
+        private val ADVANCED_INPUT_BUS_MODEL = Identifier("block/advanced_input_bus")
+        private val INDUSTRIAL_INPUT_BUS_MODEL = Identifier("block/industrial_input_bus")
     }
 
     override fun loadModelResource(p0: ResourceLocation, p1: ModelProviderContext): UnbakedModel? {
