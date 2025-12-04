@@ -24,8 +24,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
-import net.minecraft.client.renderer.RenderType
-import java.util.function.Supplier
 
 object AGBlocks {
 

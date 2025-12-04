@@ -22,7 +22,12 @@ abstract class BusBlockEntity(
     blockState: BlockState,
     size: Int,
     val type: Type,
-) : BlockEntity(blockEntityType, blockPos, blockState), IInventory, MenuProvider, WorldlyContainer, RenderAttachmentBlockEntity {
+) :
+    BlockEntity(blockEntityType, blockPos, blockState),
+    IInventory,
+    MenuProvider,
+    WorldlyContainer,
+    RenderAttachmentBlockEntity {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
     var casingBlock: BlockState? = null
