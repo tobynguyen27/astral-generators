@@ -16,7 +16,11 @@ class BusModelProvider : ModelResourceProvider {
     }
 
     override fun loadModelResource(p0: ResourceLocation, p1: ModelProviderContext): UnbakedModel? {
-        if (p0 == BASIC_INPUT_BUS_MODEL || p0 == ADVANCED_INPUT_BUS_MODEL || p0 == INDUSTRIAL_INPUT_BUS_MODEL) {
+        if (
+            p0 == BASIC_INPUT_BUS_MODEL ||
+                p0 == ADVANCED_INPUT_BUS_MODEL ||
+                p0 == INDUSTRIAL_INPUT_BUS_MODEL
+        ) {
             return BusUnbakedModel()
         }
 

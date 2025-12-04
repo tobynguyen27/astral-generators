@@ -36,9 +36,9 @@ class BusBakedModel(
         randomSupplier: Supplier<Random>,
         context: RenderContext,
     ) {
-        if(blockView !is RenderAttachedBlockView) return
+        if (blockView !is RenderAttachedBlockView) return
         val attachment = blockView.getBlockEntityRenderAttachment(pos)
-        if(attachment !is BusModelClientData) return
+        if (attachment !is BusModelClientData) return
 
         val emitter = context.emitter
 
@@ -47,12 +47,13 @@ class BusBakedModel(
             var casingSpriteToUse = defaultCasingSprite
 
             val casingBlockState = attachment.casingBlock
-            if(casingBlockState != null) {
+            if (casingBlockState != null) {
                 // Use custom casing here
-                val casingModel = Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
+                val casingModel =
+                    Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
                 val quads = casingModel.getQuads(casingBlockState, direction, randomSupplier.get())
 
-                if(quads.isNotEmpty()) {
+                if (quads.isNotEmpty()) {
                     casingSpriteToUse = quads[0].sprite
                 } else {
                     casingSpriteToUse = casingModel.particleIcon // Should I do this?
@@ -68,19 +69,17 @@ class BusBakedModel(
             val busType = attachment.type
             var overlaySpriteToUse = inputOverlaySprite
 
-            if(busType == BusBlockEntity.Type.OUTPUT) {
+            if (busType == BusBlockEntity.Type.OUTPUT) {
                 overlaySpriteToUse = outputOverlaySprite
             }
 
             emitter.material(renderMaterial)
             emitter.square(direction, 0f, 0f, 1f, 1f, -3e-4f)
             emitter.cullFace(direction) // HACKME
-            emitter.spriteBake(0, overlaySpriteToUse, MutableQuadView.BAKE_LOCK_UV);
-            emitter.spriteColor(0, -1, -1, -1, -1);
-            emitter.emit();
-
+            emitter.spriteBake(0, overlaySpriteToUse, MutableQuadView.BAKE_LOCK_UV)
+            emitter.spriteColor(0, -1, -1, -1, -1)
+            emitter.emit()
         }
-
     }
 
     override fun emitItemQuads(
@@ -101,9 +100,10 @@ class BusBakedModel(
         emitter.material(renderMaterial)
         emitter.square(Direction.NORTH, 0f, 0f, 1f, 1f, -3e-4f)
         emitter.cullFace(Direction.NORTH) // HACKME
-        emitter.spriteBake(0, inputOverlaySprite, MutableQuadView.BAKE_LOCK_UV); // FIXME
-        emitter.spriteColor(0, -1, -1, -1, -1);
-        emitter.emit();
+        emitter.spriteBake(0, inputOverlaySprite, MutableQuadView.BAKE_LOCK_UV)
+        // FIXME
+        emitter.spriteColor(0, -1, -1, -1, -1)
+        emitter.emit()
     }
 
     override fun getParticleIcon(): TextureAtlasSprite {
