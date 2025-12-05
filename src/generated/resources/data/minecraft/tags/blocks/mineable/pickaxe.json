@@ -5,11 +5,17 @@
     "astralgenerators:boiler_casing",
     "astralgenerators:steam_turbine_casing",
     "astralgenerators:matrix_casing",
+    "astralgenerators:basic_machine_casing",
+    "astralgenerators:advanced_machine_casing",
+    "astralgenerators:industrial_machine_casing",
     "astralgenerators:high_magnetic_coil",
     "astralgenerators:calvar_block",
     "astralgenerators:assembler",
     "astralgenerators:boiler_controller",
     "astralgenerators:amalgamation_matrix_controller",
-    "astralgenerators:steam_turbine_vent"
+    "astralgenerators:steam_turbine_vent",
+    "astralgenerators:basic_input_bus",
+    "astralgenerators:advanced_input_bus",
+    "astralgenerators:industrial_input_bus"
   ]
 }
