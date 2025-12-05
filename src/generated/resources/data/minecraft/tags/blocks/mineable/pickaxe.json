@@ -16,6 +16,9 @@
     "astralgenerators:steam_turbine_vent",
     "astralgenerators:basic_input_bus",
     "astralgenerators:advanced_input_bus",
-    "astralgenerators:industrial_input_bus"
+    "astralgenerators:industrial_input_bus",
+    "astralgenerators:basic_output_bus",
+    "astralgenerators:advanced_output_bus",
+    "astralgenerators:industrial_output_bus"
   ]
 }
