@@ -93,6 +93,8 @@ loom {
 }
 
 tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     var replaceProperties = [
         minecraft_version      : minecraft_version,
         loader_version_range   : loader_version,

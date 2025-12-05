@@ -9,7 +9,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.tags.AGBlockTags
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.astralgenerators.utils.StringHelper
-import java.util.function.Supplier
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.NonNullList
@@ -24,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Material
 import net.minecraftforge.client.model.generators.ModelFile
+import java.util.function.Supplier
 
 object BlockRegistry {
 
@@ -51,9 +51,15 @@ object BlockRegistry {
                         }
                     }
                 }
-            }
+            }.model { ctx, prov -> {} }
             .tab { AstralGenerators.ITEM_GROUP }
-            .build()
+            .build().blockstate { ctx, prov ->
+                prov.simpleBlock(ctx.entry,
+                    ModelFile.UncheckedModelFile(Identifier(
+                        "block/${ctx.name}"
+                    )
+                    ))
+            }
     }
 
     fun <T : Block> registerControllerBlock(
