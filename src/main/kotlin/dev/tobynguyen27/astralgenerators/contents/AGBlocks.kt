@@ -151,11 +151,11 @@ object AGBlocks {
             .register()
     val BASIC_OUTPUT_BUS =
         BlockRegistry.registerPortBlock(
-            BasicOutputBus.ID,
-            ::BasicOutputBus,
-            BusBlockEntity.Tier.BASIC,
-            BusBlockEntity.Mode.OUTPUT,
-        )
+                BasicOutputBus.ID,
+                ::BasicOutputBus,
+                BusBlockEntity.Tier.BASIC,
+                BusBlockEntity.Mode.OUTPUT,
+            )
             .blockEntity { type, blockPos, blockState ->
                 BasicOutputBusBlockEntity(type, blockPos, blockState)
             }
@@ -163,11 +163,11 @@ object AGBlocks {
             .register()
     val ADVANCED_OUTPUT_BUS =
         BlockRegistry.registerPortBlock(
-            AdvancedOutputBus.ID,
-            ::AdvancedOutputBus,
-            BusBlockEntity.Tier.ADVANCED,
-            BusBlockEntity.Mode.OUTPUT,
-        )
+                AdvancedOutputBus.ID,
+                ::AdvancedOutputBus,
+                BusBlockEntity.Tier.ADVANCED,
+                BusBlockEntity.Mode.OUTPUT,
+            )
             .blockEntity { type, blockPos, blockState ->
                 AdvancedOutputBusBlockEntity(type, blockPos, blockState)
             }
@@ -175,11 +175,11 @@ object AGBlocks {
             .register()
     val INDUSTRIAL_OUTPUT_BUS =
         BlockRegistry.registerPortBlock(
-            IndustrialOutputBus.ID,
-            ::IndustrialOutputBus,
-            BusBlockEntity.Tier.INDUSTRIAL,
-            BusBlockEntity.Mode.OUTPUT,
-        )
+                IndustrialOutputBus.ID,
+                ::IndustrialOutputBus,
+                BusBlockEntity.Tier.INDUSTRIAL,
+                BusBlockEntity.Mode.OUTPUT,
+            )
             .blockEntity { type, blockPos, blockState ->
                 IndustrialOutputBusBlockEntity(type, blockPos, blockState)
             }

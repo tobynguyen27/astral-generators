@@ -18,30 +18,30 @@ class BusModelProvider : ModelResourceProvider {
 
     companion object {
 
-        private val BUSES = listOf<String>(
-            BasicInputBus.ID,
-            BasicOutputBus.ID,
-            AdvancedInputBus.ID,
-            AdvancedOutputBus.ID,
-            IndustrialInputBus.ID,
-            IndustrialOutputBus.ID,
-        )
-
-        private val BUS_MODELS = BUSES.flatMap { bus ->
-            listOf(
-                ModelResourceLocation(Identifier("block/$bus"), ""),
-                ModelResourceLocation(Identifier("item/$bus"), "inventory")
+        private val BUSES =
+            listOf<String>(
+                BasicInputBus.ID,
+                BasicOutputBus.ID,
+                AdvancedInputBus.ID,
+                AdvancedOutputBus.ID,
+                IndustrialInputBus.ID,
+                IndustrialOutputBus.ID,
             )
-        }
+
+        private val BUS_MODELS =
+            BUSES.flatMap { bus ->
+                listOf(
+                    ModelResourceLocation(Identifier("block/$bus"), ""),
+                    ModelResourceLocation(Identifier("item/$bus"), "inventory"),
+                )
+            }
     }
 
     override fun loadModelResource(
         resourceId: ResourceLocation,
         ctx: ModelProviderContext,
     ): UnbakedModel? {
-        if (
-            resourceId in BUS_MODELS
-        ) {
+        if (resourceId in BUS_MODELS) {
             return BusUnbakedModel()
         }
 

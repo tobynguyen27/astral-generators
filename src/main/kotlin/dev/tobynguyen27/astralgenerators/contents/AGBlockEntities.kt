@@ -8,7 +8,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.Adv
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBusBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
 import net.minecraft.core.Registry
