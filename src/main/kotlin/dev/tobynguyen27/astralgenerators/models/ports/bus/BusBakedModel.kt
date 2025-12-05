@@ -98,8 +98,8 @@ class BusBakedModel(
         randomSupplier: Supplier<Random>,
         context: RenderContext,
     ) {
-        var defaultTier = "basic"
-        var defaultMode = "input"
+        var defaultTier = BusBlockEntity.Tier.BASIC.toString()
+        var defaultMode = BusBlockEntity.Mode.INPUT.toString()
 
         stack.tag?.apply {
             if (contains("tier")) defaultTier = getString("tier")
@@ -108,13 +108,13 @@ class BusBakedModel(
 
         val baseTierToUse =
             when (defaultTier) {
-                "advanced" -> baseAdvancedSprite
-                "industrial" -> baseIndustrialSprite
+                BusBlockEntity.Tier.ADVANCED.toString() -> baseAdvancedSprite
+                BusBlockEntity.Tier.INDUSTRIAL.toString() -> baseIndustrialSprite
                 else -> baseBasicSprite
             }
         val modeToUse =
             when (defaultMode) {
-                "output" -> outputOverlaySprite
+                BusBlockEntity.Mode.OUTPUT.toString() -> outputOverlaySprite
                 else -> inputOverlaySprite
             }
 
