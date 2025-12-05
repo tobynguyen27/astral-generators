@@ -51,6 +51,10 @@ class BusBakedModel(
                     BusBlockEntity.Tier.INDUSTRIAL -> baseIndustrialSprite
                     else -> baseBasicSprite
                 }
+        } else {
+            val casingBlockState = attachment.casingBlock
+            val casingModel = Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
+            baseTierToUse = casingModel.particleIcon
         }
 
         var overlaySpriteToUse = inputOverlaySprite
@@ -62,20 +66,6 @@ class BusBakedModel(
         val emitter = context.emitter
 
         for (d in Direction.entries) {
-            if (attachment.casingBlock != null) {
-                // Base
-                val casingBlockState = attachment.casingBlock
-                val casingModel =
-                    Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
-                val quads = casingModel.getQuads(casingBlockState, d, randomSupplier.get())
-
-                baseTierToUse =
-                    if (quads.isNotEmpty()) {
-                        quads[0].sprite
-                    } else {
-                        casingModel.particleIcon
-                    }
-            }
 
             // Base
             emitter.square(d, 0f, 0f, 1f, 1f, 0f)
