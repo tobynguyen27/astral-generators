@@ -1,9 +1,12 @@
 package dev.tobynguyen27.astralgenerators.contents
 
 import com.tterrag.registrate.util.entry.BlockEntry
+import dev.tobynguyen27.astralgenerators.contents.blocks.AdvancedMachineCasing
+import dev.tobynguyen27.astralgenerators.contents.blocks.BasicMachineCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.BoilerCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.CalvarCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.HighMagneticCoil
+import dev.tobynguyen27.astralgenerators.contents.blocks.IndustrialMachineCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.MatrixCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineCasing
 import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineVent
@@ -43,6 +46,9 @@ object AGBlocks {
         BlockRegistry.registerCasingBlock(SteamTurbineCasing.ID, ::SteamTurbineCasing).register()
     val MATRIX_CASING =
         BlockRegistry.registerCasingBlock(MatrixCasing.ID, ::MatrixCasing).register()
+    val BASIC_MACHINE_CASING = BlockRegistry.registerCasingBlock(BasicMachineCasing.ID, ::BasicMachineCasing).register()
+    val ADVANCED_MACHINE_CASING = BlockRegistry.registerCasingBlock(AdvancedMachineCasing.ID, ::AdvancedMachineCasing).register()
+    val INDUSTRIAL_MACHINE_CASING = BlockRegistry.registerCasingBlock(IndustrialMachineCasing.ID, ::IndustrialMachineCasing).register()
 
     // Coils
     val HIGH_MAGNETIC_COIL =
