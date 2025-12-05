@@ -14,19 +14,23 @@ import net.minecraft.client.resources.model.UnbakedModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.InventoryMenu
 
-class BusUnbakedModel() : UnbakedModel {
+class BusUnbakedModel : UnbakedModel {
 
     companion object {
-        val DEFAULT_CASING_ID = Identifier("block/machines/side")
-        val INPUT_OVERLAY_ID = Identifier("block/ports/overlay_item_hatch_input")
-        val OUTPUT_OVERLAY_ID = Identifier("block/ports/overlay_item_hatch_output")
+        val BASE_BASIC = Identifier("block/casings/basic_machine_casing")
+        val ADVANCED_BASIC = Identifier("block/casings/advanced_machine_casing")
+        val INDUSTRIAL_BASIC = Identifier("block/casings/industrial_machine_casing")
+
+        val OVERLAY_INPUT = Identifier("block/ports/overlay_item_hatch_input")
+        val OVERLAY_OUTPUT = Identifier("block/ports/overlay_item_hatch_output")
 
         val MATERIALS =
-            listOf<Material>(
-                Material(InventoryMenu.BLOCK_ATLAS, DEFAULT_CASING_ID),
-                Material(InventoryMenu.BLOCK_ATLAS, INPUT_OVERLAY_ID),
-                Material(InventoryMenu.BLOCK_ATLAS, OUTPUT_OVERLAY_ID),
-            )
+            listOf(BASE_BASIC, ADVANCED_BASIC, INDUSTRIAL_BASIC, OVERLAY_INPUT, OVERLAY_OUTPUT)
+                .map { Material(InventoryMenu.BLOCK_ATLAS, it) }
+    }
+
+    override fun getDependencies(): Collection<ResourceLocation> {
+        return emptyList()
     }
 
     override fun getMaterials(
@@ -42,23 +46,25 @@ class BusUnbakedModel() : UnbakedModel {
         transform: ModelState,
         location: ResourceLocation,
     ): BakedModel {
+        val baseBasicSprite = spriteGetter.apply(MATERIALS[0])
+        val baseAdvancedSprite = spriteGetter.apply(MATERIALS[1])
+        val baseIndustrialSprite = spriteGetter.apply(MATERIALS[2])
+
+        val inputOverlaySprite = spriteGetter.apply(MATERIALS[3])
+        val outputOverlaySprite = spriteGetter.apply(MATERIALS[4])
+
         val cutoutMaterial =
             RendererAccess.INSTANCE.renderer!!.materialFinder()
                 .blendMode(0, BlendMode.CUTOUT_MIPPED)
                 .find()
-        val defaultCasingSprite = spriteGetter.apply(MATERIALS[0])
-        val inputOverlaySprite = spriteGetter.apply(MATERIALS[1])
-        val outputOverlaySprite = spriteGetter.apply(MATERIALS[2])
 
         return BusBakedModel(
             cutoutMaterial,
-            defaultCasingSprite,
+            baseBasicSprite,
+            baseAdvancedSprite,
+            baseIndustrialSprite,
             inputOverlaySprite,
             outputOverlaySprite,
         )
-    }
-
-    override fun getDependencies(): Collection<ResourceLocation> {
-        return emptyList()
     }
 }

@@ -24,6 +24,9 @@ object AGMenuScreens {
                 AGMenus.BASIC_INPUT_BUS,
                 AGMenus.ADVANCED_INPUT_BUS,
                 AGMenus.INDUSTRIAL_INPUT_BUS,
+                AGMenus.BASIC_OUTPUT_BUS,
+                AGMenus.ADVANCED_OUTPUT_BUS,
+                AGMenus.INDUSTRIAL_OUTPUT_BUS,
             )
 
         for (screen in screens) {

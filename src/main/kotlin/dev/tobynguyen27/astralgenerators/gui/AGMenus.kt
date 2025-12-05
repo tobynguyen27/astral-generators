@@ -5,6 +5,9 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusMenu
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.core.Registry
@@ -53,6 +56,30 @@ object AGMenus {
             Identifier(IndustrialInputBusMenu.ID),
             MenuType { syncId, inventory ->
                 IndustrialInputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
+            },
+        )
+    val BASIC_OUTPUT_BUS: MenuType<BasicOutputBusMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(BasicOutputBusMenu.ID),
+            MenuType { syncId, inventory ->
+                BasicOutputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
+            },
+        )
+    val ADVANCED_OUTPUT_BUS: MenuType<AdvancedOutputBusMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(AdvancedOutputBusMenu.ID),
+            MenuType { syncId, inventory ->
+                AdvancedOutputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
+            },
+        )
+    val INDUSTRIAL_OUTPUT_BUS: MenuType<IndustrialOutputBusMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(IndustrialOutputBusMenu.ID),
+            MenuType { syncId, inventory ->
+                IndustrialOutputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
             },
         )
 

@@ -13,7 +13,7 @@ class BasicInputBusBlockEntity(
     type: BlockEntityType<*>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Type.INPUT) {
+) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Tier.BASIC, Mode.INPUT, null) {
 
     companion object {
         const val CONTAINER_SIZE = 1

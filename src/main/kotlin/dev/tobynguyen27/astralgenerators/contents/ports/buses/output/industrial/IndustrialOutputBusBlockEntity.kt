@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial
+package dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial
 
 import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import net.minecraft.core.BlockPos
@@ -9,11 +9,11 @@ import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
-class IndustrialInputBusBlockEntity(
+class IndustrialOutputBusBlockEntity(
     type: BlockEntityType<*>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Tier.INDUSTRIAL, Mode.INPUT, null) {
+) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Tier.INDUSTRIAL, Mode.OUTPUT, null) {
 
     companion object {
         const val CONTAINER_SIZE = 25
@@ -24,7 +24,7 @@ class IndustrialInputBusBlockEntity(
         inventory: Inventory,
         player: Player,
     ): AbstractContainerMenu {
-        return IndustrialInputBusMenu(
+        return IndustrialOutputBusMenu(
             syncId,
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),

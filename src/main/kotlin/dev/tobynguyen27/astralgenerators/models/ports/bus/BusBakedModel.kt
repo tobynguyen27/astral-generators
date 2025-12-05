@@ -24,7 +24,9 @@ import net.minecraft.world.level.block.state.BlockState
 
 class BusBakedModel(
     val renderMaterial: RenderMaterial,
-    val defaultCasingSprite: TextureAtlasSprite,
+    val baseBasicSprite: TextureAtlasSprite,
+    val baseAdvancedSprite: TextureAtlasSprite,
+    val baseIndustrialSprite: TextureAtlasSprite,
     val inputOverlaySprite: TextureAtlasSprite,
     val outputOverlaySprite: TextureAtlasSprite,
 ) : BakedModel, FabricBakedModel {
@@ -40,42 +42,51 @@ class BusBakedModel(
         val attachment = blockView.getBlockEntityRenderAttachment(pos)
         if (attachment !is BusModelClientData) return
 
+        var baseTierToUse: TextureAtlasSprite? = null
+
+        if (attachment.casingBlock == null) {
+            baseTierToUse =
+                when (attachment.tier) {
+                    BusBlockEntity.Tier.ADVANCED -> baseAdvancedSprite
+                    BusBlockEntity.Tier.INDUSTRIAL -> baseIndustrialSprite
+                    else -> baseBasicSprite
+                }
+        }
+
+        var overlaySpriteToUse = inputOverlaySprite
+
+        if (attachment.mode == BusBlockEntity.Mode.OUTPUT) {
+            overlaySpriteToUse = outputOverlaySprite
+        }
+
         val emitter = context.emitter
 
-        for (direction in Direction.entries) {
-            // Casing
-            var casingSpriteToUse = defaultCasingSprite
-
-            val casingBlockState = attachment.casingBlock
-            if (casingBlockState != null) {
-                // Use custom casing here
+        for (d in Direction.entries) {
+            if (attachment.casingBlock != null) {
+                // Base
+                val casingBlockState = attachment.casingBlock
                 val casingModel =
                     Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
-                val quads = casingModel.getQuads(casingBlockState, direction, randomSupplier.get())
+                val quads = casingModel.getQuads(casingBlockState, d, randomSupplier.get())
 
-                if (quads.isNotEmpty()) {
-                    casingSpriteToUse = quads[0].sprite
-                } else {
-                    casingSpriteToUse = casingModel.particleIcon // Should I do this?
-                }
+                baseTierToUse =
+                    if (quads.isNotEmpty()) {
+                        quads[0].sprite
+                    } else {
+                        casingModel.particleIcon
+                    }
             }
 
-            emitter.square(direction, 0f, 0f, 1f, 1f, 0f)
-            emitter.spriteBake(0, casingSpriteToUse, MutableQuadView.BAKE_LOCK_UV)
+            // Base
+            emitter.square(d, 0f, 0f, 1f, 1f, 0f)
+            emitter.spriteBake(0, baseTierToUse, MutableQuadView.BAKE_LOCK_UV)
             emitter.spriteColor(0, -1, -1, -1, -1)
             emitter.emit()
 
             // Overlay
-            val busType = attachment.type
-            var overlaySpriteToUse = inputOverlaySprite
-
-            if (busType == BusBlockEntity.Type.OUTPUT) {
-                overlaySpriteToUse = outputOverlaySprite
-            }
-
             emitter.material(renderMaterial)
-            emitter.square(direction, 0f, 0f, 1f, 1f, -3e-4f)
-            emitter.cullFace(direction) // HACKME
+            emitter.square(d, 0f, 0f, 1f, 1f, -3e-4f)
+            emitter.cullFace(d)
             emitter.spriteBake(0, overlaySpriteToUse, MutableQuadView.BAKE_LOCK_UV)
             emitter.spriteColor(0, -1, -1, -1, -1)
             emitter.emit()
@@ -87,27 +98,43 @@ class BusBakedModel(
         randomSupplier: Supplier<Random>,
         context: RenderContext,
     ) {
+        var defaultTier = "basic"
+        var defaultMode = "input"
+
+        stack.tag?.apply {
+            if (contains("tier")) defaultTier = getString("tier")
+            if (contains("mode")) defaultMode = getString("mode")
+        }
+
+        val baseTierToUse =
+            when (defaultTier) {
+                "advanced" -> baseAdvancedSprite
+                "industrial" -> baseIndustrialSprite
+                else -> baseBasicSprite
+            }
+        val modeToUse =
+            when (defaultMode) {
+                "output" -> outputOverlaySprite
+                else -> inputOverlaySprite
+            }
+
         val emitter = context.emitter
 
-        // Casing
-        emitter.square(Direction.NORTH, 0f, 0f, 1f, 1f, 0f)
-        emitter.spriteBake(0, defaultCasingSprite, MutableQuadView.BAKE_LOCK_UV)
-        emitter.spriteColor(0, -1, -1, -1, -1)
-        emitter.emit()
+        for (d in Direction.entries) {
+            // Base
+            emitter.square(d, 0f, 0f, 1f, 1f, 0f)
+            emitter.spriteBake(0, baseTierToUse, MutableQuadView.BAKE_LOCK_UV)
+            emitter.spriteColor(0, -1, -1, -1, -1)
+            emitter.emit()
 
-        // Overlay
-
-        emitter.material(renderMaterial)
-        emitter.square(Direction.NORTH, 0f, 0f, 1f, 1f, -3e-4f)
-        emitter.cullFace(Direction.NORTH) // HACKME
-        emitter.spriteBake(0, inputOverlaySprite, MutableQuadView.BAKE_LOCK_UV)
-        // FIXME
-        emitter.spriteColor(0, -1, -1, -1, -1)
-        emitter.emit()
-    }
-
-    override fun getParticleIcon(): TextureAtlasSprite {
-        return defaultCasingSprite
+            // Overlay
+            emitter.material(renderMaterial)
+            emitter.square(d, 0f, 0f, 1f, 1f, -3e-4f)
+            emitter.cullFace(d)
+            emitter.spriteBake(0, modeToUse, MutableQuadView.BAKE_LOCK_UV)
+            emitter.spriteColor(0, -1, -1, -1, -1)
+            emitter.emit()
+        }
     }
 
     override fun getQuads(state: BlockState?, side: Direction?, rand: Random): List<BakedQuad> {
@@ -128,6 +155,10 @@ class BusBakedModel(
 
     override fun isCustomRenderer(): Boolean {
         return false
+    }
+
+    override fun getParticleIcon(): TextureAtlasSprite {
+        return baseBasicSprite
     }
 
     override fun getTransforms(): ItemTransforms {

@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports
 
 import dev.tobynguyen27.astralgenerators.utils.IInventory
+import java.util.Locale.getDefault
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -21,7 +22,9 @@ abstract class BusBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
     size: Int,
-    val type: Type,
+    val tier: Tier,
+    val mode: Mode,
+    var casingBlock: BlockState?,
 ) :
     BlockEntity(blockEntityType, blockPos, blockState),
     IInventory,
@@ -30,7 +33,6 @@ abstract class BusBlockEntity(
     RenderAttachmentBlockEntity {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
-    var casingBlock: BlockState? = null
 
     override fun getItems(): NonNullList<ItemStack> {
         return items
@@ -65,7 +67,7 @@ abstract class BusBlockEntity(
         itemStack: ItemStack,
         direction: Direction?,
     ): Boolean {
-        return type == Type.INPUT
+        return mode == Mode.INPUT
     }
 
     override fun canTakeItemThroughFace(
@@ -73,15 +75,29 @@ abstract class BusBlockEntity(
         stack: ItemStack,
         direction: Direction,
     ): Boolean {
-        return type == Type.OUTPUT
+        return mode == Mode.OUTPUT
     }
 
     override fun getRenderAttachmentData(): BusModelClientData {
-        return BusModelClientData(type, casingBlock)
+        return BusModelClientData(mode, tier, casingBlock)
     }
 
-    enum class Type {
+    enum class Mode {
         INPUT,
-        OUTPUT,
+        OUTPUT;
+
+        override fun toString(): String {
+            return super.toString().lowercase(getDefault())
+        }
+    }
+
+    enum class Tier {
+        BASIC,
+        ADVANCED,
+        INDUSTRIAL;
+
+        override fun toString(): String {
+            return super.toString().lowercase(getDefault())
+        }
     }
 }
