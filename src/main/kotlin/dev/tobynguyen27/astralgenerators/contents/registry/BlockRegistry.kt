@@ -5,8 +5,8 @@ import com.tterrag.registrate.builders.BlockBuilder
 import com.tterrag.registrate.util.nullness.NonNullFunction
 import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
 import dev.tobynguyen27.astralgenerators.contents.tags.AGBlockTags
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil
 import dev.tobynguyen27.astralgenerators.utils.Identifier
-import dev.tobynguyen27.astralgenerators.utils.StringHelper
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.client.renderer.RenderType
@@ -148,7 +148,7 @@ object BlockRegistry {
         factory: NonNullFunction<BlockBehaviour.Properties, T>,
     ): BlockBuilder<T, Registrate> {
         return REGISTRATE.block(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .properties {
                 FabricBlockSettings.of(Material.METAL)
                     .sound(SoundType.METAL)

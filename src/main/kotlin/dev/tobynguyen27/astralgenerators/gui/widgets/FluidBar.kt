@@ -2,10 +2,10 @@ package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.calculateFormattedPercentage
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toEnglishName
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toReadableNumberString
 import dev.tobynguyen27.astralgenerators.utils.Identifier
-import dev.tobynguyen27.astralgenerators.utils.StringHelper.calculateFormattedPercentage
-import dev.tobynguyen27.astralgenerators.utils.StringHelper.toEnglishName
-import dev.tobynguyen27.astralgenerators.utils.StringHelper.toReadableNumberString
 import dev.tobynguyen27.codebebelib.math.MathHelper
 import dev.tobynguyen27.codebebelib.render.CCRenderState
 import dev.tobynguyen27.codebebelib.render.RenderUtils

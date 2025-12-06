@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.utils.StringHelper.calculateFormattedPercentage
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.calculateFormattedPercentage
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WBar
 import net.minecraft.ChatFormatting

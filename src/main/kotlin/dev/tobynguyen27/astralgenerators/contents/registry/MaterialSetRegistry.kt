@@ -5,7 +5,7 @@ import com.tterrag.registrate.builders.BlockBuilder
 import com.tterrag.registrate.builders.ItemBuilder
 import com.tterrag.registrate.util.nullness.NonNullFunction
 import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
-import dev.tobynguyen27.astralgenerators.utils.StringHelper
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil
 import java.util.function.Supplier
 import net.minecraft.client.color.block.BlockColor
 import net.minecraft.client.color.item.ItemColor
@@ -50,7 +50,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -67,7 +67,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -83,7 +83,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -100,7 +100,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -116,7 +116,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -133,7 +133,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -149,7 +149,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -166,7 +166,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -182,7 +182,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov ->
                 prov.generated(
                     { ctx.entry },
@@ -198,7 +198,7 @@ object MaterialSetRegistry {
         color: Int,
     ): ItemBuilder<T, Registrate> =
         REGISTRATE.item(name, factory)
-            .lang(StringHelper.toEnglishName(name))
+            .lang(FormattingUtil.toEnglishName(name))
             .model { ctx, prov -> prov.generated({ ctx.entry }, prov.modLoc("item/base/dust")) }
             .color { Supplier { ItemColor { _, _ -> color } } }
 }
