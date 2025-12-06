@@ -15,12 +15,8 @@ abstract class PortBlockEntity(
     blockState: BlockState,
     val tier: PortBlockSpecification.Tier,
     val mode: PortBlockSpecification.Mode,
-    val casingBlock: BlockState?
-) : BlockEntity(
-    blockEntityType,
-    blockPos,
-    blockState
-), MenuProvider, RenderAttachmentBlockEntity {
+    var casingBlock: BlockState?,
+) : BlockEntity(blockEntityType, blockPos, blockState), MenuProvider, RenderAttachmentBlockEntity {
     // Menu
     override fun getDisplayName(): Component {
         return TranslatableComponent(blockState.block.descriptionId)

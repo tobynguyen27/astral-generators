@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.models.ports.bus
+package dev.tobynguyen27.astralgenerators.models.ports
 
 import com.mojang.datafixers.util.Pair
 import dev.tobynguyen27.astralgenerators.utils.Identifier
@@ -58,7 +58,7 @@ class BusUnbakedModel : UnbakedModel {
                 .blendMode(0, BlendMode.CUTOUT_MIPPED)
                 .find()
 
-        return BusBakedModel(
+        return PortBlockBakedModel(
             cutoutMaterial,
             baseBasicSprite,
             baseAdvancedSprite,

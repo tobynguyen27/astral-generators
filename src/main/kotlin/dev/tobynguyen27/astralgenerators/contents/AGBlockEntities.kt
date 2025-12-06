@@ -10,6 +10,12 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatchBlockEntity
 import net.minecraft.core.Registry
 
 object AGBlockEntities {
@@ -53,6 +59,31 @@ object AGBlockEntities {
     val INDUSTRIAL_OUTPUT_BUS: BlockEntityEntry<IndustrialOutputBusBlockEntity> =
         BlockEntityEntry.cast<IndustrialOutputBusBlockEntity>(
             AGBlocks.INDUSTRIAL_OUTPUT_BUS.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+
+    val BASIC_FLUID_INPUT_HATCH: BlockEntityEntry<BasicFluidInputHatchBlockEntity> =
+        BlockEntityEntry.cast<BasicFluidInputHatchBlockEntity>(
+            AGBlocks.BASIC_FLUID_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val ADVANCED_FLUID_INPUT_HATCH: BlockEntityEntry<AdvancedFluidInputHatchBlockEntity> =
+        BlockEntityEntry.cast<AdvancedFluidInputHatchBlockEntity>(
+            AGBlocks.ADVANCED_FLUID_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val INDUSTRIAL_FLUID_INPUT_HATCH: BlockEntityEntry<IndustrialFluidInputHatchBlockEntity> =
+        BlockEntityEntry.cast<IndustrialFluidInputHatchBlockEntity>(
+            AGBlocks.INDUSTRIAL_FLUID_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val BASIC_FLUID_OUTPUT_HATCH: BlockEntityEntry<BasicFluidOutputHatchBlockEntity> =
+        BlockEntityEntry.cast<BasicFluidOutputHatchBlockEntity>(
+            AGBlocks.BASIC_FLUID_OUTPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val ADVANCED_FLUID_OUTPUT_HATCH: BlockEntityEntry<AdvancedFluidOutputHatchBlockEntity> =
+        BlockEntityEntry.cast<AdvancedFluidOutputHatchBlockEntity>(
+            AGBlocks.ADVANCED_FLUID_OUTPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+    val INDUSTRIAL_FLUID_OUTPUT_HATCH: BlockEntityEntry<IndustrialFluidOutputHatchBlockEntity> =
+        BlockEntityEntry.cast<IndustrialFluidOutputHatchBlockEntity>(
+            AGBlocks.INDUSTRIAL_FLUID_OUTPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
     fun register() {}

@@ -1,15 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents
 
 import com.tterrag.registrate.util.entry.BlockEntry
-import dev.tobynguyen27.astralgenerators.contents.blocks.AdvancedMachineCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.BasicMachineCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.BoilerCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.CalvarCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.HighMagneticCoil
-import dev.tobynguyen27.astralgenerators.contents.blocks.IndustrialMachineCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.MatrixCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineCasing
-import dev.tobynguyen27.astralgenerators.contents.blocks.SteamTurbineVent
+import dev.tobynguyen27.astralgenerators.contents.blocks.*
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlock
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
@@ -30,6 +22,18 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.Basic
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.PortBlockRegistry
@@ -155,6 +159,63 @@ object AGBlocks {
             )
             .blockEntity { type, blockPos, blockState ->
                 IndustrialOutputBusBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val BASIC_FLUID_INPUT_HATCH =
+        PortBlockRegistry.registerBasicInputBlock(BasicFluidInputHatch.ID, ::BasicFluidInputHatch)
+            .blockEntity { type, blockPos, blockState ->
+                BasicFluidInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val ADVANCED_FLUID_INPUT_HATCH =
+        PortBlockRegistry.registerAdvancedInputBlock(
+                AdvancedFluidInputHatch.ID,
+                ::AdvancedFluidInputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                AdvancedFluidInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val INDUSTRIAL_FLUID_INPUT_HATCH =
+        PortBlockRegistry.registerIndustrialInputBlock(
+                IndustrialFluidInputHatch.ID,
+                ::IndustrialFluidInputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                IndustrialFluidInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val BASIC_FLUID_OUTPUT_HATCH =
+        PortBlockRegistry.registerBasicOutputBlock(
+                BasicFluidOutputHatch.ID,
+                ::BasicFluidOutputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                BasicFluidOutputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val ADVANCED_FLUID_OUTPUT_HATCH =
+        PortBlockRegistry.registerAdvancedOutputBlock(
+                AdvancedFluidOutputHatch.ID,
+                ::AdvancedFluidOutputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                AdvancedFluidOutputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val INDUSTRIAL_FLUID_OUTPUT_HATCH =
+        PortBlockRegistry.registerIndustrialOutputBlock(
+                IndustrialFluidOutputHatch.ID,
+                ::IndustrialFluidOutputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                IndustrialFluidOutputHatchBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()

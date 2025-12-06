@@ -19,6 +19,12 @@
     "astralgenerators:industrial_input_bus",
     "astralgenerators:basic_output_bus",
     "astralgenerators:advanced_output_bus",
-    "astralgenerators:industrial_output_bus"
+    "astralgenerators:industrial_output_bus",
+    "astralgenerators:basic_fluid_input_hatch",
+    "astralgenerators:advanced_fluid_input_hatch",
+    "astralgenerators:industrial_fluid_input_hatch",
+    "astralgenerators:basic_fluid_output_hatch",
+    "astralgenerators:advanced_fluid_output_hatch",
+    "astralgenerators:industrial_fluid_output_hatch"
   ]
 }

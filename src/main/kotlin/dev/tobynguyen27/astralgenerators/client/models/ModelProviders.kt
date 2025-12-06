@@ -6,5 +6,6 @@ object ModelProviders {
 
     fun register() {
         ModelLoadingRegistry.INSTANCE.registerResourceProvider { _ -> BusModelProvider() }
+        ModelLoadingRegistry.INSTANCE.registerResourceProvider { _ -> FluidHatchModelProvider() }
     }
 }

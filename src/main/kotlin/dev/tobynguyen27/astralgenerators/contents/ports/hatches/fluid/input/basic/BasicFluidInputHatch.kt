@@ -1,0 +1,18 @@
+package dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic
+
+import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlock
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
+
+class BasicFluidInputHatch(properties: Properties) : FluidHatchBlock(properties) {
+
+    companion object {
+        const val ID = "basic_fluid_input_hatch"
+    }
+
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+        return AGBlockEntities.BASIC_FLUID_INPUT_HATCH.create(pos, state)
+    }
+}

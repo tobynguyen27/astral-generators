@@ -1,8 +1,7 @@
-package dev.tobynguyen27.astralgenerators.models.ports.bus
+package dev.tobynguyen27.astralgenerators.models.ports
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockModelClientData
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import java.util.Random
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial
@@ -23,7 +22,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.block.state.BlockState
 
-class BusBakedModel(
+class PortBlockBakedModel(
     val renderMaterial: RenderMaterial,
     val baseBasicSprite: TextureAtlasSprite,
     val baseAdvancedSprite: TextureAtlasSprite,

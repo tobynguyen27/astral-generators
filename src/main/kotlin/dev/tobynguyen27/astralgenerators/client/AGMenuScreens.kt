@@ -27,6 +27,12 @@ object AGMenuScreens {
                 AGMenus.BASIC_OUTPUT_BUS,
                 AGMenus.ADVANCED_OUTPUT_BUS,
                 AGMenus.INDUSTRIAL_OUTPUT_BUS,
+                AGMenus.BASIC_FLUID_INPUT_HATCH,
+                AGMenus.ADVANCED_FLUID_INPUT_HATCH,
+                AGMenus.INDUSTRIAL_FLUID_INPUT_HATCH,
+                AGMenus.BASIC_FLUID_OUTPUT_HATCH,
+                AGMenus.ADVANCED_FLUID_OUTPUT_HATCH,
+                AGMenus.INDUSTRIAL_FLUID_OUTPUT_HATCH,
             )
 
         for (screen in screens) {
