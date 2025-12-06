@@ -8,6 +8,12 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial.IndustrialEnergyInputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchMenu
@@ -134,6 +140,55 @@ object AGMenus {
             Identifier(IndustrialFluidOutputHatchMenu.ID),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
                 IndustrialFluidOutputHatchMenu(syncId, inventory, buf)
+            },
+        )
+
+    val BASIC_ENERGY_INPUT_HATCH: MenuType<BasicEnergyInputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(BasicEnergyInputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                BasicEnergyInputHatchMenu(syncId, inventory, buf)
+            },
+        )
+    val ADVANCED_ENERGY_INPUT_HATCH: MenuType<AdvancedEnergyInputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(AdvancedEnergyInputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                AdvancedEnergyInputHatchMenu(syncId, inventory, buf)
+            },
+        )
+    val INDUSTRIAL_ENERGY_INPUT_HATCH: MenuType<IndustrialEnergyInputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(IndustrialEnergyInputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                IndustrialEnergyInputHatchMenu(syncId, inventory, buf)
+            },
+        )
+    val BASIC_ENERGY_OUTPUT_HATCH: MenuType<BasicEnergyOutputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(BasicEnergyOutputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                BasicEnergyOutputHatchMenu(syncId, inventory, buf)
+            },
+        )
+    val ADVANCED_ENERGY_OUTPUT_HATCH: MenuType<AdvancedEnergyOutputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(AdvancedEnergyOutputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                AdvancedEnergyOutputHatchMenu(syncId, inventory, buf)
+            },
+        )
+    val INDUSTRIAL_ENERGY_OUTPUT_HATCH: MenuType<IndustrialEnergyOutputHatchMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(IndustrialEnergyOutputHatchMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                IndustrialEnergyOutputHatchMenu(syncId, inventory, buf)
             },
         )
 

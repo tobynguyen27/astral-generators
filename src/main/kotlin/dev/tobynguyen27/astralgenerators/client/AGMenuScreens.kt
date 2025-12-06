@@ -33,6 +33,12 @@ object AGMenuScreens {
                 AGMenus.BASIC_FLUID_OUTPUT_HATCH,
                 AGMenus.ADVANCED_FLUID_OUTPUT_HATCH,
                 AGMenus.INDUSTRIAL_FLUID_OUTPUT_HATCH,
+                AGMenus.BASIC_ENERGY_INPUT_HATCH,
+                AGMenus.ADVANCED_ENERGY_INPUT_HATCH,
+                AGMenus.INDUSTRIAL_ENERGY_INPUT_HATCH,
+                AGMenus.BASIC_ENERGY_OUTPUT_HATCH,
+                AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH,
+                AGMenus.INDUSTRIAL_ENERGY_OUTPUT_HATCH,
             )
 
         for (screen in screens) {

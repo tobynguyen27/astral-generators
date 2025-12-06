@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astralgenerators:block/industrial_energy_output_hatch"
+    }
+  }
+}

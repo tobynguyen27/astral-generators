@@ -22,6 +22,18 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.Basic
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial.IndustrialEnergyInputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial.IndustrialEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatch
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatch
@@ -216,6 +228,61 @@ object AGBlocks {
             )
             .blockEntity { type, blockPos, blockState ->
                 IndustrialFluidOutputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+
+    val BASIC_ENERGY_INPUT_HATCH =
+        PortBlockRegistry.registerBasicInputBlock(BasicEnergyInputHatch.ID, ::BasicEnergyInputHatch)
+            .blockEntity { type, blockPos, blockState ->
+                BasicEnergyInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val ADVANCED_ENERGY_INPUT_HATCH =
+        PortBlockRegistry.registerAdvancedInputBlock(
+                AdvancedEnergyInputHatch.ID,
+                ::AdvancedEnergyInputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                AdvancedEnergyInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val INDUSTRIAL_ENERGY_INPUT_HATCH =
+        PortBlockRegistry.registerIndustrialInputBlock(
+                IndustrialEnergyInputHatch.ID,
+                ::IndustrialEnergyInputHatch,
+            )
+            .blockEntity { type, blockPos, blockState ->
+                IndustrialEnergyInputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val BASIC_ENERGY_OUTPUT_HATCH =
+        PortBlockRegistry.registerBasicOutputBlock(BasicEnergyOutputHatch.ID, ::BasicEnergyOutputHatch)
+            .blockEntity { type, blockPos, blockState ->
+                BasicEnergyOutputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val ADVANCED_ENERGY_OUTPUT_HATCH =
+        PortBlockRegistry.registerAdvancedOutputBlock(
+            AdvancedEnergyOutputHatch.ID,
+            ::AdvancedEnergyOutputHatch,
+        )
+            .blockEntity { type, blockPos, blockState ->
+                AdvancedEnergyOutputHatchBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .register()
+    val INDUSTRIAL_ENERGY_OUTPUT_HATCH =
+        PortBlockRegistry.registerIndustrialOutputBlock(
+            IndustrialEnergyOutputHatch.ID,
+            ::IndustrialEnergyOutputHatch,
+        )
+            .blockEntity { type, blockPos, blockState ->
+                IndustrialEnergyOutputHatchBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()

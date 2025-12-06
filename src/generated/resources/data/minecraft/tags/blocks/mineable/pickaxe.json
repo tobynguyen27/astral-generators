@@ -25,6 +25,12 @@
     "astralgenerators:industrial_fluid_input_hatch",
     "astralgenerators:basic_fluid_output_hatch",
     "astralgenerators:advanced_fluid_output_hatch",
-    "astralgenerators:industrial_fluid_output_hatch"
+    "astralgenerators:industrial_fluid_output_hatch",
+    "astralgenerators:basic_energy_input_hatch",
+    "astralgenerators:advanced_energy_input_hatch",
+    "astralgenerators:industrial_energy_input_hatch",
+    "astralgenerators:basic_energy_output_hatch",
+    "astralgenerators:advanced_energy_output_hatch",
+    "astralgenerators:industrial_energy_output_hatch"
   ]
 }

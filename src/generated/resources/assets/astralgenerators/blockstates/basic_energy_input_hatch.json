@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astralgenerators:block/basic_energy_input_hatch"
+    }
+  }
+}
