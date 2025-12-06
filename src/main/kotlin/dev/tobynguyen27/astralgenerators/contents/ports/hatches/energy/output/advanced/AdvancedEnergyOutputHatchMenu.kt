@@ -17,7 +17,14 @@ class AdvancedEnergyOutputHatchMenu(
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) : SyncedGuiDescription(AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH, syncId, playerInventory, null, null) {
+) :
+    SyncedGuiDescription(
+        AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH,
+        syncId,
+        playerInventory,
+        null,
+        null,
+    ) {
 
     // Client
     private var energyCapacity = 0L

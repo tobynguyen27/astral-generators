@@ -260,7 +260,10 @@ object AGBlocks {
             .build()
             .register()
     val BASIC_ENERGY_OUTPUT_HATCH =
-        PortBlockRegistry.registerBasicOutputBlock(BasicEnergyOutputHatch.ID, ::BasicEnergyOutputHatch)
+        PortBlockRegistry.registerBasicOutputBlock(
+                BasicEnergyOutputHatch.ID,
+                ::BasicEnergyOutputHatch,
+            )
             .blockEntity { type, blockPos, blockState ->
                 BasicEnergyOutputHatchBlockEntity(type, blockPos, blockState)
             }
@@ -268,9 +271,9 @@ object AGBlocks {
             .register()
     val ADVANCED_ENERGY_OUTPUT_HATCH =
         PortBlockRegistry.registerAdvancedOutputBlock(
-            AdvancedEnergyOutputHatch.ID,
-            ::AdvancedEnergyOutputHatch,
-        )
+                AdvancedEnergyOutputHatch.ID,
+                ::AdvancedEnergyOutputHatch,
+            )
             .blockEntity { type, blockPos, blockState ->
                 AdvancedEnergyOutputHatchBlockEntity(type, blockPos, blockState)
             }
@@ -278,9 +281,9 @@ object AGBlocks {
             .register()
     val INDUSTRIAL_ENERGY_OUTPUT_HATCH =
         PortBlockRegistry.registerIndustrialOutputBlock(
-            IndustrialEnergyOutputHatch.ID,
-            ::IndustrialEnergyOutputHatch,
-        )
+                IndustrialEnergyOutputHatch.ID,
+                ::IndustrialEnergyOutputHatch,
+            )
             .blockEntity { type, blockPos, blockState ->
                 IndustrialEnergyOutputHatchBlockEntity(type, blockPos, blockState)
             }

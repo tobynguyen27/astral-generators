@@ -25,7 +25,7 @@ class EnergyHatchModelProvider : ModelResourceProvider {
                 IndustrialEnergyInputHatch.ID,
                 BasicEnergyOutputHatch.ID,
                 AdvancedEnergyOutputHatch.ID,
-                IndustrialEnergyOutputHatch.ID
+                IndustrialEnergyOutputHatch.ID,
             )
 
         private val HATCH_MODELS =
