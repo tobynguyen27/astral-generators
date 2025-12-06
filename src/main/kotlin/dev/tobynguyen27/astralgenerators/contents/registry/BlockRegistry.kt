@@ -3,21 +3,15 @@ package dev.tobynguyen27.astralgenerators.contents.registry
 import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.builders.BlockBuilder
 import com.tterrag.registrate.util.nullness.NonNullFunction
-import dev.tobynguyen27.astralgenerators.AstralGenerators
 import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.tags.AGBlockTags
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.astralgenerators.utils.StringHelper
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.core.NonNullList
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.CreativeModeTab
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -26,42 +20,6 @@ import net.minecraft.world.level.material.Material
 import net.minecraftforge.client.model.generators.ModelFile
 
 object BlockRegistry {
-
-    fun <T : Block> registerPortBlock(
-        name: String,
-        factory: NonNullFunction<BlockBehaviour.Properties, T>,
-        tier: BusBlockEntity.Tier,
-        mode: BusBlockEntity.Mode,
-    ): BlockBuilder<T, Registrate> {
-        return register(name, factory)
-            .addLayer { Supplier { RenderType.cutout() } }
-            .item { block, properties ->
-                object : BlockItem(block, properties) {
-                    override fun fillItemCategory(
-                        category: CreativeModeTab,
-                        items: NonNullList<ItemStack>,
-                    ) {
-                        if (this.allowdedIn(category)) {
-                            val stack = ItemStack(this)
-
-                            val nbt = stack.orCreateTag
-                            nbt.putString("mode", mode.toString())
-                            nbt.putString("tier", tier.toString())
-                            items.add(stack)
-                        }
-                    }
-                }
-            }
-            .model { ctx, prov -> {} }
-            .tab { AstralGenerators.ITEM_GROUP }
-            .build()
-            .blockstate { ctx, prov ->
-                prov.simpleBlock(
-                    ctx.entry,
-                    ModelFile.UncheckedModelFile(Identifier("block/${ctx.name}")),
-                )
-            }
-    }
 
     fun <T : Block> registerControllerBlock(
         name: String,

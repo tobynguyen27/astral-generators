@@ -18,7 +18,6 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBus
@@ -33,6 +32,7 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
+import dev.tobynguyen27.astralgenerators.contents.registry.PortBlockRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 
 object AGBlocks {
@@ -80,7 +80,7 @@ object AGBlocks {
             .build()
             .register()
 
-    val BOILER_CONTROLLER =
+    val BOILER_CONTROLLER: BlockEntry<BoilerController> =
         BlockRegistry.registerControllerBlock(
                 BoilerController.ID,
                 ::BoilerController,
@@ -91,7 +91,7 @@ object AGBlocks {
             }
             .build()
             .register()
-    val AM_CONTROLLER =
+    val AM_CONTROLLER: BlockEntry<AMControllerBlock> =
         BlockRegistry.registerControllerBlock(
                 AMControllerBlock.ID,
                 ::AMControllerBlock,
@@ -113,72 +113,45 @@ object AGBlocks {
             .register()
 
     // Buses
-    val BASIC_INPUT_BUS =
-        BlockRegistry.registerPortBlock(
-                BasicInputBus.ID,
-                ::BasicInputBus,
-                BusBlockEntity.Tier.BASIC,
-                BusBlockEntity.Mode.INPUT,
-            )
+    val BASIC_INPUT_BUS: BlockEntry<BasicInputBus> =
+        PortBlockRegistry.registerBasicInputBlock(BasicInputBus.ID, ::BasicInputBus)
             .blockEntity { type, blockPos, blockState ->
                 BasicInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
-    val ADVANCED_INPUT_BUS =
-        BlockRegistry.registerPortBlock(
-                AdvancedInputBus.ID,
-                ::AdvancedInputBus,
-                BusBlockEntity.Tier.ADVANCED,
-                BusBlockEntity.Mode.INPUT,
-            )
+    val ADVANCED_INPUT_BUS: BlockEntry<AdvancedInputBus> =
+        PortBlockRegistry.registerAdvancedInputBlock(AdvancedInputBus.ID, ::AdvancedInputBus)
             .blockEntity { type, blockPos, blockState ->
                 AdvancedInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
-    val INDUSTRIAL_INPUT_BUS =
-        BlockRegistry.registerPortBlock(
-                IndustrialInputBus.ID,
-                ::IndustrialInputBus,
-                BusBlockEntity.Tier.INDUSTRIAL,
-                BusBlockEntity.Mode.INPUT,
-            )
+    val INDUSTRIAL_INPUT_BUS: BlockEntry<IndustrialInputBus> =
+        PortBlockRegistry.registerIndustrialInputBlock(IndustrialInputBus.ID, ::IndustrialInputBus)
             .blockEntity { type, blockPos, blockState ->
                 IndustrialInputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
-    val BASIC_OUTPUT_BUS =
-        BlockRegistry.registerPortBlock(
-                BasicOutputBus.ID,
-                ::BasicOutputBus,
-                BusBlockEntity.Tier.BASIC,
-                BusBlockEntity.Mode.OUTPUT,
-            )
+    val BASIC_OUTPUT_BUS: BlockEntry<BasicOutputBus> =
+        PortBlockRegistry.registerBasicOutputBlock(BasicOutputBus.ID, ::BasicOutputBus)
             .blockEntity { type, blockPos, blockState ->
                 BasicOutputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
-    val ADVANCED_OUTPUT_BUS =
-        BlockRegistry.registerPortBlock(
-                AdvancedOutputBus.ID,
-                ::AdvancedOutputBus,
-                BusBlockEntity.Tier.ADVANCED,
-                BusBlockEntity.Mode.OUTPUT,
-            )
+    val ADVANCED_OUTPUT_BUS: BlockEntry<AdvancedOutputBus> =
+        PortBlockRegistry.registerAdvancedOutputBlock(AdvancedOutputBus.ID, ::AdvancedOutputBus)
             .blockEntity { type, blockPos, blockState ->
                 AdvancedOutputBusBlockEntity(type, blockPos, blockState)
             }
             .build()
             .register()
-    val INDUSTRIAL_OUTPUT_BUS =
-        BlockRegistry.registerPortBlock(
+    val INDUSTRIAL_OUTPUT_BUS: BlockEntry<IndustrialOutputBus> =
+        PortBlockRegistry.registerIndustrialOutputBlock(
                 IndustrialOutputBus.ID,
                 ::IndustrialOutputBus,
-                BusBlockEntity.Tier.INDUSTRIAL,
-                BusBlockEntity.Mode.OUTPUT,
             )
             .blockEntity { type, blockPos, blockState ->
                 IndustrialOutputBusBlockEntity(type, blockPos, blockState)

@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic
 
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -13,7 +14,16 @@ class BasicOutputBusBlockEntity(
     type: BlockEntityType<*>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : BusBlockEntity(type, blockPos, blockState, CONTAINER_SIZE, Tier.BASIC, Mode.OUTPUT, null) {
+) :
+    BusBlockEntity(
+        type,
+        blockPos,
+        blockState,
+        CONTAINER_SIZE,
+        PortBlockSpecification.Tier.BASIC,
+        PortBlockSpecification.Mode.OUTPUT,
+        null,
+    ) {
 
     companion object {
         const val CONTAINER_SIZE = 1

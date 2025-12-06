@@ -1,7 +1,8 @@
-package dev.tobynguyen27.astralgenerators.contents.ports
+package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockModelClientData
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.utils.IInventory
-import java.util.Locale.getDefault
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -22,8 +23,8 @@ abstract class BusBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
     size: Int,
-    val tier: Tier,
-    val mode: Mode,
+    val tier: PortBlockSpecification.Tier,
+    val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
 ) :
     BlockEntity(blockEntityType, blockPos, blockState),
@@ -67,7 +68,7 @@ abstract class BusBlockEntity(
         itemStack: ItemStack,
         direction: Direction?,
     ): Boolean {
-        return mode == Mode.INPUT
+        return mode == PortBlockSpecification.Mode.INPUT
     }
 
     override fun canTakeItemThroughFace(
@@ -75,29 +76,10 @@ abstract class BusBlockEntity(
         stack: ItemStack,
         direction: Direction,
     ): Boolean {
-        return mode == Mode.OUTPUT
+        return mode == PortBlockSpecification.Mode.OUTPUT
     }
 
-    override fun getRenderAttachmentData(): BusModelClientData {
-        return BusModelClientData(mode, tier, casingBlock)
-    }
-
-    enum class Mode {
-        INPUT,
-        OUTPUT;
-
-        override fun toString(): String {
-            return super.toString().lowercase(getDefault())
-        }
-    }
-
-    enum class Tier {
-        BASIC,
-        ADVANCED,
-        INDUSTRIAL;
-
-        override fun toString(): String {
-            return super.toString().lowercase(getDefault())
-        }
+    override fun getRenderAttachmentData(): PortBlockModelClientData {
+        return PortBlockModelClientData(mode, tier, casingBlock)
     }
 }

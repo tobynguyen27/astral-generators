@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced
 
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlock
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState

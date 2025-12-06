@@ -1,7 +1,8 @@
 package dev.tobynguyen27.astralgenerators.models.ports.bus
 
-import dev.tobynguyen27.astralgenerators.contents.ports.BusBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.ports.BusModelClientData
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockModelClientData
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import java.util.Random
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial
@@ -40,15 +41,15 @@ class BusBakedModel(
     ) {
         if (blockView !is RenderAttachedBlockView) return
         val attachment = blockView.getBlockEntityRenderAttachment(pos)
-        if (attachment !is BusModelClientData) return
+        if (attachment !is PortBlockModelClientData) return
 
         var baseTierToUse: TextureAtlasSprite? = null
 
         if (attachment.casingBlock == null) {
             baseTierToUse =
                 when (attachment.tier) {
-                    BusBlockEntity.Tier.ADVANCED -> baseAdvancedSprite
-                    BusBlockEntity.Tier.INDUSTRIAL -> baseIndustrialSprite
+                    PortBlockSpecification.Tier.ADVANCED -> baseAdvancedSprite
+                    PortBlockSpecification.Tier.INDUSTRIAL -> baseIndustrialSprite
                     else -> baseBasicSprite
                 }
         } else {
@@ -59,7 +60,7 @@ class BusBakedModel(
 
         var overlaySpriteToUse = inputOverlaySprite
 
-        if (attachment.mode == BusBlockEntity.Mode.OUTPUT) {
+        if (attachment.mode == PortBlockSpecification.Mode.OUTPUT) {
             overlaySpriteToUse = outputOverlaySprite
         }
 
@@ -88,8 +89,8 @@ class BusBakedModel(
         randomSupplier: Supplier<Random>,
         context: RenderContext,
     ) {
-        var defaultTier = BusBlockEntity.Tier.BASIC.toString()
-        var defaultMode = BusBlockEntity.Mode.INPUT.toString()
+        var defaultTier = PortBlockSpecification.Tier.BASIC.toString()
+        var defaultMode = PortBlockSpecification.Mode.INPUT.toString()
 
         stack.tag?.apply {
             if (contains("tier")) defaultTier = getString("tier")
@@ -98,13 +99,13 @@ class BusBakedModel(
 
         val baseTierToUse =
             when (defaultTier) {
-                BusBlockEntity.Tier.ADVANCED.toString() -> baseAdvancedSprite
-                BusBlockEntity.Tier.INDUSTRIAL.toString() -> baseIndustrialSprite
+                PortBlockSpecification.Tier.ADVANCED.toString() -> baseAdvancedSprite
+                PortBlockSpecification.Tier.INDUSTRIAL.toString() -> baseIndustrialSprite
                 else -> baseBasicSprite
             }
         val modeToUse =
             when (defaultMode) {
-                BusBlockEntity.Mode.OUTPUT.toString() -> outputOverlaySprite
+                PortBlockSpecification.Mode.OUTPUT.toString() -> outputOverlaySprite
                 else -> inputOverlaySprite
             }
 

@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.contents.ports
+package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
