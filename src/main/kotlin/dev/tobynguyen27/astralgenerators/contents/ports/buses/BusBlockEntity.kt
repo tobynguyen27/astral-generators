@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockModelClientData
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.utils.IInventory
@@ -23,11 +24,11 @@ abstract class BusBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
     size: Int,
-    val tier: PortBlockSpecification.Tier,
-    val mode: PortBlockSpecification.Mode,
-    var casingBlock: BlockState?,
+    tier: PortBlockSpecification.Tier,
+    mode: PortBlockSpecification.Mode,
+    casingBlock: BlockState?,
 ) :
-    BlockEntity(blockEntityType, blockPos, blockState),
+    PortBlockEntity(blockEntityType, blockPos, blockState, tier, mode, casingBlock),
     IInventory,
     MenuProvider,
     WorldlyContainer,
@@ -40,7 +41,7 @@ abstract class BusBlockEntity(
     }
 
     override fun setChanged() {
-        super<BlockEntity>.setChanged()
+        super<PortBlockEntity>.setChanged()
     }
 
     override fun saveAdditional(tag: CompoundTag) {
@@ -53,10 +54,6 @@ abstract class BusBlockEntity(
         ContainerHelper.loadAllItems(tag, items)
 
         super.load(tag)
-    }
-
-    override fun getDisplayName(): Component {
-        return TranslatableComponent(blockState.block.descriptionId)
     }
 
     override fun getSlotsForFace(side: Direction): IntArray {
@@ -77,9 +74,5 @@ abstract class BusBlockEntity(
         direction: Direction,
     ): Boolean {
         return mode == PortBlockSpecification.Mode.OUTPUT
-    }
-
-    override fun getRenderAttachmentData(): PortBlockModelClientData {
-        return PortBlockModelClientData(mode, tier, casingBlock)
     }
 }

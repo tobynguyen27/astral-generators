@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
@@ -11,22 +12,7 @@ import net.minecraft.world.level.block.RenderShape
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
 
-abstract class BusBlock(properties: Properties) : BaseEntityBlock(properties) {
-
-    override fun use(
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
-    ): InteractionResult {
-        if (!level.isClientSide) {
-            player.openMenu(state.getMenuProvider(level, pos))
-        }
-
-        return InteractionResult.SUCCESS
-    }
+abstract class BusBlock(properties: Properties) : PortBlock(properties) {
 
     override fun onRemove(
         state: BlockState,
@@ -45,9 +31,5 @@ abstract class BusBlock(properties: Properties) : BaseEntityBlock(properties) {
         }
 
         super.onRemove(state, level, pos, newState, isMoving)
-    }
-
-    override fun getRenderShape(state: BlockState): RenderShape {
-        return RenderShape.MODEL
     }
 }
