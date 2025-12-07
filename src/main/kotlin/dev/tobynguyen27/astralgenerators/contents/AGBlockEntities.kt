@@ -10,9 +10,12 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial.IndustrialEnergyInputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchBlockEntity
@@ -85,11 +88,11 @@ object AGBlockEntities {
         BlockEntityEntry.cast(
             AGPortBlocks.BASIC_ENERGY_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
-    val ADVANCED_ENERGY_INPUT_HATCH: BlockEntityEntry<AdvancedFluidInputHatchBlockEntity> =
+    val ADVANCED_ENERGY_INPUT_HATCH: BlockEntityEntry<AdvancedEnergyInputHatchBlockEntity> =
         BlockEntityEntry.cast(
             AGPortBlocks.ADVANCED_ENERGY_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
-    val INDUSTRIAL_ENERGY_INPUT_HATCH: BlockEntityEntry<IndustrialFluidInputHatchBlockEntity> =
+    val INDUSTRIAL_ENERGY_INPUT_HATCH: BlockEntityEntry<IndustrialEnergyInputHatchBlockEntity> =
         BlockEntityEntry.cast(
             AGPortBlocks.INDUSTRIAL_ENERGY_INPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
@@ -101,7 +104,7 @@ object AGBlockEntities {
         BlockEntityEntry.cast(
             AGPortBlocks.ADVANCED_ENERGY_OUTPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
-    val INDUSTRIAL_ENERGY_OUTPUT_HATCH: BlockEntityEntry<IndustrialFluidOutputHatchBlockEntity> =
+    val INDUSTRIAL_ENERGY_OUTPUT_HATCH: BlockEntityEntry<IndustrialEnergyOutputHatchBlockEntity> =
         BlockEntityEntry.cast(
             AGPortBlocks.INDUSTRIAL_ENERGY_OUTPUT_HATCH.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )

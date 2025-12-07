@@ -3,7 +3,6 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
@@ -29,26 +28,23 @@ abstract class EnergyHatchBlockEntity(
     }
 
     val energyStorage =
-        object : SimpleEnergyStorage(capacity, 0, 0) {
+        object :
+            SimpleEnergyStorage(
+                capacity,
+                if (mode == PortBlockSpecification.Mode.INPUT) {
+                    capacity
+                } else {
+                    0
+                },
+                if (mode == PortBlockSpecification.Mode.OUTPUT) {
+                    capacity
+                } else {
+                    0
+                },
+            ) {
 
             override fun onFinalCommit() {
                 setChanged()
-            }
-
-            override fun insert(p0: Long, p1: TransactionContext): Long {
-                return if (mode == PortBlockSpecification.Mode.OUTPUT) {
-                    0L
-                } else {
-                    capacity
-                }
-            }
-
-            override fun extract(p0: Long, p1: TransactionContext): Long {
-                return if (mode == PortBlockSpecification.Mode.INPUT) {
-                    0L
-                } else {
-                    capacity
-                }
             }
         }
 
