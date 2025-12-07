@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.calculateFormattedPercentage
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatPercent
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WBar
 import net.minecraft.ChatFormatting
@@ -23,7 +23,7 @@ class ProgressBar(bg: ResourceLocation, bar: ResourceLocation, field: Int, maxFi
         information.add(
             TranslatableComponent(Texts.PROGRESS)
                 .withStyle(ChatFormatting.GRAY)
-                .append(TextComponent(" ${calculateFormattedPercentage(current, max, "0")}%"))
+                .append(TextComponent(" ${formatPercent(current, max, "0")}"))
         )
     }
 }

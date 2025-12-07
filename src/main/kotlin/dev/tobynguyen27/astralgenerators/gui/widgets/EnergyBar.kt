@@ -2,8 +2,8 @@ package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.calculateFormattedPercentage
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toReadableNumberString
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatNumbers
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatPercent
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.codebebelib.math.MathHelper
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
@@ -56,15 +56,15 @@ class EnergyBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWi
     }
 
     override fun addTooltip(information: TooltipBuilder) {
-        val currentEnergy = currentValue().toInt()
-        val maxEnergyCapacity = maxCapacity().toInt()
+        val currentEnergy = currentValue()
+        val maxEnergyCapacity = maxCapacity()
 
         information.add(TranslatableComponent(Texts.ENERGY).withStyle(ChatFormatting.DARK_AQUA))
         information.add(
             TranslatableComponent(Texts.CAPACITY)
                 .withStyle(ChatFormatting.GOLD)
                 .append(
-                    TextComponent(" ${toReadableNumberString(maxEnergyCapacity)} E")
+                    TextComponent(" ${formatNumbers(maxEnergyCapacity)} E")
                         .withStyle(ChatFormatting.GRAY)
                 )
         )
@@ -74,15 +74,15 @@ class EnergyBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWi
                 .append(
                     TextComponent(
                             " ${
-                                toReadableNumberString(
+                                formatNumbers(
                                     currentEnergy
                                 )
                             } E (${
-                                calculateFormattedPercentage(
-                                    currentEnergy.toDouble(),
-                                    maxEnergyCapacity.toDouble(),
+                                formatPercent(
+                                    currentEnergy,
+                                    maxEnergyCapacity,
                                 )
-                            }%)"
+                            })"
                         )
                         .withStyle(ChatFormatting.GRAY)
                 )

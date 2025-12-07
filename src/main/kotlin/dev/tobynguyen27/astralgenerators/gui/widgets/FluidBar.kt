@@ -2,9 +2,9 @@ package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.calculateFormattedPercentage
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatBuckets
+import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatPercent
 import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toEnglishName
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toReadableNumberString
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.codebebelib.math.MathHelper
 import dev.tobynguyen27.codebebelib.render.CCRenderState
@@ -90,8 +90,8 @@ class FluidBar(
     }
 
     override fun addTooltip(information: TooltipBuilder) {
-        val current = currentValue().toInt()
-        val max = maxCapacity().toInt()
+        val current = currentValue()
+        val max = maxCapacity()
 
         val fluidName = toEnglishName(fluidVariant().fluid.registryName.path)
 
@@ -99,10 +99,7 @@ class FluidBar(
         information.add(
             TranslatableComponent(Texts.CAPACITY)
                 .withStyle(ChatFormatting.GOLD)
-                .append(
-                    TextComponent(" ${toReadableNumberString(max)} mB")
-                        .withStyle(ChatFormatting.GRAY)
-                )
+                .append(TextComponent(" ${formatBuckets(max)}").withStyle(ChatFormatting.GRAY))
         )
 
         information.add(
@@ -110,12 +107,12 @@ class FluidBar(
                 .withStyle(ChatFormatting.GOLD)
                 .append(
                     TextComponent(
-                            " ${toReadableNumberString(
+                            " ${formatBuckets(
                             current
-                        )} mB (${calculateFormattedPercentage(
-                            current.toDouble(),
-                            max.toDouble(),
-                        )}%)"
+                        )} (${formatPercent(
+                            current,
+                            max,
+                        )})"
                         )
                         .withStyle(ChatFormatting.GRAY)
                 )
