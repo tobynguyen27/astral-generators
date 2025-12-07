@@ -39,6 +39,14 @@ abstract class FluidHatchBlockEntity(
             override fun onFinalCommit() {
                 setChanged()
             }
+
+            override fun canExtract(variant: FluidVariant): Boolean {
+                return mode == PortBlockSpecification.Mode.OUTPUT
+            }
+
+            override fun canInsert(variant: FluidVariant): Boolean {
+                return mode == PortBlockSpecification.Mode.INPUT
+            }
         }
 
     override fun saveAdditional(tag: CompoundTag) {
