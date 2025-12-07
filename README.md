@@ -17,10 +17,13 @@ Contents
 ---
 
 - Assembler: A singleblock crafting machine.
+- Item buses: A port block that allows extracting or inserting items in multilblock.
+- Fluid buses: A port block that allows extracting or inserting fluid in multilblock.
+- Energy buses: A port block that allows extracting or inserting energy in multilblock.
 
 Credits
 ---
-- Texture artist: [MikoTheBoi](https://github.com/MikoTheBoi)
+- Texture artists: [MikoTheBoi](https://github.com/MikoTheBoi), [ethanicusss](https://github.com/ethanicusss)
 - Code contributors: [HyperRaccoon13](https://github.com/HyperRaccoon13)
 
 License
