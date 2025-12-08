@@ -1,7 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents
 
 import com.tterrag.registrate.util.entry.BlockEntry
-import dev.tobynguyen27.astralgenerators.contents.blocks.*
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlock
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
@@ -13,12 +12,13 @@ import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
 import dev.tobynguyen27.astralgenerators.contents.registry.MaterialSetRegistry
 import dev.tobynguyen27.astralgenerators.utils.Identifier
+import net.minecraft.world.level.block.Block
 
 object AGBlocks {
 
     // Casings
     val CALVAR_CASING =
-        BlockRegistry.registerCasingBlock(CalvarCasing.ID, ::CalvarCasing, true)
+        BlockRegistry.registerCasingBlock("calvar_casing", ::Block, true)
             .blockstate { ctx, prov ->
                 prov.simpleBlock(
                     ctx.get(),
@@ -26,24 +26,30 @@ object AGBlocks {
                 )
             }
             .register()
-    val BOILER_CASING =
-        BlockRegistry.registerCasingBlock(BoilerCasing.ID, ::BoilerCasing).register()
+    val BOILER_CASING = BlockRegistry.registerCasingBlock("boiler_casing", ::Block).register()
     val STEAM_TURBINE_CASING =
-        BlockRegistry.registerCasingBlock(SteamTurbineCasing.ID, ::SteamTurbineCasing).register()
-    val MATRIX_CASING =
-        BlockRegistry.registerCasingBlock(MatrixCasing.ID, ::MatrixCasing).register()
+        BlockRegistry.registerCasingBlock("steam_turbine_casing", ::Block).register()
+    val MATRIX_CASING = BlockRegistry.registerCasingBlock("matrix_casing", ::Block).register()
     val BASIC_MACHINE_CASING =
-        BlockRegistry.registerCasingBlock(BasicMachineCasing.ID, ::BasicMachineCasing).register()
+        BlockRegistry.registerCasingBlock("basic_machine_casing", ::Block).register()
     val ADVANCED_MACHINE_CASING =
-        BlockRegistry.registerCasingBlock(AdvancedMachineCasing.ID, ::AdvancedMachineCasing)
-            .register()
+        BlockRegistry.registerCasingBlock("advanced_machine_casing", ::Block).register()
     val INDUSTRIAL_MACHINE_CASING =
-        BlockRegistry.registerCasingBlock(IndustrialMachineCasing.ID, ::IndustrialMachineCasing)
-            .register()
+        BlockRegistry.registerCasingBlock("industrial_machine_casing", ::Block).register()
+    val INDUSTRIAL_COMPOSTER_CASING =
+        BlockRegistry.registerCasingBlock("industrial_composter_casing", ::Block).register()
 
-    // Coils
     val HIGH_MAGNETIC_COIL =
-        BlockRegistry.registerCoilBlock(HighMagneticCoil.ID, ::HighMagneticCoil).register()
+        BlockRegistry.registerCoilBlock("high_magnetic_coil", ::Block).register()
+
+    val STEAM_TURBINE_VENT: BlockEntry<Block> =
+        BlockRegistry.register2LayersBlock(
+                "steam_turbine_vent",
+                ::Block,
+                Identifier("block/casings/steam_turbine_casing"),
+                Identifier("block/steam_turbine_vent"),
+            )
+            .register()
 
     // Material
     val CALVAR_BLOCK =
@@ -63,7 +69,7 @@ object AGBlocks {
         BlockRegistry.registerControllerBlock(
                 BoilerController.ID,
                 ::BoilerController,
-                "boiler_casing",
+                BOILER_CASING.id.path,
             )
             .blockEntity { type, blockPos, blockState ->
                 BoilerControllerBlockEntity(type, blockPos, blockState)
@@ -74,21 +80,12 @@ object AGBlocks {
         BlockRegistry.registerControllerBlock(
                 AMControllerBlock.ID,
                 ::AMControllerBlock,
-                "matrix_casing",
+                MATRIX_CASING.id.path,
             )
             .blockEntity { type, blockPos, blockState ->
                 AMControllerBlockEntity(type, blockPos, blockState)
             }
             .build()
-            .register()
-
-    val STEAM_TURBINE_VENT: BlockEntry<SteamTurbineVent> =
-        BlockRegistry.register2LayersBlock(
-                SteamTurbineVent.ID,
-                ::SteamTurbineVent,
-                Identifier("block/casings/steam_turbine_casing"),
-                Identifier("block/steam_turbine_vent"),
-            )
             .register()
 
     fun register() {
