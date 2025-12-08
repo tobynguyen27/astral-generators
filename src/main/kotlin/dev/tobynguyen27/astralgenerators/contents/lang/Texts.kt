@@ -10,8 +10,8 @@ object Texts {
     const val IDLING = "text.idling"
 
     fun register() {
-        val texts: Map<String, String> =
-            mapOf(
+        val texts =
+            hashMapOf(
                 ENERGY to "Energy",
                 CAPACITY to "Capacity",
                 STORED to "Stored",

@@ -28,15 +28,15 @@ class FluidBar(
     val currentValue: () -> Long,
 ) : WWidget() {
 
-    private val bg = Identifier("textures/gui/widgets/widget_fluid_empty.png")
-
-    private val bar = Identifier("textures/gui/widgets/widget_fluid_empty.png")
+    companion object {
+        private val BG = Identifier("textures/gui/widgets/widget_fluid_empty.png")
+    }
 
     override fun canResize(): Boolean = true
 
     override fun paint(matrices: PoseStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         // Draw tank
-        ScreenDrawing.texturedRect(matrices, x, y, this.getWidth(), this.getHeight(), this.bg, -1)
+        ScreenDrawing.texturedRect(matrices, x, y, this.getWidth(), this.getHeight(), BG, -1)
 
         val currentValue = this.currentValue()
 

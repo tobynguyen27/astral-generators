@@ -18,15 +18,16 @@ class BusUnbakedModel : UnbakedModel {
 
     companion object {
         val BASE_BASIC = Identifier("block/casings/basic_machine_casing")
-        val ADVANCED_BASIC = Identifier("block/casings/advanced_machine_casing")
-        val INDUSTRIAL_BASIC = Identifier("block/casings/industrial_machine_casing")
+        val BASE_ADVANCED = Identifier("block/casings/advanced_machine_casing")
+        val BASE_INDUSTRIAL = Identifier("block/casings/industrial_machine_casing")
 
         val OVERLAY_INPUT = Identifier("block/ports/overlay_item_hatch_input")
         val OVERLAY_OUTPUT = Identifier("block/ports/overlay_item_hatch_output")
 
         val MATERIALS =
-            listOf(BASE_BASIC, ADVANCED_BASIC, INDUSTRIAL_BASIC, OVERLAY_INPUT, OVERLAY_OUTPUT)
-                .map { Material(InventoryMenu.BLOCK_ATLAS, it) }
+            setOf(BASE_BASIC, BASE_ADVANCED, BASE_INDUSTRIAL, OVERLAY_INPUT, OVERLAY_OUTPUT).map {
+                Material(InventoryMenu.BLOCK_ATLAS, it)
+            }
     }
 
     override fun getDependencies(): Collection<ResourceLocation> {

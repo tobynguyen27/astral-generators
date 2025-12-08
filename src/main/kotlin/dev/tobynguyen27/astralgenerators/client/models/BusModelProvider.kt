@@ -19,7 +19,7 @@ class BusModelProvider : ModelResourceProvider {
     companion object {
 
         private val BUSES =
-            listOf<String>(
+            setOf<String>(
                 BasicInputBus.ID,
                 BasicOutputBus.ID,
                 AdvancedInputBus.ID,
@@ -30,7 +30,7 @@ class BusModelProvider : ModelResourceProvider {
 
         private val BUS_MODELS =
             BUSES.flatMap { bus ->
-                listOf(
+                setOf(
                     ModelResourceLocation(Identifier("block/$bus"), ""),
                     ModelResourceLocation(Identifier("item/$bus"), "inventory"),
                 )

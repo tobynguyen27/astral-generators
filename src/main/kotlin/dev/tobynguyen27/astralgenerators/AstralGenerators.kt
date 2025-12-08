@@ -13,6 +13,7 @@ import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.codebebelib.Bebe
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.minecraft.world.item.CreativeModeTab
 import org.slf4j.LoggerFactory
 
 object AstralGenerators : ModInitializer {
@@ -20,8 +21,8 @@ object AstralGenerators : ModInitializer {
     const val MOD_NAME = "Astral Generators"
     val LOGGER = LoggerFactory.getLogger(MOD_ID)
 
-    val REGISTRATE = Registrate.create(MOD_ID)
-    val ITEM_GROUP =
+    val REGISTRATE: Registrate = Registrate.create(MOD_ID)
+    val ITEM_GROUP: CreativeModeTab =
         FabricItemGroupBuilder.build(Identifier("general")) {
             AGItems.ASTRALNOMICON.get().defaultInstance
         }

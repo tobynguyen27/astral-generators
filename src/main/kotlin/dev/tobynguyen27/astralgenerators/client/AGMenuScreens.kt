@@ -4,6 +4,7 @@ import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerSc
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerScreen
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockScreen
 import dev.tobynguyen27.astralgenerators.gui.AGMenus
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 import net.minecraft.client.gui.screens.MenuScreens
 
 object AGMenuScreens {
@@ -19,8 +20,7 @@ object AGMenuScreens {
     }
 
     private fun registerBusBlockScreens() {
-        val screens =
-            arrayOf(
+        ObjectOpenHashSet.of(
                 AGMenus.BASIC_INPUT_BUS,
                 AGMenus.ADVANCED_INPUT_BUS,
                 AGMenus.INDUSTRIAL_INPUT_BUS,
@@ -40,11 +40,10 @@ object AGMenuScreens {
                 AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH,
                 AGMenus.INDUSTRIAL_ENERGY_OUTPUT_HATCH,
             )
-
-        for (screen in screens) {
-            MenuScreens.register(screen) { type, playerInventory, title ->
-                PortBlockScreen(type, playerInventory, title)
+            .forEach { screen ->
+                MenuScreens.register(screen) { type, playerInventory, title ->
+                    PortBlockScreen(type, playerInventory, title)
+                }
             }
-        }
     }
 }

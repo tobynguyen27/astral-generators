@@ -19,7 +19,7 @@ class FluidHatchModelProvider : ModelResourceProvider {
     companion object {
 
         private val HATCHES =
-            listOf<String>(
+            setOf<String>(
                 BasicFluidInputHatch.ID,
                 AdvancedFluidInputHatch.ID,
                 IndustrialFluidInputHatch.ID,
@@ -30,7 +30,7 @@ class FluidHatchModelProvider : ModelResourceProvider {
 
         private val HATCH_MODELS =
             HATCHES.flatMap { bus ->
-                listOf(
+                setOf(
                     ModelResourceLocation(Identifier("block/$bus"), ""),
                     ModelResourceLocation(Identifier("item/$bus"), "inventory"),
                 )

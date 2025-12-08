@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 object ModelProviders {
 
     fun register() {
-        ModelLoadingRegistry.INSTANCE.registerResourceProvider { _ -> BusModelProvider() }
-        ModelLoadingRegistry.INSTANCE.registerResourceProvider { _ -> FluidHatchModelProvider() }
-        ModelLoadingRegistry.INSTANCE.registerResourceProvider { _ -> EnergyHatchModelProvider() }
+        ModelLoadingRegistry.INSTANCE.apply {
+            registerResourceProvider { _ -> BusModelProvider() }
+            registerResourceProvider { _ -> FluidHatchModelProvider() }
+            registerResourceProvider { _ -> EnergyHatchModelProvider() }
+        }
     }
 }

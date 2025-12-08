@@ -6,6 +6,7 @@ import java.util.Random
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial
 import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView
+import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel
 import net.fabricmc.fabric.api.renderer.v1.model.ModelHelper
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext
@@ -42,10 +43,10 @@ class PortBlockBakedModel(
         val attachment = blockView.getBlockEntityRenderAttachment(pos)
         if (attachment !is PortBlockModelClientData) return
 
-        var baseTierToUse: TextureAtlasSprite? = null
+        var baseSpriteToUse: TextureAtlasSprite? = null
 
         if (attachment.casingBlock == null) {
-            baseTierToUse =
+            baseSpriteToUse =
                 when (attachment.tier) {
                     PortBlockSpecification.Tier.ADVANCED -> baseAdvancedSprite
                     PortBlockSpecification.Tier.INDUSTRIAL -> baseIndustrialSprite
@@ -54,7 +55,7 @@ class PortBlockBakedModel(
         } else {
             val casingBlockState = attachment.casingBlock
             val casingModel = Minecraft.getInstance().blockRenderer.getBlockModel(casingBlockState)
-            baseTierToUse = casingModel.particleIcon
+            baseSpriteToUse = casingModel.particleIcon
         }
 
         var overlaySpriteToUse = inputOverlaySprite
@@ -63,24 +64,7 @@ class PortBlockBakedModel(
             overlaySpriteToUse = outputOverlaySprite
         }
 
-        val emitter = context.emitter
-
-        for (d in Direction.entries) {
-
-            // Base
-            emitter.square(d, 0f, 0f, 1f, 1f, 0f)
-            emitter.spriteBake(0, baseTierToUse, MutableQuadView.BAKE_LOCK_UV)
-            emitter.spriteColor(0, -1, -1, -1, -1)
-            emitter.emit()
-
-            // Overlay
-            emitter.material(renderMaterial)
-            emitter.square(d, 0f, 0f, 1f, 1f, -3e-4f)
-            emitter.cullFace(d)
-            emitter.spriteBake(0, overlaySpriteToUse, MutableQuadView.BAKE_LOCK_UV)
-            emitter.spriteColor(0, -1, -1, -1, -1)
-            emitter.emit()
-        }
+        emitBlock(context.emitter, baseSpriteToUse, overlaySpriteToUse)
     }
 
     override fun emitItemQuads(
@@ -96,24 +80,30 @@ class PortBlockBakedModel(
             if (contains("mode")) defaultMode = getString("mode")
         }
 
-        val baseTierToUse =
+        val baseSpriteToUse =
             when (defaultTier) {
                 PortBlockSpecification.Tier.ADVANCED.toString() -> baseAdvancedSprite
                 PortBlockSpecification.Tier.INDUSTRIAL.toString() -> baseIndustrialSprite
                 else -> baseBasicSprite
             }
-        val modeToUse =
+        val overlaySpriteToUse =
             when (defaultMode) {
                 PortBlockSpecification.Mode.OUTPUT.toString() -> outputOverlaySprite
                 else -> inputOverlaySprite
             }
 
-        val emitter = context.emitter
+        emitBlock(context.emitter, baseSpriteToUse, overlaySpriteToUse)
+    }
 
+    private fun emitBlock(
+        emitter: QuadEmitter,
+        baseTexture: TextureAtlasSprite,
+        overlayTexture: TextureAtlasSprite,
+    ) {
         for (d in Direction.entries) {
             // Base
             emitter.square(d, 0f, 0f, 1f, 1f, 0f)
-            emitter.spriteBake(0, baseTierToUse, MutableQuadView.BAKE_LOCK_UV)
+            emitter.spriteBake(0, baseTexture, MutableQuadView.BAKE_LOCK_UV)
             emitter.spriteColor(0, -1, -1, -1, -1)
             emitter.emit()
 
@@ -121,7 +111,7 @@ class PortBlockBakedModel(
             emitter.material(renderMaterial)
             emitter.square(d, 0f, 0f, 1f, 1f, -3e-4f)
             emitter.cullFace(d)
-            emitter.spriteBake(0, modeToUse, MutableQuadView.BAKE_LOCK_UV)
+            emitter.spriteBake(0, overlayTexture, MutableQuadView.BAKE_LOCK_UV)
             emitter.spriteColor(0, -1, -1, -1, -1)
             emitter.emit()
         }

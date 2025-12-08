@@ -17,15 +17,17 @@ import net.minecraft.util.Mth
 
 class EnergyBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWidget() {
 
-    private val bg = Texture(Identifier("textures/gui/widgets/widget_energy_empty.png"))
-    private val bar = Texture(Identifier("textures/gui/widgets/widget_energy_full.png"))
+    companion object {
+        private val BG = Texture(Identifier("textures/gui/widgets/widget_energy_empty.png"))
+        private val BAR = Texture(Identifier("textures/gui/widgets/widget_energy_full.png"))
+    }
 
     override fun canResize(): Boolean {
         return true
     }
 
     override fun paint(matrices: PoseStack?, x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        ScreenDrawing.texturedRect(matrices, x, y, getWidth(), getHeight(), bg, -0x1)
+        ScreenDrawing.texturedRect(matrices, x, y, getWidth(), getHeight(), BG, -0x1)
 
         val maxVal = maxCapacity().toFloat()
         var percent = MathHelper.clip(currentValue() / maxVal, 0f, 1f)
@@ -46,11 +48,11 @@ class EnergyBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWi
             top,
             width,
             barSize,
-            bar.image(),
-            bar.u1(),
-            Mth.lerp(percent, bar.v2(), bar.v1()),
-            bar.u2(),
-            bar.v2(),
+            BAR.image(),
+            BAR.u1(),
+            Mth.lerp(percent, BAR.v2(), BAR.v1()),
+            BAR.u2(),
+            BAR.v2(),
             -0x1,
         )
     }

@@ -16,7 +16,7 @@ object EnergyAPI {
     }
 
     private fun initEnergyHatches() {
-        listOf(
+        setOf(
                 AGBlockEntities.BASIC_ENERGY_INPUT_HATCH,
                 AGBlockEntities.ADVANCED_ENERGY_INPUT_HATCH,
                 AGBlockEntities.INDUSTRIAL_ENERGY_INPUT_HATCH,

@@ -1,6 +1,5 @@
-package dev.tobynguyen27.astralgenerators.contents.tags
+package dev.tobynguyen27.astralgenerators.utils
 
-import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey

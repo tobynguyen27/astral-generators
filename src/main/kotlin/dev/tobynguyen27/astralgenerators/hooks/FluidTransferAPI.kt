@@ -15,7 +15,7 @@ object FluidTransferAPI {
     }
 
     private fun initFluidHatches() {
-        listOf(
+        setOf(
                 AGBlockEntities.BASIC_FLUID_INPUT_HATCH,
                 AGBlockEntities.BASIC_FLUID_OUTPUT_HATCH,
                 AGBlockEntities.ADVANCED_FLUID_INPUT_HATCH,
