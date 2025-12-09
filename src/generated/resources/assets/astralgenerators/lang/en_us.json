@@ -43,6 +43,7 @@
   "text.capacity": "Capacity",
   "text.energy": "Energy",
   "text.idling": "Idling",
+  "text.multiblock.invalid": "Invalid multiblock structure",
   "text.progress": "Progress",
   "text.stored": "Stored"
 }

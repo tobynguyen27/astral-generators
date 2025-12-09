@@ -1,9 +1,12 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
+import dev.tobynguyen27.astralgenerators.contents.lang.Texts
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerLogical.serverTick
+import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
@@ -61,8 +64,21 @@ class BoilerController(properties: BlockBehaviour.Properties) : BaseEntityBlock(
         hand: InteractionHand,
         hit: BlockHitResult,
     ): InteractionResult {
-        if (!level.isClientSide) {
-            player.openMenu(state.getMenuProvider(level, pos))
+        val blockEntity = level.getBlockEntity(pos)
+
+        if (blockEntity is BoilerControllerBlockEntity) {
+            if (!level.isClientSide) {
+
+                if (blockEntity.isFormed) {
+                    player.openMenu(state.getMenuProvider(level, pos))
+                } else {
+                    player.displayClientMessage(
+                        TranslatableComponent(Texts.INVALID_MULTIBLOCK)
+                            .withStyle(ChatFormatting.RED),
+                        true,
+                    )
+                }
+            }
         }
 
         return InteractionResult.SUCCESS
