@@ -8,6 +8,7 @@ import dev.tobynguyen27.astralgenerators.contents.AGItems
 import dev.tobynguyen27.astralgenerators.contents.lang.Texts
 import dev.tobynguyen27.astralgenerators.gui.AGMenus
 import dev.tobynguyen27.astralgenerators.hooks.IntegrationHooks
+import dev.tobynguyen27.astralgenerators.multiblocks.level.ChunkEventListeners
 import dev.tobynguyen27.astralgenerators.recipes.AGRecipes
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import dev.tobynguyen27.codebebelib.Bebe
@@ -29,6 +30,7 @@ object AstralGenerators : ModInitializer {
 
     override fun onInitialize() {
         Bebe.initialize()
+        ChunkEventListeners.initialize()
 
         registerItemGroups()
         Texts.register()

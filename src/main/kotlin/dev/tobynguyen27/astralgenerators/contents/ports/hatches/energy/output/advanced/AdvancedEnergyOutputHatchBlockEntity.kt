@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
@@ -32,5 +33,9 @@ class AdvancedEnergyOutputHatchBlockEntity(
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),
         )
+    }
+
+    override fun getPortType(): PortBlockType {
+        return PortBlockType.ENERGY_OUTPUT
     }
 }

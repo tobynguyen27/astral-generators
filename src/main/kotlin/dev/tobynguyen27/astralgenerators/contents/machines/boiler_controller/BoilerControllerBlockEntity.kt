@@ -1,5 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
+import dev.tobynguyen27.astralgenerators.multiblocks.MultiblockControllerBlockEntity
+import dev.tobynguyen27.astralgenerators.multiblocks.ShapeTemplate
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
@@ -11,7 +13,6 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -19,7 +20,10 @@ class BoilerControllerBlockEntity(
     type: BlockEntityType<BoilerControllerBlockEntity>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : BlockEntity(type, blockPos, blockState), MenuProvider, ExtendedScreenHandlerFactory {
+) :
+    MultiblockControllerBlockEntity(type, blockPos, blockState),
+    MenuProvider,
+    ExtendedScreenHandlerFactory {
     // Menu
     override fun getDisplayName(): Component {
         return TranslatableComponent(blockState.block.descriptionId)
@@ -34,4 +38,8 @@ class BoilerControllerBlockEntity(
     }
 
     override fun writeScreenOpeningData(player: ServerPlayer, packet: FriendlyByteBuf) {}
+
+    override fun getMultiblockShape(): ShapeTemplate {
+        return BoilerMultiblock.SHAPE
+    }
 }

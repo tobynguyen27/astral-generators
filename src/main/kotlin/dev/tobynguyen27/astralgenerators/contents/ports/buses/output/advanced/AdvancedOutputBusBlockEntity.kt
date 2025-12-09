@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
@@ -39,5 +40,9 @@ class AdvancedOutputBusBlockEntity(
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),
         )
+    }
+
+    override fun getPortType(): PortBlockType {
+        return PortBlockType.ITEM_OUTPUT
     }
 }

@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
@@ -32,5 +33,9 @@ class BasicFluidOutputHatchBlockEntity(
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),
         )
+    }
+
+    override fun getPortType(): PortBlockType {
+        return PortBlockType.FLUID_OUTPUT
     }
 }
