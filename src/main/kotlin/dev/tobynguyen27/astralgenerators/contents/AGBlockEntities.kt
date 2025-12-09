@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjectorBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusBlockEntity
@@ -34,6 +35,9 @@ object AGBlockEntities {
 
     val BOILER_CONTROLLER: BlockEntityEntry<BoilerControllerBlockEntity> =
         BlockEntityEntry.cast(AGBlocks.BOILER_CONTROLLER.getSibling(Registry.BLOCK_ENTITY_TYPE))
+
+    val MULTIBLOCK_PROJECTOR: BlockEntityEntry<MultiblockProjectorBlockEntity> =
+        BlockEntityEntry.cast(AGBlocks.MULTIBLOCK_PROJECTOR.getSibling(Registry.BLOCK_ENTITY_TYPE))
 
     // Buses
     val BASIC_INPUT_BUS: BlockEntityEntry<BasicInputBusBlockEntity> =

@@ -7,6 +7,8 @@ import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerController
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjector
+import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjectorBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
 import dev.tobynguyen27.astralgenerators.contents.registry.BlockRegistry
@@ -63,6 +65,25 @@ object AGBlocks {
                 AssemblerBlockEntity(type, blockPos, blockState)
             }
             .build()
+            .register()
+
+    val MULTIBLOCK_PROJECTOR: BlockEntry<MultiblockProjector> =
+        BlockRegistry.register(MultiblockProjector.ID, ::MultiblockProjector)
+            .simpleItem()
+            .blockEntity { type, blockPos, blockState ->
+                MultiblockProjectorBlockEntity(type, blockPos, blockState)
+            }
+            .build()
+            .blockstate { ctx, prov ->
+                val name = ctx.name
+                val frontTexture = Identifier("block/machines/$name")
+                val sideTexture = Identifier("block/machines/side")
+
+                prov.horizontalBlock(
+                    ctx.get(),
+                    prov.models().orientable(name, sideTexture, frontTexture, sideTexture),
+                )
+            }
             .register()
 
     val BOILER_CONTROLLER: BlockEntry<BoilerController> =
