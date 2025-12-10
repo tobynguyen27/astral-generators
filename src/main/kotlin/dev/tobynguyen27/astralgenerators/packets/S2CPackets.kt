@@ -8,4 +8,6 @@ object S2CPackets {
 
     val FLUID_AMOUNT = Identifier("fluid_amount")
     val FLUID_VARIANT = Identifier("fluid_variant")
+
+    val MULTIBLOCK_SYNC = Identifier("multiblock_sync")
 }

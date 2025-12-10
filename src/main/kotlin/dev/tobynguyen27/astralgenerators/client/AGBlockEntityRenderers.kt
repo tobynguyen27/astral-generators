@@ -14,7 +14,7 @@ object AGBlockEntityRenderers {
         )
         BlockEntityRendererRegistry.register(
             AGBlockEntities.MULTIBLOCK_PROJECTOR.get(),
-            ::MultiblockProjectorBlockEntityRenderer
+            ::MultiblockProjectorBlockEntityRenderer,
         )
     }
 }
