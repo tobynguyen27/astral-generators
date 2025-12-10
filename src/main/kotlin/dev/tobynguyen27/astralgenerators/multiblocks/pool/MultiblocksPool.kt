@@ -17,7 +17,7 @@ import java.io.IOException
 
 typealias Multiblocks = Object2ObjectOpenHashMap<ResourceLocation, MultiblockDefinition>
 
-class MultiblockPool : SimpleResourceReloadListener<Multiblocks> {
+class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
 
     private val json: Gson = GsonBuilder().create()
 
@@ -80,7 +80,7 @@ class MultiblockPool : SimpleResourceReloadListener<Multiblocks> {
         var DEFINITIONS = Multiblocks()
 
         fun initialize() {
-            ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(MultiblockPool())
+            ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(MultiblocksPool())
         }
     }
 }
