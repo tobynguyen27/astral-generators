@@ -4,7 +4,7 @@ import dev.tobynguyen27.astralgenerators.gui.AGMenus
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.ProgressBar
-import dev.tobynguyen27.astralgenerators.packets.S2CPackets
+import dev.tobynguyen27.astralgenerators.packets.AGPackets
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
@@ -94,15 +94,15 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
         root.validate(this)
 
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(S2CPackets.ENERGY_AMOUNT) { packet
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.ENERGY_AMOUNT) { packet
                 ->
                 energyAmount = packet.readLong()
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(S2CPackets.FLUID_AMOUNT) { packet
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.FLUID_AMOUNT) { packet
                 ->
                 fluidAmount = packet.readLong()
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(S2CPackets.FLUID_VARIANT) { packet
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.FLUID_VARIANT) { packet
                 ->
                 fluidVariant = FluidVariant.fromPacket(packet)
             }
@@ -138,8 +138,8 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
             val energyAmount = blockEntity.energyStorage.amount
             if (energyAmount != this.lastEnergyAmount) {
                 this.lastEnergyAmount = energyAmount
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(S2CPackets.ENERGY_AMOUNT) {
-                    packet ->
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.ENERGY_AMOUNT) { packet
+                    ->
                     packet.writeLong(energyAmount)
                 }
             }
@@ -147,7 +147,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
             val fluidAmount = blockEntity.fluidStorage.amount
             if (fluidAmount != this.lastFluidAmount) {
                 this.lastFluidAmount = fluidAmount
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(S2CPackets.FLUID_AMOUNT) { packet
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.FLUID_AMOUNT) { packet
                     ->
                     packet.writeLong(fluidAmount)
                 }
@@ -156,8 +156,8 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
             val fluidVariant = blockEntity.fluidStorage.variant
             if (fluidVariant != this.lastFluidVariant) {
                 this.lastFluidVariant = fluidVariant
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(S2CPackets.FLUID_VARIANT) {
-                    packet ->
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.FLUID_VARIANT) { packet
+                    ->
                     fluidVariant.toPacket(packet)
                 }
             }

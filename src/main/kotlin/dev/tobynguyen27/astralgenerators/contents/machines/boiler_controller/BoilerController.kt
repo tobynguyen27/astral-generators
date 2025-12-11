@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.Rotation
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -82,6 +83,10 @@ class BoilerController(properties: BlockBehaviour.Properties) : BaseEntityBlock(
         }
 
         return InteractionResult.SUCCESS
+    }
+
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState? {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)))
     }
 
     override fun getRenderShape(state: BlockState): RenderShape {

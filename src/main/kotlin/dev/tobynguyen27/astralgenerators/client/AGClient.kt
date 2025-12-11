@@ -1,7 +1,9 @@
 package dev.tobynguyen27.astralgenerators.client
 
-import dev.tobynguyen27.astralgenerators.client.models.ModelProviders
-import dev.tobynguyen27.astralgenerators.client.networking.MultiblocksSync
+import dev.tobynguyen27.astralgenerators.client.model.ModelProviders
+import dev.tobynguyen27.astralgenerators.client.network.MultiblockSyncHandler
+import dev.tobynguyen27.astralgenerators.client.render.AGBlockEntityRenderers
+import dev.tobynguyen27.astralgenerators.client.screen.AGMenuScreens
 import dev.tobynguyen27.codebebelib.BebeClient
 import net.fabricmc.api.ClientModInitializer
 
@@ -13,6 +15,6 @@ class AGClient : ClientModInitializer {
         AGMenuScreens.register()
         ModelProviders.register()
 
-        MultiblocksSync.register()
+        MultiblockSyncHandler.register()
     }
 }

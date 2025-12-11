@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.client.models
+package dev.tobynguyen27.astralgenerators.client.model.providers
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatch
@@ -19,7 +19,7 @@ class EnergyHatchModelProvider : ModelResourceProvider {
     companion object {
 
         private val HATCHES =
-            setOf<String>(
+            setOf(
                 BasicEnergyInputHatch.ID,
                 AdvancedEnergyInputHatch.ID,
                 IndustrialEnergyInputHatch.ID,

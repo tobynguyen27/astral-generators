@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.client.models
+package dev.tobynguyen27.astralgenerators.client.model.providers
 
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBus
@@ -19,7 +19,7 @@ class BusModelProvider : ModelResourceProvider {
     companion object {
 
         private val BUSES =
-            setOf<String>(
+            setOf(
                 BasicInputBus.ID,
                 BasicOutputBus.ID,
                 AdvancedInputBus.ID,

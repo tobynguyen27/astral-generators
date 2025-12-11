@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.client
+package dev.tobynguyen27.astralgenerators.client.render
 
 import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntityRenderer

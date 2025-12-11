@@ -1,9 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+	id "fabric-loom" version "${loom_version}"
 	id "org.jetbrains.kotlin.jvm" version "2.2.21"
     id "com.diffplug.spotless" version "8.1.0"
+    id "idea"
 }
 
 version = project.mod_version
@@ -14,14 +13,14 @@ base {
 }
 
 repositories {
-    maven { url "https://maven.parchmentmc.org" }
-    maven { url "https://maven.terraformersmc.com/" }
-    maven { url "https://mvn.devos.one/snapshots/" }
-    maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
-    maven { url "https://server.bbkr.space/artifactory/libs-release" }
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://jitpack.io" }
-    maven { url "https://api.modrinth.com/maven/" }
+    maven { url = "https://maven.parchmentmc.org" } // Parchment
+    maven { url = "https://maven.terraformersmc.com/" } // ModMenu
+    maven { url = "https://mvn.devos.one/snapshots/" }
+    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
+    maven { url = "https://server.bbkr.space/artifactory/libs-release" }
+    maven { url = "https://maven.shedaniel.me/" } // REU
+    maven { url = "https://jitpack.io" } // CodeBebeLib
+    maven { url = "https://api.modrinth.com/maven/" }
 }
 
 dependencies {
@@ -118,20 +117,15 @@ tasks.withType(ProcessResources).configureEach {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
-}
-
-tasks.withType(KotlinCompile).all {
-	kotlinOptions {
-		jvmTarget = 17
-	}
+	it.options.encoding = "UTF-8"
 }
 
 java {
-	withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
 }
 
 jar {
@@ -164,5 +158,12 @@ spotless {
         biome("2.3.7").downloadDir(new File(rootDir, ".gradle/biome").absolutePath).configPath(new File(rootDir, "spotless/biome.json").absolutePath)
 
         endWithNewline()
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }

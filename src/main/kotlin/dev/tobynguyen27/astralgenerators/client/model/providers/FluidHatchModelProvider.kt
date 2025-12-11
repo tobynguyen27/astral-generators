@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.client.models
+package dev.tobynguyen27.astralgenerators.client.model.providers
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatch
@@ -19,7 +19,7 @@ class FluidHatchModelProvider : ModelResourceProvider {
     companion object {
 
         private val HATCHES =
-            setOf<String>(
+            setOf(
                 BasicFluidInputHatch.ID,
                 AdvancedFluidInputHatch.ID,
                 IndustrialFluidInputHatch.ID,

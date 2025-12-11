@@ -2,7 +2,7 @@ package dev.tobynguyen27.astralgenerators.packets
 
 import dev.tobynguyen27.astralgenerators.utils.Identifier
 
-object S2CPackets {
+object AGPackets {
 
     val ENERGY_AMOUNT = Identifier("energy_amount")
 
