@@ -20,13 +20,14 @@ Contents
 - Item buses: A port block that allows extracting or inserting items in multilblock.
 - Fluid buses: A port block that allows extracting or inserting fluid in multilblock.
 - Energy buses: A port block that allows extracting or inserting energy in multilblock.
+- Multiblock projector: A block that renders multiblock shapes for building.
 
 Credits
 ---
-- Texture artists: [MikoTheBoi](https://github.com/MikoTheBoi), [ethanicusss](https://github.com/ethanicusss)
-- Code contributors: [HyperRaccoon13](https://github.com/HyperRaccoon13)
-- [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization): Multiblock validator API
-- [GregTech Refreshed](https://github.com/ULSTICK/GregTechRefreshed): For some textures
+- Texture artists: [MikoTheBoi](https://github.com/MikoTheBoi), [ethanicusss](https://github.com/ethanicusss).
+- Code contributors: [HyperRaccoon13](https://github.com/HyperRaccoon13).
+- [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization): Multiblock validator API.
+- [GregTech Refreshed](https://github.com/ULSTICK/GregTechRefreshed): For some textures.
 
 License
 ---
