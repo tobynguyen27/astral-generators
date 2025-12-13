@@ -42,11 +42,18 @@ object BlockRegistry {
                     .models()
                     .cubeColumn(name, prov.modLoc("block/$name"), prov.modLoc("block/${name}_side"))
 
-            prov.getVariantBuilder(ctx.entry)
-                .partialState().with(BlockStateProperties.LIT, true)
-                .modelForState().modelFile(activeModel).addModel()
-                .partialState().with(BlockStateProperties.LIT, false)
-                .modelForState().modelFile(inactiveModel).addModel();
+            prov
+                .getVariantBuilder(ctx.entry)
+                .partialState()
+                .with(BlockStateProperties.LIT, true)
+                .modelForState()
+                .modelFile(activeModel)
+                .addModel()
+                .partialState()
+                .with(BlockStateProperties.LIT, false)
+                .modelForState()
+                .modelFile(inactiveModel)
+                .addModel()
         }
     }
 
