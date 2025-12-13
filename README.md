@@ -26,6 +26,7 @@ Credits
 - Texture artists: [MikoTheBoi](https://github.com/MikoTheBoi), [ethanicusss](https://github.com/ethanicusss)
 - Code contributors: [HyperRaccoon13](https://github.com/HyperRaccoon13)
 - [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization): Multiblock validator API
+- [GregTech Refreshed](https://github.com/ULSTICK/GregTechRefreshed): For some textures
 
 License
 ---
