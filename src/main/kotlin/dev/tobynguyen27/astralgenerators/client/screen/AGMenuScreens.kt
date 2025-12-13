@@ -33,6 +33,7 @@ object AGMenuScreens {
             AGMenus.INDUSTRIAL_ENERGY_OUTPUT_HATCH,
             AGMenus.ASSEMBLER_MENU,
             AGMenus.BOILER_CONTROLLER,
+            AGMenus.MULTIBLOCK_PROJECTOR,
         )
 
     fun register() {

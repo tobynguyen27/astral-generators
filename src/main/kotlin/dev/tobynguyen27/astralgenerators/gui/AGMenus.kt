@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.gui
 
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerMenu
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerMenu
+import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjectorMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.advanced.AdvancedInputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic.BasicInputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.IndustrialInputBusMenu
@@ -43,6 +44,15 @@ object AGMenus {
             Identifier(BoilerControllerMenu.ID),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
                 BoilerControllerMenu(syncId, inventory, buf)
+            },
+        )
+
+    val MULTIBLOCK_PROJECTOR: ExtendedScreenHandlerType<MultiblockProjectorMenu> =
+        Registry.register(
+            Registry.MENU,
+            Identifier(MultiblockProjectorMenu.ID),
+            ExtendedScreenHandlerType { syncId, inventory, buf ->
+                MultiblockProjectorMenu(syncId, inventory, buf)
             },
         )
 

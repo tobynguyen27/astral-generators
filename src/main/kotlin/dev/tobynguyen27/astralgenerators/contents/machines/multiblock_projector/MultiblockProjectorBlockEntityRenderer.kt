@@ -13,7 +13,6 @@ import dev.tobynguyen27.codebebelib.utils.ClientUtils
 import dev.tobynguyen27.codebebelib.vec.Cuboid6
 import java.util.OptionalDouble
 import kotlin.math.abs
-import kotlin.math.sin
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
@@ -23,6 +22,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Rotation
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
@@ -30,6 +30,9 @@ class MultiblockProjectorBlockEntityRenderer(ctx: BlockEntityRendererProvider.Co
     BlockEntityRenderer<MultiblockProjectorBlockEntity> {
 
     companion object {
+
+        var CURRENT_MULTIBLOCK: ResourceLocation? = null
+
         private val INVALID_OUTLINE =
             RenderType.create(
                 Identifier("invalid_outline").toString(),
@@ -55,14 +58,18 @@ class MultiblockProjectorBlockEntityRenderer(ctx: BlockEntityRendererProvider.Co
         packedLight: Int,
         packedOverlay: Int,
     ) {
+        if (CURRENT_MULTIBLOCK == null) {
+            return
+        }
+
+        val definition = MultiblocksPool.DEFINITIONS[CURRENT_MULTIBLOCK] ?: return
+
         val facing = blockEntity.blockState.getValue(BlockStateProperties.HORIZONTAL_FACING)
         val level = blockEntity.level!! // Renderer is only activated when a block entity placed
         val player = Minecraft.getInstance().player
         val invalidBlockPositions = mutableListOf<BlockPos>()
 
-        val definition = MultiblocksPool.DEFINITIONS[Identifier("multiblocks/a.json")]!!.getBlocks()
-
-        for ((blockPos, blockState) in definition.entries) {
+        for ((blockPos, blockState) in definition.getBlocks().entries) {
 
             val rotatedBlockPos = ShapeMatcher.toWorldPos(BlockPos.ZERO, facing.opposite, blockPos)
             val worldPos = blockEntity.blockPos.offset(rotatedBlockPos)

@@ -70,7 +70,7 @@ class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
         return CompletableFuture.runAsync(
             {
                 DEFINITIONS = data
-                AstralGenerators.LOGGER.info("Detected ${data.size} multiblocks")
+                AstralGenerators.LOGGER.info("Loaded ${data.size} multiblocks")
             },
             executor,
         )
