@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents
 
 import com.tterrag.registrate.util.entry.BlockEntry
+import dev.tobynguyen27.astralgenerators.contents.blocks.FireboxCasing
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlock
 import dev.tobynguyen27.astralgenerators.contents.machines.am_controller.AMControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.Assembler
@@ -40,6 +41,8 @@ object AGBlocks {
         BlockRegistry.registerCasingBlock("industrial_machine_casing", ::Block).register()
     val INDUSTRIAL_COMPOSTER_CASING =
         BlockRegistry.registerCasingBlock("industrial_composter_casing", ::Block).register()
+    val FIREBOX_CASING =
+        BlockRegistry.registerColumnBlock(FireboxCasing.ID, ::FireboxCasing).register()
 
     val HIGH_MAGNETIC_COIL =
         BlockRegistry.registerCoilBlock("high_magnetic_coil", ::Block).register()

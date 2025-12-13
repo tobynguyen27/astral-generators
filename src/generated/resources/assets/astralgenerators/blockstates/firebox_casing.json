@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "astralgenerators:block/firebox_casing"
+    },
+    "lit=true": {
+      "model": "astralgenerators:block/firebox_casing_active"
+    }
+  }
+}

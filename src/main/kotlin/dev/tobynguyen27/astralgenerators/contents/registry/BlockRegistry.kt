@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.RotatedPillarBlock
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -20,6 +21,34 @@ import net.minecraft.world.level.material.Material
 import net.minecraftforge.client.model.generators.ModelFile
 
 object BlockRegistry {
+
+    fun <T : RotatedPillarBlock> registerColumnBlock(
+        name: String,
+        factory: NonNullFunction<BlockBehaviour.Properties, T>,
+    ): BlockBuilder<T, Registrate> {
+        return register(name, factory).simpleItem().blockstate { ctx, prov ->
+            val name = ctx.name
+
+            val activeModel =
+                prov
+                    .models()
+                    .cubeColumn(
+                        "${name}_active",
+                        prov.modLoc("block/${name}_active"),
+                        prov.modLoc("block/${name}_side"),
+                    )
+            val inactiveModel =
+                prov
+                    .models()
+                    .cubeColumn(name, prov.modLoc("block/$name"), prov.modLoc("block/${name}_side"))
+
+            prov.getVariantBuilder(ctx.entry)
+                .partialState().with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(activeModel).addModel()
+                .partialState().with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(inactiveModel).addModel();
+        }
+    }
 
     fun <T : Block> registerControllerBlock(
         name: String,

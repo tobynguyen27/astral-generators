@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "astralgenerators:block/firebox_casing",
+    "end": "astralgenerators:block/firebox_casing_side"
+  }
+}
