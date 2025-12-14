@@ -14,7 +14,7 @@ abstract class MultiblockControllerBlockEntity(
     blockState: BlockState,
 ) : MachineBlockEntity(type, blockPos, blockState) {
 
-    private var shapeMatcher: ShapeMatcher? = null
+    var shapeMatcher: ShapeMatcher? = null
     var isFormed = false
 
     fun createShapeMatcher(): ShapeMatcher {
