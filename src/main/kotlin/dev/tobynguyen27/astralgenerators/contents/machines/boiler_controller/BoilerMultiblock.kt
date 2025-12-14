@@ -22,6 +22,6 @@ object BoilerMultiblock {
                     .build(),
             )
             .add3by3(1, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
-            .add3by3(2, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
+            .add3by3(2, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), false, null)
             .build()
 }
