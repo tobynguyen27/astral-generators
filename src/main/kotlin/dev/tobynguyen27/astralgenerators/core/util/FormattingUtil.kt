@@ -69,7 +69,23 @@ object FormattingUtil {
             val numerator = remainder / commonDivisor
             val denominator = dropletsPerMB / commonDivisor
 
-            return "$mbInteger + ${toSuperscript("$numerator")}/${toSubscript("$denominator")} mB"
+            return "$mbInteger ${toSuperscript("$numerator")}/${toSubscript("$denominator")} mB"
+        }
+    }
+
+    fun convertCelsiusToFahrenheit(celsius: Double): Double {
+        return celsius * 1.8 + 32
+    }
+
+    fun convertFahrenheitToCelsius(fahrenheit: Double): Double {
+        return (fahrenheit - 32 ) / 1.8
+    }
+
+    fun formatTemperature(temp: Double, useFahrenheit: Boolean = false): String {
+        return if (useFahrenheit) {
+            "$temp °F"
+        } else {
+            "$temp ℃"
         }
     }
 }
