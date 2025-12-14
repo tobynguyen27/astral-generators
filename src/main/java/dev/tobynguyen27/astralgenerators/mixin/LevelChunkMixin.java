@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.mixin;
 
-import dev.tobynguyen27.astralgenerators.multiblocks.level.ChunkEventListeners;
+import dev.tobynguyen27.astralgenerators.core.multiblock.level.ChunkEventListeners;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.ChunkPos;

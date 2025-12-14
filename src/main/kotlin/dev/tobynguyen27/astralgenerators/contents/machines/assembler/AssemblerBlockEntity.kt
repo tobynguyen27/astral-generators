@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
-import dev.tobynguyen27.astralgenerators.utils.IInventory
+import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants

@@ -1,12 +1,10 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
-import dev.tobynguyen27.astralgenerators.multiblocks.MultiblockControllerBlockEntity
-import dev.tobynguyen27.astralgenerators.multiblocks.ShapeTemplate
+import dev.tobynguyen27.astralgenerators.core.base.MultiblockControllerBlockEntity
+import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -25,10 +23,6 @@ class BoilerControllerBlockEntity(
     MenuProvider,
     ExtendedScreenHandlerFactory {
     // Menu
-    override fun getDisplayName(): Component {
-        return TranslatableComponent(blockState.block.descriptionId)
-    }
-
     override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
         return BoilerControllerMenu(
             i,

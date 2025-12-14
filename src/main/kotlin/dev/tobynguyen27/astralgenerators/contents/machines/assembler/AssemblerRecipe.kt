@@ -1,9 +1,9 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
 import com.google.gson.JsonObject
-import dev.tobynguyen27.astralgenerators.recipes.base.FluidInput
-import dev.tobynguyen27.astralgenerators.recipes.base.ItemInput
-import dev.tobynguyen27.astralgenerators.recipes.base.ItemOutput
+import dev.tobynguyen27.astralgenerators.recipe.base.FluidInput
+import dev.tobynguyen27.astralgenerators.recipe.base.ItemInput
+import dev.tobynguyen27.astralgenerators.recipe.base.ItemOutput
 import io.github.fabricators_of_create.porting_lib.util.FluidStack
 import java.util.ArrayList
 import net.minecraft.core.Registry

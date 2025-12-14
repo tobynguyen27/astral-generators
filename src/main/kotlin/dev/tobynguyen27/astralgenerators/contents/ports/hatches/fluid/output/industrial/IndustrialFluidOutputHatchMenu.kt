@@ -1,9 +1,9 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
-import dev.tobynguyen27.astralgenerators.gui.AGMenus
+import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
-import dev.tobynguyen27.astralgenerators.packets.AGPackets
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
@@ -64,12 +64,10 @@ class IndustrialFluidOutputHatchMenu(
         root.validate(this)
 
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.FLUID_AMOUNT) { packet
-                ->
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_AMOUNT) { packet ->
                 fluidAmount = packet.readLong()
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.FLUID_VARIANT) { packet
-                ->
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_VARIANT) { packet ->
                 fluidVariant = FluidVariant.fromPacket(packet)
             }
         }
@@ -101,8 +99,7 @@ class IndustrialFluidOutputHatchMenu(
             val fluidAmount = blockEntity.fluidStorage.amount
             if (fluidAmount != this.lastFluidAmount) {
                 this.lastFluidAmount = fluidAmount
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.FLUID_AMOUNT) { packet
-                    ->
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.FLUID_AMOUNT) { packet ->
                     packet.writeLong(fluidAmount)
                 }
             }
@@ -110,7 +107,7 @@ class IndustrialFluidOutputHatchMenu(
             val fluidVariant = blockEntity.fluidStorage.variant
             if (fluidVariant != this.lastFluidVariant) {
                 this.lastFluidVariant = fluidVariant
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.FLUID_VARIANT) { packet
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.FLUID_VARIANT) { packet
                     ->
                     fluidVariant.toPacket(packet)
                 }

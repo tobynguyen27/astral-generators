@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.hooks
 
-import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity
+import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
 import team.reborn.energy.api.EnergyStorage
 
 object EnergyAPI {

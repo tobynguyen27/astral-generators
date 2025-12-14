@@ -6,6 +6,9 @@
     "description": "${mod_description}",
     "authors": ["tobynguyen27"],
     "contact": {
+        "email": "hi@tobynguyen.dev",
+        "homepage": "https://github.com/tobynguyen27/astral-generators",
+        "issues": "https://github.com/tobynguyen27/astral-generators/issues",
         "sources": "https://github.com/tobynguyen27/astral-generators"
     },
     "license": "${mod_license}",
@@ -26,7 +29,7 @@
         ],
         "fabric-datagen": [
             {
-                "value": "dev.tobynguyen27.astralgenerators.datagen.AGDataGen",
+                "value": "dev.tobynguyen27.astralgenerators.data.AGDataGen",
                 "adapter": "kotlin"
             }
         ]

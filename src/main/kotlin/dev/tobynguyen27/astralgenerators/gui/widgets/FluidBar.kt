@@ -1,11 +1,11 @@
 package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatBuckets
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.formatPercent
-import dev.tobynguyen27.astralgenerators.utils.FormattingUtil.toEnglishName
-import dev.tobynguyen27.astralgenerators.utils.Identifier
+import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil.formatBuckets
+import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil.formatPercent
+import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil.toEnglishName
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
+import dev.tobynguyen27.astralgenerators.data.client.Texts
 import dev.tobynguyen27.codebebelib.math.MathHelper
 import dev.tobynguyen27.codebebelib.render.CCRenderState
 import dev.tobynguyen27.codebebelib.render.RenderUtils

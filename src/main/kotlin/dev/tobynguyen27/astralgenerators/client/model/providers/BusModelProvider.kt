@@ -6,8 +6,8 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial.I
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.AdvancedOutputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBus
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBus
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.models.ports.BusUnbakedModel
-import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.fabricmc.fabric.api.client.model.ModelProviderContext
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider
 import net.minecraft.client.resources.model.ModelResourceLocation

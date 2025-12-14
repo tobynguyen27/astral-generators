@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector
 
-import dev.tobynguyen27.astralgenerators.multiblocks.pool.MultiblocksPool
+import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf

@@ -1,9 +1,9 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
-import dev.tobynguyen27.astralgenerators.gui.AGMenus
+import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
-import dev.tobynguyen27.astralgenerators.packets.AGPackets
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
@@ -60,8 +60,7 @@ class IndustrialEnergyInputHatchMenu(
         root.validate(this)
 
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(AGPackets.ENERGY_AMOUNT) { packet
-                ->
+            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.ENERGY_AMOUNT) { packet ->
                 energyAmount = packet.readLong()
             }
         }
@@ -91,7 +90,7 @@ class IndustrialEnergyInputHatchMenu(
             val energyAmount = blockEntity.energyStorage.amount
             if (energyAmount != this.lastEnergyAmount) {
                 this.lastEnergyAmount = energyAmount
-                ScreenNetworking.of(this, NetworkSide.SERVER).send(AGPackets.ENERGY_AMOUNT) { packet
+                ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.ENERGY_AMOUNT) { packet
                     ->
                     packet.writeLong(energyAmount)
                 }

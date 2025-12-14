@@ -3,7 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.am_controller
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexFormat
-import dev.tobynguyen27.astralgenerators.utils.Identifier
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.codebebelib.render.CCModel
 import dev.tobynguyen27.codebebelib.render.CCRenderState
 import dev.tobynguyen27.codebebelib.render.RenderUtils

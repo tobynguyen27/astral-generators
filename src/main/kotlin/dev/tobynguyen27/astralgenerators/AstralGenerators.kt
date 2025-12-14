@@ -1,27 +1,28 @@
 package dev.tobynguyen27.astralgenerators
 
 import com.tterrag.registrate.Registrate
-import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
-import dev.tobynguyen27.astralgenerators.contents.AGBlocks
-import dev.tobynguyen27.astralgenerators.contents.AGFluids
-import dev.tobynguyen27.astralgenerators.contents.AGItems
-import dev.tobynguyen27.astralgenerators.contents.lang.Texts
-import dev.tobynguyen27.astralgenerators.gui.AGMenus
+import dev.tobynguyen27.astralgenerators.core.multiblock.level.ChunkEventListeners
+import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
+import dev.tobynguyen27.astralgenerators.data.client.Texts
 import dev.tobynguyen27.astralgenerators.hooks.IntegrationHooks
-import dev.tobynguyen27.astralgenerators.multiblocks.level.ChunkEventListeners
-import dev.tobynguyen27.astralgenerators.multiblocks.pool.MultiblocksPool
-import dev.tobynguyen27.astralgenerators.recipes.AGRecipes
-import dev.tobynguyen27.astralgenerators.utils.Identifier
+import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
+import dev.tobynguyen27.astralgenerators.registry.AGBlocks
+import dev.tobynguyen27.astralgenerators.registry.AGFluids
+import dev.tobynguyen27.astralgenerators.registry.AGItems
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
+import dev.tobynguyen27.astralgenerators.registry.AGRecipes
 import dev.tobynguyen27.codebebelib.Bebe
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.world.item.CreativeModeTab
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object AstralGenerators : ModInitializer {
     const val MOD_ID = "astralgenerators"
     const val MOD_NAME = "Astral Generators"
-    val LOGGER = LoggerFactory.getLogger(MOD_ID)
+    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 
     val REGISTRATE: Registrate = Registrate.create(MOD_ID)
     val ITEM_GROUP: CreativeModeTab =

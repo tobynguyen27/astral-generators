@@ -6,8 +6,8 @@ import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.ind
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatch
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.models.ports.EnergyHatchUnbakedModel
-import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.fabricmc.fabric.api.client.model.ModelProviderContext
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider
 import net.minecraft.client.resources.model.ModelResourceLocation

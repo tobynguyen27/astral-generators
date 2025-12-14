@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial
 
-import dev.tobynguyen27.astralgenerators.contents.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlock
+import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState

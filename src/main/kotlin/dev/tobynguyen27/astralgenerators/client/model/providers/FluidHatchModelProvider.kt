@@ -6,8 +6,8 @@ import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.indu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatch
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatch
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.models.ports.FluidHatchUnbakedModel
-import dev.tobynguyen27.astralgenerators.utils.Identifier
 import net.fabricmc.fabric.api.client.model.ModelProviderContext
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider
 import net.minecraft.client.resources.model.ModelResourceLocation

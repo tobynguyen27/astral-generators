@@ -2,7 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
-import dev.tobynguyen27.astralgenerators.utils.IInventory
+import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction

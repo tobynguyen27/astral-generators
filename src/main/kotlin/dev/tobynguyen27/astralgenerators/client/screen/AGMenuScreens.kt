@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.client.screen
 
-import dev.tobynguyen27.astralgenerators.gui.AGMenus
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet

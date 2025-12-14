@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.utils
 
+import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

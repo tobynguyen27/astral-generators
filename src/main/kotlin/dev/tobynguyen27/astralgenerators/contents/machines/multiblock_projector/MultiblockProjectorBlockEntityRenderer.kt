@@ -3,9 +3,9 @@ package dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexFormat
-import dev.tobynguyen27.astralgenerators.multiblocks.ShapeMatcher
-import dev.tobynguyen27.astralgenerators.multiblocks.pool.MultiblocksPool
-import dev.tobynguyen27.astralgenerators.utils.Identifier
+import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeMatcher
+import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.codebebelib.math.MathHelper
 import dev.tobynguyen27.codebebelib.render.RenderUtils
 import dev.tobynguyen27.codebebelib.render.buffer.TransformingVertexConsumer

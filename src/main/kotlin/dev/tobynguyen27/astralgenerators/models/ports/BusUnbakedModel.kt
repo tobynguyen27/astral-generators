@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.models.ports
 
 import com.mojang.datafixers.util.Pair
-import dev.tobynguyen27.astralgenerators.utils.Identifier
+import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import java.util.function.Function
 import net.fabricmc.fabric.api.renderer.v1.RendererAccess
 import net.fabricmc.fabric.api.renderer.v1.material.BlendMode

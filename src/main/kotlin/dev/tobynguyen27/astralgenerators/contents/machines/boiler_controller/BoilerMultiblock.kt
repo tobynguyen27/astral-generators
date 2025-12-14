@@ -1,18 +1,19 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
-import dev.tobynguyen27.astralgenerators.contents.AGBlocks
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
-import dev.tobynguyen27.astralgenerators.multiblocks.PortFlags
-import dev.tobynguyen27.astralgenerators.multiblocks.ShapeTemplate
-import dev.tobynguyen27.astralgenerators.multiblocks.SimpleMember
+import dev.tobynguyen27.astralgenerators.core.multiblock.PortFlags
+import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
+import dev.tobynguyen27.astralgenerators.core.multiblock.SimpleMember
+import dev.tobynguyen27.astralgenerators.registry.AGBlocks
 
 object BoilerMultiblock {
     val SHAPE =
         ShapeTemplate.Builder(AGBlocks.BOILER_CASING.defaultState)
+            .add3by3(-1, SimpleMember.forBlock(AGBlocks.FIREBOX_CASING.get()), false, null)
             .add3by3(
-                -1,
+                0,
                 SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()),
-                false,
+                true,
                 PortFlags.Builder.with(
                         PortBlockType.ITEM_INPUT,
                         PortBlockType.FLUID_INPUT,
@@ -20,7 +21,6 @@ object BoilerMultiblock {
                     )
                     .build(),
             )
-            .add3by3(0, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
             .add3by3(1, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
             .add3by3(2, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
             .add3by3(3, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)

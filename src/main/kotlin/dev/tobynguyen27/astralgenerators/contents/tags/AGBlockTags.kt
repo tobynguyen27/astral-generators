@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.tags
 
-import dev.tobynguyen27.astralgenerators.utils.TagUtils
+import dev.tobynguyen27.astralgenerators.core.util.TagUtils
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block
 
