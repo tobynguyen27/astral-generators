@@ -81,7 +81,7 @@ object FormattingUtil {
         return (fahrenheit - 32) / 1.8
     }
 
-    fun formatTemperature(temp: Double, useFahrenheit: Boolean = false): String {
+    fun formatTemperature(temp: Number, useFahrenheit: Boolean = false): String {
         return if (useFahrenheit) {
             "$temp °F"
         } else {

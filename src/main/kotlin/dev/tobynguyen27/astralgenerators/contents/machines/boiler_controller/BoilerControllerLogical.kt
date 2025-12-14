@@ -4,6 +4,8 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
+import dev.tobynguyen27.codebebelib.utils.ClientUtils
+import dev.tobynguyen27.codebebelib.utils.ServerUtils
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
@@ -12,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluids
 
 object BoilerControllerLogical {
+
+    private const val WATER_BOILING_POINT = 100
 
     fun clientTick(
         level: Level,
@@ -58,11 +62,19 @@ object BoilerControllerLogical {
 
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
+        // Temperature
+        if(blockEntity.heat < blockEntity.maxHeat) {
+            blockEntity.heat += 2
+        }
+
+        if (blockEntity.heat < WATER_BOILING_POINT) return
+        // Steam
+
         // Craft logic here
         Transaction.openOuter().use { transaction ->
             val consumeFluid = consumeFluid(transaction, inputHatch, 1)
             val canProduceFluid = produceFluid(transaction, outputHatch, 2, true)
-            if(consumeFluid && canProduceFluid) {
+            if (consumeFluid && canProduceFluid) {
                 produceFluid(transaction, outputHatch, 2)
                 transaction.commit()
                 blockEntity.setChanged()
@@ -81,7 +93,7 @@ object BoilerControllerLogical {
         simulate: Boolean = false,
     ): Boolean {
 
-        if(simulate) {
+        if (simulate) {
             transaction.openNested().use { t ->
                 val producedAmount =
                     outputHatch.fluidStorage.insert(
