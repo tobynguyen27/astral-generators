@@ -78,7 +78,7 @@ object FormattingUtil {
     }
 
     fun convertFahrenheitToCelsius(fahrenheit: Double): Double {
-        return (fahrenheit - 32 ) / 1.8
+        return (fahrenheit - 32) / 1.8
     }
 
     fun formatTemperature(temp: Double, useFahrenheit: Boolean = false): String {

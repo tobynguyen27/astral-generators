@@ -1,9 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
-import dev.tobynguyen27.astralgenerators.contents.machines.assembler.AssemblerBlockEntity.Companion.CONTAINER_DATA_SIZE
 import dev.tobynguyen27.astralgenerators.core.base.MultiblockControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
-import dev.tobynguyen27.astralgenerators.core.util.SIUtils
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
@@ -26,7 +24,8 @@ class BoilerControllerBlockEntity(
 ) :
     MultiblockControllerBlockEntity(type, blockPos, blockState),
     MenuProvider,
-    ExtendedScreenHandlerFactory {
+    ExtendedScreenHandlerFactory,
+    PropertyDelegateHolder {
 
     companion object {
         const val CONTAINER_DATA_SIZE = 2
@@ -34,17 +33,17 @@ class BoilerControllerBlockEntity(
         private var HEAT_TAG = "heat"
     }
 
-    var heat = SIUtils.STANDARD_TEMPERATURE
-    var maxHeat = 873.15
+    var heat = 0
+    var maxHeat = 600
 
     // NBT
     override fun saveAdditional(tag: CompoundTag) {
-        tag.putDouble(HEAT_TAG, heat)
+        tag.putInt(HEAT_TAG, heat)
         super.saveAdditional(tag)
     }
 
     override fun load(tag: CompoundTag) {
-        heat = tag.getDouble(HEAT_TAG)
+        heat = tag.getInt(HEAT_TAG)
         super.load(tag)
     }
 
@@ -57,8 +56,32 @@ class BoilerControllerBlockEntity(
         )
     }
 
-    override fun writeScreenOpeningData(player: ServerPlayer, packet: FriendlyByteBuf) {
-        packet.writeDouble(heat)
+    override fun writeScreenOpeningData(player: ServerPlayer, packet: FriendlyByteBuf) {}
+
+    // Data
+    val containerData =
+        object : ContainerData {
+            override fun get(index: Int): Int {
+                return when (index) {
+                    0 -> maxHeat
+                    1 -> heat
+                    else -> -1
+                }
+            }
+
+            override fun set(index: Int, value: Int) {
+                when (index) {
+                    1 -> heat = value
+                }
+            }
+
+            override fun getCount(): Int {
+                return CONTAINER_DATA_SIZE
+            }
+        }
+
+    override fun getPropertyDelegate(): ContainerData {
+        return containerData
     }
 
     // Multiblock
