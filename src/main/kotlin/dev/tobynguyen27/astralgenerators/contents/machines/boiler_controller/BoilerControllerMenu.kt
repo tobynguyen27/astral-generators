@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
+import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.data.Insets
 import net.minecraft.network.FriendlyByteBuf
@@ -13,8 +14,8 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         AGMenus.BOILER_CONTROLLER,
         syncId,
         playerInventory,
-        getBlockInventory(ctx, 1),
-        getBlockPropertyDelegate(ctx, 2),
+        null,
+        null,
     ) {
 
     constructor(
