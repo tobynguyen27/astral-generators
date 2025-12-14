@@ -33,18 +33,15 @@ abstract class PortBlockEntity(
     }
 
     override fun getUpdateTag(): CompoundTag {
-        return saveWithoutMetadata()
+        val tag = CompoundTag()
+        if (casingBlock != null) {
+            tag.put("casingBlock", NbtUtils.writeBlockState(casingBlock!!))
+        }
+        return tag
     }
 
     override fun getUpdatePacket(): Packet<ClientGamePacketListener> {
         return ClientboundBlockEntityDataPacket.create(this)
-    }
-
-    override fun saveAdditional(tag: CompoundTag) {
-        if (casingBlock != null) {
-            tag.put("casingBlock", NbtUtils.writeBlockState(casingBlock!!))
-        }
-        super.saveAdditional(tag)
     }
 
     override fun load(tag: CompoundTag) {
@@ -66,11 +63,13 @@ abstract class PortBlockEntity(
 
     fun unlink() {
         this.casingBlock = null
+        setChanged()
         level!!.sendBlockUpdated(blockPos, blockState, blockState, 3)
     }
 
     fun link(casingBlock: BlockState) {
         this.casingBlock = casingBlock
+        setChanged()
         level!!.sendBlockUpdated(blockPos, blockState, blockState, 3)
     }
 
