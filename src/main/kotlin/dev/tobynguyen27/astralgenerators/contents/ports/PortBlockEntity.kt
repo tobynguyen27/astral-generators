@@ -1,16 +1,13 @@
 package dev.tobynguyen27.astralgenerators.contents.ports
 
+import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.NbtUtils
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.world.MenuProvider
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -21,12 +18,7 @@ abstract class PortBlockEntity(
     val tier: PortBlockSpecification.Tier,
     val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
-) : BlockEntity(blockEntityType, blockPos, blockState), MenuProvider, RenderAttachmentBlockEntity {
-    // Menu
-    override fun getDisplayName(): Component {
-        return TranslatableComponent(blockState.block.descriptionId)
-    }
-
+) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity {
     // Block model
     override fun getRenderAttachmentData(): PortBlockModelClientData {
         return PortBlockModelClientData(mode, tier, casingBlock)
