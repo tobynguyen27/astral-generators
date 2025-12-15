@@ -1,5 +1,8 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
+import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.IDEAL_WATER_CONSUMPTION
+import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.STEAM_EXPANSION_RATIO
+import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.WATER_BOILING_POINT
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
@@ -8,14 +11,12 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluids
 
 object BoilerControllerLogical {
-
-    private const val WATER_BOILING_POINT = 100
 
     fun clientTick(
         level: Level,
@@ -62,73 +63,104 @@ object BoilerControllerLogical {
 
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
-        // Temperature
-        if (blockEntity.heat < blockEntity.maxHeat) {
-            blockEntity.heat += 2
+        // Fuel logic
+        // Consume fuel if boiler is not being heated yet
+        if (blockEntity.burnTime <= 0) {
+            val addedBurnTime = consumeFuel(inputBus)
+            if (addedBurnTime > 0) {
+                blockEntity.burnTime = addedBurnTime
+                blockEntity.maxBurnTime = addedBurnTime
+                blockEntity.setChanged()
+            }
+        }
+
+        val isBurning = blockEntity.burnTime > 0
+        updateActiveState(level, blockEntity, isBurning)
+
+        // Consume burn time
+        if (isBurning) {
+            blockEntity.burnTime--
+            blockEntity.setChanged()
+        }
+
+        // Increase temp when it has water
+        if (hasWater(inputHatch) && isBurning) {
+            if (blockEntity.heat < blockEntity.maxHeat) {
+                blockEntity.heat++
+                blockEntity.setChanged()
+            }
+        } else {
+            // No water so cooling
+            if (blockEntity.burnTime > 0) {
+                blockEntity.burnTime--
+                // Use exponential decay
+                blockEntity.setChanged()
+            }
         }
 
         if (blockEntity.heat < WATER_BOILING_POINT) return
-        // Steam
 
-        // Craft logic here
-        Transaction.openOuter().use { transaction ->
-            val consumeFluid = consumeWater(transaction, inputHatch, 1)
-            val canProduceFluid = produceSteam(transaction, outputHatch, 2, true)
-            val consumeFuel = consumeFuel(transaction, inputBus, 1)
+        val efficiency = blockEntity.heat.toDouble() / blockEntity.maxHeat
+        val waterToConsume = (IDEAL_WATER_CONSUMPTION * efficiency).toLong()
 
-            if (consumeFluid && canProduceFluid && consumeFuel) {
-                produceSteam(transaction, outputHatch, 2)
-                transaction.commit()
-                blockEntity.setChanged()
+        if (waterToConsume <= 0) return
+
+        Transaction.openOuter().use {
+            val extractedWater =
+                inputHatch.fluidStorage.extract(FluidVariant.of(Fluids.WATER), waterToConsume, it)
+
+            if (extractedWater > 0) {
+                val steamToProduce = extractedWater * STEAM_EXPANSION_RATIO
+
+                if (produceSteam(it, outputHatch, steamToProduce)) {
+                    it.commit()
+                    blockEntity.setChanged()
+                } else {
+                    it.abort()
+                }
             } else {
-                transaction.abort()
+                it.abort()
             }
         }
 
         blockEntity.setChanged()
     }
 
-    private fun consumeFuel(
-        transaction: Transaction,
-        inputBus: BusBlockEntity,
-        amountToConsume: Int,
-        simulate: Boolean = false,
-    ): Boolean {
-        transaction.openNested().use {
-            val logFuel = Ingredient.of(ItemTags.LOGS_THAT_BURN)
-            val plankFuel = Ingredient.of(ItemTags.PLANKS)
-            val coalFuel = Ingredient.of(ItemTags.COALS)
+    private fun hasWater(inputHatch: FluidHatchBlockEntity): Boolean {
+        Transaction.openOuter().use {
+            return inputHatch.fluidStorage.extract(FluidVariant.of(Fluids.WATER), 1L, it) > 0
+        }
+    }
 
-            var neededAmount = amountToConsume.toLong()
-
+    private fun consumeFuel(inputBus: BusBlockEntity): Int {
+        Transaction.openOuter().use {
             for (input in inputBus.inputStorage) {
-                if (neededAmount == 0L) {
-                    break
-                }
                 if (input.isResourceBlank) {
                     continue
                 }
 
                 val resource = input.resource
+                val fuelBurnTime = getFuelBurnTime(resource.toStack())
+                if (fuelBurnTime > 0) {
+                    val consumedAmount = input.extract(resource, 1, it)
 
-                if (
-                    logFuel.test(resource.toStack()) ||
-                        plankFuel.test(resource.toStack()) ||
-                        coalFuel.test(resource.toStack())
-                ) {
-                    val consumedAmount = input.extract(resource, neededAmount, it)
-
-                    neededAmount -= consumedAmount
+                    if (consumedAmount == 1L) {
+                        it.commit()
+                        return fuelBurnTime
+                    }
                 }
             }
 
-            val result = neededAmount <= 0
+            return 0
+        }
+    }
 
-            if (result && !simulate) {
-                it.commit()
-            }
-
-            return result
+    private fun getFuelBurnTime(fuel: ItemStack): Int {
+        return when {
+            fuel.`is`(ItemTags.COALS) -> 1600
+            fuel.`is`(ItemTags.LOGS_THAT_BURN) -> 800
+            fuel.`is`(ItemTags.PLANKS) -> 400
+            else -> 0
         }
     }
 
@@ -156,18 +188,16 @@ object BoilerControllerLogical {
         }
     }
 
-    private fun consumeWater(
-        transaction: Transaction,
-        inputHatch: FluidHatchBlockEntity,
-        amountToConsume: Long,
-    ): Boolean {
-        val consumedAmount =
-            inputHatch.fluidStorage.extract(
-                FluidVariant.of(Fluids.WATER),
-                amountToConsume,
-                transaction,
-            )
+    private fun updateActiveState(level: Level, entity: BoilerControllerBlockEntity, active: Boolean) {
+        val currentState = level.getBlockState(entity.blockPos)
 
-        return consumedAmount == amountToConsume
+        if (currentState.getValue(BoilerController.LIT) == active) {
+            return
+        }
+
+        val newState = currentState.setValue(BoilerController.LIT, active)
+        level.setBlock(entity.blockPos, newState, 3)
+
+        entity.setChanged()
     }
 }

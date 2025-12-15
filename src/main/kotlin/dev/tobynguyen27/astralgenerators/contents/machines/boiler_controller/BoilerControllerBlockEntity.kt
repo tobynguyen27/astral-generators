@@ -28,10 +28,19 @@ class BoilerControllerBlockEntity(
     PropertyDelegateHolder {
 
     companion object {
-        const val CONTAINER_DATA_SIZE = 2
+        const val WATER_BOILING_POINT = 100
+        const val STEAM_EXPANSION_RATIO = 160 // 1 water = 160 steam
+        const val IDEAL_WATER_CONSUMPTION = 81 // Water consumed at 100% efficiency
+
+        const val CONTAINER_DATA_SIZE = 4
 
         private var HEAT_TAG = "heat"
+        private var BURN_TIME_TAG = "burn_time"
+        private var MAX_BURN_TIME_TAG = "max_burn_time"
     }
+
+    var burnTime = 0
+    var maxBurnTime = 0
 
     var heat = 0
     var maxHeat = 600
@@ -39,11 +48,17 @@ class BoilerControllerBlockEntity(
     // NBT
     override fun saveAdditional(tag: CompoundTag) {
         tag.putInt(HEAT_TAG, heat)
+        tag.putInt(BURN_TIME_TAG, burnTime)
+        tag.putInt(MAX_BURN_TIME_TAG, maxBurnTime)
+
         super.saveAdditional(tag)
     }
 
     override fun load(tag: CompoundTag) {
         heat = tag.getInt(HEAT_TAG)
+        burnTime = tag.getInt(BURN_TIME_TAG)
+        maxBurnTime = tag.getInt(MAX_BURN_TIME_TAG)
+
         super.load(tag)
     }
 
@@ -65,6 +80,8 @@ class BoilerControllerBlockEntity(
                 return when (index) {
                     0 -> maxHeat
                     1 -> heat
+                    2 -> maxBurnTime
+                    3 -> burnTime
                     else -> -1
                 }
             }
@@ -72,6 +89,7 @@ class BoilerControllerBlockEntity(
             override fun set(index: Int, value: Int) {
                 when (index) {
                     1 -> heat = value
+                    3 -> burnTime = value
                 }
             }
 

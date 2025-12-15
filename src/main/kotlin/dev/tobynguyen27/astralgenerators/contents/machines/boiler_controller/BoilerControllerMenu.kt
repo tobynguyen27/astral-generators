@@ -46,5 +46,36 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             }"
             })
         root.add(temperature, 0, 2)
+
+        val burnTime = WDynamicLabel({ "Burn Time: ${propertyDelegate.get(3)}" })
+        root.add(burnTime, 0, 4)
+
+        val consuming =
+            WDynamicLabel({
+                "Consuming: ${
+                    FormattingUtil.formatBuckets(((propertyDelegate.get(1).toDouble() / propertyDelegate.get(0)) * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong())
+                }/t"
+            })
+        root.add(consuming, 0, 6)
+
+        val producing =
+            WDynamicLabel({
+                "Producing: ${
+                    FormattingUtil.formatBuckets(((propertyDelegate.get(1).toDouble() / propertyDelegate.get(0)) * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong())
+                }/t"
+            })
+        root.add(producing, 0, 8)
+
+        val efficiency =
+            WDynamicLabel({
+                "Efficiency: ${FormattingUtil.formatPercent(
+                    propertyDelegate.get(1),
+                    propertyDelegate.get(0),
+                    "0",
+                )}"
+            })
+        root.add(efficiency, 0, 10)
+
+        root.validate(this)
     }
 }
