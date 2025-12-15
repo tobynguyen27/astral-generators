@@ -101,7 +101,7 @@ object BoilerControllerLogical {
 
             var neededAmount = amountToConsume.toLong()
 
-            for (input in inputBus.storage) {
+            for (input in inputBus.inputStorage) {
                 if (neededAmount == 0L) {
                     break
                 }
