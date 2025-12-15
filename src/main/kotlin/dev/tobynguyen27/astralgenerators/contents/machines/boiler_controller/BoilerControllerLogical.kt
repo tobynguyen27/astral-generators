@@ -178,7 +178,7 @@ object BoilerControllerLogical {
                     it,
                 )
 
-            val result = producedAmount == amountToProduce
+            val result = producedAmount > 0
 
             if (result && !simulate) {
                 it.commit()
