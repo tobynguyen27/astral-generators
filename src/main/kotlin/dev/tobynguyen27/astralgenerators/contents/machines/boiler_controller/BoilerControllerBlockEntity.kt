@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
+import dev.tobynguyen27.astralgenerators.contents.blocks.FireboxCasing
 import dev.tobynguyen27.astralgenerators.core.base.MultiblockControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
@@ -103,6 +104,16 @@ class BoilerControllerBlockEntity(
     }
 
     // Multiblock
+    override fun setRemoved() {
+        val level = level
+
+        if (level != null && !level.isClientSide) {
+            updateFireboxActiveState(false)
+        }
+
+        super.setRemoved()
+    }
+
     fun updateActiveState(
         active: Boolean
     ) {
@@ -115,6 +126,22 @@ class BoilerControllerBlockEntity(
 
         val newState = currentState.setValue(BoilerController.LIT, active)
         level.setBlock(blockPos, newState, 3)
+    }
+
+    fun updateFireboxActiveState(active: Boolean) {
+        val level = level ?: return
+        val shapeMatcher = shapeMatcher ?: return
+
+        shapeMatcher.simpleMembers.forEach { (blockPos, _) ->
+            val currentState = level.getBlockState(blockPos)
+
+            if(currentState.block is FireboxCasing) {
+                if(currentState.getValue(FireboxCasing.LIT) != active) {
+                    val newState = currentState.setValue(BoilerController.LIT, active)
+                    level.setBlock(blockPos, newState, 3)
+                }
+            }
+        }
     }
 
     override fun getMultiblockShape(): ShapeTemplate {

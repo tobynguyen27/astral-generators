@@ -35,6 +35,7 @@ object BoilerControllerLogical {
 
         if (!blockEntity.isFormed) {
             blockEntity.updateActiveState(false)
+            blockEntity.updateFireboxActiveState(false)
             return
         }
         if (blockEntity.shapeMatcher == null) return
@@ -79,6 +80,7 @@ object BoilerControllerLogical {
 
         val isBurning = blockEntity.burnTime > 0
         blockEntity.updateActiveState(isBurning)
+        blockEntity.updateFireboxActiveState(isBurning)
 
         // Consume burn time
         if (isBurning) {
