@@ -37,13 +37,14 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.setInsets(Insets.ROOT_PANEL)
         root.add(createPlayerInventoryPanel(), 0, 15)
 
-        val temperature = WDynamicLabel({
-            "Temperature: ${
+        val temperature =
+            WDynamicLabel({
+                "Temperature: ${
                 FormattingUtil.formatTemperature(
                     propertyDelegate.get(1)
                 )
             }"
-        })
+            })
         root.add(temperature, 0, 2)
     }
 }

@@ -4,11 +4,11 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
-import dev.tobynguyen27.codebebelib.utils.ClientUtils
-import dev.tobynguyen27.codebebelib.utils.ServerUtils
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
+import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluids
@@ -63,7 +63,7 @@ object BoilerControllerLogical {
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
         // Temperature
-        if(blockEntity.heat < blockEntity.maxHeat) {
+        if (blockEntity.heat < blockEntity.maxHeat) {
             blockEntity.heat += 2
         }
 
@@ -72,10 +72,12 @@ object BoilerControllerLogical {
 
         // Craft logic here
         Transaction.openOuter().use { transaction ->
-            val consumeFluid = consumeFluid(transaction, inputHatch, 1)
-            val canProduceFluid = produceFluid(transaction, outputHatch, 2, true)
-            if (consumeFluid && canProduceFluid) {
-                produceFluid(transaction, outputHatch, 2)
+            val consumeFluid = consumeWater(transaction, inputHatch, 1)
+            val canProduceFluid = produceSteam(transaction, outputHatch, 2, true)
+            val consumeFuel = consumeFuel(transaction, inputBus, 1)
+
+            if (consumeFluid && canProduceFluid && consumeFuel) {
+                produceSteam(transaction, outputHatch, 2)
                 transaction.commit()
                 blockEntity.setChanged()
             } else {
@@ -86,37 +88,75 @@ object BoilerControllerLogical {
         blockEntity.setChanged()
     }
 
-    private fun produceFluid(
+    private fun consumeFuel(
+        transaction: Transaction,
+        inputBus: BusBlockEntity,
+        amountToConsume: Int,
+        simulate: Boolean = false,
+    ): Boolean {
+        transaction.openNested().use {
+            val logFuel = Ingredient.of(ItemTags.LOGS_THAT_BURN)
+            val plankFuel = Ingredient.of(ItemTags.PLANKS)
+            val coalFuel = Ingredient.of(ItemTags.COALS)
+
+            var neededAmount = amountToConsume.toLong()
+
+            for (input in inputBus.storage) {
+                if (neededAmount == 0L) {
+                    break
+                }
+                if (input.isResourceBlank) {
+                    continue
+                }
+
+                val resource = input.resource
+
+                if (
+                    logFuel.test(resource.toStack()) ||
+                        plankFuel.test(resource.toStack()) ||
+                        coalFuel.test(resource.toStack())
+                ) {
+                    val consumedAmount = input.extract(resource, neededAmount, it)
+
+                    neededAmount -= consumedAmount
+                }
+            }
+
+            val result = neededAmount <= 0
+
+            if (result && !simulate) {
+                it.commit()
+            }
+
+            return result
+        }
+    }
+
+    private fun produceSteam(
         transaction: Transaction,
         outputHatch: FluidHatchBlockEntity,
         amountToProduce: Long,
         simulate: Boolean = false,
     ): Boolean {
+        transaction.openNested().use {
+            val producedAmount =
+                outputHatch.fluidStorage.insert(
+                    FluidVariant.of(AGFluids.STEAM.get().source),
+                    amountToProduce,
+                    it,
+                )
 
-        if (simulate) {
-            transaction.openNested().use { t ->
-                val producedAmount =
-                    outputHatch.fluidStorage.insert(
-                        FluidVariant.of(AGFluids.STEAM.get().source),
-                        amountToProduce,
-                        t,
-                    )
+            val result = producedAmount == amountToProduce
 
-                return producedAmount == amountToProduce
+            if (result && !simulate) {
+                it.commit()
             }
+
+            return result
         }
-
-        val producedAmount =
-            outputHatch.fluidStorage.insert(
-                FluidVariant.of(AGFluids.STEAM.get().source),
-                amountToProduce,
-                transaction,
-            )
-
-        return producedAmount == amountToProduce
     }
 
-    private fun consumeFluid(
+    private fun consumeWater(
         transaction: Transaction,
         inputHatch: FluidHatchBlockEntity,
         amountToConsume: Long,

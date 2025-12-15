@@ -4,6 +4,7 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
@@ -31,6 +32,9 @@ abstract class BusBlockEntity(
     RenderAttachmentBlockEntity {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
+
+    val containerWrapper: InventoryStorage = InventoryStorage.of(this, null)
+    val storage = containerWrapper.slots
 
     override fun getItems(): NonNullList<ItemStack> {
         return items
