@@ -85,7 +85,7 @@ object FormattingUtil {
         return if (useFahrenheit) {
             "$temp °F"
         } else {
-            "$temp ℃"
+            "$temp °C"
         }
     }
 }
