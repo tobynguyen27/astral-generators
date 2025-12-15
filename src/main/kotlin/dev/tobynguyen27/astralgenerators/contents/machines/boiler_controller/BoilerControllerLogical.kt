@@ -188,7 +188,11 @@ object BoilerControllerLogical {
         }
     }
 
-    private fun updateActiveState(level: Level, entity: BoilerControllerBlockEntity, active: Boolean) {
+    private fun updateActiveState(
+        level: Level,
+        entity: BoilerControllerBlockEntity,
+        active: Boolean,
+    ) {
         val currentState = level.getBlockState(entity.blockPos)
 
         if (currentState.getValue(BoilerController.LIT) == active) {
