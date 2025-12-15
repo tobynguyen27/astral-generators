@@ -26,7 +26,7 @@ abstract class MultiblockControllerBlockEntity(
         )
     }
 
-    protected fun onRematch(shapeMatcher: ShapeMatcher) {}
+    protected open fun onRematch(shapeMatcher: ShapeMatcher) {}
 
     abstract fun getMultiblockShape(): ShapeTemplate
 
