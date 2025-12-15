@@ -25,7 +25,7 @@ abstract class PortBlockEntity(
     }
 
     override fun getUpdateTag(): CompoundTag {
-        val tag = CompoundTag()
+        val tag = saveWithoutMetadata()
         if (casingBlock != null) {
             tag.put("casingBlock", NbtUtils.writeBlockState(casingBlock!!))
         }
