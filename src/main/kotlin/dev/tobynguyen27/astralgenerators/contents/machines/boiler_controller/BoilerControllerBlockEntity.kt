@@ -114,9 +114,7 @@ class BoilerControllerBlockEntity(
         super.setRemoved()
     }
 
-    fun updateActiveState(
-        active: Boolean
-    ) {
+    fun updateActiveState(active: Boolean) {
         val level = level ?: return
         val currentState = level.getBlockState(blockPos)
 
@@ -135,8 +133,8 @@ class BoilerControllerBlockEntity(
         shapeMatcher.simpleMembers.forEach { (blockPos, _) ->
             val currentState = level.getBlockState(blockPos)
 
-            if(currentState.block is FireboxCasing) {
-                if(currentState.getValue(FireboxCasing.LIT) != active) {
+            if (currentState.block is FireboxCasing) {
+                if (currentState.getValue(FireboxCasing.LIT) != active) {
                     val newState = currentState.setValue(BoilerController.LIT, active)
                     level.setBlock(blockPos, newState, 3)
                 }
