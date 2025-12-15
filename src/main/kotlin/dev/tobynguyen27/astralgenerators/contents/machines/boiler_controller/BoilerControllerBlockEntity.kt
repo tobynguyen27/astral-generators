@@ -103,6 +103,20 @@ class BoilerControllerBlockEntity(
     }
 
     // Multiblock
+    fun updateActiveState(
+        active: Boolean
+    ) {
+        val level = level ?: return
+        val currentState = level.getBlockState(blockPos)
+
+        if (currentState.getValue(BoilerController.LIT) == active) {
+            return
+        }
+
+        val newState = currentState.setValue(BoilerController.LIT, active)
+        level.setBlock(blockPos, newState, 3)
+    }
+
     override fun getMultiblockShape(): ShapeTemplate {
         return BoilerMultiblock.SHAPE
     }

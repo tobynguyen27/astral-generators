@@ -33,7 +33,10 @@ object BoilerControllerLogical {
     ) {
         blockEntity.link()
 
-        if (!blockEntity.isFormed) return
+        if (!blockEntity.isFormed) {
+            blockEntity.updateActiveState(false)
+            return
+        }
         if (blockEntity.shapeMatcher == null) return
 
         var inputBus: BusBlockEntity? = null
@@ -75,7 +78,7 @@ object BoilerControllerLogical {
         }
 
         val isBurning = blockEntity.burnTime > 0
-        updateActiveState(level, blockEntity, isBurning)
+        blockEntity.updateActiveState(isBurning)
 
         // Consume burn time
         if (isBurning) {
@@ -186,22 +189,5 @@ object BoilerControllerLogical {
 
             return result
         }
-    }
-
-    private fun updateActiveState(
-        level: Level,
-        entity: BoilerControllerBlockEntity,
-        active: Boolean,
-    ) {
-        val currentState = level.getBlockState(entity.blockPos)
-
-        if (currentState.getValue(BoilerController.LIT) == active) {
-            return
-        }
-
-        val newState = currentState.setValue(BoilerController.LIT, active)
-        level.setBlock(entity.blockPos, newState, 3)
-
-        entity.setChanged()
     }
 }
