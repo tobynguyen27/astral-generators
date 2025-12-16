@@ -11,7 +11,6 @@ import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.ItemStack
@@ -30,19 +29,19 @@ object BoilerControllerLogical {
     ) {
         val isActive = blockState.getValue(BlockStateProperties.LIT)
 
-        if(!isActive) return
-        /**
-         * level.playLocalSound(
-         *             blockPos.x.toDouble(),
-         *             blockPos.y.toDouble(),
-         *             blockPos.z.toDouble(),
-         *             AGSounds.BOILER_WORKING,
-         *             SoundSource.BLOCKS,
-         *             1f,
-         *             1f,
-         *             false
-         *         )
-         */
+        if (!isActive) return
+        if (level.gameTime % 64L != 0L) return
+
+        level.playLocalSound(
+            blockPos.x.toDouble(),
+            blockPos.y.toDouble(),
+            blockPos.z.toDouble(),
+            AGSounds.BOILER_WORKING,
+            SoundSource.BLOCKS,
+            1f,
+            1f,
+            false,
+        )
     }
 
     fun serverTick(

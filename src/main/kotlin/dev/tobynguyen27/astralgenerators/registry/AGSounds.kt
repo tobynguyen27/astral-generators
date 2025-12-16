@@ -16,9 +16,8 @@ object AGSounds {
 
         REGISTRATE.addRawLang("subtitle.$MOD_ID.$name", FormattingUtil.toEnglishName(name))
 
-        return Registry.register(Registry.SOUND_EVENT,id, SoundEvent(id))
+        return Registry.register(Registry.SOUND_EVENT, id, SoundEvent(id))
     }
 
     fun register() {}
-
 }
