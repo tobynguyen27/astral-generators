@@ -74,6 +74,16 @@ object BoilerControllerLogical {
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
         if(isFulled(outputHatch)) {
+            if(blockEntity.burnTime > 0) {
+                blockEntity.burnTime--
+                blockEntity.setChanged()
+            }
+
+            if (blockEntity.heat > 0) {
+                blockEntity.heat--
+                blockEntity.setChanged()
+            }
+
             blockEntity.updateActiveState(false)
             blockEntity.updateFireboxActiveState(false)
             return

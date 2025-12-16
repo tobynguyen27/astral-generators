@@ -38,6 +38,20 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
     private val burnTime get() = propertyDelegate.get(BURN_TIME_INDEX)
 
     private val efficiency get() = currentHeat.toDouble() / maxHeat.toDouble()
+    private val consumingAmount: Long get() {
+        return if(currentHeat < 100) {
+            0L
+        } else {
+            (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong()
+        }
+    }
+    private val producingAmount: Long get() {
+        return if(currentHeat < 100) {
+            0L
+        } else {
+            (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong()
+        }
+    }
 
     init {
         val root = WGridPanel(6)
@@ -61,7 +75,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val consuming =
             WDynamicLabel({
                 "Consuming: ${
-                    FormattingUtil.formatBuckets((efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong())
+                    FormattingUtil.formatBuckets(consumingAmount)
                 }/t"
             })
         root.add(consuming, 0, 6)
@@ -69,7 +83,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val producing =
             WDynamicLabel({
                 "Producing: ${
-                    FormattingUtil.formatBuckets((efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong())
+                    FormattingUtil.formatBuckets(producingAmount)
                 }/t"
             })
         root.add(producing, 0, 8)
