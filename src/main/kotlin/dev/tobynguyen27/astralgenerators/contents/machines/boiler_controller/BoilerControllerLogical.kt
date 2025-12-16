@@ -7,7 +7,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
-import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
@@ -73,8 +72,8 @@ object BoilerControllerLogical {
 
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
-        if(isFulled(outputHatch)) {
-            if(blockEntity.burnTime > 0) {
+        if (isFulled(outputHatch)) {
+            if (blockEntity.burnTime > 0) {
                 blockEntity.burnTime--
                 blockEntity.setChanged()
             }
@@ -155,7 +154,11 @@ object BoilerControllerLogical {
 
     private fun isFulled(outputHatch: FluidHatchBlockEntity): Boolean {
         Transaction.openOuter().use {
-            return outputHatch.fluidStorage.insert(FluidVariant.of(AGFluids.STEAM.get().source), 1L, it) == 0L
+            return outputHatch.fluidStorage.insert(
+                FluidVariant.of(AGFluids.STEAM.get().source),
+                1L,
+                it,
+            ) == 0L
         }
     }
 

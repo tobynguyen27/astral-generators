@@ -33,25 +33,38 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         private const val BURN_TIME_INDEX = 3
     }
 
-    private val maxHeat get() = propertyDelegate.get(MAX_HEAT_INDEX)
-    private val currentHeat get() = propertyDelegate.get(CURRENT_HEAT_INDEX)
-    private val burnTime get() = propertyDelegate.get(BURN_TIME_INDEX)
+    private val maxHeat
+        get() = propertyDelegate.get(MAX_HEAT_INDEX)
 
-    private val efficiency get() = currentHeat.toDouble() / maxHeat.toDouble()
-    private val consumingAmount: Long get() {
-        return if(currentHeat < 100) {
-            0L
-        } else {
-            (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong()
+    private val currentHeat
+        get() = propertyDelegate.get(CURRENT_HEAT_INDEX)
+
+    private val burnTime
+        get() = propertyDelegate.get(BURN_TIME_INDEX)
+
+    private val efficiency
+        get() = currentHeat.toDouble() / maxHeat.toDouble()
+
+    private val consumingAmount: Long
+        get() {
+            return if (currentHeat < 100) {
+                0L
+            } else {
+                (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong()
+            }
         }
-    }
-    private val producingAmount: Long get() {
-        return if(currentHeat < 100) {
-            0L
-        } else {
-            (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong()
+
+    private val producingAmount: Long
+        get() {
+            return if (currentHeat < 100) {
+                0L
+            } else {
+                (efficiency *
+                        BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION *
+                        BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO)
+                    .toLong()
+            }
         }
-    }
 
     init {
         val root = WGridPanel(6)
@@ -61,13 +74,17 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.setInsets(Insets.ROOT_PANEL)
         root.add(createPlayerInventoryPanel(), 0, 15)
 
-        root.add(  WDynamicLabel({
-            "Temperature: ${
+        root.add(
+            WDynamicLabel({
+                "Temperature: ${
                 FormattingUtil.formatTemperature(
                     currentHeat
                 )
             }"
-        }), 0, 2)
+            }),
+            0,
+            2,
+        )
 
         val burnTime = WDynamicLabel({ "Burn Time: $burnTime" })
         root.add(burnTime, 0, 4)
