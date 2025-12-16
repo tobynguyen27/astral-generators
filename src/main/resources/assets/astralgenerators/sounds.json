@@ -1,0 +1,11 @@
+{
+    "boiler": {
+        "sounds": [
+            {
+                "type": "file",
+                "name": "astralgenerators:boiler"
+            }
+        ],
+        "subtitle": "subtitle.astralgenerators.boiler"
+    }
+}

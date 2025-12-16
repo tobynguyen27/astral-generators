@@ -12,6 +12,7 @@ import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGItems
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import dev.tobynguyen27.astralgenerators.registry.AGRecipes
+import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import dev.tobynguyen27.codebebelib.Bebe
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -44,6 +45,7 @@ object AstralGenerators : ModInitializer {
         AGBlockEntities.register()
         AGMenus.register()
         AGRecipes.register()
+        AGSounds.register()
 
         REGISTRATE.register()
         IntegrationHooks.init()

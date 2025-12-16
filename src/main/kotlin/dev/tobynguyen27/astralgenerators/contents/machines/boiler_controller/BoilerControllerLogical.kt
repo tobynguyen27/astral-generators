@@ -7,13 +7,17 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
+import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Fluids
 
 object BoilerControllerLogical {
@@ -23,7 +27,23 @@ object BoilerControllerLogical {
         blockPos: BlockPos,
         blockState: BlockState,
         blockEntity: BoilerControllerBlockEntity,
-    ) {}
+    ) {
+        val isActive = blockState.getValue(BlockStateProperties.LIT)
+
+        if(!isActive) return
+        /**
+         * level.playLocalSound(
+         *             blockPos.x.toDouble(),
+         *             blockPos.y.toDouble(),
+         *             blockPos.z.toDouble(),
+         *             AGSounds.BOILER_WORKING,
+         *             SoundSource.BLOCKS,
+         *             1f,
+         *             1f,
+         *             false
+         *         )
+         */
+    }
 
     fun serverTick(
         level: Level,
