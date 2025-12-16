@@ -7,6 +7,7 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
+import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
@@ -34,6 +35,11 @@ object BoilerControllerLogical {
         blockEntity.link()
 
         if (!blockEntity.isFormed) {
+            blockEntity.burnTime = 0
+            blockEntity.maxBurnTime = 0
+            blockEntity.heat = 0
+            blockEntity.setChanged()
+
             blockEntity.updateActiveState(false)
             blockEntity.updateFireboxActiveState(false)
             return
@@ -66,6 +72,12 @@ object BoilerControllerLogical {
         }
 
         if (inputBus == null || inputHatch == null || outputHatch == null) return
+
+        if(isFulled(outputHatch)) {
+            blockEntity.updateActiveState(false)
+            blockEntity.updateFireboxActiveState(false)
+            return
+        }
 
         // Fuel logic
         // Consume fuel if boiler is not being heated yet
@@ -129,6 +141,12 @@ object BoilerControllerLogical {
         }
 
         blockEntity.setChanged()
+    }
+
+    private fun isFulled(outputHatch: FluidHatchBlockEntity): Boolean {
+        Transaction.openOuter().use {
+            return outputHatch.fluidStorage.insert(FluidVariant.of(AGFluids.STEAM.get().source), 1L, it) == 0L
+        }
     }
 
     private fun hasWater(inputHatch: FluidHatchBlockEntity): Boolean {
