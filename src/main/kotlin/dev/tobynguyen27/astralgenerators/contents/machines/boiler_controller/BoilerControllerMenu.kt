@@ -74,38 +74,29 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.setInsets(Insets.ROOT_PANEL)
         root.add(createPlayerInventoryPanel(), 0, 15)
 
-        root.add(
+        // Widgets
+        val temperatureWidget =
             WDynamicLabel({
                 "Temperature: ${
                 FormattingUtil.formatTemperature(
                     currentHeat
                 )
             }"
-            }),
-            0,
-            2,
-        )
-
-        val burnTime = WDynamicLabel({ "Burn Time: $burnTime" })
-        root.add(burnTime, 0, 4)
-
-        val consuming =
+            })
+        val burnTimeWidget = WDynamicLabel({ "Burn Time: $burnTime" })
+        val consumingWidget =
             WDynamicLabel({
                 "Consuming: ${
                     FormattingUtil.formatBuckets(consumingAmount)
                 }/t"
             })
-        root.add(consuming, 0, 6)
-
-        val producing =
+        val producingWidget =
             WDynamicLabel({
                 "Producing: ${
                     FormattingUtil.formatBuckets(producingAmount)
                 }/t"
             })
-        root.add(producing, 0, 8)
-
-        val efficiency =
+        val efficiencyWidget =
             WDynamicLabel({
                 "Efficiency: ${FormattingUtil.formatPercent(
                     currentHeat,
@@ -113,7 +104,14 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
                     "0",
                 )}"
             })
-        root.add(efficiency, 0, 10)
+
+        with(root) {
+            add(temperatureWidget, 0, 2)
+            add(burnTimeWidget, 0, 4)
+            add(consumingWidget, 0, 6)
+            add(producingWidget, 0, 8)
+            add(efficiencyWidget, 0, 10)
+        }
 
         root.validate(this)
     }
