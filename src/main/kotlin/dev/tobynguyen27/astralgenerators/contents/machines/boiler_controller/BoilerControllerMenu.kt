@@ -27,7 +27,17 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
 
     companion object {
         const val ID = "boiler_controller_menu"
+
+        private const val MAX_HEAT_INDEX = 0
+        private const val CURRENT_HEAT_INDEX = 1
+        private const val BURN_TIME_INDEX = 3
     }
+
+    private val maxHeat get() = propertyDelegate.get(MAX_HEAT_INDEX)
+    private val currentHeat get() = propertyDelegate.get(CURRENT_HEAT_INDEX)
+    private val burnTime get() = propertyDelegate.get(BURN_TIME_INDEX)
+
+    private val efficiency get() = currentHeat.toDouble() / maxHeat.toDouble()
 
     init {
         val root = WGridPanel(6)
@@ -37,23 +47,21 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.setInsets(Insets.ROOT_PANEL)
         root.add(createPlayerInventoryPanel(), 0, 15)
 
-        val temperature =
-            WDynamicLabel({
-                "Temperature: ${
+        root.add(  WDynamicLabel({
+            "Temperature: ${
                 FormattingUtil.formatTemperature(
-                    propertyDelegate.get(1)
+                    currentHeat
                 )
             }"
-            })
-        root.add(temperature, 0, 2)
+        }), 0, 2)
 
-        val burnTime = WDynamicLabel({ "Burn Time: ${propertyDelegate.get(3)}" })
+        val burnTime = WDynamicLabel({ "Burn Time: $burnTime" })
         root.add(burnTime, 0, 4)
 
         val consuming =
             WDynamicLabel({
                 "Consuming: ${
-                    FormattingUtil.formatBuckets(((propertyDelegate.get(1).toDouble() / propertyDelegate.get(0)) * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong())
+                    FormattingUtil.formatBuckets((efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong())
                 }/t"
             })
         root.add(consuming, 0, 6)
@@ -61,7 +69,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val producing =
             WDynamicLabel({
                 "Producing: ${
-                    FormattingUtil.formatBuckets(((propertyDelegate.get(1).toDouble() / propertyDelegate.get(0)) * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong())
+                    FormattingUtil.formatBuckets((efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION * BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO).toLong())
                 }/t"
             })
         root.add(producing, 0, 8)
@@ -69,8 +77,8 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val efficiency =
             WDynamicLabel({
                 "Efficiency: ${FormattingUtil.formatPercent(
-                    propertyDelegate.get(1),
-                    propertyDelegate.get(0),
+                    currentHeat,
+                    maxHeat,
                     "0",
                 )}"
             })
