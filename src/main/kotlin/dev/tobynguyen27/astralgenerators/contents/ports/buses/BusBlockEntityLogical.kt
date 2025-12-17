@@ -34,7 +34,13 @@ object BusBlockEntityLogical {
 
                 Transaction.openOuter().use {
                     val movedAmount =
-                        StorageUtil.move(blockEntity.containerWrapper, neighborStorage, { true }, 1, it)
+                        StorageUtil.move(
+                            blockEntity.containerWrapper,
+                            neighborStorage,
+                            { true },
+                            1,
+                            it,
+                        )
 
                     if (movedAmount == 1L) {
                         it.commit()
@@ -56,7 +62,13 @@ object BusBlockEntityLogical {
 
                 Transaction.openOuter().use {
                     val movedAmount =
-                        StorageUtil.move(neighborStorage, blockEntity.containerWrapper, { true }, 1, it)
+                        StorageUtil.move(
+                            neighborStorage,
+                            blockEntity.containerWrapper,
+                            { true },
+                            1,
+                            it,
+                        )
 
                     if (movedAmount == 1L) {
                         it.commit()
