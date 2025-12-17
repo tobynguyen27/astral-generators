@@ -21,6 +21,7 @@ Contents
 - Fluid buses: A port block that allows extracting or inserting fluid in multilblock.
 - Energy buses: A port block that allows extracting or inserting energy in multilblock.
 - Multiblock projector: A block that renders multiblock shapes for building.
+- Boiler: A multiblock that produces steam from water.
 
 Credits
 ---
