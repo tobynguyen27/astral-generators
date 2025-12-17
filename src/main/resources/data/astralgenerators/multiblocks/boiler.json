@@ -1,0 +1,37 @@
+{
+    "origin": {
+        "x": -1,
+        "y": 0,
+        "z": 2
+    },
+    "keys": {
+        "a": {
+            "block": "astralgenerators:boiler_casing"
+        },
+        "b": {
+            "block": "astralgenerators:firebox_casing"
+        },
+        "m": {
+            "block": "astralgenerators:boiler_controller",
+            "nbt": "LIT=true"
+        }
+    },
+    "pattern": [
+        [
+            "bbb",
+            "bbb",
+            "bbb"],
+        [
+            "ama",
+            "a a",
+            "aaa"],
+        [
+            "aaa",
+            "a a",
+            "aaa"],
+        [
+            "aaa",
+            "aaa",
+            "aaa"]
+    ]
+}
