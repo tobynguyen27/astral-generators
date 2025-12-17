@@ -30,7 +30,8 @@ object FluidHatchBlockEntityLogical {
                     if (level.getBlockEntity(neighborPos) is MultiblockControllerBlockEntity)
                         continue // I'm not sure if this is useful but I still want to put it here
 
-                    val neighborStorage = FluidStorage.SIDED.find(level, neighborPos, direction) ?: continue
+                    val neighborStorage =
+                        FluidStorage.SIDED.find(level, neighborPos, direction) ?: continue
 
                     val movedAmount =
                         StorageUtil.move(

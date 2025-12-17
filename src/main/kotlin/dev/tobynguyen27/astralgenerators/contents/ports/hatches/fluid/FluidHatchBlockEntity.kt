@@ -31,7 +31,7 @@ abstract class FluidHatchBlockEntity(
     }
 
     val autoExport = 1
-    val autoImport = 0
+    val autoImport = 1
 
     val fluidStorage =
         object : SingleVariantStorage<FluidVariant>() {
