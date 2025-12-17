@@ -18,11 +18,12 @@ object FluidHatchBlockEntityLogical {
         blockState: BlockState,
         blockEntity: FluidHatchBlockEntity,
     ) {
-        if (blockEntity.autoExport == 0) {
-            if (blockEntity.mode != PortBlockSpecification.Mode.OUTPUT) return
-            if (!blockEntity.isMatched()) return
-            if (blockEntity.fluidStorage.isResourceBlank) return
-
+        if (
+            blockEntity.autoExport == 0 &&
+                blockEntity.mode == PortBlockSpecification.Mode.OUTPUT &&
+                blockEntity.isMatched() &&
+                !blockEntity.fluidStorage.isResourceBlank
+        ) {
             Transaction.openOuter().use {
                 for (direction in Direction.entries) {
                     val neighborPos = blockPos.offset(direction.normal)
@@ -49,10 +50,11 @@ object FluidHatchBlockEntityLogical {
             }
         }
 
-        if (blockEntity.autoImport == 0) {
-            if (blockEntity.mode != PortBlockSpecification.Mode.INPUT) return
-            if (!blockEntity.isMatched()) return
-
+        if (
+            blockEntity.autoImport == 0 &&
+                blockEntity.mode == PortBlockSpecification.Mode.INPUT &&
+                blockEntity.isMatched()
+        ) {
             Transaction.openOuter().use {
                 for (direction in Direction.entries) {
                     val neighborPos = blockPos.offset(direction.normal)

@@ -19,6 +19,10 @@ abstract class PortBlockEntity(
     val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
 ) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity {
+
+    var autoExport = 1
+    var autoImport = 1
+
     // Block model
     override fun getRenderAttachmentData(): PortBlockModelClientData {
         return PortBlockModelClientData(mode, tier, casingBlock)

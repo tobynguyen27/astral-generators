@@ -30,9 +30,6 @@ abstract class FluidHatchBlockEntity(
         private const val FLUID_STORAGE_TYPE_TAG = "fluid_type"
     }
 
-    val autoExport = 1
-    val autoImport = 1
-
     val fluidStorage =
         object : SingleVariantStorage<FluidVariant>() {
             override fun getBlankVariant(): FluidVariant = FluidVariant.blank()
