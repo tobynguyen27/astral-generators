@@ -28,20 +28,7 @@ abstract class EnergyHatchBlockEntity(
     }
 
     val energyStorage =
-        object :
-            SimpleEnergyStorage(
-                capacity,
-                if (mode == PortBlockSpecification.Mode.INPUT) {
-                    capacity
-                } else {
-                    0
-                },
-                if (mode == PortBlockSpecification.Mode.OUTPUT) {
-                    capacity
-                } else {
-                    0
-                },
-            ) {
+        object : SimpleEnergyStorage(capacity, capacity, capacity) {
 
             override fun onFinalCommit() {
                 setChanged()
