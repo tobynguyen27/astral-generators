@@ -17,21 +17,9 @@
         }
     },
     "pattern": [
-        [
-            "bbb",
-            "bbb",
-            "bbb"],
-        [
-            "ama",
-            "a a",
-            "aaa"],
-        [
-            "aaa",
-            "a a",
-            "aaa"],
-        [
-            "aaa",
-            "aaa",
-            "aaa"]
+        ["bbb", "bbb", "bbb"],
+        ["ama", "a a", "aaa"],
+        ["aaa", "a a", "aaa"],
+        ["aaa", "aaa", "aaa"]
     ]
 }
