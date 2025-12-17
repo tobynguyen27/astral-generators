@@ -90,6 +90,13 @@ object SteamTurbineControllerLogical {
 
         blockEntity.updateActiveState(false)
 
+        if (blockEntity.rotorSpeed > 0) {
+            produceWater(fluidOutputHatch)
+
+            val producedEnergy = calculateEnergyProduced(blockEntity.rotorSpeed)
+            produceEnergy(energyOutputHatch, producedEnergy)
+        }
+
         // Check input
         if (
             fluidInputHatch.fluidStorage.variant != FluidVariant.of(AGFluids.STEAM.get().source) ||
@@ -111,17 +118,6 @@ object SteamTurbineControllerLogical {
         }
 
         blockEntity.updateActiveState(isConsumingSteam)
-
-        // TODO: Produce water
-        if (blockEntity.rotorSpeed > 0) {
-            produceWater(fluidOutputHatch)
-        }
-
-        // Produce energy
-        if (blockEntity.rotorSpeed > 0) {
-            val producedEnergy = calculateEnergyProduced(blockEntity.rotorSpeed)
-            produceEnergy(energyOutputHatch, producedEnergy)
-        }
 
         blockEntity.setChanged()
     }
