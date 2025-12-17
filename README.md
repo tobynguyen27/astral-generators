@@ -28,6 +28,7 @@ Credits
 - Code contributors: [HyperRaccoon13](https://github.com/HyperRaccoon13).
 - [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization): Multiblock validator API.
 - [GregTech Refreshed](https://github.com/ULSTICK/GregTechRefreshed): For some textures.
+- [GT5-Unofficial](https://github.com/GTNewHorizons/GT5-Unofficial): For some sounds
 
 License
 ---
