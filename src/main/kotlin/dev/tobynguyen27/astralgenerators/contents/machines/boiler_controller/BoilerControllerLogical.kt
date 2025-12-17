@@ -189,7 +189,7 @@ object BoilerControllerLogical {
 
     private fun consumeFuel(inputBus: BusBlockEntity): Int {
         Transaction.openOuter().use {
-            for (input in inputBus.inputStorage) {
+            for (input in inputBus.storage) {
                 if (input.isResourceBlank) {
                     continue
                 }

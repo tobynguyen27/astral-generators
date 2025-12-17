@@ -36,7 +36,7 @@ abstract class BusBlockEntity(
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
 
     val containerWrapper: InventoryStorage = InventoryStorage.of(this, null)
-    val inputStorage: List<SingleSlotStorage<ItemVariant>> = containerWrapper.slots
+    val storage: List<SingleSlotStorage<ItemVariant>> = containerWrapper.slots
 
     override fun getItems(): NonNullList<ItemStack> {
         return items
