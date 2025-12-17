@@ -51,7 +51,7 @@ class ShapeTemplate(val casingBlock: BlockState) {
         }
 
         fun add(x: Int, y: Int, z: Int, member: SimpleMember): Builder {
-            add(x, y, z, member)
+            add(x, y, z, member, null)
 
             return this
         }
