@@ -1,0 +1,7 @@
+{
+  "parent": "astralgenerators:block/cube_2_layer/front",
+  "textures": {
+    "top_north": "astralgenerators:block/machines/steam_turbine_controller",
+    "all": "astralgenerators:block/casings/steam_turbine_casing"
+  }
+}

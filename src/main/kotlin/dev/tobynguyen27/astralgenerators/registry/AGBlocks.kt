@@ -10,6 +10,8 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjector
 import dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector.MultiblockProjectorBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller.SteamTurbineController
+import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller.SteamTurbineControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
@@ -43,6 +45,7 @@ object AGBlocks {
         BlockRegistry.registerCasingBlock("industrial_composter_casing", ::Block).register()
     val FIREBOX_CASING =
         BlockRegistry.registerColumnBlock(FireboxCasing.ID, ::FireboxCasing).register()
+    val PIPE_CASING = BlockRegistry.registerCasingBlock("pipe_casing", ::Block).register()
 
     val HIGH_MAGNETIC_COIL =
         BlockRegistry.registerCoilBlock("high_magnetic_coil", ::Block).register()
@@ -109,6 +112,15 @@ object AGBlocks {
             .blockEntity { type, blockPos, blockState ->
                 AMControllerBlockEntity(type, blockPos, blockState)
             }
+            .build()
+            .register()
+    val STEAM_TURBINE_CONTROLLER: BlockEntry<SteamTurbineController> =
+        BlockRegistry.registerControllerBlock(
+                SteamTurbineController.ID,
+                ::SteamTurbineController,
+                STEAM_TURBINE_CASING.id.path,
+            )
+            .blockEntity(::SteamTurbineControllerBlockEntity)
             .build()
             .register()
 

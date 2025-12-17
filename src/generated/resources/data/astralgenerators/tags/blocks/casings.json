@@ -8,6 +8,7 @@
     "astralgenerators:basic_machine_casing",
     "astralgenerators:advanced_machine_casing",
     "astralgenerators:industrial_machine_casing",
-    "astralgenerators:industrial_composter_casing"
+    "astralgenerators:industrial_composter_casing",
+    "astralgenerators:pipe_casing"
   ]
 }

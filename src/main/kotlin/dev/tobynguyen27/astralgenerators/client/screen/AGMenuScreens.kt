@@ -34,6 +34,7 @@ object AGMenuScreens {
             AGMenus.ASSEMBLER_MENU,
             AGMenus.BOILER_CONTROLLER,
             AGMenus.MULTIBLOCK_PROJECTOR,
+            AGMenus.STEAM_TURBINE_CONTROLLER,
         )
 
     fun register() {
