@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvent
 object AGSounds {
 
     val BOILER_WORKING = registerSound("boiler")
+    val STEAM_TURBINE_WORKING = registerSound("turbine")
 
     private fun registerSound(name: String): SoundEvent {
         val id = Identifier(name)
