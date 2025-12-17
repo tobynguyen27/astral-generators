@@ -91,7 +91,7 @@ object BoilerControllerLogical {
 
         if (inputBus == null || inputHatch == null || outputHatch == null) return
 
-        if (isFulled(outputHatch)) {
+        if (isFulled(outputHatch) || !hasWater(inputHatch)) {
             if (blockEntity.burnTime > 0) {
                 blockEntity.burnTime--
                 blockEntity.setChanged()
@@ -109,7 +109,7 @@ object BoilerControllerLogical {
 
         // Fuel logic
         // Consume fuel if boiler is not being heated yet
-        if (blockEntity.burnTime <= 0) {
+        if (blockEntity.burnTime <= 0 && hasWater(inputHatch)) {
             val addedBurnTime = consumeFuel(inputBus)
             if (addedBurnTime > 0) {
                 blockEntity.burnTime = addedBurnTime
