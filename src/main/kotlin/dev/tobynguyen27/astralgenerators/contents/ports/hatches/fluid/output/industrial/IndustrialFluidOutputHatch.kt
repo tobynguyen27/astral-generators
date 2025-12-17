@@ -23,7 +23,7 @@ class IndustrialFluidOutputHatch(properties: Properties) : FluidHatchBlock(prope
     override fun <T : BlockEntity> getTicker(
         level: Level,
         state: BlockState,
-        blockEntityType: BlockEntityType<T>
+        blockEntityType: BlockEntityType<T>,
     ): BlockEntityTicker<T>? {
         if (level.isClientSide) return null
 
