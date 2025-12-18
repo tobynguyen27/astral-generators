@@ -3,14 +3,17 @@ plugins {
 	id "org.jetbrains.kotlin.jvm" version "2.3.0"
     id "com.diffplug.spotless" version "8.1.0"
     id "idea"
+    id "maven-publish"
 }
 
-version = project.mod_version
+def ENV = System.getenv()
+def runNumber = ENV.GITHUB_RUN_NUMBER == null ? "9999" : ENV.GITHUB_RUN_NUMBER
+def isRelease = project.hasProperty("release")
+
+version = isRelease ? "${project.mod_version}" : "${project.mod_version}-build.${runNumber}"
 group = project.maven_group
 
-base {
-	archivesName = project.archives_base_name
-}
+base.archivesName = project.archives_base_name
 
 repositories {
     maven { url = "https://maven.parchmentmc.org" } // Parchment
@@ -166,5 +169,37 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = project.name.toLowerCase()
+            version = project.version
+
+            from components.java
+        }
+    }
+
+    repositories {
+        if (isRelease) {
+            maven {
+                url "https://maven.tobynguyen.dev/releases"
+                credentials {
+                    username ENV.MAVEN_USERNAME
+                    password ENV.MAVEN_PASSWORD
+                }
+            }
+        } else {
+            maven {
+                url "https://maven.tobynguyen.dev/snapshots"
+                credentials {
+                    username ENV.MAVEN_USERNAME
+                    password ENV.MAVEN_PASSWORD
+                }
+            }
+        }
     }
 }
