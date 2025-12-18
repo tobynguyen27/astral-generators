@@ -14,12 +14,13 @@ base {
 
 repositories {
     maven { url = "https://maven.parchmentmc.org" } // Parchment
+    maven { url = "https://maven.tobynguyen.dev/snapshots" } // CodeBebeLib
     maven { url = "https://maven.terraformersmc.com/" } // ModMenu
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
     maven { url = "https://server.bbkr.space/artifactory/libs-release" }
     maven { url = "https://maven.shedaniel.me/" } // REU
-    maven { url = "https://jitpack.io" } // CodeBebeLib
+    maven { url = "https://jitpack.io" }
     maven { url = "https://api.modrinth.com/maven/" }
 }
 
@@ -35,7 +36,7 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
-    modImplementation("com.github.tobynguyen27:CodeBebeLib:${project.codebebelib}"){
+    modImplementation("dev.tobynguyen27:codebebelib:${project.codebebelib}"){
         exclude group: "io.github.fabricators_of_create"
     }
 
