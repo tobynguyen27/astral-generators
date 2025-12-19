@@ -13,7 +13,7 @@ def isRelease = project.hasProperty("release")
 version = isRelease ? "${project.mod_version}" : "${project.mod_version}-build.${runNumber}"
 group = project.maven_group
 
-base.archivesName = project.archives_base_name
+base.archivesName = project.mod_id
 
 repositories {
     maven { url = "https://maven.parchmentmc.org" } // Parchment
@@ -176,7 +176,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId = project.group
-            artifactId = project.archives_base_name
+            artifactId = project.mod_id
             version = project.version
 
             from components.java
