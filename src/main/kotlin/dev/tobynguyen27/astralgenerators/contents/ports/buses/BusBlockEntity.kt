@@ -38,6 +38,8 @@ abstract class BusBlockEntity(
 
     companion object {
         const val CONTAINER_DATA_SIZE = 2
+        const val AUTO_IMPORT_CONTAINER_INDEX = 0
+        const val AUTO_EXPORT_CONTAINER_INDEX = 1
     }
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
@@ -69,16 +71,16 @@ abstract class BusBlockEntity(
         object : ContainerData {
             override fun get(index: Int): Int {
                 return when (index) {
-                    0 -> autoImport
-                    1 -> autoExport
+                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport
+                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport
                     else -> -1
                 }
             }
 
             override fun set(index: Int, value: Int) {
                 when (index) {
-                    0 -> autoImport = value
-                    1 -> autoExport = value
+                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport = value
+                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport = value
                 }
             }
 
