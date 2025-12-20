@@ -8,6 +8,7 @@ import net.minecraft.nbt.NbtUtils
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -20,6 +21,12 @@ abstract class PortBlockEntity(
     var casingBlock: BlockState?,
 ) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity {
 
+    companion object {
+        const val CONTAINER_DATA_SIZE = 2
+        const val AUTO_EXPORT_CONTAINER_INDEX = 0
+        const val AUTO_IMPORT_CONTAINER_INDEX = 1
+    }
+
     var autoExport = 1
     var autoImport = 1
 
@@ -27,6 +34,29 @@ abstract class PortBlockEntity(
     override fun getRenderAttachmentData(): PortBlockModelClientData {
         return PortBlockModelClientData(mode, tier, casingBlock)
     }
+
+    val containerData = object: ContainerData {
+        override fun get(index: Int): Int {
+            return when (index) {
+                AUTO_IMPORT_CONTAINER_INDEX -> autoImport
+                AUTO_EXPORT_CONTAINER_INDEX -> autoExport
+                else -> -1
+            }
+        }
+
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                AUTO_IMPORT_CONTAINER_INDEX -> autoImport = value
+                AUTO_EXPORT_CONTAINER_INDEX -> autoExport = value
+            }
+        }
+
+        override fun getCount(): Int {
+            return CONTAINER_DATA_SIZE
+        }
+
+    }
+
 
     override fun getUpdateTag(): CompoundTag {
         val tag = saveWithoutMetadata()
@@ -67,6 +97,7 @@ abstract class PortBlockEntity(
 
     abstract fun getPortType(): PortBlockType
 
+    // Multiblock
     fun unlink() {
         this.casingBlock = null
         setChanged()

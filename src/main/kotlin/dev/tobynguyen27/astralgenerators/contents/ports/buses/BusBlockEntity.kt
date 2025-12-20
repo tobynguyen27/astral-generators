@@ -36,12 +36,6 @@ abstract class BusBlockEntity(
     RenderAttachmentBlockEntity,
     PropertyDelegateHolder {
 
-    companion object {
-        const val CONTAINER_DATA_SIZE = 2
-        const val AUTO_IMPORT_CONTAINER_INDEX = 0
-        const val AUTO_EXPORT_CONTAINER_INDEX = 1
-    }
-
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
 
     val containerWrapper: InventoryStorage = InventoryStorage.of(this, null)
@@ -66,28 +60,6 @@ abstract class BusBlockEntity(
 
         super.load(tag)
     }
-
-    val containerData =
-        object : ContainerData {
-            override fun get(index: Int): Int {
-                return when (index) {
-                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport
-                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport
-                    else -> -1
-                }
-            }
-
-            override fun set(index: Int, value: Int) {
-                when (index) {
-                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport = value
-                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport = value
-                }
-            }
-
-            override fun getCount(): Int {
-                return CONTAINER_DATA_SIZE
-            }
-        }
 
     override fun getPropertyDelegate(): ContainerData {
         return containerData
