@@ -2,9 +2,14 @@ package dev.tobynguyen27.astralgenerators.gui.widgets
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
+import dev.tobynguyen27.astralgenerators.data.client.Texts
 import io.github.cottonmc.cotton.gui.GuiDescription
+import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.data.Texture
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.inventory.ContainerData
 
 class IOButton(val type: Type, val valueIndex: Int) : WToggleButton() {
@@ -31,6 +36,22 @@ class IOButton(val type: Type, val valueIndex: Int) : WToggleButton() {
         super.paint(matrices, x, y, mouseX, mouseY)
     }
 
+    override fun addTooltip(tooltip: TooltipBuilder) {
+        val status = if(this.isOn) {
+            TranslatableComponent(Texts.ENABLED).withStyle(ChatFormatting.GREEN)
+        } else {
+            TranslatableComponent(Texts.DISABLED).withStyle(ChatFormatting.RED)
+        }
+
+        val button = if(type == Type.ONLY_IMPORT) {
+            TranslatableComponent(Texts.AUTO_IMPORT)
+        } else {
+            TranslatableComponent(Texts.AUTO_EXPORT)
+        }
+
+        tooltip.add(button.append(" is ").append(status))
+    }
+
     override fun validate(host: GuiDescription) {
         if (properties == null) {
             properties = host.propertyDelegate
@@ -40,6 +61,14 @@ class IOButton(val type: Type, val valueIndex: Int) : WToggleButton() {
 
     enum class Type {
         ONLY_EXPORT,
-        ONLY_IMPORT,
+        ONLY_IMPORT;
+
+        override fun toString(): String {
+            return if (this == ONLY_IMPORT) {
+                TranslatableComponent(Texts.AUTO_IMPORT).contents.toString()
+            } else {
+                TranslatableComponent(Texts.AUTO_EXPORT).contents.toString()
+            }
+        }
     }
 }

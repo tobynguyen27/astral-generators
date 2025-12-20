@@ -1,7 +1,13 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.industrial
 
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
+import dev.tobynguyen27.astralgenerators.core.network.Packets
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
+import dev.tobynguyen27.astralgenerators.gui.widgets.IOButton
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
+import io.github.cottonmc.cotton.gui.networking.NetworkSide
+import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.data.Insets
@@ -14,7 +20,7 @@ class IndustrialInputBusMenu(syncId: Int, playerInventory: Inventory, ctx: Conta
         syncId,
         playerInventory,
         getBlockInventory(ctx, IndustrialInputBusBlockEntity.CONTAINER_SIZE),
-        null,
+        getBlockPropertyDelegate(ctx, PortBlockEntity.CONTAINER_DATA_SIZE),
     ) {
 
     companion object {
@@ -29,8 +35,22 @@ class IndustrialInputBusMenu(syncId: Int, playerInventory: Inventory, ctx: Conta
         root.setInsets(Insets.ROOT_PANEL)
         root.add(createPlayerInventoryPanel(), 0, 20)
 
-        val inputSlot = WItemSlot(blockInventory, 0, 5, 5, false)
-        root.add(inputSlot, 6, 3)
+        val inputSlots = WItemSlot(blockInventory, 0, 5, 5, false)
+        root.add(inputSlots, 6, 3)
+
+        val autoImportButton =
+            IOButton(IOButton.Type.ONLY_IMPORT, PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX)
+        autoImportButton.onToggle = {
+            ScreenNetworking.of(this, NetworkSide.CLIENT)
+                .send(Packets.TOGGLE_AUTO_IMPORT) { packet ->
+                    packet.writeInt(BooleanUtils.toInt(it))
+                }
+        }
+        ScreenNetworking.of(this, NetworkSide.SERVER)
+            .receive(Packets.TOGGLE_AUTO_IMPORT, { packet ->
+                propertyDelegate.set(PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX, packet.readInt())
+            })
+        root.add(autoImportButton, 24, 15, 3, 3)
 
         root.validate(this)
     }

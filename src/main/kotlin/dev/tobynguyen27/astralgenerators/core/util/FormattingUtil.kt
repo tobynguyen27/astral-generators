@@ -88,4 +88,8 @@ object FormattingUtil {
             "$temp °C"
         }
     }
+
+    fun decapitalizeFirstLetter(string: String): String {
+        return string.replaceFirstChar { it.lowercase() }
+    }
 }
