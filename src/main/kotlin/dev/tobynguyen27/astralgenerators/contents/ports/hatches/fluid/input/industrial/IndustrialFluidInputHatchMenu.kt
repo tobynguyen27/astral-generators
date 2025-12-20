@@ -5,7 +5,6 @@ import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -19,14 +18,7 @@ class IndustrialFluidInputHatchMenu(
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) :
-    MachineGUI(
-        AGMenus.INDUSTRIAL_FLUID_INPUT_HATCH,
-        syncId,
-        playerInventory,
-        null,
-        null,
-    ) {
+) : MachineGUI(AGMenus.INDUSTRIAL_FLUID_INPUT_HATCH, syncId, playerInventory, null, null) {
 
     // Client
     private var fluidCapacity = 0L

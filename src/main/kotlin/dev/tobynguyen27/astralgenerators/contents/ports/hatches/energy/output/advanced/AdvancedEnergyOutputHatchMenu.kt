@@ -5,7 +5,6 @@ import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -18,14 +17,7 @@ class AdvancedEnergyOutputHatchMenu(
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) :
-    MachineGUI(
-        AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH,
-        syncId,
-        playerInventory,
-        null,
-        null,
-    ) {
+) : MachineGUI(AGMenus.ADVANCED_ENERGY_OUTPUT_HATCH, syncId, playerInventory, null, null) {
 
     // Client
     private var energyCapacity = 0L

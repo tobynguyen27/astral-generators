@@ -20,7 +20,10 @@ abstract class PortBlockEntity(
     val tier: PortBlockSpecification.Tier,
     val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
-) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity, PropertyDelegateHolder {
+) :
+    MachineBlockEntity(blockEntityType, blockPos, blockState),
+    RenderAttachmentBlockEntity,
+    PropertyDelegateHolder {
 
     companion object {
         const val CONTAINER_DATA_SIZE = 2
