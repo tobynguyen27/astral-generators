@@ -10,4 +10,5 @@ object Packets {
     val FLUID_VARIANT = Identifier("fluid_variant")
 
     val MULTIBLOCK_SYNC = Identifier("multiblock_sync")
+    val TOGGLE_AUTO_IMPORT = Identifier("toggle_auto_import")
 }
