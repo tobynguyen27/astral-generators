@@ -104,48 +104,31 @@ class EnergyHatchMenu(
     }
 
     private fun addIOButton(panel: WGridPanel) {
-        val button =
+        val (buttonType, containerIndex, togglePacket) =
             if (mode == PortBlockSpecification.Mode.INPUT) {
-                IOButton(IOButton.Type.ONLY_IMPORT, PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX)
+                Triple(
+                    IOButton.Type.ONLY_IMPORT,
+                    PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX,
+                    Packets.TOGGLE_AUTO_IMPORT,
+                )
             } else {
-                IOButton(IOButton.Type.ONLY_EXPORT, PortBlockEntity.AUTO_EXPORT_CONTAINER_INDEX)
+                Triple(
+                    IOButton.Type.ONLY_EXPORT,
+                    PortBlockEntity.AUTO_EXPORT_CONTAINER_INDEX,
+                    Packets.TOGGLE_AUTO_EXPORT,
+                )
             }
 
-        if (mode == PortBlockSpecification.Mode.INPUT) {
-            button.onToggle = {
-                ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_AUTO_IMPORT) {
-                    packet ->
-                    packet.writeInt(BooleanUtils.toInt(it))
-                }
+        val button = IOButton(buttonType, containerIndex)
+        button.onToggle = {
+            ScreenNetworking.of(this, NetworkSide.CLIENT).send(togglePacket) { packet ->
+                packet.writeInt(BooleanUtils.toInt(it))
             }
-            ScreenNetworking.of(this, NetworkSide.SERVER)
-                .receive(
-                    Packets.TOGGLE_AUTO_IMPORT,
-                    { packet ->
-                        propertyDelegate.set(
-                            PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX,
-                            packet.readInt(),
-                        )
-                    },
-                )
-        } else {
-            button.onToggle = {
-                ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_AUTO_EXPORT) {
-                    packet ->
-                    packet.writeInt(BooleanUtils.toInt(it))
-                }
-            }
-            ScreenNetworking.of(this, NetworkSide.SERVER)
-                .receive(
-                    Packets.TOGGLE_AUTO_EXPORT,
-                    { packet ->
-                        propertyDelegate.set(
-                            PortBlockEntity.AUTO_EXPORT_CONTAINER_INDEX,
-                            packet.readInt(),
-                        )
-                    },
-                )
         }
+        ScreenNetworking.of(this, NetworkSide.SERVER)
+            .receive(
+                togglePacket,
+            ) { packet -> propertyDelegate.set(containerIndex, packet.readInt()) }
 
         panel.add(button, 24, 8, 3, 3)
     }
