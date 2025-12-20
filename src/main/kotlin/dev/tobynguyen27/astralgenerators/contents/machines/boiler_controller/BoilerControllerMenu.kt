@@ -7,7 +7,6 @@ import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.TemperatureBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
@@ -83,8 +82,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.add(createPlayerInventoryPanel(), 0, 15)
 
         // Widgets
-        val temperatureBar =
-            TemperatureBar({maxHeat.toLong()}, {currentHeat.toLong()})
+        val temperatureBar = TemperatureBar({ maxHeat.toLong() }, { currentHeat.toLong() })
 
         val powerButton = PowerButton(IS_ENABLED_INDEX)
         powerButton.onToggle = {
@@ -124,7 +122,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             add(consumingWidget, 5, 7)
             add(producingWidget, 5, 9)
             add(burnTimeWidget, 5, 11)
-            add(powerButton, 24,11, 3, 3)
+            add(powerButton, 24, 11, 3, 3)
         }
 
         root.validate(this)

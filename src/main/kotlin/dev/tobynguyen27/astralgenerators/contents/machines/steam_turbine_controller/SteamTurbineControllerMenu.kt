@@ -1,6 +1,5 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller
 
-import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerMenu
 import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller.SteamTurbineLogic.calculateEnergyProduced
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
@@ -8,7 +7,6 @@ import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
@@ -85,7 +83,7 @@ class SteamTurbineControllerMenu(
             add(speedWidget, 0, 2)
             add(consumingWidget, 0, 4)
             add(generatingWidget, 0, 6)
-            add(powerButton, 24,11, 3, 3)
+            add(powerButton, 24, 11, 3, 3)
         }
 
         root.validate(this)

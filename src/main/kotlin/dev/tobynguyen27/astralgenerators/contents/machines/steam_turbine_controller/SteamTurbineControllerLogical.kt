@@ -49,7 +49,7 @@ object SteamTurbineControllerLogical {
         blockState: BlockState,
         blockEntity: SteamTurbineControllerBlockEntity,
     ) {
-        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
+        if (!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
             blockEntity.updateActiveState(false)
             return
         }

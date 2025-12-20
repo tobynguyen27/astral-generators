@@ -20,23 +20,8 @@
         }
     },
     "pattern": [
-        [
-            "bbb",
-            "bbb",
-            "bbb",
-            "bbb"
-        ],
-        [
-            "bmb",
-            "bab",
-            "bab",
-            "bcb"
-        ],
-        [
-            "bbb",
-            "bbb",
-            "bbb",
-            "bbb"
-        ]
+        ["bbb", "bbb", "bbb", "bbb"],
+        ["bmb", "bab", "bab", "bcb"],
+        ["bbb", "bbb", "bbb", "bbb"]
     ]
 }

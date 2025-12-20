@@ -18,8 +18,10 @@ import net.minecraft.util.Mth
 class TemperatureBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWidget() {
 
     companion object {
-        private val BG = Texture(Identifier("textures/gui/widgets/widget_temperature_bar_empty.png"))
-        private val BAR = Texture(Identifier("textures/gui/widgets/widget_temperature_bar_full.png"))
+        private val BG =
+            Texture(Identifier("textures/gui/widgets/widget_temperature_bar_empty.png"))
+        private val BAR =
+            Texture(Identifier("textures/gui/widgets/widget_temperature_bar_full.png"))
     }
 
     override fun canResize(): Boolean {
@@ -61,7 +63,9 @@ class TemperatureBar(val maxCapacity: () -> Long, val currentValue: () -> Long) 
         val currentTemperature = currentValue()
         val maxTemperature = maxCapacity()
 
-        information.add(TranslatableComponent(Texts.TEMPERATURE).withStyle(ChatFormatting.DARK_AQUA))
+        information.add(
+            TranslatableComponent(Texts.TEMPERATURE).withStyle(ChatFormatting.DARK_AQUA)
+        )
         information.add(
             TranslatableComponent(Texts.MAX_TEMPERATURE)
                 .withStyle(ChatFormatting.GOLD)
