@@ -35,28 +35,27 @@ abstract class PortBlockEntity(
         return PortBlockModelClientData(mode, tier, casingBlock)
     }
 
-    val containerData = object: ContainerData {
-        override fun get(index: Int): Int {
-            return when (index) {
-                AUTO_IMPORT_CONTAINER_INDEX -> autoImport
-                AUTO_EXPORT_CONTAINER_INDEX -> autoExport
-                else -> -1
+    val containerData =
+        object : ContainerData {
+            override fun get(index: Int): Int {
+                return when (index) {
+                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport
+                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport
+                    else -> -1
+                }
+            }
+
+            override fun set(index: Int, value: Int) {
+                when (index) {
+                    AUTO_IMPORT_CONTAINER_INDEX -> autoImport = value
+                    AUTO_EXPORT_CONTAINER_INDEX -> autoExport = value
+                }
+            }
+
+            override fun getCount(): Int {
+                return CONTAINER_DATA_SIZE
             }
         }
-
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                AUTO_IMPORT_CONTAINER_INDEX -> autoImport = value
-                AUTO_EXPORT_CONTAINER_INDEX -> autoExport = value
-            }
-        }
-
-        override fun getCount(): Int {
-            return CONTAINER_DATA_SIZE
-        }
-
-    }
-
 
     override fun getUpdateTag(): CompoundTag {
         val tag = saveWithoutMetadata()
