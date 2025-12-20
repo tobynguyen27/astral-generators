@@ -33,12 +33,15 @@ class BoilerControllerBlockEntity(
         const val STEAM_EXPANSION_RATIO = 160 // 1 water = 160 steam
         const val IDEAL_WATER_CONSUMPTION = 81 // Water consumed at 100% efficiency
 
-        const val CONTAINER_DATA_SIZE = 4
+        const val CONTAINER_DATA_SIZE = 5
 
         private var HEAT_TAG = "heat"
         private var BURN_TIME_TAG = "burn_time"
         private var MAX_BURN_TIME_TAG = "max_burn_time"
+        private var IS_ENABLED_TAG = "is_enabled"
     }
+
+    var isEnabled = 0
 
     var burnTime = 0
     var maxBurnTime = 0
@@ -51,6 +54,7 @@ class BoilerControllerBlockEntity(
         tag.putInt(HEAT_TAG, heat)
         tag.putInt(BURN_TIME_TAG, burnTime)
         tag.putInt(MAX_BURN_TIME_TAG, maxBurnTime)
+        tag.putInt(IS_ENABLED_TAG, isEnabled)
 
         super.saveAdditional(tag)
     }
@@ -59,6 +63,7 @@ class BoilerControllerBlockEntity(
         heat = tag.getInt(HEAT_TAG)
         burnTime = tag.getInt(BURN_TIME_TAG)
         maxBurnTime = tag.getInt(MAX_BURN_TIME_TAG)
+        isEnabled = tag.getInt(IS_ENABLED_TAG)
 
         super.load(tag)
     }
@@ -83,6 +88,7 @@ class BoilerControllerBlockEntity(
                     1 -> heat
                     2 -> maxBurnTime
                     3 -> burnTime
+                    4 -> isEnabled
                     else -> -1
                 }
             }
@@ -91,6 +97,7 @@ class BoilerControllerBlockEntity(
                 when (index) {
                     1 -> heat = value
                     3 -> burnTime = value
+                    4 -> isEnabled = value
                 }
             }
 

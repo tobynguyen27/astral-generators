@@ -9,4 +9,8 @@ object BooleanUtils {
             1
         }
     }
+
+    fun fromIntToBool(int: Int): Boolean {
+        return int == 0
+    }
 }

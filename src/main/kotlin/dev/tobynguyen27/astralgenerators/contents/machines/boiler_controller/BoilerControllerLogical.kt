@@ -6,6 +6,7 @@ import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.Boi
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
@@ -50,6 +51,7 @@ object BoilerControllerLogical {
         blockState: BlockState,
         blockEntity: BoilerControllerBlockEntity,
     ) {
+        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) return
         blockEntity.link()
 
         if (!blockEntity.isFormed) {

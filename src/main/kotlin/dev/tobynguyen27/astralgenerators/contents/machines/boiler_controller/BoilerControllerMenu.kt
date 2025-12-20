@@ -1,10 +1,15 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
+import dev.tobynguyen27.astralgenerators.core.network.Packets
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
+import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.TemperatureBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
+import io.github.cottonmc.cotton.gui.networking.NetworkSide
+import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.data.Insets
@@ -33,6 +38,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         private const val MAX_HEAT_INDEX = 0
         private const val CURRENT_HEAT_INDEX = 1
         private const val BURN_TIME_INDEX = 3
+        private const val IS_ENABLED_INDEX = 4
     }
 
     private val maxHeat
@@ -80,6 +86,16 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val temperatureBar =
             TemperatureBar({maxHeat.toLong()}, {currentHeat.toLong()})
 
+        val powerButton = PowerButton(IS_ENABLED_INDEX)
+        powerButton.onToggle = {
+            ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_MACHINE) { packet ->
+                packet.writeInt(BooleanUtils.toInt(it))
+            }
+        }
+        ScreenNetworking.of(this, NetworkSide.SERVER).receive(Packets.TOGGLE_MACHINE) { packet ->
+            propertyDelegate.set(IS_ENABLED_INDEX, packet.readInt())
+        }
+
         val burnTimeWidget = WDynamicLabel({ "Burn Time: $burnTime" })
         val consumingWidget =
             WDynamicLabel({
@@ -108,6 +124,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             add(consumingWidget, 5, 7)
             add(producingWidget, 5, 9)
             add(burnTimeWidget, 5, 11)
+            add(powerButton, 24,11, 3, 3)
         }
 
         root.validate(this)
