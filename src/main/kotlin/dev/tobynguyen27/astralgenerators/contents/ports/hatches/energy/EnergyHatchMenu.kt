@@ -1,10 +1,9 @@
-package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic
+package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
-import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -12,12 +11,31 @@ import io.github.cottonmc.cotton.gui.widget.data.Insets
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.inventory.MenuType
 
-class BasicEnergyInputHatchMenu(
+class EnergyHatchMenu(
+    menuType: MenuType<*>,
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) : MachineGUI(AGMenus.BASIC_ENERGY_INPUT_HATCH, syncId, playerInventory, null, null) {
+) :
+    MachineGUI(
+        menuType,
+        syncId,
+        playerInventory,
+        null,
+        getBlockPropertyDelegate(ctx, PortBlockEntity.CONTAINER_DATA_SIZE),
+    ) {
+
+    constructor(
+        menuType: MenuType<*>,
+        syncId: Int,
+        playerInventory: Inventory,
+        buf: FriendlyByteBuf,
+    ) : this(menuType, syncId, playerInventory, ContainerLevelAccess.NULL) {
+        energyCapacity = buf.readLong()
+        energyAmount = buf.readLong()
+    }
 
     // Client
     private var energyCapacity = 0L
@@ -25,19 +43,6 @@ class BasicEnergyInputHatchMenu(
 
     // Server
     private var lastEnergyAmount = 0L
-
-    constructor(
-        syncId: Int,
-        playerInventory: Inventory,
-        packet: FriendlyByteBuf,
-    ) : this(syncId, playerInventory, ContainerLevelAccess.NULL) {
-        energyCapacity = packet.readLong()
-        energyAmount = packet.readLong()
-    }
-
-    companion object {
-        const val ID = "basic_energy_input_hatch_menu"
-    }
 
     init {
         val root = WGridPanel(6)

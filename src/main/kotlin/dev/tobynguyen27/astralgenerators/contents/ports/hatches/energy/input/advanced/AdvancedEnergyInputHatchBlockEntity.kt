@@ -3,6 +3,8 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.ad
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchMenu
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -28,7 +30,8 @@ class AdvancedEnergyInputHatchBlockEntity(
         inventory: Inventory,
         player: Player,
     ): AbstractContainerMenu {
-        return AdvancedEnergyInputHatchMenu(
+        return EnergyHatchMenu(
+            AGMenus.ADVANCED_ENERGY_INPUT_HATCH,
             syncId,
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),
