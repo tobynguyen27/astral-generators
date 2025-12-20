@@ -22,7 +22,7 @@ class IndustrialEnergyInputHatchBlockEntity(
     companion object {
         private val CAPACITY = 256000L
         private val TIER = PortBlockSpecification.Tier.INDUSTRIAL
-        private val MODE = PortBlockSpecification.Mode.INPUT
+        val MODE = PortBlockSpecification.Mode.INPUT
     }
 
     override fun createMenu(
@@ -31,6 +31,7 @@ class IndustrialEnergyInputHatchBlockEntity(
         player: Player,
     ): AbstractContainerMenu {
         return EnergyHatchMenu(
+            MODE,
             AGMenus.INDUSTRIAL_ENERGY_INPUT_HATCH,
             syncId,
             inventory,

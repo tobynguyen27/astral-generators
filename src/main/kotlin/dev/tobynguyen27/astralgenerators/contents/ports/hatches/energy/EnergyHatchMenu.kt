@@ -1,9 +1,12 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.network.Packets
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
+import dev.tobynguyen27.astralgenerators.gui.widgets.IOButton
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -14,6 +17,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.MenuType
 
 class EnergyHatchMenu(
+    val mode: PortBlockSpecification.Mode,
     menuType: MenuType<*>,
     syncId: Int,
     playerInventory: Inventory,
@@ -28,11 +32,12 @@ class EnergyHatchMenu(
     ) {
 
     constructor(
+        mode: PortBlockSpecification.Mode,
         menuType: MenuType<*>,
         syncId: Int,
         playerInventory: Inventory,
         buf: FriendlyByteBuf,
-    ) : this(menuType, syncId, playerInventory, ContainerLevelAccess.NULL) {
+    ) : this(mode, menuType, syncId, playerInventory, ContainerLevelAccess.NULL) {
         energyCapacity = buf.readLong()
         energyAmount = buf.readLong()
     }
@@ -54,6 +59,8 @@ class EnergyHatchMenu(
 
         val energyBar = EnergyBar({ energyCapacity }, { energyAmount })
         root.add(energyBar, 12, 2, 3, 9)
+
+        addIOButton(root)
 
         root.validate(this)
 
@@ -94,5 +101,52 @@ class EnergyHatchMenu(
                 }
             }
         }
+    }
+
+    private fun addIOButton(panel: WGridPanel) {
+        val button =
+            if (mode == PortBlockSpecification.Mode.INPUT) {
+                IOButton(IOButton.Type.ONLY_IMPORT, PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX)
+            } else {
+                IOButton(IOButton.Type.ONLY_EXPORT, PortBlockEntity.AUTO_EXPORT_CONTAINER_INDEX)
+            }
+
+        if (mode == PortBlockSpecification.Mode.INPUT) {
+            button.onToggle = {
+                ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_AUTO_IMPORT) {
+                    packet ->
+                    packet.writeInt(BooleanUtils.toInt(it))
+                }
+            }
+            ScreenNetworking.of(this, NetworkSide.SERVER)
+                .receive(
+                    Packets.TOGGLE_AUTO_IMPORT,
+                    { packet ->
+                        propertyDelegate.set(
+                            PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX,
+                            packet.readInt(),
+                        )
+                    },
+                )
+        } else {
+            button.onToggle = {
+                ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_AUTO_EXPORT) {
+                    packet ->
+                    packet.writeInt(BooleanUtils.toInt(it))
+                }
+            }
+            ScreenNetworking.of(this, NetworkSide.SERVER)
+                .receive(
+                    Packets.TOGGLE_AUTO_EXPORT,
+                    { packet ->
+                        propertyDelegate.set(
+                            PortBlockEntity.AUTO_EXPORT_CONTAINER_INDEX,
+                            packet.readInt(),
+                        )
+                    },
+                )
+        }
+
+        panel.add(button, 24, 8, 3, 3)
     }
 }

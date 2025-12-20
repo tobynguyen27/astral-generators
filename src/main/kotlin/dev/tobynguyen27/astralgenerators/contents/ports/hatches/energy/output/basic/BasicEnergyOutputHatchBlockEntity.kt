@@ -3,6 +3,8 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.b
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchMenu
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -20,7 +22,7 @@ class BasicEnergyOutputHatchBlockEntity(
     companion object {
         private val CAPACITY = 16000L
         private val TIER = PortBlockSpecification.Tier.BASIC
-        private val MODE = PortBlockSpecification.Mode.OUTPUT
+        val MODE = PortBlockSpecification.Mode.OUTPUT
     }
 
     override fun createMenu(
@@ -28,7 +30,9 @@ class BasicEnergyOutputHatchBlockEntity(
         inventory: Inventory,
         player: Player,
     ): AbstractContainerMenu {
-        return BasicEnergyOutputHatchMenu(
+        return EnergyHatchMenu(
+            MODE,
+            AGMenus.BASIC_ENERGY_OUTPUT_HATCH,
             syncId,
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),

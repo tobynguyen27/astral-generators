@@ -22,7 +22,7 @@ class BasicEnergyInputHatchBlockEntity(
     companion object {
         private val CAPACITY = 16000L
         private val TIER = PortBlockSpecification.Tier.BASIC
-        private val MODE = PortBlockSpecification.Mode.INPUT
+        val MODE = PortBlockSpecification.Mode.INPUT
     }
 
     override fun createMenu(
@@ -31,6 +31,7 @@ class BasicEnergyInputHatchBlockEntity(
         player: Player,
     ): AbstractContainerMenu {
         return EnergyHatchMenu(
+            MODE,
             AGMenus.BASIC_ENERGY_INPUT_HATCH,
             syncId,
             inventory,

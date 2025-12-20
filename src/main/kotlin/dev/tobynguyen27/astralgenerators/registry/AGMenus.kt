@@ -11,9 +11,12 @@ import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced.Ad
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.basic.BasicOutputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.output.industrial.IndustrialOutputBusMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.advanced.AdvancedEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.basic.BasicEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.industrial.IndustrialEnergyInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchMenu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchMenu
@@ -164,7 +167,13 @@ object AGMenus {
             Registry.MENU,
             Identifier("basic_energy_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                EnergyHatchMenu(BASIC_ENERGY_INPUT_HATCH, syncId, inventory, buf)
+                EnergyHatchMenu(
+                    BasicEnergyInputHatchBlockEntity.MODE,
+                    BASIC_ENERGY_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
     val ADVANCED_ENERGY_INPUT_HATCH: MenuType<EnergyHatchMenu> =
@@ -172,7 +181,13 @@ object AGMenus {
             Registry.MENU,
             Identifier("advanced_energy_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                EnergyHatchMenu(ADVANCED_ENERGY_INPUT_HATCH, syncId, inventory, buf)
+                EnergyHatchMenu(
+                    AdvancedEnergyInputHatchBlockEntity.MODE,
+                    ADVANCED_ENERGY_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
     val INDUSTRIAL_ENERGY_INPUT_HATCH: MenuType<EnergyHatchMenu> =
@@ -180,31 +195,55 @@ object AGMenus {
             Registry.MENU,
             Identifier("industrial_energy_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                EnergyHatchMenu(INDUSTRIAL_ENERGY_INPUT_HATCH, syncId, inventory, buf)
+                EnergyHatchMenu(
+                    IndustrialEnergyInputHatchBlockEntity.MODE,
+                    INDUSTRIAL_ENERGY_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val BASIC_ENERGY_OUTPUT_HATCH: MenuType<BasicEnergyOutputHatchMenu> =
+    val BASIC_ENERGY_OUTPUT_HATCH: MenuType<EnergyHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(BasicEnergyOutputHatchMenu.Companion.ID),
+            Identifier("basic_energy_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                BasicEnergyOutputHatchMenu(syncId, inventory, buf)
+                EnergyHatchMenu(
+                    BasicEnergyOutputHatchBlockEntity.MODE,
+                    BASIC_ENERGY_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val ADVANCED_ENERGY_OUTPUT_HATCH: MenuType<AdvancedEnergyOutputHatchMenu> =
+    val ADVANCED_ENERGY_OUTPUT_HATCH: MenuType<EnergyHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(AdvancedEnergyOutputHatchMenu.Companion.ID),
+            Identifier("advanced_energy_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                AdvancedEnergyOutputHatchMenu(syncId, inventory, buf)
+                EnergyHatchMenu(
+                    AdvancedEnergyOutputHatchBlockEntity.MODE,
+                    ADVANCED_ENERGY_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val INDUSTRIAL_ENERGY_OUTPUT_HATCH: MenuType<IndustrialEnergyOutputHatchMenu> =
+    val INDUSTRIAL_ENERGY_OUTPUT_HATCH: MenuType<EnergyHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(IndustrialEnergyOutputHatchMenu.Companion.ID),
+            Identifier("industrial_energy_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                IndustrialEnergyOutputHatchMenu(syncId, inventory, buf)
+                EnergyHatchMenu(
+                    IndustrialEnergyOutputHatchBlockEntity.MODE,
+                    INDUSTRIAL_ENERGY_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
 
