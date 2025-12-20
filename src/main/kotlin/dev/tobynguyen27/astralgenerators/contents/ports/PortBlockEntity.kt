@@ -40,7 +40,17 @@ abstract class PortBlockEntity(
         return ClientboundBlockEntityDataPacket.create(this)
     }
 
+    override fun saveAdditional(tag: CompoundTag) {
+        tag.putInt("autoImport", autoImport)
+        tag.putInt("autoExport", autoExport)
+
+        super.saveAdditional(tag)
+    }
+
     override fun load(tag: CompoundTag) {
+        autoImport = tag.getInt("autoImport")
+        autoExport = tag.getInt("autoExport")
+
         casingBlock =
             if (tag.contains("casingBlock")) {
                 NbtUtils.readBlockState(tag.getCompound("casingBlock"))
