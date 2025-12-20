@@ -3,9 +3,9 @@ package dev.tobynguyen27.astralgenerators.contents.ports.buses.output.advanced
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
+import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.IOButton
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.ContainerLevelAccess
 
 class AdvancedOutputBusMenu(syncId: Int, playerInventory: Inventory, ctx: ContainerLevelAccess) :
-    SyncedGuiDescription(
+    MachineGUI(
         AGMenus.ADVANCED_OUTPUT_BUS,
         syncId,
         playerInventory,
