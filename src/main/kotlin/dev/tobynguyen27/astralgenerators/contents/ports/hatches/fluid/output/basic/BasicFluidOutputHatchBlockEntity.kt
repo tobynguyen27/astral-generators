@@ -3,6 +3,8 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.ba
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchMenu
+import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -20,7 +22,7 @@ class BasicFluidOutputHatchBlockEntity(
     companion object {
         private val CAPACITY = 8
         private val TIER = PortBlockSpecification.Tier.BASIC
-        private val MODE = PortBlockSpecification.Mode.OUTPUT
+        val MODE = PortBlockSpecification.Mode.OUTPUT
     }
 
     override fun createMenu(
@@ -28,7 +30,9 @@ class BasicFluidOutputHatchBlockEntity(
         inventory: Inventory,
         player: Player,
     ): AbstractContainerMenu {
-        return BasicFluidOutputHatchMenu(
+        return FluidHatchMenu(
+            MODE,
+            AGMenus.BASIC_FLUID_OUTPUT_HATCH,
             syncId,
             inventory,
             ContainerLevelAccess.create(player.level, blockPos),

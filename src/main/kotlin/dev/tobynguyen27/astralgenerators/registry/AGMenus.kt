@@ -17,12 +17,13 @@ import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.ind
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.advanced.AdvancedEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.basic.BasicEnergyOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.output.industrial.IndustrialEnergyOutputHatchBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatchMenu
-import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchMenu
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.advanced.AdvancedFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.basic.BasicFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.industrial.IndustrialFluidInputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.core.Registry
@@ -113,52 +114,88 @@ object AGMenus {
                 IndustrialOutputBusMenu(syncId, inventory, ContainerLevelAccess.NULL)
             },
         )
-    val BASIC_FLUID_INPUT_HATCH: MenuType<BasicFluidInputHatchMenu> =
+    val BASIC_FLUID_INPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(BasicFluidInputHatchMenu.Companion.ID),
+            Identifier("basic_fluid_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                BasicFluidInputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    BasicFluidInputHatchBlockEntity.MODE,
+                    BASIC_FLUID_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val ADVANCED_FLUID_INPUT_HATCH: MenuType<AdvancedFluidInputHatchMenu> =
+    val ADVANCED_FLUID_INPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(AdvancedFluidInputHatchMenu.Companion.ID),
+            Identifier("advanced_fluid_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                AdvancedFluidInputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    AdvancedFluidInputHatchBlockEntity.MODE,
+                    ADVANCED_FLUID_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val INDUSTRIAL_FLUID_INPUT_HATCH: MenuType<IndustrialFluidInputHatchMenu> =
+    val INDUSTRIAL_FLUID_INPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(IndustrialFluidInputHatchMenu.Companion.ID),
+            Identifier("industrial_fluid_input_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                IndustrialFluidInputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    IndustrialFluidInputHatchBlockEntity.MODE,
+                    INDUSTRIAL_FLUID_INPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val BASIC_FLUID_OUTPUT_HATCH: MenuType<BasicFluidOutputHatchMenu> =
+    val BASIC_FLUID_OUTPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(BasicFluidOutputHatchMenu.Companion.ID),
+            Identifier("basic_fluid_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                BasicFluidOutputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    BasicFluidOutputHatchBlockEntity.MODE,
+                    BASIC_FLUID_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val ADVANCED_FLUID_OUTPUT_HATCH: MenuType<AdvancedFluidOutputHatchMenu> =
+    val ADVANCED_FLUID_OUTPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(AdvancedFluidOutputHatchMenu.Companion.ID),
+            Identifier("advanced_fluid_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                AdvancedFluidOutputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    AdvancedFluidOutputHatchBlockEntity.MODE,
+                    ADVANCED_FLUID_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
-    val INDUSTRIAL_FLUID_OUTPUT_HATCH: MenuType<IndustrialFluidOutputHatchMenu> =
+    val INDUSTRIAL_FLUID_OUTPUT_HATCH: MenuType<FluidHatchMenu> =
         Registry.register(
             Registry.MENU,
-            Identifier(IndustrialFluidOutputHatchMenu.Companion.ID),
+            Identifier("industrial_fluid_output_hatch"),
             ExtendedScreenHandlerType { syncId, inventory, buf ->
-                IndustrialFluidOutputHatchMenu(syncId, inventory, buf)
+                FluidHatchMenu(
+                    IndustrialFluidOutputHatchBlockEntity.MODE,
+                    INDUSTRIAL_FLUID_OUTPUT_HATCH,
+                    syncId,
+                    inventory,
+                    buf,
+                )
             },
         )
 
