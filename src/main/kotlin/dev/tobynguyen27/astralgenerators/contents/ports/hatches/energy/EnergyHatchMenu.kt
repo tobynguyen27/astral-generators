@@ -125,10 +125,9 @@ class EnergyHatchMenu(
                 packet.writeInt(BooleanUtils.toInt(it))
             }
         }
-        ScreenNetworking.of(this, NetworkSide.SERVER)
-            .receive(
-                togglePacket,
-            ) { packet -> propertyDelegate.set(containerIndex, packet.readInt()) }
+        ScreenNetworking.of(this, NetworkSide.SERVER).receive(togglePacket) { packet ->
+            propertyDelegate.set(containerIndex, packet.readInt())
+        }
 
         panel.add(button, 24, 8, 3, 3)
     }
