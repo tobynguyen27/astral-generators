@@ -1,0 +1,42 @@
+{
+    "origin": {
+        "x": -1,
+        "y": 0,
+        "z": 2
+    },
+    "keys": {
+        "a": {
+            "block": "astralgenerators:pipe_casing"
+        },
+        "b": {
+            "block": "astralgenerators:steam_turbine_casing"
+        },
+        "c": {
+            "block": "astralgenerators:steam_turbine_vent"
+        },
+        "m": {
+            "block": "astralgenerators:steam_turbine_controller",
+            "nbt": "LIT=true"
+        }
+    },
+    "pattern": [
+        [
+            "bbb",
+            "bbb",
+            "bbb",
+            "bbb"
+        ],
+        [
+            "bmb",
+            "bab",
+            "bab",
+            "bcb"
+        ],
+        [
+            "bbb",
+            "bbb",
+            "bbb",
+            "bbb"
+        ]
+    ]
+}
