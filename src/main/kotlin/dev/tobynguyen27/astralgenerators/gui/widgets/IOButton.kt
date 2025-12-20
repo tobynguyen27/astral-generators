@@ -8,7 +8,6 @@ import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.data.Texture
 import net.minecraft.ChatFormatting
-import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.inventory.ContainerData
 
@@ -37,17 +36,19 @@ class IOButton(val type: Type, val valueIndex: Int) : WToggleButton() {
     }
 
     override fun addTooltip(tooltip: TooltipBuilder) {
-        val status = if(this.isOn) {
-            TranslatableComponent(Texts.ENABLED).withStyle(ChatFormatting.GREEN)
-        } else {
-            TranslatableComponent(Texts.DISABLED).withStyle(ChatFormatting.RED)
-        }
+        val status =
+            if (this.isOn) {
+                TranslatableComponent(Texts.ENABLED).withStyle(ChatFormatting.GREEN)
+            } else {
+                TranslatableComponent(Texts.DISABLED).withStyle(ChatFormatting.RED)
+            }
 
-        val button = if(type == Type.ONLY_IMPORT) {
-            TranslatableComponent(Texts.AUTO_IMPORT)
-        } else {
-            TranslatableComponent(Texts.AUTO_EXPORT)
-        }
+        val button =
+            if (type == Type.ONLY_IMPORT) {
+                TranslatableComponent(Texts.AUTO_IMPORT)
+            } else {
+                TranslatableComponent(Texts.AUTO_EXPORT)
+            }
 
         tooltip.add(button.append(" is ").append(status))
     }

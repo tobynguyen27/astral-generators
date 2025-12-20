@@ -1,7 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.ports.buses.input.basic
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.gui.widgets.IOButton
@@ -42,15 +41,21 @@ class BasicInputBusMenu(syncId: Int, playerInventory: Inventory, ctx: ContainerL
         val autoImportButton =
             IOButton(IOButton.Type.ONLY_IMPORT, PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX)
         autoImportButton.onToggle = {
-            ScreenNetworking.of(this, NetworkSide.CLIENT)
-                .send(Packets.TOGGLE_AUTO_IMPORT) { packet ->
-                    packet.writeInt(BooleanUtils.toInt(it))
-                }
+            ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_AUTO_IMPORT) { packet
+                ->
+                packet.writeInt(BooleanUtils.toInt(it))
+            }
         }
         ScreenNetworking.of(this, NetworkSide.SERVER)
-            .receive(Packets.TOGGLE_AUTO_IMPORT, { packet ->
-                propertyDelegate.set(PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX, packet.readInt())
-            })
+            .receive(
+                Packets.TOGGLE_AUTO_IMPORT,
+                { packet ->
+                    propertyDelegate.set(
+                        PortBlockEntity.AUTO_IMPORT_CONTAINER_INDEX,
+                        packet.readInt(),
+                    )
+                },
+            )
         root.add(autoImportButton, 24, 10, 3, 3)
 
         root.validate(this)

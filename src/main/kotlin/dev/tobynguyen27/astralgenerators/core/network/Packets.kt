@@ -11,4 +11,5 @@ object Packets {
 
     val MULTIBLOCK_SYNC = Identifier("multiblock_sync")
     val TOGGLE_AUTO_IMPORT = Identifier("toggle_auto_import")
+    val TOGGLE_AUTO_EXPORT = Identifier("toggle_auto_export")
 }
