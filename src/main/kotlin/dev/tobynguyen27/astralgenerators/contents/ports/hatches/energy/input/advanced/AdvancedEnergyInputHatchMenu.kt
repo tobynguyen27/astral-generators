@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.input.ad
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.core.network.Packets
+import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
@@ -17,7 +18,7 @@ class AdvancedEnergyInputHatchMenu(
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) : SyncedGuiDescription(AGMenus.ADVANCED_ENERGY_INPUT_HATCH, syncId, playerInventory, null, null) {
+) : MachineGUI(AGMenus.ADVANCED_ENERGY_INPUT_HATCH, syncId, playerInventory, null, null) {
 
     // Client
     private var energyCapacity = 0L

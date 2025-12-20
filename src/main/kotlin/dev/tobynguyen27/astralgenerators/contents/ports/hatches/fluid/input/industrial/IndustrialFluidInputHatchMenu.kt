@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.ind
 
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.core.network.Packets
+import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
@@ -19,7 +20,7 @@ class IndustrialFluidInputHatchMenu(
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
 ) :
-    SyncedGuiDescription(
+    MachineGUI(
         AGMenus.INDUSTRIAL_FLUID_INPUT_HATCH,
         syncId,
         playerInventory,
