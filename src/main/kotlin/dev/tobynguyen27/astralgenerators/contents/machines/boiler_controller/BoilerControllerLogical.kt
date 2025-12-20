@@ -51,7 +51,11 @@ object BoilerControllerLogical {
         blockState: BlockState,
         blockEntity: BoilerControllerBlockEntity,
     ) {
-        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) return
+        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
+            blockEntity.updateActiveState(false)
+            blockEntity.updateFireboxActiveState(false)
+            return
+        }
         blockEntity.link()
 
         if (!blockEntity.isFormed) {

@@ -8,6 +8,7 @@ import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_control
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
@@ -48,6 +49,10 @@ object SteamTurbineControllerLogical {
         blockState: BlockState,
         blockEntity: SteamTurbineControllerBlockEntity,
     ) {
+        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
+            blockEntity.updateActiveState(false)
+            return
+        }
         blockEntity.link()
 
         if (!blockEntity.isFormed) {

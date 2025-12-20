@@ -5,6 +5,7 @@ import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
@@ -25,12 +26,29 @@ class SteamTurbineControllerBlockEntity(
     PropertyDelegateHolder {
 
     companion object {
-        const val CONTAINER_DATA_SIZE = 2
+        const val CONTAINER_DATA_SIZE = 3
+
+        private const val IS_ENABLED_TAG = "is_enabled"
+        private const val ROTOR_SPEED_TAG = "rotor_speed"
     }
 
     // Data
+    var isEnabled = 0
+
     var rotorSpeed = 0
     val maxRotorSpeed = 3600
+
+    override fun saveAdditional(tag: CompoundTag) {
+        tag.putInt(ROTOR_SPEED_TAG, rotorSpeed)
+        tag.putInt(IS_ENABLED_TAG, isEnabled)
+        super.saveAdditional(tag)
+    }
+
+    override fun load(tag: CompoundTag) {
+        rotorSpeed = tag.getInt(ROTOR_SPEED_TAG)
+        isEnabled = tag.getInt(IS_ENABLED_TAG)
+        super.load(tag)
+    }
 
     // Multiblock
     fun updateActiveState(active: Boolean) {
@@ -66,6 +84,7 @@ class SteamTurbineControllerBlockEntity(
                 return when (index) {
                     0 -> maxRotorSpeed
                     1 -> rotorSpeed
+                    2 -> isEnabled
                     else -> -1
                 }
             }
@@ -73,6 +92,7 @@ class SteamTurbineControllerBlockEntity(
             override fun set(index: Int, value: Int) {
                 when (index) {
                     1 -> rotorSpeed = value
+                    2 -> isEnabled = value
                 }
             }
 
