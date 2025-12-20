@@ -33,8 +33,7 @@ abstract class BusBlockEntity(
     IInventory,
     MenuProvider,
     WorldlyContainer,
-    RenderAttachmentBlockEntity,
-    PropertyDelegateHolder {
+    RenderAttachmentBlockEntity {
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
 
@@ -59,10 +58,6 @@ abstract class BusBlockEntity(
         ContainerHelper.loadAllItems(tag, items)
 
         super.load(tag)
-    }
-
-    override fun getPropertyDelegate(): ContainerData {
-        return containerData
     }
 
     override fun getSlotsForFace(side: Direction): IntArray {

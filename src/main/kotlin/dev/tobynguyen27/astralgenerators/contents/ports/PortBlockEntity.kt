@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.ports
 
 import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
+import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -19,7 +20,7 @@ abstract class PortBlockEntity(
     val tier: PortBlockSpecification.Tier,
     val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
-) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity {
+) : MachineBlockEntity(blockEntityType, blockPos, blockState), RenderAttachmentBlockEntity, PropertyDelegateHolder {
 
     companion object {
         const val CONTAINER_DATA_SIZE = 2
@@ -56,6 +57,10 @@ abstract class PortBlockEntity(
                 return CONTAINER_DATA_SIZE
             }
         }
+
+    override fun getPropertyDelegate(): ContainerData {
+        return containerData
+    }
 
     override fun getUpdateTag(): CompoundTag {
         val tag = saveWithoutMetadata()
