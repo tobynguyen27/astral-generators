@@ -1,6 +1,8 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
+import dev.tobynguyen27.astralgenerators.gui.MachineGUI
+import dev.tobynguyen27.astralgenerators.gui.widgets.TemperatureBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
@@ -11,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.ContainerLevelAccess
 
 class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerLevelAccess) :
-    SyncedGuiDescription(
+    MachineGUI(
         AGMenus.BOILER_CONTROLLER,
         syncId,
         playerInventory,
@@ -75,14 +77,9 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         root.add(createPlayerInventoryPanel(), 0, 15)
 
         // Widgets
-        val temperatureWidget =
-            WDynamicLabel({
-                "Temperature: ${
-                FormattingUtil.formatTemperature(
-                    currentHeat
-                )
-            }"
-            })
+        val temperatureBar =
+            TemperatureBar({maxHeat.toLong()}, {currentHeat.toLong()})
+
         val burnTimeWidget = WDynamicLabel({ "Burn Time: $burnTime" })
         val consumingWidget =
             WDynamicLabel({
@@ -106,11 +103,11 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             })
 
         with(root) {
-            add(temperatureWidget, 0, 2)
-            add(burnTimeWidget, 0, 4)
-            add(consumingWidget, 0, 6)
-            add(producingWidget, 0, 8)
-            add(efficiencyWidget, 0, 10)
+            add(temperatureBar, 1, 2, 2, 12)
+            add(efficiencyWidget, 5, 5)
+            add(consumingWidget, 5, 7)
+            add(producingWidget, 5, 9)
+            add(burnTimeWidget, 5, 11)
         }
 
         root.validate(this)

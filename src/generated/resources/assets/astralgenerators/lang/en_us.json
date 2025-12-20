@@ -50,11 +50,14 @@
   "text.autoimport": "Auto import",
   "text.button.io.mode": "{{button}} is {{status}}",
   "text.capacity": "Capacity",
+  "text.currenttemperature": "Current temperature",
   "text.disabled": "disabled",
   "text.enabled": "enabled",
   "text.energy": "Energy",
   "text.idling": "Idling",
+  "text.maxtemperature": "Max temperature",
   "text.multiblock.invalid": "Invalid multiblock structure",
   "text.progress": "Progress",
-  "text.stored": "Stored"
+  "text.stored": "Stored",
+  "text.temperature": "Temperature"
 }

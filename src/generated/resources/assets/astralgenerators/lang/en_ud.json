@@ -50,11 +50,14 @@
   "text.autoimport": "\u0287\u0279od\u026F\u0131 o\u0287n\u2C6F",
   "text.button.io.mode": "}}sn\u0287\u0250\u0287s{{ s\u0131 }}uo\u0287\u0287nq{{",
   "text.capacity": "\u028E\u0287\u0131\u0254\u0250d\u0250\u0186",
+  "text.currenttemperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u0287 \u0287u\u01DD\u0279\u0279n\u0186",
   "text.disabled": "p\u01DD\u05DFq\u0250s\u0131p",
   "text.enabled": "p\u01DD\u05DFq\u0250u\u01DD",
   "text.energy": "\u028Eb\u0279\u01DDu\u018E",
   "text.idling": "bu\u0131\u05DFpI",
+  "text.maxtemperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u0287 x\u0250W",
   "text.multiblock.invalid": "\u01DD\u0279n\u0287\u0254n\u0279\u0287s \u029E\u0254o\u05DFq\u0131\u0287\u05DFn\u026F p\u0131\u05DF\u0250\u028CuI",
   "text.progress": "ss\u01DD\u0279bo\u0279\u0500",
-  "text.stored": "p\u01DD\u0279o\u0287S"
+  "text.stored": "p\u01DD\u0279o\u0287S",
+  "text.temperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u27D8"
 }

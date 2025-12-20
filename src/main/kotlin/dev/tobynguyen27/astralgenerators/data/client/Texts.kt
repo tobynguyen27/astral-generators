@@ -14,6 +14,9 @@ object Texts {
     const val AUTO_EXPORT = "text.autoexport"
     const val ENABLED = "text.enabled"
     const val DISABLED = "text.disabled"
+    const val TEMPERATURE = "text.temperature"
+    const val MAX_TEMPERATURE = "text.maxtemperature"
+    const val CURRENT_TEMPERATURE = "text.currenttemperature"
 
     fun register() {
         val texts =
@@ -29,6 +32,9 @@ object Texts {
                 AUTO_EXPORT to "Auto export",
                 ENABLED to "enabled",
                 DISABLED to "disabled",
+                TEMPERATURE to "Temperature",
+                MAX_TEMPERATURE to "Max temperature",
+                CURRENT_TEMPERATURE to "Current temperature",
             )
 
         texts.forEach { (k, v) -> AstralGenerators.REGISTRATE.addRawLang(k, v) }
