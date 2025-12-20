@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.buses
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
+import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
@@ -14,6 +15,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.WorldlyContainer
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
@@ -31,7 +33,12 @@ abstract class BusBlockEntity(
     IInventory,
     MenuProvider,
     WorldlyContainer,
-    RenderAttachmentBlockEntity {
+    RenderAttachmentBlockEntity,
+    PropertyDelegateHolder {
+
+    companion object {
+        const val CONTAINER_DATA_SIZE = 2
+    }
 
     private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
 
@@ -56,6 +63,32 @@ abstract class BusBlockEntity(
         ContainerHelper.loadAllItems(tag, items)
 
         super.load(tag)
+    }
+
+    val containerData =
+        object : ContainerData {
+            override fun get(index: Int): Int {
+                return when (index) {
+                    0 -> autoImport
+                    1 -> autoExport
+                    else -> -1
+                }
+            }
+
+            override fun set(index: Int, value: Int) {
+                when (index) {
+                    0 -> autoImport = value
+                    1 -> autoExport = value
+                }
+            }
+
+            override fun getCount(): Int {
+                return CONTAINER_DATA_SIZE
+            }
+        }
+
+    override fun getPropertyDelegate(): ContainerData {
+        return containerData
     }
 
     override fun getSlotsForFace(side: Direction): IntArray {
