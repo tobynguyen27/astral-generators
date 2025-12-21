@@ -45,6 +45,8 @@ class AssemblerBlockEntity(
     companion object {
         const val ID = "assembler_entity"
 
+        private const val IS_ENABLED_TAG = "is_enabled"
+
         // Energy
         private const val ENERGY_CAPACITY = 100000.toLong()
         private const val MAX_ENERGY_INSERT = 100000.toLong()
@@ -62,7 +64,7 @@ class AssemblerBlockEntity(
         private val OUTPUT_SLOT = intArrayOf(CONTAINER_SIZE - 1)
 
         // Data (progress)
-        val CONTAINER_DATA_SIZE = 2
+        const val CONTAINER_DATA_SIZE = 3
 
         // Progress
         const val MAX_PROGRESS_TAG = "assembler_max_progress"
@@ -71,6 +73,7 @@ class AssemblerBlockEntity(
     }
 
     // Progress
+    var isEnabled = 0
     var maxProgress: Int = 100
     var progress: Int = 0
     var cachedRecipe: AssemblerRecipe? = null
@@ -114,6 +117,7 @@ class AssemblerBlockEntity(
                 return when (index) {
                     0 -> maxProgress
                     1 -> progress
+                    2 -> isEnabled
                     else -> -1
                 }
             }
@@ -121,6 +125,7 @@ class AssemblerBlockEntity(
             override fun set(index: Int, value: Int) {
                 when (index) {
                     1 -> progress = value
+                    2 -> isEnabled = value
                 }
             }
 
@@ -134,6 +139,7 @@ class AssemblerBlockEntity(
     }
 
     override fun load(tag: CompoundTag) {
+        isEnabled = tag.getInt(IS_ENABLED_TAG)
         energyStorage.amount = tag.getLong(ENERGY_STORAGE_TAG)
 
         fluidStorage.amount = tag.getLong(FLUID_STORAGE_AMOUNT_TAG)
@@ -154,6 +160,7 @@ class AssemblerBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag) {
+        tag.putInt(IS_ENABLED_TAG, isEnabled)
         tag.putLong(ENERGY_STORAGE_TAG, energyStorage.amount)
 
         tag.putLong(FLUID_STORAGE_AMOUNT_TAG, fluidStorage.amount)
