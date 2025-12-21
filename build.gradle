@@ -47,7 +47,6 @@ dependencies {
     }
 
     // API
-    modImplementation("maven.modrinth:jade:${project.jade_version}")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
 
@@ -59,13 +58,12 @@ dependencies {
     include modImplementation("io.github.cottonmc:LibGui:${project.libgui_version}")
     include modImplementation("teamreborn:energy:${project.energy_api_version}")
 
+    modLocalRuntime("maven.modrinth:jade:${project.jade_version}")
     modLocalRuntime("maven.modrinth:jade-addons-fabric:${project.jade_addons_version}")
     modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}")
     modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") {
         exclude group: "net.fabricmc"
     }
-    modLocalRuntime("maven.modrinth:ctm-refabricated:${project.ctm_refabricated_version}")
-    modLocalRuntime("maven.modrinth:powah:${project.powah_version}")
 }
 
 test {
