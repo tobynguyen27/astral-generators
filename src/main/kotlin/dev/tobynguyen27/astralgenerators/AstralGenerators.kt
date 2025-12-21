@@ -6,6 +6,7 @@ import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.data.client.Texts
 import dev.tobynguyen27.astralgenerators.data.config.AGConfig
+import dev.tobynguyen27.astralgenerators.data.config.ConfigSyncHandler
 import dev.tobynguyen27.astralgenerators.data.config.ConfigTexts
 import dev.tobynguyen27.astralgenerators.hooks.IntegrationHooks
 import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
@@ -42,6 +43,7 @@ object AstralGenerators : ModInitializer {
 
         ChunkEventListeners.initialize()
         MultiblocksPool.initialize()
+        ConfigSyncHandler.initialize()
 
         registerItemGroups()
         Texts.register()

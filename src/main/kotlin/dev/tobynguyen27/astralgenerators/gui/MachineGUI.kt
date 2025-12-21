@@ -20,7 +20,9 @@ open class MachineGUI(
     @Environment(EnvType.CLIENT)
     override fun addPainters() {
         if (rootPanel != null && !fullscreen) {
-            this.rootPanel.setBackgroundPainter(BackgroundPainter.createNinePatch(Identifier("textures/gui/machine_gui.png")))
+            this.rootPanel.setBackgroundPainter(
+                BackgroundPainter.createNinePatch(Identifier("textures/gui/machine_gui.png"))
+            )
         }
     }
 }
