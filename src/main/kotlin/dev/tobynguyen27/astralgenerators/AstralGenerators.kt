@@ -6,6 +6,7 @@ import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.data.client.Texts
 import dev.tobynguyen27.astralgenerators.data.config.AGConfig
+import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder
 import dev.tobynguyen27.astralgenerators.data.config.ConfigSyncHandler
 import dev.tobynguyen27.astralgenerators.data.config.ConfigTexts
 import dev.tobynguyen27.astralgenerators.hooks.IntegrationHooks
@@ -39,6 +40,7 @@ object AstralGenerators : ModInitializer {
     override fun onInitialize() {
         Bebe.initialize()
         AutoConfig.register<AGConfig>(AGConfig::class.java, ::Toml4jConfigSerializer)
+        ConfigHolder.register()
         ConfigTexts.register()
 
         ChunkEventListeners.initialize()
