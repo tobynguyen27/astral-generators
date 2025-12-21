@@ -5,6 +5,8 @@ import dev.tobynguyen27.astralgenerators.core.multiblock.level.ChunkEventListene
 import dev.tobynguyen27.astralgenerators.core.multiblock.pool.MultiblocksPool
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.data.client.Texts
+import dev.tobynguyen27.astralgenerators.data.config.AGConfig
+import dev.tobynguyen27.astralgenerators.data.config.ConfigTexts
 import dev.tobynguyen27.astralgenerators.hooks.IntegrationHooks
 import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
 import dev.tobynguyen27.astralgenerators.registry.AGBlocks
@@ -14,6 +16,8 @@ import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import dev.tobynguyen27.astralgenerators.registry.AGRecipes
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import dev.tobynguyen27.codebebelib.Bebe
+import me.shedaniel.autoconfig.AutoConfig
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.world.item.CreativeModeTab
@@ -33,6 +37,9 @@ object AstralGenerators : ModInitializer {
 
     override fun onInitialize() {
         Bebe.initialize()
+        AutoConfig.register<AGConfig>(AGConfig::class.java, ::Toml4jConfigSerializer)
+        ConfigTexts.register()
+
         ChunkEventListeners.initialize()
         MultiblocksPool.initialize()
 

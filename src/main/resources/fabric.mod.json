@@ -32,6 +32,12 @@
                 "value": "dev.tobynguyen27.astralgenerators.data.AGDataGen",
                 "adapter": "kotlin"
             }
+        ],
+        "modmenu": [
+            {
+                "value": "dev.tobynguyen27.astralgenerators.integration.ModMenu",
+                "adapter": "kotlin"
+            }
         ]
     },
     "mixins": ["astralgenerators.mixins.json"],
