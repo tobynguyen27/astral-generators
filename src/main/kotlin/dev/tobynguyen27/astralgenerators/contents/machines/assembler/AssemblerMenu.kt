@@ -9,7 +9,6 @@ import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.ProgressBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -105,7 +104,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
         ScreenNetworking.of(this, NetworkSide.SERVER).receive(Packets.TOGGLE_MACHINE) { packet ->
             propertyDelegate.set(IS_ENABLED_INDEX, packet.readInt())
         }
-        root.add(powerButton, 24 ,11, 3, 3)
+        root.add(powerButton, 24, 11, 3, 3)
 
         root.validate(this)
 

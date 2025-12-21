@@ -23,8 +23,7 @@ object AssemblerLogical {
         blockState: BlockState,
         blockEntity: AssemblerBlockEntity,
     ) {
-        if(!BooleanUtils.fromIntToBool(blockEntity.isEnabled))
-        {
+        if (!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
             updateActiveState(level, blockEntity, false)
             return
         }
