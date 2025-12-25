@@ -17,7 +17,7 @@ base.archivesName = project.mod_id
 
 repositories {
     maven { url = "https://maven.parchmentmc.org" } // Parchment
-    maven { url = "https://maven.tobynguyen.dev/snapshots" } // CodeBebeLib
+    maven { url = "https://maven.tobynguyen.dev/releases" } // CodeBebeLib
     maven { url = "https://maven.terraformersmc.com/" } // ModMenu
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
@@ -42,6 +42,7 @@ dependencies {
     modImplementation("dev.tobynguyen27:codebebelib:${project.codebebelib}"){
         exclude group: "io.github.fabricators_of_create"
     }
+    modImplementation("dev.tobynguyen27:sense:${project.sense_version}")
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}") {
         exclude group: "net.fabricmc"
     }

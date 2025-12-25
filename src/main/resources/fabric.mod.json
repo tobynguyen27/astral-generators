@@ -47,6 +47,7 @@
         "java": ">=17",
         "fabric-api": "*",
         "fabric-language-kotlin": "*",
-        "codebebelib": ">=2.0.0"
+        "codebebelib": ">=2.0.0-beta",
+        "sense": ">=1.0.0"
     }
 }
