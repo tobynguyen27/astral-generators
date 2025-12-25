@@ -1,6 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector
 
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
+import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WBox
@@ -22,7 +23,7 @@ class MultiblockProjectorMenu(
     syncId: Int,
     playerInventory: Inventory,
     val ctx: ContainerLevelAccess,
-) : SyncedGuiDescription(AGMenus.MULTIBLOCK_PROJECTOR, syncId, playerInventory) {
+) : MachineGUI(AGMenus.MULTIBLOCK_PROJECTOR, syncId, playerInventory, null, null) {
 
     private var availableDefinitions: MutableList<ResourceLocation> = mutableListOf()
 
