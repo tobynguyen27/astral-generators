@@ -3,10 +3,12 @@ package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 import dev.tobynguyen27.astralgenerators.contents.blocks.FireboxCasing
 import dev.tobynguyen27.astralgenerators.core.base.MultiblockControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
+import dev.tobynguyen27.sense.sync.annotation.Persisted
+import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
+import dev.tobynguyen27.sense.sync.container.ManagedFieldContainer
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.MenuProvider
@@ -15,6 +17,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -26,7 +29,8 @@ class BoilerControllerBlockEntity(
     MultiblockControllerBlockEntity(type, blockPos, blockState),
     MenuProvider,
     ExtendedScreenHandlerFactory,
-    PropertyDelegateHolder {
+    PropertyDelegateHolder,
+    AutoPersistBlockEntity {
 
     companion object {
         const val WATER_BOILING_POINT = 100
@@ -34,39 +38,15 @@ class BoilerControllerBlockEntity(
         const val IDEAL_WATER_CONSUMPTION = 81 // Water consumed at 100% efficiency
 
         const val CONTAINER_DATA_SIZE = 5
-
-        private var HEAT_TAG = "heat"
-        private var BURN_TIME_TAG = "burn_time"
-        private var MAX_BURN_TIME_TAG = "max_burn_time"
-        private var IS_ENABLED_TAG = "is_enabled"
     }
 
-    var isEnabled = 0
+    private val managedFieldContainer by lazy { ManagedFieldContainer(this) }
 
-    var burnTime = 0
-    var maxBurnTime = 0
-
-    var heat = 0
+    @Persisted var isEnabled = 0
+    @Persisted var burnTime = 0
+    @Persisted var maxBurnTime = 0
+    @Persisted var heat = 0
     var maxHeat = 600
-
-    // NBT
-    override fun saveAdditional(tag: CompoundTag) {
-        tag.putInt(HEAT_TAG, heat)
-        tag.putInt(BURN_TIME_TAG, burnTime)
-        tag.putInt(MAX_BURN_TIME_TAG, maxBurnTime)
-        tag.putInt(IS_ENABLED_TAG, isEnabled)
-
-        super.saveAdditional(tag)
-    }
-
-    override fun load(tag: CompoundTag) {
-        heat = tag.getInt(HEAT_TAG)
-        burnTime = tag.getInt(BURN_TIME_TAG)
-        maxBurnTime = tag.getInt(MAX_BURN_TIME_TAG)
-        isEnabled = tag.getInt(IS_ENABLED_TAG)
-
-        super.load(tag)
-    }
 
     // Menu
     override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
@@ -152,4 +132,8 @@ class BoilerControllerBlockEntity(
     override fun getMultiblockShape(): ShapeTemplate {
         return BoilerMultiblock.SHAPE
     }
+
+    override fun getSelf(): BlockEntity = this
+
+    override fun getFieldContainer(): ManagedFieldContainer = managedFieldContainer
 }

@@ -3,7 +3,6 @@ package dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WBox
 import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
