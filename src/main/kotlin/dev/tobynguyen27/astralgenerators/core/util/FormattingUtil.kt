@@ -92,4 +92,6 @@ object FormattingUtil {
     fun decapitalizeFirstLetter(string: String): String {
         return string.replaceFirstChar { it.lowercase() }
     }
+
+    fun convertTicksToSeconds(ticks: Int): Double = ticks * 0.05
 }

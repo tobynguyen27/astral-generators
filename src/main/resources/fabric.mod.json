@@ -38,6 +38,12 @@
                 "value": "dev.tobynguyen27.astralgenerators.integration.ModMenu",
                 "adapter": "kotlin"
             }
+        ],
+        "rei_client": [
+            {
+                "value": "dev.tobynguyen27.astralgenerators.integration.rei.AGREIPlugin",
+                "adapter": "kotlin"
+            }
         ]
     },
     "mixins": ["astralgenerators.mixins.json"],
