@@ -1,9 +1,9 @@
 plugins {
 	id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
 	id "org.jetbrains.kotlin.jvm" version "2.3.0"
-    id "com.diffplug.spotless" version "8.1.0"
-    id "idea"
-    id "maven-publish"
+	id "com.diffplug.spotless" version "8.1.0"
+	id "idea"
+	id "maven-publish"
 }
 
 def ENV = System.getenv()
@@ -16,108 +16,108 @@ group = project.maven_group
 base.archivesName = project.mod_id
 
 repositories {
-    maven { url = "https://maven.parchmentmc.org" } // Parchment
-    maven { url = "https://maven.tobynguyen.dev/releases" } // CodeBebeLib, Sense
-    maven { url = "https://maven.tobynguyen.dev/snapshots" }
-    maven { url = "https://maven.terraformersmc.com/" } // ModMenu
-    maven { url = "https://mvn.devos.one/snapshots/" }
-    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
-    maven { url = "https://server.bbkr.space/artifactory/libs-release" }
-    maven { url = "https://maven.shedaniel.me/" } // REU
-    maven { url = "https://jitpack.io" }
-    maven { url = "https://api.modrinth.com/maven/" }
+	maven { url = "https://maven.parchmentmc.org" } // Parchment
+	maven { url = "https://maven.tobynguyen.dev/releases" } // CodeBebeLib, Sense
+	maven { url = "https://maven.tobynguyen.dev/snapshots" }
+	maven { url = "https://maven.terraformersmc.com/" } // ModMenu
+	maven { url = "https://mvn.devos.one/snapshots/" }
+	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
+	maven { url = "https://server.bbkr.space/artifactory/libs-release" }
+	maven { url = "https://maven.shedaniel.me/" } // REU
+	maven { url = "https://jitpack.io" }
+	maven { url = "https://api.modrinth.com/maven/" }
 }
 
 dependencies {
 	minecraft("com.mojang:minecraft:${project.minecraft_version}")
 	mappings loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.18.2:2022.11.06@zip")
-    }
+		officialMojangMappings()
+		parchment("org.parchmentmc.data:parchment-1.18.2:2022.11.06@zip")
+	}
 
-    testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
 
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
-    modImplementation("dev.tobynguyen27:codebebelib:${project.codebebelib}"){
-        exclude group: "io.github.fabricators_of_create"
-    }
-    modImplementation("dev.tobynguyen27:sense:${project.sense_version}")
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}") {
-        exclude group: "net.fabricmc"
-    }
+	modImplementation("dev.tobynguyen27:codebebelib:${project.codebebelib}"){
+		exclude group: "io.github.fabricators_of_create"
+	}
+	modImplementation("dev.tobynguyen27:sense:${project.sense_version}")
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}") {
+		exclude group: "net.fabricmc"
+	}
 
-    // API
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
+	// API
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
 
-    include modImplementation("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
-    include modImplementation("me.alphamode:ForgeTags:${project.forge_tags_version}")
-    include modImplementation("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}") {
-        exclude group: "io.github.fabricators_of_create"
-    }
-    include modImplementation("io.github.cottonmc:LibGui:${project.libgui_version}")
-    include modImplementation("teamreborn:energy:${project.energy_api_version}")
+	include modImplementation("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
+	include modImplementation("me.alphamode:ForgeTags:${project.forge_tags_version}")
+	include modImplementation("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}") {
+		exclude group: "io.github.fabricators_of_create"
+	}
+	include modImplementation("io.github.cottonmc:LibGui:${project.libgui_version}")
+	include modImplementation("teamreborn:energy:${project.energy_api_version}")
 
-    modLocalRuntime("maven.modrinth:jade:${project.jade_version}")
-    modLocalRuntime("maven.modrinth:jade-addons-fabric:${project.jade_addons_version}")
-    modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}")
-    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") {
-        exclude group: "net.fabricmc"
-    }
+	modLocalRuntime("maven.modrinth:jade:${project.jade_version}")
+	modLocalRuntime("maven.modrinth:jade-addons-fabric:${project.jade_addons_version}")
+	modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}")
+	modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") {
+		exclude group: "net.fabricmc"
+	}
 }
 
 test {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
 
 sourceSets {
-    main {
-        resources {
-            srcDir("src/generated/resources")
-            exclude(".cache")
-        }
-    }
+	main {
+		resources {
+			srcDir("src/generated/resources")
+			exclude(".cache")
+		}
+	}
 }
 
 loom {
-    runs {
-        register("datagen") {
-            client()
+	runs {
+		register("datagen") {
+			client()
 
-            name("Data Generation")
-            vmArg("-Dfabric-api.datagen")
-            vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
-            vmArg("-Dfabric-api.datagen.modid=${mod_id}")
-            vmArg("-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}")
-        }
+			name("Data Generation")
+			vmArg("-Dfabric-api.datagen")
+			vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
+			vmArg("-Dfabric-api.datagen.modid=${mod_id}")
+			vmArg("-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}")
+		}
 
-        getByName("server") { runDir("run/server") }
+		getByName("server") { runDir("run/server") }
 
-        getByName("client") {
-            programArgs(["--username", "Toby"])
-        }
-    }
+		getByName("client") {
+			programArgs(["--username", "Toby"])
+		}
+	}
 }
 
 tasks.withType(ProcessResources).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    var replaceProperties = [
-        minecraft_version      : minecraft_version,
-        loader_version_range   : loader_version,
-        mod_id                 : mod_id,
-        mod_name               : mod_name,
-        mod_license            : mod_license,
-        mod_version            : mod_version,
-        mod_description        : mod_description
-    ]
-    inputs.properties replaceProperties
+	var replaceProperties = [
+		minecraft_version      : minecraft_version,
+		loader_version_range   : loader_version,
+		mod_id                 : mod_id,
+		mod_name               : mod_name,
+		mod_license            : mod_license,
+		mod_version            : mod_version,
+		mod_description        : mod_description
+	]
+	inputs.properties replaceProperties
 
-    filesMatching(["fabric.mod.json"]) {
-        expand replaceProperties
-    }
+	filesMatching(["fabric.mod.json"]) {
+		expand replaceProperties
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -125,11 +125,11 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 
-    withSourcesJar()
+	withSourcesJar()
 }
 
 jar {
@@ -141,65 +141,70 @@ jar {
 }
 
 spotless {
-    encoding "UTF-8"
+	encoding "UTF-8"
 
-    kotlin {
-        ktfmt().kotlinlangStyle()
-        endWithNewline()
-        toggleOffOn()
-    }
+	kotlin {
+		ktfmt().kotlinlangStyle()
+		endWithNewline()
+		toggleOffOn()
+	}
 
-    java {
-        importOrder()
-        removeUnusedImports()
-        palantirJavaFormat()
-    }
+	groovyGradle {
+		target "*.gradle"
+		greclipse()
+	}
 
-    json {
-        target("src/*/resources/**/*.json")
-        targetExclude("src/generated/resources/**")
+	java {
+		importOrder()
+		removeUnusedImports()
+		palantirJavaFormat()
+	}
 
-        biome("2.3.7").downloadDir(new File(rootDir, ".gradle/biome").absolutePath).configPath(new File(rootDir, "spotless/biome.json").absolutePath)
+	json {
+		target("src/*/resources/**/*.json")
+		targetExclude("src/generated/resources/**")
 
-        endWithNewline()
-    }
+		biome("2.3.7").downloadDir(new File(rootDir, ".gradle/biome").absolutePath).configPath(new File(rootDir, "spotless/biome.json").absolutePath)
+
+		endWithNewline()
+	}
 }
 
 idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
-    }
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }
 
 publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group
-            artifactId = project.mod_id
-            version = project.version
+	publications {
+		maven(MavenPublication) {
+			groupId = project.group
+			artifactId = project.mod_id
+			version = project.version
 
-            from components.java
-        }
-    }
+			from components.java
+		}
+	}
 
-    repositories {
-        if (isRelease) {
-            maven {
-                url "https://maven.tobynguyen.dev/releases"
-                credentials {
-                    username ENV.MAVEN_USERNAME
-                    password ENV.MAVEN_PASSWORD
-                }
-            }
-        } else {
-            maven {
-                url "https://maven.tobynguyen.dev/snapshots"
-                credentials {
-                    username ENV.MAVEN_USERNAME
-                    password ENV.MAVEN_PASSWORD
-                }
-            }
-        }
-    }
+	repositories {
+		if (isRelease) {
+			maven {
+				url "https://maven.tobynguyen.dev/releases"
+				credentials {
+					username ENV.MAVEN_USERNAME
+					password ENV.MAVEN_PASSWORD
+				}
+			}
+		} else {
+			maven {
+				url "https://maven.tobynguyen.dev/snapshots"
+				credentials {
+					username ENV.MAVEN_USERNAME
+					password ENV.MAVEN_PASSWORD
+				}
+			}
+		}
+	}
 }
