@@ -1,6 +1,10 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
+import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
+import dev.tobynguyen27.sense.sync.annotation.Persisted
+import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
+import dev.tobynguyen27.sense.sync.container.ManagedFieldContainer
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
@@ -12,12 +16,9 @@ import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.ContainerHelper
-import net.minecraft.world.MenuProvider
 import net.minecraft.world.WorldlyContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -35,17 +36,15 @@ class AssemblerBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) :
-    BlockEntity(type, blockPos, blockState),
-    MenuProvider,
+    MachineBlockEntity(type, blockPos, blockState),
     PropertyDelegateHolder,
     ExtendedScreenHandlerFactory,
     IInventory,
-    WorldlyContainer {
+    WorldlyContainer,
+    AutoPersistBlockEntity {
 
     companion object {
         const val ID = "assembler_entity"
-
-        private const val IS_ENABLED_TAG = "is_enabled"
 
         // Energy
         private const val ENERGY_CAPACITY = 100000.toLong()
@@ -67,17 +66,17 @@ class AssemblerBlockEntity(
         const val CONTAINER_DATA_SIZE = 3
 
         // Progress
-        const val MAX_PROGRESS_TAG = "assembler_max_progress"
-        const val PROGRESS_TAG = "assembler_progress"
         const val SAVED_RECIPE_ID_TAG = "saved_recipe_id"
     }
 
+    val managedFieldContainer by lazy { ManagedFieldContainer(this) }
+
     // Progress
-    var isEnabled = 0
-    var maxProgress: Int = 100
-    var progress: Int = 0
-    var cachedRecipe: AssemblerRecipe? = null
+    @Persisted var isEnabled = 0
+    @Persisted var maxProgress: Int = 100
+    @Persisted var progress: Int = 0
     var savedRecipeId: ResourceLocation? = null
+    var cachedRecipe: AssemblerRecipe? = null
 
     // Energy
     val energyStorage =
@@ -135,11 +134,10 @@ class AssemblerBlockEntity(
         }
 
     override fun setChanged() {
-        super<BlockEntity>.setChanged()
+        super<MachineBlockEntity>.setChanged()
     }
 
     override fun load(tag: CompoundTag) {
-        isEnabled = tag.getInt(IS_ENABLED_TAG)
         energyStorage.amount = tag.getLong(ENERGY_STORAGE_TAG)
 
         fluidStorage.amount = tag.getLong(FLUID_STORAGE_AMOUNT_TAG)
@@ -147,8 +145,6 @@ class AssemblerBlockEntity(
 
         ContainerHelper.loadAllItems(tag, items)
 
-        maxProgress = tag.getInt(MAX_PROGRESS_TAG)
-        progress = tag.getInt(PROGRESS_TAG)
         if (tag.contains(SAVED_RECIPE_ID_TAG)) {
             val id = tag.getString(SAVED_RECIPE_ID_TAG)
             if (id.isNotEmpty()) {
@@ -160,7 +156,6 @@ class AssemblerBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag) {
-        tag.putInt(IS_ENABLED_TAG, isEnabled)
         tag.putLong(ENERGY_STORAGE_TAG, energyStorage.amount)
 
         tag.putLong(FLUID_STORAGE_AMOUNT_TAG, fluidStorage.amount)
@@ -168,18 +163,12 @@ class AssemblerBlockEntity(
 
         ContainerHelper.saveAllItems(tag, items)
 
-        tag.putInt(MAX_PROGRESS_TAG, maxProgress)
-        tag.putInt(PROGRESS_TAG, progress)
         cachedRecipe?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
 
         super.saveAdditional(tag)
     }
 
     // Menu
-    override fun getDisplayName(): Component {
-        return TranslatableComponent(blockState.block.descriptionId)
-    }
-
     override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
         return AssemblerMenu(i, inventory, ContainerLevelAccess.create(player.level, blockPos))
     }
@@ -223,4 +212,8 @@ class AssemblerBlockEntity(
     ): Boolean {
         return direction == Direction.DOWN && index == CONTAINER_SIZE - 1
     }
+
+    override fun getFieldContainer(): ManagedFieldContainer = managedFieldContainer
+
+    override fun getSelf(): BlockEntity = this
 }
