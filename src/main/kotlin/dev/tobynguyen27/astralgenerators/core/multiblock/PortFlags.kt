@@ -7,7 +7,7 @@ class PortFlags(val flags: Int) {
         return (flags and (1 shl type.value)) > 0
     }
 
-    object Builder {
+    class Builder {
 
         var flags = 0
 

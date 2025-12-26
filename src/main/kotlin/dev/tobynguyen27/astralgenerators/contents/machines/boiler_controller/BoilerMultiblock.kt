@@ -14,7 +14,7 @@ object BoilerMultiblock {
                 0,
                 SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()),
                 true,
-                PortFlags.Builder.with(
+                PortFlags.Builder().with(
                         PortBlockType.ITEM_INPUT,
                         PortBlockType.FLUID_INPUT,
                         PortBlockType.FLUID_OUTPUT,
