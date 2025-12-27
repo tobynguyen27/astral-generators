@@ -1,0 +1,45 @@
+[versions]
+loom = "1.14-SNAPSHOT"
+kotlin = "2.3.0"
+spotless = "8.1.0"
+
+minecraft = "1.18.2"
+fabric-loader = "0.18.1"
+fabric-api = "0.77.0+1.18.2"
+fabric-kotlin = "1.13.8+kotlin.2.3.0"
+codebebelib = "2.0.0-beta"
+sense = "1.0.1-build.11"
+modmenu = "3.2.5"
+rei = "8.4.737"
+portinglib = "1.2.1304-beta+1.18.2"
+forgetags = "2.1"
+registrate = "MC1.18.2-1.1.11"
+libgui = "5.4.2+1.18.2"
+energyapi = "2.3.0"
+jade="5.100.0"
+jadeaddons="2.2.0"
+lazydfu="0.1.2"
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
+fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-kotlin" }
+codebebelib = { module = "dev.tobynguyen27:codebebelib", version.ref = "codebebelib" }
+sense = { module = "dev.tobynguyen27:sense", version.ref = "sense" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+rei-api = { module = "me.shedaniel:RoughlyEnoughItems-api-fabric", version.ref = "rei" }
+rei-fabric = { module = "me.shedaniel:RoughlyEnoughItems-fabric", version.ref = "rei" }
+portinglib = { module = "io.github.fabricators_of_create:Porting-Lib", version.ref = "portinglib" }
+forgetags = { module = "me.alphamode:ForgeTags", version.ref = "forgetags" }
+registrate = { module = "com.tterrag.registrate_fabric:Registrate", version.ref = "registrate" }
+libgui = { module = "io.github.cottonmc:LibGui", version.ref = "libgui" }
+energyapi = { module = "teamreborn:energy", version.ref = "energyapi" }
+jade = { module = "maven.modrinth:jade", version.ref = "jade" }
+jadeaddons = { module = "maven.modrinth:jade-addons-fabric", version.ref = "jadeaddons" }
+lazydfu = { module = "maven.modrinth:lazydfu", version.ref = "lazydfu" }
+
+[plugins]
+loom = { id = "net.fabricmc.fabric-loom-remap", version.ref = "loom" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

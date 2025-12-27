@@ -1,7 +1,7 @@
 plugins {
-	id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
-	id "org.jetbrains.kotlin.jvm" version "2.3.0"
-	id "com.diffplug.spotless" version "8.1.0"
+	alias(libs.plugins.loom)
+    alias(libs.plugins.kotlin)
+	alias(libs.plugins.spotless)
 	id "idea"
 	id "maven-publish"
 }
@@ -29,47 +29,52 @@ repositories {
 }
 
 dependencies {
-	minecraft("com.mojang:minecraft:${project.minecraft_version}")
+	minecraft(libs.minecraft)
 	mappings loom.layered {
 		officialMojangMappings()
 		parchment("org.parchmentmc.data:parchment-1.18.2:2022.11.06@zip")
 	}
 
-	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+	modImplementation(libs.fabric.loader)
+    modImplementation(libs.fabric.api)
+    modImplementation(libs.fabric.kotlin)
 
-	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
-	modImplementation("dev.tobynguyen27:codebebelib:${project.codebebelib}"){
+	modImplementation(libs.codebebelib){
 		exclude group: "io.github.fabricators_of_create"
 	}
-	modImplementation("dev.tobynguyen27:sense:${project.sense_version}")
-	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}") {
+	modImplementation(libs.sense)
+	modImplementation(libs.modmenu) {
 		exclude group: "net.fabricmc"
 	}
 
 	// API
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
+	modCompileOnly(libs.rei.api)
 
-	include modImplementation("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
-	include modImplementation("me.alphamode:ForgeTags:${project.forge_tags_version}")
-	include modImplementation("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}") {
+    modImplementation(libs.portinglib)
+    include (libs.portinglib)
+
+    modImplementation(libs.forgetags)
+    include(libs.forgetags)
+
+    modImplementation(libs.registrate) {
 		exclude group: "io.github.fabricators_of_create"
 	}
-	include modImplementation("io.github.cottonmc:LibGui:${project.libgui_version}")
-	include modImplementation("teamreborn:energy:${project.energy_api_version}")
+    include(libs.registrate) {
+        exclude group: "io.github.fabricators_of_create"
+    }
 
-	modLocalRuntime("maven.modrinth:jade:${project.jade_version}")
-	modLocalRuntime("maven.modrinth:jade-addons-fabric:${project.jade_addons_version}")
-	modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}")
-	modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") {
+	 modImplementation(libs.libgui)
+    include (libs.libgui)
+
+     modImplementation(libs.energyapi)
+    include (libs.energyapi)
+
+	modLocalRuntime(libs.jade)
+    modLocalRuntime(libs.jadeaddons)
+    modLocalRuntime(libs.lazydfu)
+	modLocalRuntime(libs.rei.fabric) {
 		exclude group: "net.fabricmc"
 	}
-}
-
-test {
-	useJUnitPlatform()
 }
 
 sourceSets {
