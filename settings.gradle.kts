@@ -2,7 +2,7 @@ pluginManagement {
 	repositories {
 		maven {
 			name = "Fabric"
-			url = "https://maven.fabricmc.net/"
+			url = uri("https://maven.fabricmc.net/")
 		}
 		mavenCentral()
 		gradlePluginPortal()
@@ -10,7 +10,7 @@ pluginManagement {
 }
 
 plugins {
-	id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
+	id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 rootProject.name = "Astral Generators"
