@@ -1,9 +1,9 @@
 plugins {
-	alias(libs.plugins.loom)
+    alias(libs.plugins.loom)
     alias(libs.plugins.kotlin)
-	alias(libs.plugins.spotless)
-	idea
-	`maven-publish`
+    alias(libs.plugins.spotless)
+    idea
+    `maven-publish`
 }
 
 val ENV = System.getenv()
@@ -14,112 +14,100 @@ val mod_version: String by project
 val mod_id: String by project
 val maven_group: String by project
 
-version = if(isRelease) "${mod_version}" else "${mod_version}-build.${runNumber}"
+version = if (isRelease) "${mod_version}" else "${mod_version}-build.${runNumber}"
+
 group = maven_group
 
 base.archivesName = mod_id
 
 repositories {
-	val repositories = setOf(
-       "https://maven.parchmentmc.org" ,
-           "https://maven.tobynguyen.dev/releases",
-            "https://maven.tobynguyen.dev/snapshots" ,
-            "https://maven.terraformersmc.com/" ,
-            "https://mvn.devos.one/snapshots/" ,
-            "https://maven.jamieswhiteshirt.com/libs-release" ,
-            "https://server.bbkr.space/artifactory/libs-release" ,
-            "https://maven.shedaniel.me/" ,
-            "https://jitpack.io" ,
-            "https://api.modrinth.com/maven/" ,
-    )
+    val repositories =
+        setOf(
+            "https://maven.parchmentmc.org",
+            "https://maven.tobynguyen.dev/releases",
+            "https://maven.tobynguyen.dev/snapshots",
+            "https://maven.terraformersmc.com/",
+            "https://mvn.devos.one/snapshots/",
+            "https://maven.jamieswhiteshirt.com/libs-release",
+            "https://server.bbkr.space/artifactory/libs-release",
+            "https://maven.shedaniel.me/",
+            "https://jitpack.io",
+            "https://api.modrinth.com/maven/",
+        )
 
-    repositories.forEach {
-        maven {
-            url = uri(it)
-        }
-    }
+    repositories.forEach { maven { url = uri(it) } }
 }
 
 dependencies {
-	minecraft(libs.minecraft)
-	mappings(loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.18.2:2022.11.06@zip")
-    })
+    minecraft(libs.minecraft)
+    mappings(
+        loom.layered {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-1.18.2:2022.11.06@zip")
+        }
+    )
 
-	modImplementation(libs.fabric.loader)
+    modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.api)
     modImplementation(libs.fabric.kotlin)
 
-	modImplementation(libs.codebebelib){
-		exclude(group = "io.github.fabricators_of_create")
-	}
-	modImplementation(libs.sense)
-	modImplementation(libs.modmenu) {
-		exclude(group = "net.fabricmc")
-	}
+    modImplementation(libs.codebebelib) { exclude(group = "io.github.fabricators_of_create") }
+    modImplementation(libs.sense)
+    modImplementation(libs.modmenu) { exclude(group = "net.fabricmc") }
 
-	// API
-	modCompileOnly(libs.rei.api)
+    // API
+    modCompileOnly(libs.rei.api)
 
     modImplementation(libs.portinglib)
-    include (libs.portinglib)
+    include(libs.portinglib)
 
     modImplementation(libs.forgetags)
     include(libs.forgetags)
 
-    modImplementation(libs.registrate) {
-		exclude(group = "io.github.fabricators_of_create")
-	}
-    include(libs.registrate) {
-        exclude(group = "io.github.fabricators_of_create")
-    }
+    modImplementation(libs.registrate) { exclude(group = "io.github.fabricators_of_create") }
+    include(libs.registrate) { exclude(group = "io.github.fabricators_of_create") }
 
-	 modImplementation(libs.libgui)
-    include (libs.libgui)
+    modImplementation(libs.libgui)
+    include(libs.libgui)
 
-     modImplementation(libs.energyapi)
-    include (libs.energyapi)
+    modImplementation(libs.energyapi)
+    include(libs.energyapi)
 
-	modLocalRuntime(libs.jade)
+    modLocalRuntime(libs.jade)
     modLocalRuntime(libs.jadeaddons)
     modLocalRuntime(libs.lazydfu)
-	modLocalRuntime(libs.rei.fabric) {
-		exclude(group = "net.fabricmc")
-	}
+    modLocalRuntime(libs.rei.fabric) { exclude(group = "net.fabricmc") }
 }
 
 sourceSets {
-	main {
-		resources {
-			srcDir("src/generated/resources")
-			exclude(".cache")
-		}
-	}
+    main {
+        resources {
+            srcDir("src/generated/resources")
+            exclude(".cache")
+        }
+    }
 }
 
 loom {
-	runs {
-		register("datagen") {
-			client()
+    runs {
+        register("datagen") {
+            client()
 
-			name("Data Generation")
-			vmArg("-Dfabric-api.datagen")
-			vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
-			vmArg("-Dfabric-api.datagen.modid=${mod_id}")
-			vmArg("-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}")
-		}
+            name("Data Generation")
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
+            vmArg("-Dfabric-api.datagen.modid=${mod_id}")
+            vmArg("-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}")
+        }
 
-		getByName("server") { runDir("run/server") }
+        getByName("server") { runDir("run/server") }
 
-		getByName("client") {
-            programArgs(setOf("--password", "Toby"))
-		}
-	}
+        getByName("client") { programArgs(setOf("--password", "Toby")) }
+    }
 }
 
 tasks.withType<ProcessResources>().configureEach {
-	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     val loader_version: String by project
     val minecraft_version: String by project
@@ -145,15 +133,12 @@ tasks.withType<ProcessResources>().configureEach {
     filesMatching(setOf("fabric.mod.json")) { expand(replaceProperties) }
 }
 
-
 tasks.withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
 
-	withSourcesJar()
+    withSourcesJar()
 }
 
 tasks.named<Jar>("jar") {
@@ -197,35 +182,36 @@ publishing {
     }
 }
 
-
 spotless {
-	encoding("UTF-8")
+    encoding("UTF-8")
 
-	kotlin {
-		ktfmt().kotlinlangStyle()
-		endWithNewline()
-		toggleOffOn()
-	}
+    kotlin {
+        ktfmt().kotlinlangStyle()
+        endWithNewline()
+        toggleOffOn()
+    }
 
     kotlinGradle {
         target("*.gradle.kts")
         ktfmt().kotlinlangStyle()
     }
 
-	java {
-		importOrder()
-		removeUnusedImports()
-		palantirJavaFormat()
-	}
+    java {
+        importOrder()
+        removeUnusedImports()
+        palantirJavaFormat()
+    }
 
-	json {
-		target("src/*/resources/**/*.json")
-		targetExclude("src/generated/resources/**")
+    json {
+        target("src/*/resources/**/*.json")
+        targetExclude("src/generated/resources/**")
 
-		biome("2.3.7").downloadDir(File(rootDir, ".gradle/biome").absolutePath).configPath(File(rootDir, "spotless/biome.json").absolutePath)
+        biome("2.3.7")
+            .downloadDir(File(rootDir, ".gradle/biome").absolutePath)
+            .configPath(File(rootDir, "spotless/biome.json").absolutePath)
 
-		endWithNewline()
-	}
+        endWithNewline()
+    }
 }
 
 idea {

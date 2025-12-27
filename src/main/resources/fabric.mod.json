@@ -4,7 +4,7 @@
     "version": "${mod_version}",
     "name": "${mod_name}",
     "description": "${mod_description}",
-    "authors": ["tobynguyen27"],
+    "authors": ["tobynguyen27", "MikoTheBoi"],
     "contact": {
         "email": "hi@tobynguyen.dev",
         "homepage": "https://github.com/tobynguyen27/astral-generators",
@@ -48,8 +48,8 @@
     },
     "mixins": ["astralgenerators.mixins.json"],
     "depends": {
-        "fabricloader": ">=0.18.1",
-        "minecraft": "~1.18.2",
+        "fabricloader": ">=${loader_version}",
+        "minecraft": "~${minecraft_version}",
         "java": ">=17",
         "fabric-api": "*",
         "fabric-language-kotlin": "*",
