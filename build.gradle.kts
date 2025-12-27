@@ -102,7 +102,7 @@ loom {
 
         getByName("server") { runDir("run/server") }
 
-        getByName("client") { programArgs(setOf("--password", "Toby")) }
+        getByName("client") { programArgs(setOf("--username", "Toby")) }
     }
 }
 
