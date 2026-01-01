@@ -48,18 +48,18 @@ class FluidBar(
         val maxValue = maxCapacity().toDouble()
         val percent = MathHelper.clip(currentValue / maxValue, 0.0, 1.0)
 
-        val startX = x + width - 1
-        val startY = y + height - 1
-        val endX = x + 1
-        val endY = y + 1
+        val startX = x + width - 3
+        val startY = y + height - 2 + 0.5
+        val endX = x + 3
+        val endY = y + 2 - 0.5
 
         val bound =
             Cuboid6(
                 startX.toDouble(),
-                startY.toDouble(),
+                startY,
                 0.0,
                 endX.toDouble(),
-                endY.toDouble(),
+                endY,
                 0.0,
             )
 
@@ -71,7 +71,7 @@ class FluidBar(
 
         val renderType = RenderUtils.getFluidRenderType()
         val fluidVariant = fluidVariant()
-        val fluidStack = FluidStack(fluidVariant, currentValue.toLong(), fluidVariant.nbt)
+        val fluidStack = FluidStack(fluidVariant, currentValue, fluidVariant.nbt)
 
         val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
 
