@@ -53,15 +53,7 @@ class FluidBar(
         val endX = x + 3
         val endY = y + 2 - 0.5
 
-        val bound =
-            Cuboid6(
-                startX.toDouble(),
-                startY,
-                0.0,
-                endX.toDouble(),
-                endY,
-                0.0,
-            )
+        val bound = Cuboid6(startX.toDouble(), startY, 0.0, endX.toDouble(), endY, 0.0)
 
         val ccr = CCRenderState.instance()
         ccr.reset()
