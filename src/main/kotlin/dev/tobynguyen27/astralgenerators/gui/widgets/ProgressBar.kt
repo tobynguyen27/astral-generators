@@ -11,6 +11,11 @@ import net.minecraft.resources.ResourceLocation
 
 class ProgressBar(bg: ResourceLocation, bar: ResourceLocation, field: Int, maxField: Int) :
     WBar(bg, bar, field, maxField, Direction.RIGHT) {
+
+    override fun canResize(): Boolean {
+        return true
+    }
+
     override fun addTooltip(information: TooltipBuilder) {
         val current = properties.get(field)
         val max = properties.get(max)
