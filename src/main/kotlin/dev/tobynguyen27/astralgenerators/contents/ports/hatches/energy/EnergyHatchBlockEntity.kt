@@ -3,6 +3,9 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyContainerAttribute
+import dev.tobynguyen27.sense.sync.annotation.Persisted
+import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
+import dev.tobynguyen27.sense.sync.container.ManagedFieldContainer
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
@@ -23,10 +26,13 @@ abstract class EnergyHatchBlockEntity(
 ) :
     PortBlockEntity(blockEntityType, blockPos, blockState, tier, mode, casingBlock),
     ExtendedScreenHandlerFactory,
-    EnergyContainerAttribute {
+    EnergyContainerAttribute,
+    AutoPersistBlockEntity {
 
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
     override val self: BlockEntity = this
-    override val energyContainer: SimpleEnergyStorage =
+    @Persisted
+    override var energyContainer: SimpleEnergyStorage =
         createEnergyContainer(capacity, capacity, capacity)
 
     override fun writeScreenOpeningData(player: ServerPlayer, buf: FriendlyByteBuf) {

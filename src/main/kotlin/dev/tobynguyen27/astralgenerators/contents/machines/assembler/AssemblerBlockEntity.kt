@@ -79,7 +79,8 @@ class AssemblerBlockEntity(
 
     override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
     override val self: BlockEntity = this
-    override val energyContainer: SimpleEnergyStorage =
+    @Persisted
+    override var energyContainer: SimpleEnergyStorage =
         createEnergyContainer(ENERGY_CAPACITY, MAX_ENERGY_EXTRACT, MAX_ENERGY_INSERT)
     override val fluidContainer: SingleVariantStorage<FluidVariant> =
         createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)

@@ -1,18 +1,9 @@
 package dev.tobynguyen27.astralgenerators.core.blockentity.attributes
 
-import net.minecraft.nbt.CompoundTag
 import team.reborn.energy.api.base.SimpleEnergyStorage
 
 interface EnergyContainerAttribute : Attribute {
-    val energyContainer: SimpleEnergyStorage
-
-    fun saveEnergyData(tag: CompoundTag) {
-        tag.putLong("energyAmount", energyContainer.amount)
-    }
-
-    fun loadEnergyData(tag: CompoundTag) {
-        energyContainer.amount = tag.getLong("energyAmount")
-    }
+    var energyContainer: SimpleEnergyStorage
 
     fun createEnergyContainer(
         capacity: Long,
