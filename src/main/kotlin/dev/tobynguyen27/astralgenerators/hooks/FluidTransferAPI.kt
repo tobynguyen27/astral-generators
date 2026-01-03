@@ -7,7 +7,7 @@ object FluidTransferAPI {
 
     fun init() {
         FluidStorage.SIDED.registerForBlockEntity(
-            { blockEntity, _ -> blockEntity.fluidStorage },
+            { blockEntity, _ -> blockEntity.fluidContainer },
             AGBlockEntities.ASSEMBLER.get(),
         )
 

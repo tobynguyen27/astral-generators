@@ -8,7 +8,7 @@ object EnergyAPI {
 
     fun init() {
         EnergyStorage.SIDED.registerForBlockEntity(
-            { blockEntity: AssemblerBlockEntity, _ -> blockEntity.energyStorage },
+            { blockEntity: AssemblerBlockEntity, _ -> blockEntity.energyContainer },
             AGBlockEntities.ASSEMBLER.get(),
         )
 

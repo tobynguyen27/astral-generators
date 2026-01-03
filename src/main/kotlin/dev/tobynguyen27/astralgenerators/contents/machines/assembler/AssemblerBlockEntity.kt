@@ -79,7 +79,7 @@ class AssemblerBlockEntity(
     var cachedRecipe: AssemblerRecipe? = null
 
     // Energy
-    val energyStorage =
+    val energyContainer =
         object : SimpleEnergyStorage(ENERGY_CAPACITY, MAX_ENERGY_INSERT, MAX_ENERGY_EXTRACT) {
             override fun onFinalCommit() {
                 setChanged()
@@ -87,7 +87,7 @@ class AssemblerBlockEntity(
         }
 
     // Fluid
-    val fluidStorage =
+    val fluidContainer =
         object : SingleVariantStorage<FluidVariant>() {
             override fun getBlankVariant(): FluidVariant = FluidVariant.blank()
 
@@ -138,10 +138,10 @@ class AssemblerBlockEntity(
     }
 
     override fun load(tag: CompoundTag) {
-        energyStorage.amount = tag.getLong(ENERGY_STORAGE_TAG)
+        energyContainer.amount = tag.getLong(ENERGY_STORAGE_TAG)
 
-        fluidStorage.amount = tag.getLong(FLUID_STORAGE_AMOUNT_TAG)
-        fluidStorage.variant = FluidVariant.fromNbt(tag.getCompound(FLUID_STORAGE_TYPE_TAG))
+        fluidContainer.amount = tag.getLong(FLUID_STORAGE_AMOUNT_TAG)
+        fluidContainer.variant = FluidVariant.fromNbt(tag.getCompound(FLUID_STORAGE_TYPE_TAG))
 
         ContainerHelper.loadAllItems(tag, items)
 
@@ -156,10 +156,10 @@ class AssemblerBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag) {
-        tag.putLong(ENERGY_STORAGE_TAG, energyStorage.amount)
+        tag.putLong(ENERGY_STORAGE_TAG, energyContainer.amount)
 
-        tag.putLong(FLUID_STORAGE_AMOUNT_TAG, fluidStorage.amount)
-        tag.put(FLUID_STORAGE_TYPE_TAG, fluidStorage.variant.toNbt())
+        tag.putLong(FLUID_STORAGE_AMOUNT_TAG, fluidContainer.amount)
+        tag.put(FLUID_STORAGE_TYPE_TAG, fluidContainer.variant.toNbt())
 
         ContainerHelper.saveAllItems(tag, items)
 
@@ -179,13 +179,13 @@ class AssemblerBlockEntity(
 
     override fun writeScreenOpeningData(player: ServerPlayer, buf: FriendlyByteBuf) {
         // Energy
-        buf.writeLong(energyStorage.capacity)
-        buf.writeLong(energyStorage.amount)
+        buf.writeLong(energyContainer.capacity)
+        buf.writeLong(energyContainer.amount)
 
         // Fluid
-        buf.writeLong(fluidStorage.capacity)
-        buf.writeLong(fluidStorage.amount)
-        buf.writeNbt(fluidStorage.variant.toNbt())
+        buf.writeLong(fluidContainer.capacity)
+        buf.writeLong(fluidContainer.amount)
+        buf.writeNbt(fluidContainer.variant.toNbt())
     }
 
     // Inventory interact

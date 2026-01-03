@@ -181,14 +181,14 @@ object AssemblerLogical {
         variantToConsume: FluidVariant,
     ): Boolean {
         val consumedAmount =
-            blockEntity.fluidStorage.extract(variantToConsume, amountToConsume, transaction)
+            blockEntity.fluidContainer.extract(variantToConsume, amountToConsume, transaction)
 
         return consumedAmount == amountToConsume
     }
 
     private fun consumeEnergy(blockEntity: AssemblerBlockEntity, amountToConsume: Long): Boolean {
         Transaction.openOuter().use { transaction ->
-            val consumedAmount = blockEntity.energyStorage.extract(amountToConsume, transaction)
+            val consumedAmount = blockEntity.energyContainer.extract(amountToConsume, transaction)
 
             if (consumedAmount == amountToConsume) {
                 transaction.commit()
@@ -206,7 +206,7 @@ object AssemblerLogical {
         amountToConsume: Long,
     ): Boolean {
         transaction.openNested().use {
-            val consumedAmount = blockEntity.energyStorage.extract(amountToConsume, it)
+            val consumedAmount = blockEntity.energyContainer.extract(amountToConsume, it)
 
             return consumedAmount == amountToConsume
         }

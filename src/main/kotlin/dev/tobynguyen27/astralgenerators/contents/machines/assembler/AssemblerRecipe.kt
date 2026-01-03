@@ -26,14 +26,14 @@ class AssemblerRecipe(
     val duration: Int,
 ) : Recipe<AssemblerBlockEntity> {
     override fun matches(container: AssemblerBlockEntity, level: Level): Boolean {
-        if (container.energyStorage.amount < energyConsumption) {
+        if (container.energyContainer.amount < energyConsumption) {
             return false
         }
 
-        if (container.fluidStorage.variant != fluidInput.fluid.type) {
+        if (container.fluidContainer.variant != fluidInput.fluid.type) {
             return false
         }
-        if (container.fluidStorage.amount < fluidInput.fluid.amount) {
+        if (container.fluidContainer.amount < fluidInput.fluid.amount) {
             return false
         }
 

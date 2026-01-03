@@ -125,12 +125,12 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
                 val blockEntity =
                     world.getBlockEntity(blockPos) as? AssemblerBlockEntity ?: return@execute
 
-                val energyAmount = blockEntity.energyStorage.amount
+                val energyAmount = blockEntity.energyContainer.amount
                 this.lastEnergyAmount = energyAmount
 
-                val fluidAmount = blockEntity.fluidStorage.amount
+                val fluidAmount = blockEntity.fluidContainer.amount
                 this.lastFluidAmount = fluidAmount
-                val fluidVariant = blockEntity.fluidStorage.variant
+                val fluidVariant = blockEntity.fluidContainer.variant
                 this.lastFluidVariant = fluidVariant
             }
         }
@@ -147,7 +147,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
             val blockEntity =
                 world.getBlockEntity(blockPos) as? AssemblerBlockEntity ?: return@execute
 
-            val energyAmount = blockEntity.energyStorage.amount
+            val energyAmount = blockEntity.energyContainer.amount
             if (energyAmount != this.lastEnergyAmount) {
                 this.lastEnergyAmount = energyAmount
                 ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.ENERGY_AMOUNT) { packet
@@ -156,7 +156,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
                 }
             }
 
-            val fluidAmount = blockEntity.fluidStorage.amount
+            val fluidAmount = blockEntity.fluidContainer.amount
             if (fluidAmount != this.lastFluidAmount) {
                 this.lastFluidAmount = fluidAmount
                 ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.FLUID_AMOUNT) { packet ->
@@ -164,7 +164,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
                 }
             }
 
-            val fluidVariant = blockEntity.fluidStorage.variant
+            val fluidVariant = blockEntity.fluidContainer.variant
             if (fluidVariant != this.lastFluidVariant) {
                 this.lastFluidVariant = fluidVariant
                 ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.FLUID_VARIANT) { packet
