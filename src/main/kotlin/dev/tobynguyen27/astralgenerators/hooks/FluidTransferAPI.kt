@@ -25,7 +25,7 @@ object FluidTransferAPI {
             )
             .forEach {
                 FluidStorage.SIDED.registerForBlockEntity(
-                    { blockEntity, _ -> blockEntity.fluidStorage },
+                    { blockEntity, _ -> blockEntity.fluidContainer },
                     it.get(),
                 )
             }

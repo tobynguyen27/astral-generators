@@ -158,7 +158,7 @@ object BoilerControllerLogical {
 
         Transaction.openOuter().use {
             val extractedWater =
-                inputHatch.fluidStorage.extract(FluidVariant.of(Fluids.WATER), waterToConsume, it)
+                inputHatch.fluidContainer.extract(FluidVariant.of(Fluids.WATER), waterToConsume, it)
 
             if (extractedWater > 0) {
                 val steamToProduce = extractedWater * STEAM_EXPANSION_RATIO
@@ -179,7 +179,7 @@ object BoilerControllerLogical {
 
     private fun isFulled(outputHatch: FluidHatchBlockEntity): Boolean {
         Transaction.openOuter().use {
-            return outputHatch.fluidStorage.insert(
+            return outputHatch.fluidContainer.insert(
                 FluidVariant.of(AGFluids.STEAM.get().source),
                 1L,
                 it,
@@ -189,7 +189,7 @@ object BoilerControllerLogical {
 
     private fun hasWater(inputHatch: FluidHatchBlockEntity): Boolean {
         Transaction.openOuter().use {
-            return inputHatch.fluidStorage.extract(FluidVariant.of(Fluids.WATER), 1L, it) > 0
+            return inputHatch.fluidContainer.extract(FluidVariant.of(Fluids.WATER), 1L, it) > 0
         }
     }
 
@@ -233,7 +233,7 @@ object BoilerControllerLogical {
     ): Boolean {
         transaction.openNested().use {
             val producedAmount =
-                outputHatch.fluidStorage.insert(
+                outputHatch.fluidContainer.insert(
                     FluidVariant.of(AGFluids.STEAM.get().source),
                     amountToProduce,
                     it,

@@ -24,7 +24,7 @@ object EnergyHatchBlockEntityLogical {
         if (
             blockEntity.autoExport == 0 &&
                 blockEntity.mode == PortBlockSpecification.Mode.OUTPUT &&
-                blockEntity.energyStorage.amount != 0L
+                blockEntity.energyContainer.amount != 0L
         ) {
             Transaction.openOuter().use {
                 for (direction in Direction.entries) {
@@ -38,9 +38,9 @@ object EnergyHatchBlockEntityLogical {
 
                     val movedAmount =
                         EnergyStorageUtil.move(
-                            blockEntity.energyStorage,
+                            blockEntity.energyContainer,
                             neighborStorage,
-                            blockEntity.energyStorage.capacity,
+                            blockEntity.energyContainer.capacity,
                             it,
                         )
 
@@ -66,8 +66,8 @@ object EnergyHatchBlockEntityLogical {
                     val movedAmount =
                         EnergyStorageUtil.move(
                             neighborStorage,
-                            blockEntity.energyStorage,
-                            blockEntity.energyStorage.capacity,
+                            blockEntity.energyContainer,
+                            blockEntity.energyContainer.capacity,
                             it,
                         )
 

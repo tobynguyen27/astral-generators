@@ -104,8 +104,9 @@ object SteamTurbineControllerLogical {
 
         // Check input
         if (
-            fluidInputHatch.fluidStorage.variant != FluidVariant.of(AGFluids.STEAM.get().source) ||
-                fluidInputHatch.fluidStorage.amount == 0L
+            fluidInputHatch.fluidContainer.variant !=
+                FluidVariant.of(AGFluids.STEAM.get().source) ||
+                fluidInputHatch.fluidContainer.amount == 0L
         )
             return
 
@@ -128,6 +129,6 @@ object SteamTurbineControllerLogical {
     }
 
     private fun isEnergyHatchFull(outputHatch: EnergyHatchBlockEntity): Boolean {
-        return outputHatch.energyStorage.amount == outputHatch.energyStorage.capacity
+        return outputHatch.energyContainer.amount == outputHatch.energyContainer.capacity
     }
 }

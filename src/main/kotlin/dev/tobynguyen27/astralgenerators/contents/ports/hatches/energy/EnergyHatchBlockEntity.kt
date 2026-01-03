@@ -2,11 +2,12 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyContainerAttribute
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import team.reborn.energy.api.base.SimpleEnergyStorage
@@ -21,34 +22,15 @@ abstract class EnergyHatchBlockEntity(
     casingBlock: BlockState?,
 ) :
     PortBlockEntity(blockEntityType, blockPos, blockState, tier, mode, casingBlock),
-    ExtendedScreenHandlerFactory {
+    ExtendedScreenHandlerFactory,
+    EnergyContainerAttribute {
 
-    companion object {
-        private const val ENERGY_STORAGE_AMOUNT_TAG = "energy_amount"
-    }
-
-    val energyStorage =
-        object : SimpleEnergyStorage(capacity, capacity, capacity) {
-
-            override fun onFinalCommit() {
-                setChanged()
-            }
-        }
-
-    override fun saveAdditional(tag: CompoundTag) {
-        tag.putLong(ENERGY_STORAGE_AMOUNT_TAG, energyStorage.amount)
-
-        super.saveAdditional(tag)
-    }
-
-    override fun load(tag: CompoundTag) {
-        energyStorage.amount = tag.getLong(ENERGY_STORAGE_AMOUNT_TAG)
-
-        super.load(tag)
-    }
+    override val self: BlockEntity = this
+    override val energyContainer: SimpleEnergyStorage =
+        createEnergyContainer(capacity, capacity, capacity)
 
     override fun writeScreenOpeningData(player: ServerPlayer, buf: FriendlyByteBuf) {
-        buf.writeLong(energyStorage.capacity)
-        buf.writeLong(energyStorage.amount)
+        buf.writeLong(energyContainer.capacity)
+        buf.writeLong(energyContainer.amount)
     }
 }

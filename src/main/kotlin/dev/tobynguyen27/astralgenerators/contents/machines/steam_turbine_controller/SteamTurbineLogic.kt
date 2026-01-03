@@ -20,7 +20,7 @@ object SteamTurbineLogic {
     fun produceWater(blockEntity: FluidHatchBlockEntity): Long {
         Transaction.openOuter().use {
             val producedAmount =
-                blockEntity.fluidStorage.insert(
+                blockEntity.fluidContainer.insert(
                     FluidVariant.of(Fluids.WATER.source),
                     MAX_STEAM_INTAKE,
                     it,
@@ -34,7 +34,7 @@ object SteamTurbineLogic {
 
     fun produceEnergy(blockEntity: EnergyHatchBlockEntity, amount: Long): Long {
         Transaction.openOuter().use {
-            val producedAmount = blockEntity.energyStorage.insert(amount, it)
+            val producedAmount = blockEntity.energyContainer.insert(amount, it)
 
             if (producedAmount > 0L) it.commit()
 
@@ -45,7 +45,7 @@ object SteamTurbineLogic {
     fun consumeSteam(blockEntity: FluidHatchBlockEntity): Long {
         Transaction.openOuter().use {
             val consumedAmount =
-                blockEntity.fluidStorage.extract(
+                blockEntity.fluidContainer.extract(
                     FluidVariant.of(AGFluids.STEAM.get().source),
                     MAX_STEAM_INTAKE,
                     it,

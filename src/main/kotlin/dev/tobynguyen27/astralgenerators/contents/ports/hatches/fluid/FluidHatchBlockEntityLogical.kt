@@ -24,7 +24,7 @@ object FluidHatchBlockEntityLogical {
         if (
             blockEntity.autoExport == 0 &&
                 blockEntity.mode == PortBlockSpecification.Mode.OUTPUT &&
-                !blockEntity.fluidStorage.isResourceBlank
+                !blockEntity.fluidContainer.isResourceBlank
         ) {
             Transaction.openOuter().use {
                 for (direction in Direction.entries) {
@@ -38,10 +38,10 @@ object FluidHatchBlockEntityLogical {
 
                     val movedAmount =
                         StorageUtil.move(
-                            blockEntity.fluidStorage,
+                            blockEntity.fluidContainer,
                             neighborStorage,
                             { true },
-                            blockEntity.fluidStorage.amount,
+                            blockEntity.fluidContainer.amount,
                             it,
                         )
 
@@ -67,9 +67,9 @@ object FluidHatchBlockEntityLogical {
                     val movedAmount =
                         StorageUtil.move(
                             neighborStorage,
-                            blockEntity.fluidStorage,
+                            blockEntity.fluidContainer,
                             { true },
-                            blockEntity.fluidStorage.capacity,
+                            blockEntity.fluidContainer.capacity,
                             it,
                         )
 

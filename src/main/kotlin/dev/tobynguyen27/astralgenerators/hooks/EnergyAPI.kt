@@ -26,7 +26,7 @@ object EnergyAPI {
             )
             .forEach {
                 EnergyStorage.SIDED.registerForBlockEntity(
-                    { blockEntity, _ -> blockEntity.energyStorage },
+                    { blockEntity, _ -> blockEntity.energyContainer },
                     it.get(),
                 )
             }

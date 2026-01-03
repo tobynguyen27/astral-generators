@@ -75,7 +75,7 @@ class EnergyHatchMenu(
                 val blockEntity =
                     world.getBlockEntity(blockPos) as? EnergyHatchBlockEntity ?: return@execute
 
-                val energyAmount = blockEntity.energyStorage.amount
+                val energyAmount = blockEntity.energyContainer.amount
                 this.lastEnergyAmount = energyAmount
             }
         }
@@ -92,7 +92,7 @@ class EnergyHatchMenu(
             val blockEntity =
                 world.getBlockEntity(blockPos) as? EnergyHatchBlockEntity ?: return@execute
 
-            val energyAmount = blockEntity.energyStorage.amount
+            val energyAmount = blockEntity.energyContainer.amount
             if (energyAmount != this.lastEnergyAmount) {
                 this.lastEnergyAmount = energyAmount
                 ScreenNetworking.of(this, NetworkSide.SERVER).send(Packets.ENERGY_AMOUNT) { packet
