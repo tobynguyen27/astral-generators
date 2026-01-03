@@ -33,7 +33,8 @@ class SteamTurbineControllerBlockEntity(
         const val CONTAINER_DATA_SIZE = 3
     }
 
-    private val managedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val self: BlockEntity = this
 
     // Data
     @Persisted var isEnabled = 0
@@ -95,8 +96,4 @@ class SteamTurbineControllerBlockEntity(
     override fun getPropertyDelegate(): ContainerData {
         return containerData
     }
-
-    override fun getSelf(): BlockEntity = this
-
-    override fun getFieldContainer(): ManagedFieldContainer = managedFieldContainer
 }

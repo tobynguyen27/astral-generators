@@ -40,7 +40,8 @@ class BoilerControllerBlockEntity(
         const val CONTAINER_DATA_SIZE = 5
     }
 
-    private val managedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val self: BlockEntity = this
 
     @Persisted var isEnabled = 0
     @Persisted var burnTime = 0
@@ -132,8 +133,4 @@ class BoilerControllerBlockEntity(
     override fun getMultiblockShape(): ShapeTemplate {
         return BoilerMultiblock.SHAPE
     }
-
-    override fun getSelf(): BlockEntity = this
-
-    override fun getFieldContainer(): ManagedFieldContainer = managedFieldContainer
 }

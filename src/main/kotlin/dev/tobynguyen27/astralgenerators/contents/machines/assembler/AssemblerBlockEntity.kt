@@ -1,6 +1,8 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
 import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyContainerAttribute
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.FluidContainerAttribute
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import dev.tobynguyen27.sense.sync.annotation.Persisted
 import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
@@ -41,7 +43,8 @@ class AssemblerBlockEntity(
     ExtendedScreenHandlerFactory,
     IInventory,
     WorldlyContainer,
-    AutoPersistBlockEntity {
+    AutoPersistBlockEntity,
+EnergyContainerAttribute, FluidContainerAttribute{
 
     companion object {
         const val ID = "assembler_entity"
@@ -69,8 +72,6 @@ class AssemblerBlockEntity(
         const val SAVED_RECIPE_ID_TAG = "saved_recipe_id"
     }
 
-    val managedFieldContainer by lazy { ManagedFieldContainer(this) }
-
     // Progress
     @Persisted var isEnabled = 0
     @Persisted var maxProgress: Int = 100
@@ -78,25 +79,10 @@ class AssemblerBlockEntity(
     var savedRecipeId: ResourceLocation? = null
     var cachedRecipe: AssemblerRecipe? = null
 
-    // Energy
-    val energyContainer =
-        object : SimpleEnergyStorage(ENERGY_CAPACITY, MAX_ENERGY_INSERT, MAX_ENERGY_EXTRACT) {
-            override fun onFinalCommit() {
-                setChanged()
-            }
-        }
-
-    // Fluid
-    val fluidContainer =
-        object : SingleVariantStorage<FluidVariant>() {
-            override fun getBlankVariant(): FluidVariant = FluidVariant.blank()
-
-            override fun getCapacity(p0: FluidVariant): Long = MAX_FLUID_CAPACITY_IN_BUCKET
-
-            override fun onFinalCommit() {
-                setChanged()
-            }
-        }
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val self: BlockEntity = this
+    override val energyContainer: SimpleEnergyStorage = createEnergyContainer(ENERGY_CAPACITY, MAX_ENERGY_EXTRACT, MAX_ENERGY_INSERT)
+    override val fluidContainer: SingleVariantStorage<FluidVariant> = createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)
 
     // Container
     private val items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY)
@@ -138,10 +124,8 @@ class AssemblerBlockEntity(
     }
 
     override fun load(tag: CompoundTag) {
-        energyContainer.amount = tag.getLong(ENERGY_STORAGE_TAG)
-
-        fluidContainer.amount = tag.getLong(FLUID_STORAGE_AMOUNT_TAG)
-        fluidContainer.variant = FluidVariant.fromNbt(tag.getCompound(FLUID_STORAGE_TYPE_TAG))
+        loadEnergyData(tag)
+        loadFluidData(tag)
 
         ContainerHelper.loadAllItems(tag, items)
 
@@ -156,10 +140,8 @@ class AssemblerBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag) {
-        tag.putLong(ENERGY_STORAGE_TAG, energyContainer.amount)
-
-        tag.putLong(FLUID_STORAGE_AMOUNT_TAG, fluidContainer.amount)
-        tag.put(FLUID_STORAGE_TYPE_TAG, fluidContainer.variant.toNbt())
+        saveEnergyData(tag)
+        saveFluidData(tag)
 
         ContainerHelper.saveAllItems(tag, items)
 
@@ -212,8 +194,4 @@ class AssemblerBlockEntity(
     ): Boolean {
         return direction == Direction.DOWN && index == CONTAINER_SIZE - 1
     }
-
-    override fun getFieldContainer(): ManagedFieldContainer = managedFieldContainer
-
-    override fun getSelf(): BlockEntity = this
 }
