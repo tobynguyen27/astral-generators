@@ -126,9 +126,6 @@ class AssemblerBlockEntity(
     }
 
     override fun load(tag: CompoundTag) {
-        loadEnergyData(tag)
-        loadFluidData(tag)
-
         ContainerHelper.loadAllItems(tag, items)
 
         if (tag.contains(SAVED_RECIPE_ID_TAG)) {
@@ -142,9 +139,6 @@ class AssemblerBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag) {
-        saveEnergyData(tag)
-        saveFluidData(tag)
-
         ContainerHelper.saveAllItems(tag, items)
 
         cachedRecipe?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
