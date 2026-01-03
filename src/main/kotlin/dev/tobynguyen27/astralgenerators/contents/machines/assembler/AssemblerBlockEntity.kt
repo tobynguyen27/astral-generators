@@ -1,8 +1,8 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
-import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyContainerAttribute
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.FluidContainerAttribute
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.MenuProviderAttribute
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import dev.tobynguyen27.sense.sync.annotation.Persisted
 import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
@@ -23,7 +23,6 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.WorldlyContainer
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
@@ -38,13 +37,15 @@ class AssemblerBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) :
-    MachineBlockEntity(type, blockPos, blockState),
+    BlockEntity(type, blockPos, blockState),
     PropertyDelegateHolder,
     ExtendedScreenHandlerFactory,
     IInventory,
     WorldlyContainer,
     AutoPersistBlockEntity,
-EnergyContainerAttribute, FluidContainerAttribute{
+    EnergyContainerAttribute,
+    FluidContainerAttribute,
+    MenuProviderAttribute {
 
     companion object {
         const val ID = "assembler_entity"
@@ -53,12 +54,9 @@ EnergyContainerAttribute, FluidContainerAttribute{
         private const val ENERGY_CAPACITY = 100000.toLong()
         private const val MAX_ENERGY_INSERT = 100000.toLong()
         private const val MAX_ENERGY_EXTRACT = 100000.toLong()
-        private const val ENERGY_STORAGE_TAG = "assembler_energy"
 
         // Fluid
         private const val MAX_FLUID_CAPACITY_IN_BUCKET = 10 * FluidConstants.BUCKET // 10 buckets
-        private const val FLUID_STORAGE_AMOUNT_TAG = "assembler_fluid_amount"
-        private const val FLUID_STORAGE_TYPE_TAG = "assembler_fluid_type"
 
         // Container
         const val CONTAINER_SIZE = 10
@@ -81,8 +79,12 @@ EnergyContainerAttribute, FluidContainerAttribute{
 
     override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
     override val self: BlockEntity = this
-    override val energyContainer: SimpleEnergyStorage = createEnergyContainer(ENERGY_CAPACITY, MAX_ENERGY_EXTRACT, MAX_ENERGY_INSERT)
-    override val fluidContainer: SingleVariantStorage<FluidVariant> = createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)
+    override val energyContainer: SimpleEnergyStorage =
+        createEnergyContainer(ENERGY_CAPACITY, MAX_ENERGY_EXTRACT, MAX_ENERGY_INSERT)
+    override val fluidContainer: SingleVariantStorage<FluidVariant> =
+        createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)
+    override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
+        ::AssemblerMenu
 
     // Container
     private val items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY)
@@ -120,7 +122,7 @@ EnergyContainerAttribute, FluidContainerAttribute{
         }
 
     override fun setChanged() {
-        super<MachineBlockEntity>.setChanged()
+        super<BlockEntity>.setChanged()
     }
 
     override fun load(tag: CompoundTag) {
@@ -148,11 +150,6 @@ EnergyContainerAttribute, FluidContainerAttribute{
         cachedRecipe?.let { tag.putString(SAVED_RECIPE_ID_TAG, it.id.toString()) }
 
         super.saveAdditional(tag)
-    }
-
-    // Menu
-    override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
-        return AssemblerMenu(i, inventory, ContainerLevelAccess.create(player.level, blockPos))
     }
 
     override fun getPropertyDelegate(): ContainerData {
