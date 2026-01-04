@@ -62,65 +62,60 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
     }
 
     init {
-        val root = WGridPanel(6)
+        val root =
+            WGridPanel(6).apply {
+                // Base
+                this.setInsets(Insets.ROOT_PANEL)
+                this.add(createPlayerInventoryPanel(), 0, 15)
+
+                // Item slots
+                val inputSlots = WItemSlot(blockInventory, 0, 3, 3, false)
+                this.add(inputSlots, 8, 3)
+
+                val outputSlot = WItemSlot(blockInventory, 9, 1, 1, true)
+                outputSlot.isInsertingAllowed = false
+                this.add(outputSlot, 23, 6)
+
+                // Energy bar
+                val energyBar = EnergyBar({ energyCapacity }, { energyAmount })
+                this.add(energyBar, 0, 3, 3, 9)
+
+                // Fluid tank
+                val fluidTank = FluidBar({ fluidVariant }, { fluidCapacity }, { fluidAmount })
+                this.add(fluidTank, 4, 3, 3, 9)
+
+                // Progress bar
+                val progressBar =
+                    ProgressBar(
+                        Identifier("textures/gui/widgets/widget_progress_empty.png"),
+                        Identifier("textures/gui/widgets/widget_progress_full.png"),
+                        1,
+                        0,
+                    )
+                this.add(progressBar, 18, 6, 3, 3)
+
+                val powerButton = PowerButton(IS_ENABLED_INDEX)
+                powerButton.onToggle = {
+                    sendPacketFromClient(Packets.TOGGLE_MACHINE) { buf ->
+                        buf.writeInt(BooleanUtils.toInt(it))
+                    }
+                }
+                this.add(powerButton, 24, 11, 3, 3)
+
+                this.validate(this@AssemblerMenu)
+            }
         setRootPanel(root)
 
-        // Base
-        root.setInsets(Insets.ROOT_PANEL)
-        root.add(createPlayerInventoryPanel(), 0, 15)
-
-        // Item slots
-        val inputSlots = WItemSlot(blockInventory, 0, 3, 3, false)
-        root.add(inputSlots, 8, 3)
-
-        val outputSlot = WItemSlot(blockInventory, 9, 1, 1, true)
-        outputSlot.isInsertingAllowed = false
-        root.add(outputSlot, 23, 6)
-
-        // Energy bar
-        val energyBar = EnergyBar({ energyCapacity }, { energyAmount })
-        root.add(energyBar, 0, 3, 3, 9)
-
-        // Fluid tank
-        val fluidTank = FluidBar({ fluidVariant }, { fluidCapacity }, { fluidAmount })
-        root.add(fluidTank, 4, 3, 3, 9)
-
-        // Progress bar
-        val progressBar =
-            ProgressBar(
-                Identifier("textures/gui/widgets/widget_progress_empty.png"),
-                Identifier("textures/gui/widgets/widget_progress_full.png"),
-                1,
-                0,
-            )
-        root.add(progressBar, 18, 6, 3, 3)
-
-        val powerButton = PowerButton(IS_ENABLED_INDEX)
-        powerButton.onToggle = {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_MACHINE) { packet ->
-                packet.writeInt(BooleanUtils.toInt(it))
-            }
-        }
-        ScreenNetworking.of(this, NetworkSide.SERVER).receive(Packets.TOGGLE_MACHINE) { packet ->
-            propertyDelegate.set(IS_ENABLED_INDEX, packet.readInt())
-        }
-        root.add(powerButton, 24, 11, 3, 3)
-
-        root.validate(this)
-
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.ENERGY_AMOUNT) { packet ->
-                energyAmount = packet.readLong()
+            receivePacketOnClient(Packets.ENERGY_AMOUNT) { energyAmount = it.readLong() }
+            receivePacketOnClient(Packets.FLUID_AMOUNT) { fluidAmount = it.readLong() }
+            receivePacketOnClient(Packets.FLUID_VARIANT) {
+                fluidVariant = FluidVariant.fromPacket(it)
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_AMOUNT) { packet ->
-                fluidAmount = packet.readLong()
+        } else {
+            receivePacketOnServer(Packets.TOGGLE_MACHINE) {
+                propertyDelegate.set(IS_ENABLED_INDEX, it.readInt())
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_VARIANT) { packet ->
-                fluidVariant = FluidVariant.fromPacket(packet)
-            }
-        }
-
-        if (!world.isClientSide) {
             ctx.execute { world, blockPos ->
                 val blockEntity =
                     world.getBlockEntity(blockPos) as? AssemblerBlockEntity ?: return@execute
@@ -139,9 +134,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
     override fun broadcastChanges() {
         super.broadcastChanges()
 
-        if (world.isClientSide) {
-            return
-        }
+        if (world.isClientSide) return
 
         ctx.execute { world, blockPos ->
             val blockEntity =
