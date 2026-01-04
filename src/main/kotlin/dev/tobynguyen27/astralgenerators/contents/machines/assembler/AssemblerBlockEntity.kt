@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyContainerAttribute
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.FluidContainerAttribute
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.InventoryAttribute
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.MenuProviderAttribute
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import dev.tobynguyen27.sense.sync.annotation.Persisted
@@ -40,12 +41,12 @@ class AssemblerBlockEntity(
     BlockEntity(type, blockPos, blockState),
     PropertyDelegateHolder,
     ExtendedScreenHandlerFactory,
-    IInventory,
     WorldlyContainer,
     AutoPersistBlockEntity,
     EnergyContainerAttribute,
     FluidContainerAttribute,
-    MenuProviderAttribute {
+    MenuProviderAttribute,
+InventoryAttribute{
 
     companion object {
         const val ID = "assembler_entity"
@@ -87,17 +88,12 @@ class AssemblerBlockEntity(
         createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)
     override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
         ::AssemblerMenu
+    override val items: NonNullList<ItemStack> = createInventory(CONTAINER_SIZE)
 
     // Container
-    private val items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY)
-
     val containerWrapper = InventoryStorage.of(this, null)
     val inputsStorage = containerWrapper.slots.subList(0, CONTAINER_SIZE - 1)
     val outputStorage = containerWrapper.getSlot(CONTAINER_SIZE - 1)
-
-    override fun getItems(): NonNullList<ItemStack> {
-        return items
-    }
 
     // Data
     val containerData =
@@ -124,7 +120,7 @@ class AssemblerBlockEntity(
         }
 
     override fun setChanged() {
-        super<BlockEntity>.setChanged()
+        super.setChanged()
     }
 
     override fun load(tag: CompoundTag) {

@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.ports.buses
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.InventoryAttribute
 import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage
@@ -15,6 +16,7 @@ import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.WorldlyContainer
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -28,22 +30,19 @@ abstract class BusBlockEntity(
     casingBlock: BlockState?,
 ) :
     PortBlockEntity(blockEntityType, blockPos, blockState, tier, mode, casingBlock),
-    IInventory,
+    InventoryAttribute,
     MenuProvider,
     WorldlyContainer,
     RenderAttachmentBlockEntity {
 
-    private val items: NonNullList<ItemStack> = NonNullList.withSize(size, ItemStack.EMPTY)
+    override val self: BlockEntity = this
+    override val items: NonNullList<ItemStack> = createInventory(size)
 
     val containerWrapper: InventoryStorage = InventoryStorage.of(this, null)
     val storage: List<SingleSlotStorage<ItemVariant>> = containerWrapper.slots
 
-    override fun getItems(): NonNullList<ItemStack> {
-        return items
-    }
-
     override fun setChanged() {
-        super<PortBlockEntity>.setChanged()
+        super.setChanged()
     }
 
     override fun saveAdditional(tag: CompoundTag) {

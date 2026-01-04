@@ -19,7 +19,7 @@ abstract class BusBlock(properties: Properties) : PortBlock(properties) {
             val blockEntity = level.getBlockEntity(pos)
 
             if (blockEntity is BusBlockEntity) {
-                Containers.dropContents(level, pos, blockEntity.getItems())
+                Containers.dropContents(level, pos, blockEntity.items)
                 level.updateNeighbourForOutputSignal(pos, this)
             }
         }
