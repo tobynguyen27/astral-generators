@@ -4,6 +4,9 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.FluidContainerAttribute
 import dev.tobynguyen27.codebebelib.fluid.FluidUtils
+import dev.tobynguyen27.sense.sync.annotation.Persisted
+import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
+import dev.tobynguyen27.sense.sync.container.ManagedFieldContainer
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage
@@ -25,10 +28,14 @@ abstract class FluidHatchBlockEntity(
 ) :
     PortBlockEntity(blockEntityType, blockPos, blockState, tier, mode, casingBlock),
     ExtendedScreenHandlerFactory,
-    FluidContainerAttribute {
+    FluidContainerAttribute,
+    AutoPersistBlockEntity {
 
     override val self: BlockEntity = this
-    override val fluidContainer: SingleVariantStorage<FluidVariant> =
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
+
+    @Persisted
+    override var fluidContainer: SingleVariantStorage<FluidVariant> =
         createFluidContainer(capacityInBucket * FluidUtils.B)
 
     override fun writeScreenOpeningData(player: ServerPlayer, buf: FriendlyByteBuf) {

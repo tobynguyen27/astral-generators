@@ -70,19 +70,20 @@ class AssemblerBlockEntity(
         const val SAVED_RECIPE_ID_TAG = "saved_recipe_id"
     }
 
-    // Progress
-    @Persisted var isEnabled = 0
-    @Persisted var maxProgress: Int = 100
-    @Persisted var progress: Int = 0
+    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
+    override val self: BlockEntity = this
+
     var savedRecipeId: ResourceLocation? = null
     var cachedRecipe: AssemblerRecipe? = null
 
-    override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
-    override val self: BlockEntity = this
+    @Persisted var isEnabled = 0
+    @Persisted var maxProgress: Int = 100
+    @Persisted var progress: Int = 0
     @Persisted
     override var energyContainer: SimpleEnergyStorage =
         createEnergyContainer(ENERGY_CAPACITY, MAX_ENERGY_EXTRACT, MAX_ENERGY_INSERT)
-    override val fluidContainer: SingleVariantStorage<FluidVariant> =
+    @Persisted
+    override var fluidContainer: SingleVariantStorage<FluidVariant> =
         createFluidContainer(MAX_FLUID_CAPACITY_IN_BUCKET)
     override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
         ::AssemblerMenu
