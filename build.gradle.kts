@@ -109,8 +109,8 @@ loom {
 tasks.withType<ProcessResources>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    val loader_version: String by project
-    val minecraft_version: String by project
+    val loader_version = libs.versions.fabric.loader
+    val minecraft_version = libs.versions.minecraft
     val mod_name: String by project
     val mod_id: String by project
     val mod_license: String by project
