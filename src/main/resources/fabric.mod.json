@@ -54,6 +54,6 @@
         "fabric-api": "*",
         "fabric-language-kotlin": "*",
         "codebebelib": ">=2.0.0-beta",
-        "sense": ">=1.0.1"
+        "sense": ">=1.0.2"
     }
 }
