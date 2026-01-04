@@ -50,27 +50,25 @@ class EnergyHatchMenu(
     private var lastEnergyAmount = 0L
 
     init {
-        val root = WGridPanel(6)
+        val root =
+            WGridPanel(6).apply {
+                // Base
+                this.setInsets(Insets.ROOT_PANEL)
+                this.add(createPlayerInventoryPanel(), 0, 11)
+
+                val energyBar = EnergyBar({ energyCapacity }, { energyAmount })
+                this.add(energyBar, 12, 2, 3, 9)
+
+                addIOButton(this)
+
+                this.validate(this@EnergyHatchMenu)
+            }
+
         setRootPanel(root)
 
-        // Base
-        root.setInsets(Insets.ROOT_PANEL)
-        root.add(createPlayerInventoryPanel(), 0, 11)
-
-        val energyBar = EnergyBar({ energyCapacity }, { energyAmount })
-        root.add(energyBar, 12, 2, 3, 9)
-
-        addIOButton(root)
-
-        root.validate(this)
-
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.ENERGY_AMOUNT) { packet ->
-                energyAmount = packet.readLong()
-            }
-        }
-
-        if (!world.isClientSide) {
+            receivePacketOnClient(Packets.ENERGY_AMOUNT) { energyAmount = it.readLong() }
+        } else {
             ctx.execute { world, blockPos ->
                 val blockEntity =
                     world.getBlockEntity(blockPos) as? EnergyHatchBlockEntity ?: return@execute
@@ -84,9 +82,7 @@ class EnergyHatchMenu(
     override fun broadcastChanges() {
         super.broadcastChanges()
 
-        if (world.isClientSide) {
-            return
-        }
+        if (world.isClientSide) return
 
         ctx.execute { world, blockPos ->
             val blockEntity =

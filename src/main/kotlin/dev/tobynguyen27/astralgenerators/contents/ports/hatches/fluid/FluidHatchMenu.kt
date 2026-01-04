@@ -69,15 +69,11 @@ class FluidHatchMenu(
         root.validate(this)
 
         if (world.isClientSide) {
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_AMOUNT) { packet ->
-                fluidAmount = packet.readLong()
+            receivePacketOnClient(Packets.FLUID_AMOUNT) { fluidAmount = it.readLong() }
+            receivePacketOnClient(Packets.FLUID_VARIANT) {
+                fluidVariant = FluidVariant.fromPacket(it)
             }
-            ScreenNetworking.of(this, NetworkSide.CLIENT).receive(Packets.FLUID_VARIANT) { packet ->
-                fluidVariant = FluidVariant.fromPacket(packet)
-            }
-        }
-
-        if (!world.isClientSide) {
+        } else {
             ctx.execute { world, blockPos ->
                 val blockEntity =
                     world.getBlockEntity(blockPos) as? FluidHatchBlockEntity ?: return@execute
@@ -93,9 +89,7 @@ class FluidHatchMenu(
     override fun broadcastChanges() {
         super.broadcastChanges()
 
-        if (world.isClientSide) {
-            return
-        }
+        if (world.isClientSide) return
 
         ctx.execute { world, blockPos ->
             val blockEntity =
