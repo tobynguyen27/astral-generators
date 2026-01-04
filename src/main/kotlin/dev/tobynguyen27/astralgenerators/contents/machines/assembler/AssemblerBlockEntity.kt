@@ -4,7 +4,6 @@ import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.EnergyConta
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.FluidContainerAttribute
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.InventoryAttribute
 import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.MenuProviderAttribute
-import dev.tobynguyen27.astralgenerators.core.util.IInventory
 import dev.tobynguyen27.sense.sync.annotation.Persisted
 import dev.tobynguyen27.sense.sync.blockentity.AutoPersistBlockEntity
 import dev.tobynguyen27.sense.sync.container.ManagedFieldContainer
@@ -46,7 +45,7 @@ class AssemblerBlockEntity(
     EnergyContainerAttribute,
     FluidContainerAttribute,
     MenuProviderAttribute,
-InventoryAttribute{
+    InventoryAttribute {
 
     companion object {
         const val ID = "assembler_entity"
