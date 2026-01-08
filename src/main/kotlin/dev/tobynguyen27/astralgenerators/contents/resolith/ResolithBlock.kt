@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith
 
-import dev.tobynguyen27.astralgenerators.contents.resolith.network.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock

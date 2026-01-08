@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.items
 
-import dev.tobynguyen27.astralgenerators.contents.resolith.network.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
 import dev.tobynguyen27.astralgenerators.data.client.Texts
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos

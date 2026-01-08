@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.client.render.resolith
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.tobynguyen27.astralgenerators.contents.resolith.network.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
 import java.util.*
 
 object ResolithLaserRenderingQueue {

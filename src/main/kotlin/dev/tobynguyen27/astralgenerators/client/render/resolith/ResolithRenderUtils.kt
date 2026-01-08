@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Matrix4f
 import com.mojang.math.Vector3f
-import dev.tobynguyen27.astralgenerators.contents.resolith.network.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
 import java.util.Queue
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.OverlayTexture

@@ -2,7 +2,7 @@ package dev.tobynguyen27.astralgenerators.client.render.resolith
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.VertexFormat
-import dev.tobynguyen27.astralgenerators.contents.resolith.network.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.codebebelib.render.RenderUtils
 import dev.tobynguyen27.codebebelib.render.buffer.TransformingVertexConsumer

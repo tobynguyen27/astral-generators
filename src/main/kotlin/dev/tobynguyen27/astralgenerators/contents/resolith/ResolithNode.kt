@@ -1,6 +1,5 @@
-package dev.tobynguyen27.astralgenerators.contents.resolith.network
+package dev.tobynguyen27.astralgenerators.contents.resolith
 
-import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
