@@ -24,9 +24,26 @@ import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.input.indu
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.advanced.AdvancedFluidOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.basic.BasicFluidOutputHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.output.industrial.IndustrialFluidOutputHatchBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import net.minecraft.core.Registry
 
 object AGBlockEntities {
+
+    val RAW_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(AGBlocks.RAW_RESOLITH_PYLON.getSibling(Registry.BLOCK_ENTITY_TYPE))
+
+    val PURE_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(AGBlocks.PURE_RESOLITH_PYLON.getSibling(Registry.BLOCK_ENTITY_TYPE))
+
+    val RAW_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(
+            AGBlocks.RAW_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+
+    val PURE_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(
+            AGBlocks.PURE_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
 
     val ASSEMBLER: BlockEntityEntry<AssemblerBlockEntity> =
         BlockEntityEntry.cast(AGBlocks.ASSEMBLER.getSibling(Registry.BLOCK_ENTITY_TYPE))

@@ -22,6 +22,29 @@ import net.minecraftforge.client.model.generators.ModelFile
 
 object BlockRegistry {
 
+    fun <T : Block> registerResolith(
+        name: String,
+        factory: NonNullFunction<BlockBehaviour.Properties, T>,
+    ): BlockBuilder<T, Registrate> {
+        return REGISTRATE.block(name, factory)
+            .lang(FormattingUtil.toEnglishName(name))
+            .properties {
+                FabricBlockSettings.of(Material.AMETHYST)
+                    .sound(SoundType.AMETHYST)
+                    .strength(5f)
+                    .explosionResistance(6.0f)
+                    .requiresCorrectToolForDrops()
+            }
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .simpleItem()
+            .blockstate { ctx, prov ->
+                prov.simpleBlock(
+                    ctx.getEntry(),
+                    prov.models().getExistingFile(prov.modLoc("block/${ctx.name}")),
+                )
+            }
+    }
+
     fun <T : RotatedPillarBlock> registerColumnBlock(
         name: String,
         factory: NonNullFunction<BlockBehaviour.Properties, T>,

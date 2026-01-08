@@ -17,10 +17,26 @@ object Texts {
     const val TEMPERATURE = "text.temperature"
     const val MAX_TEMPERATURE = "text.maxtemperature"
     const val CURRENT_TEMPERATURE = "text.currenttemperature"
+    const val NODE_SELECTED = "text.node.selected"
+    const val NODE_SELECTION_REQUIRED = "text.node.select.require"
+    const val NODE_BIND_SELF = "text.node.bind.self"
+    const val NODE_SELECTED_NO_EXISTS = "text.node.selected.no.exists"
+    const val NODE_CONNECTION_REMOVED = "text.node.connection.removed"
+    const val NODE_CONNECTION_CREATED = "text.node.connection.created"
+    const val NODE_LIMIT_REACHED = "text.node.limit.reached"
+    const val NODE_SELECTED_CLEAR = "text.node.selected.clear"
 
     fun register() {
         val texts =
             hashMapOf(
+                NODE_LIMIT_REACHED to "Connection failed (Limit reached)",
+                NODE_CONNECTION_CREATED to "Connection created",
+                NODE_CONNECTION_REMOVED to "Connection removed",
+                NODE_SELECTED_NO_EXISTS to "Selected Resolith no longer exists",
+                NODE_BIND_SELF to "Cannot bind Resolith to itself",
+                NODE_SELECTION_REQUIRED to "Sneak + Right Click on a Resolith to select it first",
+                NODE_SELECTED to "Selected Resolith: %s",
+                NODE_SELECTED_CLEAR to "Selected block position cleared",
                 ENERGY to "Energy",
                 CAPACITY to "Capacity",
                 STORED to "Stored",

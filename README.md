@@ -31,6 +31,7 @@ Credits
 - [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization): Multiblock validator API.
 - [GregTech Refreshed](https://github.com/ULSTICK/GregTechRefreshed): For some textures.
 - [GregTech Modern](https://github.com/GregTechCEu/GregTech-Modern): For some sounds.
+- [LaserIO](https://github.com/Direwolf20-MC/LaserIO): For Resolith connection animation.
 
 License
 ---

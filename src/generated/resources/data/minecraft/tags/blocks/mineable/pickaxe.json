@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
+    "astralgenerators:iron_resolith_relay",
+    "astralgenerators:electrum_resolith_relay",
+    "astralgenerators:iron_resolith_transceiver",
+    "astralgenerators:electrum_resolith_transceiver",
     "astralgenerators:calvar_casing",
     "astralgenerators:boiler_casing",
     "astralgenerators:steam_turbine_casing",

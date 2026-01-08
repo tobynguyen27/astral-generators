@@ -100,17 +100,14 @@ loom {
             vmArg("-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}")
         }
 
-        getByName("server") { runDir("run/server") }
-
-        getByName("client") { programArgs(setOf("--username", "Toby")) }
+        named("server") { runDir("run/server") }
+        named("client") { programArgs(setOf("--username", "Toby")) }
     }
 }
 
 tasks.withType<ProcessResources>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    val loader_version = libs.versions.fabric.loader
-    val minecraft_version = libs.versions.minecraft
     val mod_name: String by project
     val mod_id: String by project
     val mod_license: String by project
@@ -119,8 +116,8 @@ tasks.withType<ProcessResources>().configureEach {
 
     val replaceProperties =
         hashMapOf(
-            "loader_version" to loader_version,
-            "minecraft_version" to minecraft_version,
+            "loader_version" to libs.versions.fabric.loader.get(),
+            "minecraft_version" to libs.versions.minecraft.get(),
             "mod_id" to mod_id,
             "mod_name" to mod_name,
             "mod_license" to mod_license,
