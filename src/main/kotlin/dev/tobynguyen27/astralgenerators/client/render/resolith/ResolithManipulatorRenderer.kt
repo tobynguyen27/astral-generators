@@ -67,7 +67,7 @@ object ResolithManipulatorRenderer {
         if (shape.isEmpty) {
             shape = Shapes.block()
         }
-        val box = Cuboid6(shape.bounds())
+        val box = Cuboid6(shape.bounds()).expand(0.005)
 
         val source = Minecraft.getInstance().renderBuffers().bufferSource()
         val camera = Minecraft.getInstance().gameRenderer.mainCamera
