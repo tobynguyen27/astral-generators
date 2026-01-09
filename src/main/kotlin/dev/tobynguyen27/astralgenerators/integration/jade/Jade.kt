@@ -16,11 +16,17 @@ class Jade : IWailaPlugin {
 
     override fun register(registration: IWailaCommonRegistration) {
         registration.registerBlockDataProvider(ResolithComponent, ResolithBlockEntity::class.java)
-        registration.registerBlockDataProvider(ResolithTransceiverComponent, ResolithTransceiverBlockEntity::class.java)
+        registration.registerBlockDataProvider(
+            ResolithTransceiverComponent,
+            ResolithTransceiverBlockEntity::class.java,
+        )
     }
 
     override fun registerClient(registration: IWailaClientRegistration) {
         registration.registerBlockComponent(ResolithComponent, ResolithBlock::class.java)
-        registration.registerBlockComponent(ResolithTransceiverComponent, ResolithTransceiver::class.java)
+        registration.registerBlockComponent(
+            ResolithTransceiverComponent,
+            ResolithTransceiver::class.java,
+        )
     }
 }

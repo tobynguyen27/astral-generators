@@ -35,12 +35,12 @@ abstract class ResolithTransceiver(properties: Properties) : ResolithBlock(prope
         pos: BlockPos,
         player: Player,
         hand: InteractionHand,
-        hit: BlockHitResult
+        hit: BlockHitResult,
     ): InteractionResult {
-        if(!level.isClientSide && player.isShiftKeyDown) {
+        if (!level.isClientSide && player.isShiftKeyDown) {
             val blockEntity = level.getBlockEntity(pos) ?: return InteractionResult.FAIL
 
-            if(blockEntity is ResolithTransceiverBlockEntity) {
+            if (blockEntity is ResolithTransceiverBlockEntity) {
                 blockEntity.isImport = !blockEntity.isImport
                 blockEntity.setChanged()
             }

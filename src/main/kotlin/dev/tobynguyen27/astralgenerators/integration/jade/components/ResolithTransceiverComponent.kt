@@ -16,28 +16,21 @@ import snownee.jade.api.IServerDataProvider
 import snownee.jade.api.ITooltip
 import snownee.jade.api.config.IPluginConfig
 
-object ResolithTransceiverComponent: IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+object ResolithTransceiverComponent : IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
     private const val MODE_KEY = "mode"
 
     override fun getUid(): ResourceLocation = Identifier("resolith_transceiver")
 
-    override fun appendTooltip(
-        tooltip: ITooltip,
-        accessor: BlockAccessor,
-        config: IPluginConfig
-    ) {
-        if (
-            accessor.serverData.contains(MODE_KEY)
-        ) {
+    override fun appendTooltip(tooltip: ITooltip, accessor: BlockAccessor, config: IPluginConfig) {
+        if (accessor.serverData.contains(MODE_KEY)) {
             val mode = accessor.serverData.getBoolean(MODE_KEY)
-            val modeKey = if(mode) TranslatableComponent(Texts.IMPORT) else TranslatableComponent(Texts.EXPORT)
+            val modeKey =
+                if (mode) TranslatableComponent(Texts.IMPORT)
+                else TranslatableComponent(Texts.EXPORT)
 
             tooltip.add(
-                TranslatableComponent(
-                    Texts.RESOLITH_RELAY_MODE,
-                    modeKey,
-                )
+                TranslatableComponent(Texts.RESOLITH_RELAY_MODE, modeKey)
                     .withStyle(ChatFormatting.GREEN)
             )
         }
@@ -48,7 +41,7 @@ object ResolithTransceiverComponent: IBlockComponentProvider, IServerDataProvide
         player: ServerPlayer,
         world: Level,
         blockEntity: BlockEntity,
-        showDetails: Boolean
+        showDetails: Boolean,
     ) {
         if (blockEntity is ResolithTransceiverBlockEntity) {
             data.putBoolean(MODE_KEY, blockEntity.isImport)

@@ -16,8 +16,7 @@ abstract class ResolithTransceiverBlockEntity(
     blockState: BlockState,
 ) : ResolithBlockEntity(type, blockPos, blockState), AutoPersistBlockEntity {
 
-    @Persisted
-    var isImport: Boolean = true
+    @Persisted var isImport: Boolean = true
 
     override val self: BlockEntity = this
     override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
