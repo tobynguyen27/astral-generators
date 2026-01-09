@@ -2,6 +2,7 @@ package dev.tobynguyen27.astralgenerators.contents.resolith
 
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
+import dev.tobynguyen27.codebebelib.vec.Vector3
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
@@ -95,7 +96,10 @@ abstract class ResolithBlockEntity(
                 return false
             if (!(first.hasFreeSlot() && second.hasFreeSlot())) return false
 
-            // TODO: Distance check
+            val vector1 = Vector3.fromBlockPos(first.blockPos)
+            val vector2 = Vector3.fromBlockPos(second.blockPos)
+
+            if(vector1.distance(vector2).toInt() > first.getMaxConnectionRange()) return false
 
             first.addConnection(second.blockPos)
             second.addConnection(first.blockPos)
