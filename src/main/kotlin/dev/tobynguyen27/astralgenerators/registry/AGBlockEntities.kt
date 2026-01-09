@@ -29,20 +29,22 @@ import net.minecraft.core.Registry
 
 object AGBlockEntities {
 
-    val RAW_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
-        BlockEntityEntry.cast(AGBlocks.RAW_RESOLITH_RELAY.getSibling(Registry.BLOCK_ENTITY_TYPE))
+    val IRON_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(AGBlocks.IRON_RESOLITH_RELAY.getSibling(Registry.BLOCK_ENTITY_TYPE))
 
-    val PURE_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
-        BlockEntityEntry.cast(AGBlocks.PURE_RESOLITH_RELAY.getSibling(Registry.BLOCK_ENTITY_TYPE))
-
-    val RAW_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
+    val ELECTRUM_RESOLITH_PYLON: BlockEntityEntry<ResolithBlockEntity> =
         BlockEntityEntry.cast(
-            AGBlocks.RAW_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+            AGBlocks.ELECTRUM_RESOLITH_RELAY.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
-    val PURE_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
+    val IRON_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
         BlockEntityEntry.cast(
-            AGBlocks.PURE_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+            AGBlocks.IRON_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
+        )
+
+    val ELECTRUM_RESOLITH_TRANSCEIVER: BlockEntityEntry<ResolithBlockEntity> =
+        BlockEntityEntry.cast(
+            AGBlocks.ELECTRUM_RESOLITH_TRANSCEIVER.getSibling(Registry.BLOCK_ENTITY_TYPE)
         )
 
     val ASSEMBLER: BlockEntityEntry<AssemblerBlockEntity> =

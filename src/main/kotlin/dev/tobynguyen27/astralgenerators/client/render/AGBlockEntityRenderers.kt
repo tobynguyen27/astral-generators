@@ -18,19 +18,19 @@ object AGBlockEntityRenderers {
             ::MultiblockProjectorBlockEntityRenderer,
         )
         BlockEntityRendererRegistry.register(
-            AGBlockEntities.RAW_RESOLITH_PYLON.get(),
+            AGBlockEntities.IRON_RESOLITH_PYLON.get(),
             ::ResolithBlockEntityRenderer,
         )
         BlockEntityRendererRegistry.register(
-            AGBlockEntities.PURE_RESOLITH_PYLON.get(),
+            AGBlockEntities.ELECTRUM_RESOLITH_PYLON.get(),
             ::ResolithBlockEntityRenderer,
         )
         BlockEntityRendererRegistry.register(
-            AGBlockEntities.RAW_RESOLITH_TRANSCEIVER.get(),
+            AGBlockEntities.IRON_RESOLITH_TRANSCEIVER.get(),
             ::ResolithBlockEntityRenderer,
         )
         BlockEntityRendererRegistry.register(
-            AGBlockEntities.PURE_RESOLITH_TRANSCEIVER.get(),
+            AGBlockEntities.ELECTRUM_RESOLITH_TRANSCEIVER.get(),
             ::ResolithBlockEntityRenderer,
         )
     }

@@ -58,6 +58,7 @@ abstract class ResolithBlockEntity(
         ResolithAttribute.getStats(getResolithType(), getResolithTier()).maxConnections
 
     abstract fun getResolithTier(): ResolithTier
+
     abstract fun getResolithType(): ResolithType
 
     // NBT

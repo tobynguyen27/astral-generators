@@ -30,44 +30,40 @@ import net.minecraft.world.level.block.Block
 
 object AGBlocks {
 
-    val RAW_RESOLITH_RELAY =
+    val IRON_RESOLITH_RELAY =
         BlockRegistry.registerResolith(
                 "iron_resolith_relay",
                 ::IronResolithRelay,
                 ResolithType.RELAY,
             )
-            .blockEntity { type, pos, state -> IronResolithRelayBlockEntity(type, pos, state) }
+            .blockEntity(::IronResolithRelayBlockEntity)
             .build()
             .register()
-    val PURE_RESOLITH_RELAY =
+    val ELECTRUM_RESOLITH_RELAY =
         BlockRegistry.registerResolith(
                 "electrum_resolith_relay",
                 ::ElectrumResolithRelay,
                 ResolithType.RELAY,
             )
-            .blockEntity { type, pos, state -> ElectrumResolithRelayBlockEntity(type, pos, state) }
+            .blockEntity(::ElectrumResolithRelayBlockEntity)
             .build()
             .register()
-    val RAW_RESOLITH_TRANSCEIVER =
+    val IRON_RESOLITH_TRANSCEIVER =
         BlockRegistry.registerResolith(
                 "iron_resolith_transceiver",
                 ::IronResolithTransceiver,
                 ResolithType.TRANSCEIVER,
             )
-            .blockEntity { type, pos, state ->
-                IronResolithTransceiverBlockEntity(type, pos, state)
-            }
+            .blockEntity(::IronResolithTransceiverBlockEntity)
             .build()
             .register()
-    val PURE_RESOLITH_TRANSCEIVER =
+    val ELECTRUM_RESOLITH_TRANSCEIVER =
         BlockRegistry.registerResolith(
                 "electrum_resolith_transceiver",
                 ::ElectrumResolithTransceiver,
                 ResolithType.TRANSCEIVER,
             )
-            .blockEntity { type, pos, state ->
-                ElectrumResolithTransceiverBlockEntity(type, pos, state)
-            }
+            .blockEntity(::ElectrumResolithTransceiverBlockEntity)
             .build()
             .register()
 

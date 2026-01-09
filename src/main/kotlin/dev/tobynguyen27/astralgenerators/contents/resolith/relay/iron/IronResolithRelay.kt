@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class IronResolithRelay(properties: Properties) : ResolithRelayBlock(properties) {
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
-        AGBlockEntities.RAW_RESOLITH_PYLON.create(pos, state)
+        AGBlockEntities.IRON_RESOLITH_PYLON.create(pos, state)
 
     override fun getResolithTier(): ResolithTier = ResolithTier.IRON
 }

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState
 class IronResolithTransceiver(properties: BlockBehaviour.Properties) :
     ResolithTransceiver(properties) {
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
-        AGBlockEntities.RAW_RESOLITH_TRANSCEIVER.create(pos, state)
+        AGBlockEntities.IRON_RESOLITH_TRANSCEIVER.create(pos, state)
 
     override fun getResolithTier(): ResolithTier = ResolithTier.IRON
 }
