@@ -26,8 +26,8 @@ object ResolithTransceiverComponent : IBlockComponentProvider, IServerDataProvid
         if (accessor.serverData.contains(MODE_KEY)) {
             val mode = accessor.serverData.getBoolean(MODE_KEY)
             val modeKey =
-                if (mode) TranslatableComponent(Texts.IMPORT)
-                else TranslatableComponent(Texts.EXPORT)
+                if (mode) TranslatableComponent(Texts.TRANSFER_ENERGY)
+                else TranslatableComponent(Texts.RECEIVE_ENERGY)
 
             tooltip.add(
                 TranslatableComponent(Texts.RESOLITH_RELAY_MODE, modeKey)

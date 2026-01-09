@@ -31,15 +31,15 @@ object Texts {
     const val NODE_MAX_RANGE = "text.node.max.range"
     const val NODE_MAX_CONNECTION_UNIT = "text.node.max.connection.unit"
     const val NODE_MAX_RANGE_UNIT = "text.node.max.range.unit"
-    const val EXPORT = "text.export"
-    const val IMPORT = "text.import"
+    const val RECEIVE_ENERGY = "text.receive"
+    const val TRANSFER_ENERGY = "text.transfer"
 
     fun register() {
         val texts =
             hashMapOf(
-                EXPORT to "Export",
-                IMPORT to "Import",
-                RESOLITH_RELAY_MODE to "Current mode: %s energy from this block",
+                RECEIVE_ENERGY to "Receive energy",
+                TRANSFER_ENERGY to "Send energy",
+                RESOLITH_RELAY_MODE to "Current mode: %s",
                 NODE_MAX_CONNECTION_UNIT to "%d nodes",
                 NODE_MAX_RANGE_UNIT to "%d blocks",
                 NODE_MAX_CONNECTION to "Max connections: ",
