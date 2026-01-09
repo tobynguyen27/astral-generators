@@ -11,5 +11,5 @@ abstract class ResolithRelayBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) : ResolithBlockEntity(type, blockPos, blockState) {
-    override fun getNodeType(): ResolithType = ResolithType.RELAY
+    override fun getResolithType(): ResolithType = ResolithType.RELAY
 }

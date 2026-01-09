@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith.relay.iron
 
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.relay.ResolithRelayBlockEntity
 import net.minecraft.core.BlockPos
@@ -11,7 +12,9 @@ class IronResolithRelayBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) : ResolithRelayBlockEntity(type, blockPos, blockState) {
-    override fun getTier(): ResolithTier = ResolithTier.IRON
+    override fun getMaxConnectionRange(): Int = ResolithAttribute.IRON_RELAY.range
 
-    override fun getConnectionLimit(): Int = 8
+    override fun getMaxConnection(): Int = ResolithAttribute.IRON_RELAY.maxConnections
+
+    override fun getResolithTier(): ResolithTier = ResolithTier.IRON
 }

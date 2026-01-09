@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Matrix4f
 import com.mojang.math.Vector3f
-import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import java.util.Queue
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 
 object ResolithRenderUtils {
 
-    fun drawLasers(nodes: Queue<ResolithNode>, poseStack: PoseStack) {
+    fun drawLasers(nodes: Queue<ResolithBlockEntity>, poseStack: PoseStack) {
         val client = Minecraft.getInstance()
         val buffer = client.renderBuffers().bufferSource()
         val projectedView = client.gameRenderer.mainCamera.position

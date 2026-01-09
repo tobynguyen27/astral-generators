@@ -2,7 +2,7 @@ package dev.tobynguyen27.astralgenerators.client.render.resolith
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.VertexFormat
-import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.codebebelib.render.RenderUtils
 import dev.tobynguyen27.codebebelib.render.buffer.TransformingVertexConsumer
@@ -60,7 +60,7 @@ object ResolithManipulatorRenderer {
         val level = context.world()
         val poseStack = context.matrixStack()
 
-        val isValid = level.getBlockEntity(targetPos) is ResolithNode
+        val isValid = level.getBlockEntity(targetPos) is ResolithBlockEntity
 
         val state = level.getBlockState(targetPos)
         var shape = state.getShape(level, targetPos)

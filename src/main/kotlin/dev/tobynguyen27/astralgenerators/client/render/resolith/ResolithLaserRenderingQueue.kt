@@ -1,11 +1,11 @@
 package dev.tobynguyen27.astralgenerators.client.render.resolith
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import java.util.*
 
 object ResolithLaserRenderingQueue {
-    val resolithNodes: Queue<ResolithNode> = LinkedList<ResolithNode>()
+    val resolithNodes: Queue<ResolithBlockEntity> = LinkedList<ResolithBlockEntity>()
 
     fun render(poseStack: PoseStack) {
         if (resolithNodes.isNotEmpty()) {
@@ -13,5 +13,5 @@ object ResolithLaserRenderingQueue {
         }
     }
 
-    fun add(node: ResolithNode) = resolithNodes.add(node)
+    fun add(node: ResolithBlockEntity) = resolithNodes.add(node)
 }

@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.iron
 
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.ResolithTransceiverBlockEntity
 import net.minecraft.core.BlockPos
@@ -11,7 +12,9 @@ class IronResolithTransceiverBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) : ResolithTransceiverBlockEntity(type, blockPos, blockState) {
-    override fun getTier(): ResolithTier = ResolithTier.IRON
+    override fun getMaxConnectionRange(): Int = ResolithAttribute.IRON_TRANSCEIVER.range
 
-    override fun getConnectionLimit(): Int = 2
+    override fun getMaxConnection(): Int = ResolithAttribute.IRON_TRANSCEIVER.maxConnections
+
+    override fun getResolithTier(): ResolithTier = ResolithTier.IRON
 }

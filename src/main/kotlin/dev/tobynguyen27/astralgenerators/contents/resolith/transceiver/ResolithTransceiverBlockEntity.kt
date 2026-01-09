@@ -11,5 +11,5 @@ abstract class ResolithTransceiverBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) : ResolithBlockEntity(type, blockPos, blockState) {
-    override fun getNodeType(): ResolithType = ResolithType.TRANSCEIVER
+    override fun getResolithType(): ResolithType = ResolithType.TRANSCEIVER
 }

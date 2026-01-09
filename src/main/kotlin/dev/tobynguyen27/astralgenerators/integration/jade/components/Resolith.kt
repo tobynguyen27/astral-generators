@@ -48,7 +48,7 @@ object Resolith : IBlockComponentProvider, IServerDataProvider<BlockEntity> {
     ) {
         if (blockEntity is ResolithBlockEntity) {
             data.putInt(CONNECTIONS_KEY, blockEntity.connectedNodes.size)
-            data.putInt(CONNECTIONS_LIMIT_KEY, blockEntity.getConnectionLimit())
+            data.putInt(CONNECTIONS_LIMIT_KEY, blockEntity.getMaxConnection())
         }
     }
 }

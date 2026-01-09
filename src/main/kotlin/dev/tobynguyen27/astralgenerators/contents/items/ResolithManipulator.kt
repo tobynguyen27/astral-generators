@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.items
 
-import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithNode
+import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlockEntity
 import dev.tobynguyen27.astralgenerators.data.client.Texts
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
@@ -30,7 +30,7 @@ class ResolithManipulator(properties: Item.Properties) : Item(properties) {
 
         val clickedBlockEntity = level.getBlockEntity(clickedPos)
 
-        if (clickedBlockEntity !is ResolithNode) return InteractionResult.PASS
+        if (clickedBlockEntity !is ResolithBlockEntity) return InteractionResult.PASS
 
         if (player.isShiftKeyDown) {
             storeSelection(manipulator, clickedPos)
@@ -61,7 +61,7 @@ class ResolithManipulator(properties: Item.Properties) : Item(properties) {
         }
 
         val selectedBlockEntity = level.getBlockEntity(selectedPos)
-        if (selectedBlockEntity !is ResolithNode) {
+        if (selectedBlockEntity !is ResolithBlockEntity) {
             player.displayClientMessage(
                 TranslatableComponent(Texts.NODE_SELECTED_NO_EXISTS).withStyle(ChatFormatting.RED),
                 false,
@@ -71,7 +71,7 @@ class ResolithManipulator(properties: Item.Properties) : Item(properties) {
         }
 
         if (selectedBlockEntity.isConnectedTo(clickedPos)) {
-            ResolithNode.disconnect(level, selectedPos, clickedPos)
+            ResolithBlockEntity.disconnect(level, selectedPos, clickedPos)
             player.displayClientMessage(
                 TranslatableComponent(Texts.NODE_CONNECTION_REMOVED)
                     .withStyle(ChatFormatting.GREEN),
@@ -79,7 +79,7 @@ class ResolithManipulator(properties: Item.Properties) : Item(properties) {
             )
         } else {
             val success: Boolean =
-                ResolithNode.attemptHandshake(selectedBlockEntity, clickedBlockEntity)
+                ResolithBlockEntity.attemptHandshake(selectedBlockEntity, clickedBlockEntity)
             if (success) {
                 player.displayClientMessage(
                     TranslatableComponent(Texts.NODE_CONNECTION_CREATED)

@@ -45,11 +45,11 @@ abstract class ResolithBlock(properties: Properties) : BaseEntityBlock(propertie
     ) {
         if (state != newState) {
             val blockEntity = level.getBlockEntity(pos)
-            if (blockEntity is ResolithNode) {
+            if (blockEntity is ResolithBlockEntity) {
                 blockEntity.connectedNodes.forEach {
                     if (level.hasChunk(it.x shr 4, it.z shr 4)) {
                         val targetBlockEntity = level.getBlockEntity(it)
-                        if (targetBlockEntity is ResolithNode)
+                        if (targetBlockEntity is ResolithBlockEntity)
                             targetBlockEntity.removeConnection(pos)
                     }
                 }
