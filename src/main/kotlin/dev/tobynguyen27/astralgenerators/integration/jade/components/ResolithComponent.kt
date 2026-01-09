@@ -16,7 +16,7 @@ import snownee.jade.api.IServerDataProvider
 import snownee.jade.api.ITooltip
 import snownee.jade.api.config.IPluginConfig
 
-object Resolith : IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+object ResolithComponent : IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
     private const val CONNECTIONS_KEY = "connections"
     private const val CONNECTIONS_LIMIT_KEY = "connections_limit"

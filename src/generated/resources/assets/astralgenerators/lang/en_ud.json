@@ -77,7 +77,9 @@
   "text.disabled": "p\u01DD\u05DFq\u0250s\u0131p",
   "text.enabled": "p\u01DD\u05DFq\u0250u\u01DD",
   "text.energy": "\u028Eb\u0279\u01DDu\u018E",
+  "text.export": "\u0287\u0279odx\u018E",
   "text.idling": "bu\u0131\u05DFpI",
+  "text.import": "\u0287\u0279od\u026FI",
   "text.maxtemperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u0287 x\u0250W",
   "text.multiblock.invalid": "\u01DD\u0279n\u0287\u0254n\u0279\u0287s \u029E\u0254o\u05DFq\u0131\u0287\u05DFn\u026F p\u0131\u05DF\u0250\u028CuI",
   "text.node.bind.self": "\u025F\u05DF\u01DDs\u0287\u0131 o\u0287 \u0265\u0287\u0131\u05DFos\u01DD\u1D1A pu\u0131q \u0287ouu\u0250\u0186",
@@ -94,6 +96,7 @@
   "text.node.selected.no.exists": "s\u0287s\u0131x\u01DD \u0279\u01DDbuo\u05DF ou \u0265\u0287\u0131\u05DFos\u01DD\u1D1A p\u01DD\u0287\u0254\u01DD\u05DF\u01DDS",
   "text.progress": "ss\u01DD\u0279bo\u0279\u0500",
   "text.resolith.connections": "%d / %d :suo\u0131\u0287\u0254\u01DDuuo\u0186",
+  "text.resolith.relay.mode": "\u029E\u0254o\u05DFq s\u0131\u0265\u0287 \u026Fo\u0279\u025F \u028Eb\u0279\u01DDu\u01DD %s :\u01DDpo\u026F \u0287u\u01DD\u0279\u0279n\u0186",
   "text.stored": "p\u01DD\u0279o\u0287S",
   "text.temperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u27D8"
 }

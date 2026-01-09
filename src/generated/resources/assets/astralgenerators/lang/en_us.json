@@ -77,7 +77,9 @@
   "text.disabled": "disabled",
   "text.enabled": "enabled",
   "text.energy": "Energy",
+  "text.export": "Export",
   "text.idling": "Idling",
+  "text.import": "Import",
   "text.maxtemperature": "Max temperature",
   "text.multiblock.invalid": "Invalid multiblock structure",
   "text.node.bind.self": "Cannot bind Resolith to itself",
@@ -94,6 +96,7 @@
   "text.node.selected.no.exists": "Selected Resolith no longer exists",
   "text.progress": "Progress",
   "text.resolith.connections": "Connections: %d / %d",
+  "text.resolith.relay.mode": "Current mode: %s energy from this block",
   "text.stored": "Stored",
   "text.temperature": "Temperature"
 }

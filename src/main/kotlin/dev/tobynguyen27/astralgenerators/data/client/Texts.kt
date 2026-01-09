@@ -26,14 +26,20 @@ object Texts {
     const val NODE_LIMIT_REACHED = "text.node.limit.reached"
     const val NODE_SELECTED_CLEAR = "text.node.selected.clear"
     const val RESOLITH_CONNECTIONS = "text.resolith.connections"
+    const val RESOLITH_RELAY_MODE = "text.resolith.relay.mode"
     const val NODE_MAX_CONNECTION = "text.node.max.connection"
     const val NODE_MAX_RANGE = "text.node.max.range"
     const val NODE_MAX_CONNECTION_UNIT = "text.node.max.connection.unit"
     const val NODE_MAX_RANGE_UNIT = "text.node.max.range.unit"
+    const val EXPORT = "text.export"
+    const val IMPORT = "text.import"
 
     fun register() {
         val texts =
             hashMapOf(
+                EXPORT to "Export",
+                IMPORT to "Import",
+                RESOLITH_RELAY_MODE to "Current mode: %s energy from this block",
                 NODE_MAX_CONNECTION_UNIT to "%d nodes",
                 NODE_MAX_RANGE_UNIT to "%d blocks",
                 NODE_MAX_CONNECTION to "Max connections: ",
