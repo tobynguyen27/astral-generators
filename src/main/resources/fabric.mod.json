@@ -35,7 +35,7 @@
         ],
         "modmenu": [
             {
-                "value": "dev.tobynguyen27.astralgenerators.integration.ModMenu",
+                "value": "dev.tobynguyen27.astralgenerators.integration.modmenu.ModMenu",
                 "adapter": "kotlin"
             }
         ],

@@ -1,4 +1,4 @@
-package dev.tobynguyen27.astralgenerators.integration
+package dev.tobynguyen27.astralgenerators.integration.modmenu
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
