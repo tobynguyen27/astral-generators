@@ -89,6 +89,7 @@
   "text.node.selected.clear": "Selected block position cleared",
   "text.node.selected.no.exists": "Selected Resolith no longer exists",
   "text.progress": "Progress",
+  "text.resolith.connections": "Connections: %d / %d",
   "text.stored": "Stored",
   "text.temperature": "Temperature"
 }

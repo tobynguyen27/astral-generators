@@ -25,10 +25,12 @@ object Texts {
     const val NODE_CONNECTION_CREATED = "text.node.connection.created"
     const val NODE_LIMIT_REACHED = "text.node.limit.reached"
     const val NODE_SELECTED_CLEAR = "text.node.selected.clear"
+    const val RESOLITH_CONNECTIONS = "text.resolith.connections"
 
     fun register() {
         val texts =
             hashMapOf(
+                RESOLITH_CONNECTIONS to "Connections: %d / %d",
                 NODE_LIMIT_REACHED to "Connection failed (Limit reached)",
                 NODE_CONNECTION_CREATED to "Connection created",
                 NODE_CONNECTION_REMOVED to "Connection removed",

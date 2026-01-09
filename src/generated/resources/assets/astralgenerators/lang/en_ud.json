@@ -89,6 +89,7 @@
   "text.node.selected.clear": "p\u01DD\u0279\u0250\u01DD\u05DF\u0254 uo\u0131\u0287\u0131sod \u029E\u0254o\u05DFq p\u01DD\u0287\u0254\u01DD\u05DF\u01DDS",
   "text.node.selected.no.exists": "s\u0287s\u0131x\u01DD \u0279\u01DDbuo\u05DF ou \u0265\u0287\u0131\u05DFos\u01DD\u1D1A p\u01DD\u0287\u0254\u01DD\u05DF\u01DDS",
   "text.progress": "ss\u01DD\u0279bo\u0279\u0500",
+  "text.resolith.connections": "%d / %d :suo\u0131\u0287\u0254\u01DDuuo\u0186",
   "text.stored": "p\u01DD\u0279o\u0287S",
   "text.temperature": "\u01DD\u0279n\u0287\u0250\u0279\u01DDd\u026F\u01DD\u27D8"
 }
