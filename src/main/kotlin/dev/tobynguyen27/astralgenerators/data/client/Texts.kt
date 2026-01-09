@@ -31,7 +31,8 @@ object Texts {
         val texts =
             hashMapOf(
                 RESOLITH_CONNECTIONS to "Connections: %d / %d",
-                NODE_LIMIT_REACHED to "Connection failed because the maximum number of connections has been reached or the allowed connection range has been exceeded.",
+                NODE_LIMIT_REACHED to
+                    "Connection failed because the maximum number of connections has been reached or the allowed connection range has been exceeded.",
                 NODE_CONNECTION_CREATED to "Connection created",
                 NODE_CONNECTION_REMOVED to "Connection removed",
                 NODE_SELECTED_NO_EXISTS to "Selected Resolith no longer exists",

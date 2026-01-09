@@ -99,7 +99,7 @@ abstract class ResolithBlockEntity(
             val vector1 = Vector3.fromBlockPos(first.blockPos)
             val vector2 = Vector3.fromBlockPos(second.blockPos)
 
-            if(vector1.distance(vector2).toInt() > first.getMaxConnectionRange()) return false
+            if (vector1.distance(vector2).toInt() > first.getMaxConnectionRange()) return false
 
             first.addConnection(second.blockPos)
             second.addConnection(first.blockPos)
