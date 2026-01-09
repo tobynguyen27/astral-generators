@@ -1,0 +1,6 @@
+package dev.tobynguyen27.astralgenerators.contents.resolith.providers
+
+enum class ResolithType {
+    RELAY,
+    TRANSCEIVER,
+}

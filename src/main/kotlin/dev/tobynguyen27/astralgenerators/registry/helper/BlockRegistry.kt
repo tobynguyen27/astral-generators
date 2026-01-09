@@ -4,12 +4,14 @@ import com.tterrag.registrate.Registrate
 import com.tterrag.registrate.builders.BlockBuilder
 import com.tterrag.registrate.util.nullness.NonNullFunction
 import dev.tobynguyen27.astralgenerators.AstralGenerators.REGISTRATE
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
 import dev.tobynguyen27.astralgenerators.contents.tags.AGBlockTags
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import java.util.function.Supplier
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.core.Direction
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Block
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Material
+import net.minecraftforge.client.model.generators.ConfiguredModel
 import net.minecraftforge.client.model.generators.ModelFile
 
 object BlockRegistry {
@@ -25,6 +28,7 @@ object BlockRegistry {
     fun <T : Block> registerResolith(
         name: String,
         factory: NonNullFunction<BlockBehaviour.Properties, T>,
+        type: ResolithType,
     ): BlockBuilder<T, Registrate> {
         return REGISTRATE.block(name, factory)
             .lang(FormattingUtil.toEnglishName(name))
@@ -38,10 +42,34 @@ object BlockRegistry {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .simpleItem()
             .blockstate { ctx, prov ->
-                prov.simpleBlock(
-                    ctx.getEntry(),
-                    prov.models().getExistingFile(prov.modLoc("block/${ctx.name}")),
-                )
+                val isTransceiver = type == ResolithType.TRANSCEIVER
+                val parentSuffix = if (isTransceiver) "transceiver" else "relay"
+
+                val model =
+                    prov
+                        .models()
+                        .withExistingParent(ctx.name, prov.modLoc("block/resolith_$parentSuffix"))
+                        .texture("texture", prov.modLoc("block/${ctx.name}"))
+
+                if (isTransceiver) {
+                    prov.getVariantBuilder(ctx.entry).forAllStates { state ->
+                        val direction = state.getValue(BlockStateProperties.FACING)
+
+                        val (x, y) =
+                            when (direction) {
+                                Direction.DOWN -> 180 to 0
+                                Direction.NORTH -> 90 to 0
+                                Direction.SOUTH -> 90 to 180
+                                Direction.WEST -> 90 to 270
+                                Direction.EAST -> 90 to 90
+                                else -> 0 to 0
+                            }
+
+                        ConfiguredModel.builder().modelFile(model).rotationX(x).rotationY(y).build()
+                    }
+                } else {
+                    prov.simpleBlock(ctx.entry, model)
+                }
             }
     }
 

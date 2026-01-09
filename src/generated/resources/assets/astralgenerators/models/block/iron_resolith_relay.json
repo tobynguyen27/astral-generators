@@ -1,0 +1,6 @@
+{
+  "parent": "astralgenerators:block/resolith_relay",
+  "textures": {
+    "texture": "astralgenerators:block/iron_resolith_relay"
+  }
+}

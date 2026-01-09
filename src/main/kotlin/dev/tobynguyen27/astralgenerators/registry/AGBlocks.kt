@@ -14,14 +14,15 @@ import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_control
 import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller.SteamTurbineControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarBlock
 import dev.tobynguyen27.astralgenerators.contents.materials.calvar.CalvarColor
-import dev.tobynguyen27.astralgenerators.contents.resolith.pylon.pure.PureResolithPylon
-import dev.tobynguyen27.astralgenerators.contents.resolith.pylon.pure.PureResolithPylonBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.resolith.pylon.raw.RawResolithPylon
-import dev.tobynguyen27.astralgenerators.contents.resolith.pylon.raw.RawResolithPylonBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.pure.PureResolithTransceiver
-import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.pure.PureResolithTransceiverBlockEntity
-import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.raw.RawResolithTransceiver
-import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.raw.RawResolithTransceiverBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
+import dev.tobynguyen27.astralgenerators.contents.resolith.relay.electrum.ElectrumResolithRelay
+import dev.tobynguyen27.astralgenerators.contents.resolith.relay.electrum.ElectrumResolithRelayBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.resolith.relay.iron.IronResolithRelay
+import dev.tobynguyen27.astralgenerators.contents.resolith.relay.iron.IronResolithRelayBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.electrum.ElectrumResolithTransceiver
+import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.electrum.ElectrumResolithTransceiverBlockEntity
+import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.iron.IronResolithTransceiver
+import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.iron.IronResolithTransceiverBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.registry.helper.BlockRegistry
 import dev.tobynguyen27.astralgenerators.registry.helper.MaterialSetRegistry
@@ -29,25 +30,43 @@ import net.minecraft.world.level.block.Block
 
 object AGBlocks {
 
-    val RAW_RESOLITH_PYLON =
-        BlockRegistry.registerResolith("iron_resolith_relay", ::RawResolithPylon)
-            .blockEntity { type, pos, state -> RawResolithPylonBlockEntity(type, pos, state) }
+    val RAW_RESOLITH_RELAY =
+        BlockRegistry.registerResolith(
+                "iron_resolith_relay",
+                ::IronResolithRelay,
+                ResolithType.RELAY,
+            )
+            .blockEntity { type, pos, state -> IronResolithRelayBlockEntity(type, pos, state) }
             .build()
             .register()
-    val PURE_RESOLITH_PYLON =
-        BlockRegistry.registerResolith("electrum_resolith_relay", ::PureResolithPylon)
-            .blockEntity { type, pos, state -> PureResolithPylonBlockEntity(type, pos, state) }
+    val PURE_RESOLITH_RELAY =
+        BlockRegistry.registerResolith(
+                "electrum_resolith_relay",
+                ::ElectrumResolithRelay,
+                ResolithType.RELAY,
+            )
+            .blockEntity { type, pos, state -> ElectrumResolithRelayBlockEntity(type, pos, state) }
             .build()
             .register()
     val RAW_RESOLITH_TRANSCEIVER =
-        BlockRegistry.registerResolith("iron_resolith_transceiver", ::RawResolithTransceiver)
-            .blockEntity { type, pos, state -> RawResolithTransceiverBlockEntity(type, pos, state) }
+        BlockRegistry.registerResolith(
+                "iron_resolith_transceiver",
+                ::IronResolithTransceiver,
+                ResolithType.TRANSCEIVER,
+            )
+            .blockEntity { type, pos, state ->
+                IronResolithTransceiverBlockEntity(type, pos, state)
+            }
             .build()
             .register()
     val PURE_RESOLITH_TRANSCEIVER =
-        BlockRegistry.registerResolith("electrum_resolith_transceiver", ::PureResolithTransceiver)
+        BlockRegistry.registerResolith(
+                "electrum_resolith_transceiver",
+                ::ElectrumResolithTransceiver,
+                ResolithType.TRANSCEIVER,
+            )
             .blockEntity { type, pos, state ->
-                PureResolithTransceiverBlockEntity(type, pos, state)
+                ElectrumResolithTransceiverBlockEntity(type, pos, state)
             }
             .build()
             .register()

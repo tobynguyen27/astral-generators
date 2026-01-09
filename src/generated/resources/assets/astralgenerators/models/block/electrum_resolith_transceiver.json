@@ -1,0 +1,6 @@
+{
+  "parent": "astralgenerators:block/resolith_transceiver",
+  "textures": {
+    "texture": "astralgenerators:block/electrum_resolith_transceiver"
+  }
+}

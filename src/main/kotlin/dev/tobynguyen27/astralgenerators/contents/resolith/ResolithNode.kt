@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith
 
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
@@ -91,6 +92,8 @@ abstract class ResolithNode(
 
         super.load(tag)
     }
+
+    abstract fun getNodeType(): ResolithType
 
     abstract fun getConnectionLimit(): Int
 }

@@ -1,45 +1,27 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith.transceiver
 
-import com.google.common.collect.ImmutableSet
 import dev.tobynguyen27.astralgenerators.contents.resolith.ResolithBlock
-import dev.tobynguyen27.codebebelib.raytracer.VoxelShapeCache
-import net.minecraft.core.BlockPos
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
-import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.DirectionProperty
-import net.minecraft.world.phys.shapes.CollisionContext
-import net.minecraft.world.phys.shapes.VoxelShape
 
 abstract class ResolithTransceiver(properties: Properties) : ResolithBlock(properties) {
 
     companion object {
-        val SHAPE: VoxelShape = run {
-            val builder = ImmutableSet.builder<VoxelShape>()
-
-            builder.add(box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0))
-            builder.add(box(7.0, 11.0, 5.0, 9.0, 13.0, 13.0))
-            builder.add(box(7.0, 5.0, 11.0, 9.0, 11.0, 13.0))
-            builder.add(box(7.0, 5.0, 3.0, 9.0, 13.0, 5.0))
-            builder.add(box(3.0, 11.0, 7.0, 7.0, 13.0, 9.0))
-            builder.add(box(9.0, 11.0, 7.0, 11.0, 13.0, 9.0))
-            builder.add(box(3.0, 5.0, 7.0, 5.0, 11.0, 9.0))
-            builder.add(box(11.0, 5.0, 7.0, 13.0, 13.0, 9.0))
-
-            VoxelShapeCache.merge(builder.build())
-        }
-
         val FACING: DirectionProperty = BlockStateProperties.FACING
     }
 
     init {
         registerDefaultState(with(defaultBlockState()) { setValue(FACING, Direction.DOWN) })
     }
+
+    override fun getResolithType(): ResolithType = ResolithType.TRANSCEIVER
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING)
@@ -59,11 +41,4 @@ abstract class ResolithTransceiver(properties: Properties) : ResolithBlock(prope
             this.defaultBlockState()
                 .setValue<Direction, Direction>(DirectionalBlock.FACING, direction)
     }
-
-    override fun getShape(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-        context: CollisionContext,
-    ): VoxelShape = SHAPE
 }

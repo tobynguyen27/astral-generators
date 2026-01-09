@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
+      "model": "astralgenerators:block/iron_resolith_transceiver",
+      "x": 180
+    },
+    "facing=up": {
       "model": "astralgenerators:block/iron_resolith_transceiver"
+    },
+    "facing=north": {
+      "model": "astralgenerators:block/iron_resolith_transceiver",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "astralgenerators:block/iron_resolith_transceiver",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astralgenerators:block/iron_resolith_transceiver",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astralgenerators:block/iron_resolith_transceiver",
+      "x": 90,
+      "y": 90
     }
   }
 }
