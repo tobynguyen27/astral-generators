@@ -16,8 +16,12 @@ forgetags = "2.1"
 registrate = "MC1.18.2-1.1.11"
 libgui = "5.4.2+1.18.2"
 energyapi = "2.3.0"
-jade-fabric = "4573438"
 jade-api = "4573441"
+
+joml = "1.10.8"
+sodium = "mc1.18.2-0.4.1"
+indium = "1.0.7+mc1.18.2"
+jade-fabric = "5.100.0"
 jade-addons="2.2.0"
 lazydfu="0.1.2"
 
@@ -30,14 +34,18 @@ codebebelib = { module = "dev.tobynguyen27:codebebelib", version.ref = "codebebe
 sense = { module = "dev.tobynguyen27:sense", version.ref = "sense" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 rei-api = { module = "me.shedaniel:RoughlyEnoughItems-api-fabric", version.ref = "rei" }
-rei-fabric = { module = "me.shedaniel:RoughlyEnoughItems-fabric", version.ref = "rei" }
 portinglib = { module = "io.github.fabricators_of_create:Porting-Lib", version.ref = "portinglib" }
 forgetags = { module = "me.alphamode:ForgeTags", version.ref = "forgetags" }
 registrate = { module = "com.tterrag.registrate_fabric:Registrate", version.ref = "registrate" }
 libgui = { module = "io.github.cottonmc:LibGui", version.ref = "libgui" }
 energyapi = { module = "teamreborn:energy", version.ref = "energyapi" }
-jade-fabric = { module = "curse.maven:jade-324717", version.ref = "jade-fabric" }
 jade-api = { module = "curse.maven:jade-324717", version.ref = "jade-api"}
+
+joml = { module = "org.joml:joml", version.ref = "joml" }
+sodium = { module = "maven.modrinth:sodium", version.ref = "sodium" }
+indium = { module = "maven.modrinth:indium", version.ref = "indium" }
+rei-fabric = { module = "me.shedaniel:RoughlyEnoughItems-fabric", version.ref = "rei" }
+jade-fabric = { module = "maven.modrinth:jade", version.ref = "jade-fabric" }
 jade-addons = { module = "maven.modrinth:jade-addons-fabric", version.ref = "jade-addons" }
 lazydfu = { module = "maven.modrinth:lazydfu", version.ref = "lazydfu" }
 

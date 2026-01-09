@@ -75,6 +75,9 @@ dependencies {
     modImplementation(libs.energyapi)
     include(libs.energyapi)
 
+    modLocalRuntime(libs.joml)
+    modLocalRuntime(libs.sodium)
+    modLocalRuntime(libs.indium)
     modLocalRuntime(libs.jade.fabric)
     modLocalRuntime(libs.jade.addons)
     modLocalRuntime(libs.lazydfu)
