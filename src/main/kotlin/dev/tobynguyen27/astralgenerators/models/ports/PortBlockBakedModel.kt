@@ -102,7 +102,9 @@ class PortBlockBakedModel(
     ) {
         for (d in Direction.entries) {
             // Base
+            emitter.material(renderMaterial)
             emitter.square(d, 0f, 0f, 1f, 1f, 0f)
+            emitter.cullFace(d)
             emitter.spriteBake(0, baseTexture, MutableQuadView.BAKE_LOCK_UV)
             emitter.spriteColor(0, -1, -1, -1, -1)
             emitter.emit()
