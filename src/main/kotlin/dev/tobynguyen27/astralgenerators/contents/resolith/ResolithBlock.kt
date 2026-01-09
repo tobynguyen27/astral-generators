@@ -1,9 +1,16 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith
 
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithVoxelShape
+import dev.tobynguyen27.astralgenerators.data.client.Texts
+import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
@@ -56,5 +63,31 @@ abstract class ResolithBlock(properties: Properties) : BaseEntityBlock(propertie
             }
             super.onRemove(state, level, pos, newState, isMoving)
         }
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        level: BlockGetter?,
+        tooltip: MutableList<Component>,
+        flag: TooltipFlag,
+    ) {
+        val stats = ResolithAttribute.getStats(getResolithType(), getResolithTier())
+
+        tooltip.add(
+            TranslatableComponent(Texts.NODE_MAX_CONNECTION)
+                .withStyle(ChatFormatting.BLUE)
+                .append(
+                    TranslatableComponent(Texts.NODE_MAX_CONNECTION_UNIT, stats.maxConnections)
+                        .withStyle(ChatFormatting.GRAY)
+                )
+        )
+        tooltip.add(
+            TranslatableComponent(Texts.NODE_MAX_RANGE)
+                .withStyle(ChatFormatting.BLUE)
+                .append(
+                    TranslatableComponent(Texts.NODE_MAX_RANGE_UNIT, stats.range)
+                        .withStyle(ChatFormatting.GRAY)
+                )
+        )
     }
 }

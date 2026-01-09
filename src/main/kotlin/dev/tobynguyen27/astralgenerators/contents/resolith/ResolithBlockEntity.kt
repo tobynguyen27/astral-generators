@@ -1,5 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith
 
+import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
 import dev.tobynguyen27.codebebelib.vec.Vector3
@@ -50,9 +51,11 @@ abstract class ResolithBlockEntity(
         }
     }
 
-    abstract fun getMaxConnectionRange(): Int
+    fun getMaxConnectionRange(): Int =
+        ResolithAttribute.getStats(getResolithType(), getResolithTier()).range
 
-    abstract fun getMaxConnection(): Int
+    fun getMaxConnection(): Int =
+        ResolithAttribute.getStats(getResolithType(), getResolithTier()).maxConnections
 
     abstract fun getResolithTier(): ResolithTier
 

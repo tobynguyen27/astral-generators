@@ -1,6 +1,5 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith.relay.electrum
 
-import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.relay.ResolithRelayBlockEntity
 import net.minecraft.core.BlockPos
@@ -12,9 +11,6 @@ class ElectrumResolithRelayBlockEntity(
     blockPos: BlockPos,
     blockState: BlockState,
 ) : ResolithRelayBlockEntity(type, blockPos, blockState) {
-    override fun getMaxConnectionRange(): Int = ResolithAttribute.ELECTRUM_RELAY.range
-
-    override fun getMaxConnection(): Int = ResolithAttribute.ELECTRUM_RELAY.maxConnections
 
     override fun getResolithTier(): ResolithTier = ResolithTier.ELECTRUM
 }

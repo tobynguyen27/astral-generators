@@ -26,10 +26,18 @@ object Texts {
     const val NODE_LIMIT_REACHED = "text.node.limit.reached"
     const val NODE_SELECTED_CLEAR = "text.node.selected.clear"
     const val RESOLITH_CONNECTIONS = "text.resolith.connections"
+    const val NODE_MAX_CONNECTION = "text.node.max.connection"
+    const val NODE_MAX_RANGE = "text.node.max.range"
+    const val NODE_MAX_CONNECTION_UNIT = "text.node.max.connection.unit"
+    const val NODE_MAX_RANGE_UNIT = "text.node.max.range.unit"
 
     fun register() {
         val texts =
             hashMapOf(
+                NODE_MAX_CONNECTION_UNIT to "%d nodes",
+                NODE_MAX_RANGE_UNIT to "%d blocks",
+                NODE_MAX_CONNECTION to "Max connections: ",
+                NODE_MAX_RANGE to "Max range: ",
                 RESOLITH_CONNECTIONS to "Connections: %d / %d",
                 NODE_LIMIT_REACHED to
                     "Connection failed because the maximum number of connections has been reached or the allowed connection range has been exceeded.",
