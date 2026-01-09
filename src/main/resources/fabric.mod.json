@@ -44,6 +44,12 @@
                 "value": "dev.tobynguyen27.astralgenerators.integration.rei.AGREIPlugin",
                 "adapter": "kotlin"
             }
+        ],
+        "jade": [
+            {
+                "value": "dev.tobynguyen27.astralgenerators.integration.jade.Jade",
+                "adapter": "kotlin"
+            }
         ]
     },
     "mixins": ["astralgenerators.mixins.json"],

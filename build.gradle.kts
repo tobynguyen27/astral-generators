@@ -32,6 +32,7 @@ repositories {
             "https://server.bbkr.space/artifactory/libs-release",
             "https://maven.shedaniel.me/",
             "https://jitpack.io",
+            "https://cursemaven.com",
             "https://api.modrinth.com/maven/",
         )
 
@@ -57,6 +58,7 @@ dependencies {
 
     // API
     modCompileOnly(libs.rei.api)
+    modCompileOnly(libs.jade.api)
 
     modImplementation(libs.portinglib)
     include(libs.portinglib)
@@ -73,8 +75,8 @@ dependencies {
     modImplementation(libs.energyapi)
     include(libs.energyapi)
 
-    modLocalRuntime(libs.jade)
-    modLocalRuntime(libs.jadeaddons)
+    modLocalRuntime(libs.jade.fabric)
+    modLocalRuntime(libs.jade.addons)
     modLocalRuntime(libs.lazydfu)
     modLocalRuntime(libs.rei.fabric) { exclude(group = "net.fabricmc") }
 }

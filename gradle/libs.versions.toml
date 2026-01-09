@@ -16,8 +16,9 @@ forgetags = "2.1"
 registrate = "MC1.18.2-1.1.11"
 libgui = "5.4.2+1.18.2"
 energyapi = "2.3.0"
-jade="5.100.0"
-jadeaddons="2.2.0"
+jade-fabric = "4573438"
+jade-api = "4573441"
+jade-addons="2.2.0"
 lazydfu="0.1.2"
 
 [libraries]
@@ -35,8 +36,9 @@ forgetags = { module = "me.alphamode:ForgeTags", version.ref = "forgetags" }
 registrate = { module = "com.tterrag.registrate_fabric:Registrate", version.ref = "registrate" }
 libgui = { module = "io.github.cottonmc:LibGui", version.ref = "libgui" }
 energyapi = { module = "teamreborn:energy", version.ref = "energyapi" }
-jade = { module = "maven.modrinth:jade", version.ref = "jade" }
-jadeaddons = { module = "maven.modrinth:jade-addons-fabric", version.ref = "jadeaddons" }
+jade-fabric = { module = "curse.maven:jade-324717", version.ref = "jade-fabric" }
+jade-api = { module = "curse.maven:jade-324717", version.ref = "jade-api"}
+jade-addons = { module = "maven.modrinth:jade-addons-fabric", version.ref = "jade-addons" }
 lazydfu = { module = "maven.modrinth:lazydfu", version.ref = "lazydfu" }
 
 [plugins]
