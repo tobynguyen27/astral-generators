@@ -4,6 +4,7 @@ import dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_control
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
+import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
@@ -74,7 +75,7 @@ class SteamTurbineControllerMenu(
         val consumingWidget =
             WDynamicLabel({
                 "Consuming: ${
-                    if(rotorSpeed > 0) FormattingUtil.formatBuckets(SteamTurbineLogic.MAX_STEAM_INTAKE) else  FormattingUtil.formatBuckets(0)
+                    if(rotorSpeed > 0) FormattingUtil.formatBuckets(CONFIG.maxSteamIntake.toLong()) else  FormattingUtil.formatBuckets(0)
                 }/t"
             })
         val generatingWidget = WDynamicLabel({ "Generating: $energyGenerated/t" })
