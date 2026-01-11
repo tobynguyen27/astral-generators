@@ -24,6 +24,19 @@ object ConfigSyncHandler {
             packet.writeInt(config.maxSteamIntake)
             packet.writeInt(config.energyMultiplier)
 
+            packet.writeInt(config.ironRelayMaxConnections)
+            packet.writeInt(config.ironRelayRange)
+            packet.writeInt(config.electrumRelayMaxConnections)
+            packet.writeInt(config.electrumRelayRange)
+
+            packet.writeInt(config.ironTransceiverMaxConnections)
+            packet.writeInt(config.ironTransceiverRange)
+            packet.writeInt(config.ironTransceiverTransferRate)
+
+            packet.writeInt(config.electrumTransceiverMaxConnections)
+            packet.writeInt(config.electrumTransceiverRange)
+            packet.writeInt(config.electrumTransceiverTransferRate)
+
             ServerPlayNetworking.send(impl.player, Packets.CONFIG_SYNC, packet)
         }
     }
@@ -41,6 +54,19 @@ object ConfigSyncHandler {
                 val maxSteamIntake = packet.readInt()
                 val energyMultiplier = packet.readInt()
 
+                val ironRelayMaxConnections = packet.readInt()
+                val ironRelayRange = packet.readInt()
+                val electrumRelayMaxConnections = packet.readInt()
+                val electrumRelayRange = packet.readInt()
+
+                val ironTransceiverMaxConnections = packet.readInt()
+                val ironTransceiverRange = packet.readInt()
+                val ironTransceiverTransferRate = packet.readInt()
+
+                val electrumTransceiverMaxConnections = packet.readInt()
+                val electrumTransceiverRange = packet.readInt()
+                val electrumTransceiverTransferRate = packet.readInt()
+
                 minecraft.execute {
                     val config = AutoConfig.getConfigHolder<AGConfig>(AGConfig::class.java).config
 
@@ -52,6 +78,19 @@ object ConfigSyncHandler {
                     config.acceleratorFactor = acceleratorFactor
                     config.maxSteamIntake = maxSteamIntake
                     config.energyMultiplier = energyMultiplier
+
+                    config.ironRelayMaxConnections = ironRelayMaxConnections
+                    config.ironRelayRange = ironRelayRange
+                    config.electrumRelayMaxConnections = electrumRelayMaxConnections
+                    config.electrumRelayRange = electrumRelayRange
+
+                    config.ironTransceiverMaxConnections = ironTransceiverMaxConnections
+                    config.ironTransceiverRange = ironTransceiverRange
+                    config.ironTransceiverTransferRate = ironTransceiverTransferRate
+
+                    config.electrumTransceiverMaxConnections = electrumTransceiverMaxConnections
+                    config.electrumTransceiverRange = electrumTransceiverRange
+                    config.electrumTransceiverTransferRate = electrumTransceiverTransferRate
                 }
             },
         )

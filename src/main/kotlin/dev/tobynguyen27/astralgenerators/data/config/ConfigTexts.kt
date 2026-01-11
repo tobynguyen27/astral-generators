@@ -5,6 +5,7 @@ import dev.tobynguyen27.astralgenerators.AstralGenerators
 object ConfigTexts {
     const val BOILER = "boiler"
     const val STEAM_TURBINE = "steam_turbine"
+    const val RESOLITH = "resolith"
 
     const val WATER_BOILING_POINT = "waterBoilingPoint"
     const val STEAM_EXPANSION_RATIO = "steamExpansionRatio"
@@ -14,9 +15,20 @@ object ConfigTexts {
     const val MAX_STEAM_INTAKE = "maxSteamIntake"
     const val ENERGY_MULTIPLIER = "energyMultiplier"
 
+    const val IRON_RELAY_MAX_CONNECTIONS = "ironRelayMaxConnections"
+    const val IRON_RELAY_RANGE = "ironRelayRange"
+    const val ELECTRUM_RELAY_MAX_CONNECTIONS = "electrumRelayMaxConnections"
+    const val ELECTRUM_RELAY_RANGE = "electrumRelayRange"
+
+    const val IRON_TRANSCEIVER_MAX_CONNECTIONS = "ironTransceiverMaxConnections"
+    const val IRON_TRANSCEIVER_RANGE = "ironTransceiverRange"
+    const val ELECTRUM_TRANSCEIVER_MAX_CONNECTIONS = "electrumTransceiverMaxConnections"
+    const val ELECTRUM_TRANSCEIVER_RANGE = "electrumTransceiverRange"
+
     fun register() {
         val texts = hashMapOf("title" to AstralGenerators.MOD_NAME)
-        val categories = hashMapOf(BOILER to "Boiler", STEAM_TURBINE to "Steam Turbine")
+        val categories =
+            hashMapOf(BOILER to "Boiler", STEAM_TURBINE to "Steam Turbine", RESOLITH to "Resolith")
         val options =
             hashMapOf(
                 WATER_BOILING_POINT to "Water Boiling Point",
@@ -26,6 +38,15 @@ object ConfigTexts {
                 ACCELERATOR_FACTOR to "Accelerator Factor",
                 ENERGY_MULTIPLIER to "Energy Multiplier",
                 MAX_STEAM_INTAKE to "Max Steam Intake",
+                IRON_RELAY_MAX_CONNECTIONS to "Iron Resolith Relay Max Connections",
+                IRON_RELAY_RANGE to "Iron Resolith Relay Range",
+                ELECTRUM_RELAY_MAX_CONNECTIONS to "Electrum Resolith Relay Max Connections",
+                ELECTRUM_RELAY_RANGE to "Electrum Resolith Relay Range",
+                IRON_TRANSCEIVER_MAX_CONNECTIONS to "Iron Resolith Transceiver Max Connections",
+                IRON_TRANSCEIVER_RANGE to "Iron Resolith Transceiver Range",
+                ELECTRUM_TRANSCEIVER_MAX_CONNECTIONS to
+                    "Electrum Resolith Transceiver Max Connections",
+                ELECTRUM_TRANSCEIVER_RANGE to "Electrum Resolith Transceiver Range",
             )
         val tooltips =
             hashMapOf(
@@ -66,9 +87,17 @@ object ConfigTexts {
                 v,
             )
         }
-        AstralGenerators.REGISTRATE.addRawLang(
-            "text.autoconfig.${AstralGenerators.MOD_ID}.option.$DRAG_COEFFICIENT.@PrefixText",
-            "At 100% : MAX_STEAM_INTAKE * ACCELERATOR_FACTOR = MAX_RPM * DRAG_COEFFICIENT",
-        )
+        hashMapOf(
+                DRAG_COEFFICIENT to
+                    "At 100% : MAX_STEAM_INTAKE * ACCELERATOR_FACTOR = MAX_RPM * DRAG_COEFFICIENT",
+                IRON_RELAY_MAX_CONNECTIONS to "Resolith Relay",
+                IRON_TRANSCEIVER_MAX_CONNECTIONS to "Resolith Transceiver",
+            )
+            .forEach { (k, v) ->
+                AstralGenerators.REGISTRATE.addRawLang(
+                    "text.autoconfig.${AstralGenerators.MOD_ID}.option.$k.@PrefixText",
+                    v,
+                )
+            }
     }
 }

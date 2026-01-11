@@ -1,23 +1,35 @@
 package dev.tobynguyen27.astralgenerators.contents.resolith.providers
 
+import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
+
 object ResolithAttribute {
-
-    private val IRON_RELAY = ConnectionStats(4, 8, 0)
-    private val ELECTRUM_RELAY = ConnectionStats(8, 16, 0)
-    private val IRON_TRANSCEIVER = ConnectionStats(2, 8, 1000)
-    private val ELECTRUM_TRANSCEIVER = ConnectionStats(3, 16, 10000)
-
     fun getStats(type: ResolithType, tier: ResolithTier): ConnectionStats {
         return when (type) {
             ResolithType.RELAY ->
                 when (tier) {
-                    ResolithTier.IRON -> IRON_RELAY
-                    else -> ELECTRUM_RELAY
+                    ResolithTier.IRON ->
+                        ConnectionStats(CONFIG.ironRelayMaxConnections, CONFIG.ironRelayRange, 0)
+                    else ->
+                        ConnectionStats(
+                            CONFIG.electrumRelayMaxConnections,
+                            CONFIG.electrumRelayRange,
+                            0,
+                        )
                 }
             else ->
                 when (tier) {
-                    ResolithTier.IRON -> IRON_TRANSCEIVER
-                    else -> ELECTRUM_TRANSCEIVER
+                    ResolithTier.IRON ->
+                        ConnectionStats(
+                            CONFIG.ironTransceiverMaxConnections,
+                            CONFIG.ironTransceiverRange,
+                            CONFIG.ironTransceiverTransferRate.toLong(),
+                        )
+                    else ->
+                        ConnectionStats(
+                            CONFIG.electrumTransceiverMaxConnections,
+                            CONFIG.electrumTransceiverRange,
+                            CONFIG.electrumTransceiverTransferRate.toLong(),
+                        )
                 }
         }
     }

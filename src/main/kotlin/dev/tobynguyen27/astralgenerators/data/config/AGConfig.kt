@@ -23,4 +23,18 @@ class AGConfig : ConfigData {
     @ConfigEntry.Category("steam_turbine") @ConfigEntry.Gui.Tooltip var maxSteamIntake = 18000
 
     @ConfigEntry.Category("steam_turbine") @ConfigEntry.Gui.Tooltip var energyMultiplier = 4
+
+    @ConfigEntry.Gui.PrefixText @ConfigEntry.Category("resolith") var ironRelayMaxConnections = 4
+    @ConfigEntry.Category("resolith") var ironRelayRange = 8
+    @ConfigEntry.Category("resolith") var electrumRelayMaxConnections = 8
+    @ConfigEntry.Category("resolith") var electrumRelayRange = 16
+
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Category("resolith")
+    var ironTransceiverMaxConnections = 2
+    @ConfigEntry.Category("resolith") var ironTransceiverRange = 8
+    @ConfigEntry.Category("resolith") var ironTransceiverTransferRate = 1000
+    @ConfigEntry.Category("resolith") var electrumTransceiverMaxConnections = 3
+    @ConfigEntry.Category("resolith") var electrumTransceiverTransferRate = 10000
+    @ConfigEntry.Category("resolith") var electrumTransceiverRange = 16
 }
