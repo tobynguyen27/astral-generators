@@ -33,10 +33,6 @@ class BoilerControllerBlockEntity(
     AutoPersistBlockEntity {
 
     companion object {
-        const val WATER_BOILING_POINT = 100
-        const val STEAM_EXPANSION_RATIO = 160 // 1 water = 160 steam
-        const val IDEAL_WATER_CONSUMPTION = 81 // Water consumed at 100% efficiency
-
         const val CONTAINER_DATA_SIZE = 5
     }
 

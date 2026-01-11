@@ -1,12 +1,10 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
-import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.IDEAL_WATER_CONSUMPTION
-import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.STEAM_EXPANSION_RATIO
-import dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller.BoilerControllerBlockEntity.Companion.WATER_BOILING_POINT
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
+import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
@@ -149,10 +147,10 @@ object BoilerControllerLogical {
             }
         }
 
-        if (blockEntity.heat < WATER_BOILING_POINT) return
+        if (blockEntity.heat < CONFIG.waterBoilingPoint) return
 
         val efficiency = blockEntity.heat.toDouble() / blockEntity.maxHeat
-        val waterToConsume = (IDEAL_WATER_CONSUMPTION * efficiency).toLong()
+        val waterToConsume = (CONFIG.idealWaterConsumption * efficiency).toLong()
 
         if (waterToConsume <= 0) return
 
@@ -161,7 +159,7 @@ object BoilerControllerLogical {
                 inputHatch.fluidContainer.extract(FluidVariant.of(Fluids.WATER), waterToConsume, it)
 
             if (extractedWater > 0) {
-                val steamToProduce = extractedWater * STEAM_EXPANSION_RATIO
+                val steamToProduce = extractedWater * CONFIG.steamExpansionRatio
 
                 if (produceSteam(it, outputHatch, steamToProduce)) {
                     it.commit()

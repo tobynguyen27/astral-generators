@@ -3,6 +3,7 @@ package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
+import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.TemperatureBar
@@ -57,7 +58,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             return if (currentHeat < 100) {
                 0L
             } else {
-                (efficiency * BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION).toLong()
+                (efficiency * CONFIG.idealWaterConsumption).toLong()
             }
         }
 
@@ -66,10 +67,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
             return if (currentHeat < 100) {
                 0L
             } else {
-                (efficiency *
-                        BoilerControllerBlockEntity.IDEAL_WATER_CONSUMPTION *
-                        BoilerControllerBlockEntity.STEAM_EXPANSION_RATIO)
-                    .toLong()
+                (efficiency * CONFIG.idealWaterConsumption * CONFIG.steamExpansionRatio).toLong()
             }
         }
 
