@@ -3,7 +3,9 @@ package dev.tobynguyen27.astralgenerators.contents.resolith
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithAttribute
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithTier
 import dev.tobynguyen27.astralgenerators.contents.resolith.providers.ResolithType
+import dev.tobynguyen27.astralgenerators.contents.resolith.transceiver.ResolithTransceiverBlockEntity
 import dev.tobynguyen27.codebebelib.vec.Vector3
+import kotlin.math.max
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
@@ -36,6 +38,7 @@ abstract class ResolithBlockEntity(
         level?.let {
             if (!it.isClientSide) {
                 it.sendBlockUpdated(blockPos, blockState, blockState, 3)
+                updateNetwork()
             }
         }
     }
@@ -47,6 +50,37 @@ abstract class ResolithBlockEntity(
         level?.let {
             if (!it.isClientSide) {
                 it.sendBlockUpdated(blockPos, blockState, blockState, 3)
+                updateNetwork()
+            }
+        }
+    }
+
+    fun updateNetwork() {
+        val level = level ?: return
+        if (level.isClientSide) return
+
+        val visited = hashSetOf<BlockPos>()
+        val queue = ArrayDeque<BlockPos>()
+
+        queue.add(blockPos)
+        visited.add(blockPos)
+
+        while (!queue.isEmpty()) {
+            val currentPos = queue.removeFirst()
+            if (!level.isLoaded(currentPos)) continue
+
+            val entity = level.getBlockEntity(currentPos)
+
+            if (entity is ResolithTransceiverBlockEntity && entity.isSendEnergy) {
+                entity.markNetworkDirty()
+            }
+
+            if (entity is ResolithBlockEntity) {
+                for (neighbor in entity.connectedNodes) {
+                    if (visited.add(neighbor)) {
+                        queue.add(neighbor)
+                    }
+                }
             }
         }
     }
@@ -95,15 +129,17 @@ abstract class ResolithBlockEntity(
         }
 
         fun attemptHandshake(first: ResolithBlockEntity, second: ResolithBlockEntity): Boolean {
-            if (first.blockPos.equals(second.blockPos)) return false
+            if (first.blockPos == second.blockPos) return false
             if (first.isConnectedTo(second.blockPos) || second.isConnectedTo(first.blockPos))
                 return false
             if (!(first.hasFreeSlot() && second.hasFreeSlot())) return false
 
             val vector1 = Vector3.fromBlockPos(first.blockPos)
             val vector2 = Vector3.fromBlockPos(second.blockPos)
+            val distance = vector1.distance(vector2)
+            val validRange = max(first.getMaxConnectionRange(), second.getMaxConnectionRange())
 
-            if (vector1.distance(vector2).toInt() > first.getMaxConnectionRange()) return false
+            if (distance > validRange) return false
 
             first.addConnection(second.blockPos)
             second.addConnection(first.blockPos)

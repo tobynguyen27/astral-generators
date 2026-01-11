@@ -44,7 +44,7 @@ object ResolithTransceiverComponent : IBlockComponentProvider, IServerDataProvid
         showDetails: Boolean,
     ) {
         if (blockEntity is ResolithTransceiverBlockEntity) {
-            data.putBoolean(MODE_KEY, blockEntity.isImport)
+            data.putBoolean(MODE_KEY, blockEntity.isSendEnergy)
         }
     }
 }

@@ -37,16 +37,23 @@ abstract class ResolithTransceiver(properties: Properties) : ResolithBlock(prope
         hand: InteractionHand,
         hit: BlockHitResult,
     ): InteractionResult {
-        if (!level.isClientSide && player.isShiftKeyDown) {
-            val blockEntity = level.getBlockEntity(pos) ?: return InteractionResult.FAIL
+        if (player.isShiftKeyDown) {
+            if (!level.isClientSide) {
+                val blockEntity = level.getBlockEntity(pos) ?: return InteractionResult.FAIL
 
-            if (blockEntity is ResolithTransceiverBlockEntity) {
-                blockEntity.isImport = !blockEntity.isImport
-                blockEntity.setChanged()
+                if (blockEntity is ResolithTransceiverBlockEntity) {
+                    blockEntity.isSendEnergy = !blockEntity.isSendEnergy
+                    blockEntity.setChanged()
+
+                    blockEntity.updateNetwork()
+
+                    if (blockEntity.isSendEnergy) blockEntity.markNetworkDirty()
+                }
             }
+            return InteractionResult.sidedSuccess(level.isClientSide)
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide)
+        return InteractionResult.PASS
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {

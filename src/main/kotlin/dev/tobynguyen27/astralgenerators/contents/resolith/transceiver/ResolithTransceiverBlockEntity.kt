@@ -16,7 +16,14 @@ abstract class ResolithTransceiverBlockEntity(
     blockState: BlockState,
 ) : ResolithBlockEntity(type, blockPos, blockState), AutoPersistBlockEntity {
 
-    @Persisted var isImport: Boolean = true
+    @Persisted var isSendEnergy: Boolean = true
+
+    var isNetworkDirty = true
+    var cachedTargets = mutableListOf<BlockPos>()
+
+    fun markNetworkDirty() {
+        isNetworkDirty = true
+    }
 
     override val self: BlockEntity = this
     override val fieldContainer: ManagedFieldContainer by lazy { ManagedFieldContainer(this) }
