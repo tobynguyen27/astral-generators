@@ -12,13 +12,11 @@ object SteamTurbineMultiblock {
     private val PIPE_CASING = SimpleMember.forBlock(AGBlocks.PIPE_CASING.get())
     private val CASING = SimpleMember.forBlock(AGBlocks.STEAM_TURBINE_CASING.get())
     private val PORTS =
-        PortFlags.Builder()
-            .with(
-                PortBlockType.FLUID_INPUT,
-                PortBlockType.FLUID_OUTPUT,
-                PortBlockType.ENERGY_OUTPUT,
-            )
-            .build()
+        PortFlags(
+            PortBlockType.FLUID_INPUT,
+            PortBlockType.FLUID_OUTPUT,
+            PortBlockType.ENERGY_OUTPUT,
+        )
 
     val SHAPE =
         ShapeTemplate.Builder(AGBlocks.STEAM_TURBINE_CASING.defaultState)

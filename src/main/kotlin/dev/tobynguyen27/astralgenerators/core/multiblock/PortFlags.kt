@@ -2,28 +2,28 @@ package dev.tobynguyen27.astralgenerators.core.multiblock
 
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 
-class PortFlags(val flags: Int) {
+@JvmInline
+value class PortFlags(val flags: Int) {
     fun allows(type: PortBlockType): Boolean {
         return (flags and (1 shl type.value)) > 0
     }
 
+    companion object {
+        operator fun invoke(vararg types: PortBlockType): PortFlags {
+            return PortFlags(types.fold(0) { acc, type -> acc or (1 shl type.value) })
+        }
+    }
+
     class Builder {
 
-        var flags = 0
+        private var currentFlags = 0
 
-        fun with(type: PortBlockType): Builder {
-            flags = flags or (1 shl type.value)
-            return this
-        }
-
-        fun with(vararg types: PortBlockType): Builder {
-            types.forEach { with(it) }
-
-            return this
+        fun add(type: PortBlockType) {
+            currentFlags = currentFlags or (1 shl type.value)
         }
 
         fun build(): PortFlags {
-            return PortFlags(flags)
+            return PortFlags(currentFlags)
         }
     }
 }

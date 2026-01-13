@@ -14,13 +14,11 @@ object BoilerMultiblock {
                 0,
                 SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()),
                 true,
-                PortFlags.Builder()
-                    .with(
-                        PortBlockType.ITEM_INPUT,
-                        PortBlockType.FLUID_INPUT,
-                        PortBlockType.FLUID_OUTPUT,
-                    )
-                    .build(),
+                PortFlags(
+                    PortBlockType.ITEM_INPUT,
+                    PortBlockType.FLUID_INPUT,
+                    PortBlockType.FLUID_OUTPUT,
+                ),
             )
             .add3by3(1, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), true, null)
             .add3by3(2, SimpleMember.forBlock(AGBlocks.BOILER_CASING.get()), false, null)
