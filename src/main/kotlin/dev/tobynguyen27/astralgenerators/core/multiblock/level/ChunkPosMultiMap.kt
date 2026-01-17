@@ -10,9 +10,9 @@ class ChunkPosMultiMap<T> {
         Object2ObjectOpenHashMap<Level, Object2ObjectOpenHashMap<ChunkPos, ObjectOpenHashSet<T>>>()
 
     fun get(level: Level, chunkPos: ChunkPos): ObjectOpenHashSet<T>? {
-        val chunkPosSetMap = storage.get(level) ?: return null
+        val chunkPosSetMap = storage[level] ?: return null
 
-        return chunkPosSetMap.get(chunkPos)
+        return chunkPosSetMap[chunkPos]
     }
 
     fun size(): Int {
