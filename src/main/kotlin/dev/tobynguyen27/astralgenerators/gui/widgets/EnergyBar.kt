@@ -1,65 +1,30 @@
 package dev.tobynguyen27.astralgenerators.gui.widgets
 
-import com.mojang.blaze3d.vertex.PoseStack
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil.formatNumbers
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil.formatPercent
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.data.client.Texts
-import dev.tobynguyen27.codebebelib.math.MathHelper
-import io.github.cottonmc.cotton.gui.client.ScreenDrawing
+import dev.tobynguyen27.astralgenerators.gui.widgets.base.VerticalBar
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
-import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Texture
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.util.Mth
 
-class EnergyBar(val maxCapacity: () -> Long, val currentValue: () -> Long) : WWidget() {
+class EnergyBar(override val capacity: () -> Long, override val currentValue: () -> Long) :
+    VerticalBar() {
 
     companion object {
         private val BG = Texture(Identifier("textures/gui/widgets/widget_energy_empty.png"))
-        private val BAR = Texture(Identifier("textures/gui/widgets/widget_energy_full.png"))
+        private val FG = Texture(Identifier("textures/gui/widgets/widget_energy_full.png"))
     }
 
-    override fun canResize(): Boolean {
-        return true
-    }
-
-    override fun paint(matrices: PoseStack?, x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        ScreenDrawing.texturedRect(matrices, x, y, getWidth(), getHeight(), BG, -0x1)
-
-        val maxVal = maxCapacity().toFloat()
-        var percent = MathHelper.clip(currentValue() / maxVal, 0f, 1f)
-
-        val barMax = height
-        percent = ((percent * barMax).toInt()) / barMax.toFloat()
-
-        val barSize = (barMax * percent).toInt()
-        if (barSize <= 0) return
-
-        val left = x
-        var top = y + height
-        top -= barSize
-
-        ScreenDrawing.texturedRect(
-            matrices,
-            left,
-            top,
-            width,
-            barSize,
-            BAR.image(),
-            BAR.u1(),
-            Mth.lerp(percent, BAR.v2(), BAR.v1()),
-            BAR.u2(),
-            BAR.v2(),
-            -0x1,
-        )
-    }
+    override val barBackgroundTexture: Texture = BG
+    override val barForegroundTexture: Texture = FG
 
     override fun addTooltip(information: TooltipBuilder) {
         val currentEnergy = currentValue()
-        val maxEnergyCapacity = maxCapacity()
+        val maxEnergyCapacity = capacity()
 
         information.add(TranslatableComponent(Texts.ENERGY).withStyle(ChatFormatting.DARK_AQUA))
         information.add(
