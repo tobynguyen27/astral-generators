@@ -1,9 +1,11 @@
 package dev.tobynguyen27.astralgenerators.core.base
 
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.MenuProviderAttribute
 import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeMatcher
 import dev.tobynguyen27.astralgenerators.core.multiblock.ShapeTemplate
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -12,7 +14,7 @@ abstract class MultiblockControllerBlockEntity(
     type: BlockEntityType<*>,
     blockPos: BlockPos,
     blockState: BlockState,
-) : MachineBlockEntity(type, blockPos, blockState) {
+) : BlockEntity(type, blockPos, blockState), MenuProviderAttribute {
 
     var shapeMatcher: ShapeMatcher? = null
     var isFormed = false

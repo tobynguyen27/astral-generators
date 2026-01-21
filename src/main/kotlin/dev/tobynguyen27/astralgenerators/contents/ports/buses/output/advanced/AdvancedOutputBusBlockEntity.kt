@@ -5,7 +5,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -30,17 +29,8 @@ class AdvancedOutputBusBlockEntity(
         const val CONTAINER_SIZE = 9
     }
 
-    override fun createMenu(
-        syncId: Int,
-        inventory: Inventory,
-        player: Player,
-    ): AbstractContainerMenu {
-        return AdvancedOutputBusMenu(
-            syncId,
-            inventory,
-            ContainerLevelAccess.create(player.level, blockPos),
-        )
-    }
+    override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
+        ::AdvancedOutputBusMenu
 
     override fun getPortType(): PortBlockType {
         return PortBlockType.ITEM_OUTPUT

@@ -1,6 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.ports
 
-import dev.tobynguyen27.astralgenerators.core.base.MachineBlockEntity
+import dev.tobynguyen27.astralgenerators.core.blockentity.attributes.MenuProviderAttribute
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachmentBlockEntity
 import net.minecraft.core.BlockPos
@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.inventory.ContainerData
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
@@ -21,9 +22,10 @@ abstract class PortBlockEntity(
     val mode: PortBlockSpecification.Mode,
     var casingBlock: BlockState?,
 ) :
-    MachineBlockEntity(blockEntityType, blockPos, blockState),
+    BlockEntity(blockEntityType, blockPos, blockState),
     RenderAttachmentBlockEntity,
-    PropertyDelegateHolder {
+    PropertyDelegateHolder,
+    MenuProviderAttribute {
 
     companion object {
         const val CONTAINER_DATA_SIZE = 2

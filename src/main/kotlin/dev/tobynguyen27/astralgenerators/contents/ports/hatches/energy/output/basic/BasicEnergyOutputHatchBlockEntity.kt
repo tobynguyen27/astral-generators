@@ -7,7 +7,6 @@ import dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy.EnergyHat
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -25,19 +24,10 @@ class BasicEnergyOutputHatchBlockEntity(
         val MODE = PortBlockSpecification.Mode.OUTPUT
     }
 
-    override fun createMenu(
-        syncId: Int,
-        inventory: Inventory,
-        player: Player,
-    ): AbstractContainerMenu {
-        return EnergyHatchMenu(
-            MODE,
-            AGMenus.BASIC_ENERGY_OUTPUT_HATCH,
-            syncId,
-            inventory,
-            ContainerLevelAccess.create(player.level, blockPos),
-        )
-    }
+    override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
+        { syncId, inventory, ctx ->
+            EnergyHatchMenu(MODE, AGMenus.BASIC_ENERGY_OUTPUT_HATCH, syncId, inventory, ctx)
+        }
 
     override fun getPortType(): PortBlockType {
         return PortBlockType.ENERGY_OUTPUT
