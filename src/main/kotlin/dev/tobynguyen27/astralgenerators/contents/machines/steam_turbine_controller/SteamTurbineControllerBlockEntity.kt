@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
@@ -60,13 +59,8 @@ class SteamTurbineControllerBlockEntity(
     }
 
     // Menu
-    override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
-        return SteamTurbineControllerMenu(
-            i,
-            inventory,
-            ContainerLevelAccess.create(player.level, blockPos),
-        )
-    }
+    override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu =
+        ::SteamTurbineControllerMenu
 
     override fun writeScreenOpeningData(player: ServerPlayer, buf: FriendlyByteBuf) {}
 
