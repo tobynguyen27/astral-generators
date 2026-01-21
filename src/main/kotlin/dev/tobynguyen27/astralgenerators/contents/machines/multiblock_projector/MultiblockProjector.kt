@@ -1,7 +1,7 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.multiblock_projector
 
-import dev.tobynguyen27.astralgenerators.core.base.BlockWithEntity
 import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
+import dev.tobynguyen27.sense.block.BlockWithEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionHand

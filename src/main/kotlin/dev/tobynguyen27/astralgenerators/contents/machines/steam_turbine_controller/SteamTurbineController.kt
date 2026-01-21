@@ -1,9 +1,9 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.steam_turbine_controller
 
-import dev.tobynguyen27.astralgenerators.core.base.BlockWithEntity
 import dev.tobynguyen27.astralgenerators.core.base.MultiblockControllerBlockEntity
 import dev.tobynguyen27.astralgenerators.data.client.Texts
 import dev.tobynguyen27.astralgenerators.registry.AGBlockEntities
+import dev.tobynguyen27.sense.block.BlockWithEntity
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
