@@ -199,7 +199,12 @@ spotless {
     encoding("UTF-8")
 
     kotlin {
-        ktfmt().kotlinlangStyle()
+        ktfmt().kotlinlangStyle().configure {
+            it.setMaxWidth(100)
+            it.setBlockIndent(4)
+            it.setContinuationIndent(4)
+            it.setRemoveUnusedImports(true)
+        }
         endWithNewline()
         toggleOffOn()
     }
@@ -219,7 +224,7 @@ spotless {
         target("src/*/resources/**/*.json")
         targetExclude("src/generated/resources/**")
 
-        biome("2.3.7")
+        biome("2.3.11")
             .downloadDir(File(rootDir, ".gradle/biome").absolutePath)
             .configPath(File(rootDir, "spotless/biome.json").absolutePath)
 
