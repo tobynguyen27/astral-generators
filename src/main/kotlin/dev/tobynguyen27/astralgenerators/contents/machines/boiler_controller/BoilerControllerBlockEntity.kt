@@ -46,13 +46,7 @@ class BoilerControllerBlockEntity(
     var maxHeat = 600
 
     // Menu
-    override fun createMenu(i: Int, inventory: Inventory, player: Player): AbstractContainerMenu {
-        return BoilerControllerMenu(
-            i,
-            inventory,
-            ContainerLevelAccess.create(player.level, blockPos),
-        )
-    }
+    override val menuFactory: (Int, Inventory, ContainerLevelAccess) -> AbstractContainerMenu = ::BoilerControllerMenu
 
     override fun writeScreenOpeningData(player: ServerPlayer, packet: FriendlyByteBuf) {}
 
