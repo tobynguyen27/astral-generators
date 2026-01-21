@@ -14,7 +14,7 @@ object MultiblockSyncHandler {
         }
 
         ClientPlayConnectionEvents.DISCONNECT.register { _, _ ->
-            MultiblocksPool.DEFINITIONS.clear()
+            MultiblocksPool.DEFINITIONS = emptyMap()
         }
     }
 }

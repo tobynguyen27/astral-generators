@@ -5,8 +5,6 @@ import com.google.gson.GsonBuilder
 import dev.tobynguyen27.astralgenerators.AstralGenerators
 import dev.tobynguyen27.astralgenerators.core.network.Packets
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
-import java.io.IOException
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.collections.set
@@ -23,7 +21,7 @@ import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.util.profiling.ProfilerFiller
 
-typealias Multiblocks = Object2ObjectOpenHashMap<ResourceLocation, MultiblockDefinition>
+typealias Multiblocks = Map<ResourceLocation, MultiblockDefinition>
 
 class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
 
@@ -34,26 +32,27 @@ class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
     ): CompletableFuture<Multiblocks> {
         return CompletableFuture.supplyAsync(
             {
-                val multiblocks = Object2ObjectOpenHashMap<ResourceLocation, MultiblockDefinition>()
-
-                val resources = manager.listResources("multiblocks") { it.endsWith(".json") }
-
-                for (resource in resources) {
-
-                    if (resource.namespace != AstralGenerators.MOD_ID) continue
-
-                    try {
-                        manager.getResource(resource).inputStream.reader().use {
-                            val definition = GSON.fromJson(it, MultiblockDefinition::class.java)
-                            multiblocks[resource] = definition
+                val multiblocks =
+                    buildMap {
+                            manager
+                                .listResources("multiblocks") { it.endsWith(".json") }
+                                .filter { it.namespace == AstralGenerators.MOD_ID }
+                                .forEach { resource ->
+                                    runCatching {
+                                            manager.getResource(resource).inputStream.reader().use {
+                                                GSON.fromJson(it, MultiblockDefinition::class.java)
+                                            }
+                                        }
+                                        .onSuccess { put(resource, it) }
+                                        .onFailure {
+                                            AstralGenerators.LOGGER.error(
+                                                "Failed to load multiblock definition from $resource",
+                                                it,
+                                            )
+                                        }
+                                }
                         }
-                    } catch (e: IOException) {
-                        AstralGenerators.LOGGER.error(
-                            "Failed to load multiblock definition from $resource",
-                            e,
-                        )
-                    }
-                }
+                        .toMap()
 
                 return@supplyAsync multiblocks
             },
@@ -76,15 +75,12 @@ class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
         )
     }
 
-    override fun getFabricId(): ResourceLocation {
-        return ID
-    }
+    override fun getFabricId(): ResourceLocation = Identifier("multiblock_loader")
 
     companion object {
-        val ID = Identifier("multiblock_loader")
         val GSON: Gson = GsonBuilder().disableHtmlEscaping().create()
 
-        var DEFINITIONS = Multiblocks()
+        var DEFINITIONS: Multiblocks = emptyMap()
 
         fun initialize() {
             ResourceManagerHelper.get(PackType.SERVER_DATA)
@@ -117,10 +113,7 @@ class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
                 receivedData[id] = GSON.fromJson(json, MultiblockDefinition::class.java)
             }
 
-            minecraft.execute {
-                DEFINITIONS.clear()
-                DEFINITIONS.putAll(receivedData)
-            }
+            minecraft.execute { DEFINITIONS = receivedData }
         }
     }
 }
