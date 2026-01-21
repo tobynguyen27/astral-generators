@@ -4,6 +4,7 @@ import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
 import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
+import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils.toBool
 import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
@@ -49,7 +50,7 @@ object BoilerControllerLogical {
         blockState: BlockState,
         blockEntity: BoilerControllerBlockEntity,
     ) {
-        if (!BooleanUtils.fromIntToBool(blockEntity.isEnabled)) {
+        if (!blockEntity.isEnabled.toBool()) {
             blockEntity.updateActiveState(false)
             blockEntity.updateFireboxActiveState(false)
             return
