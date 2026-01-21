@@ -8,41 +8,43 @@ import dev.tobynguyen27.astralgenerators.registry.AGBlocks
 
 object SteamTurbineMultiblock {
 
-    private val STEAM_TURBINE_VENT = SimpleMember.forBlock(AGBlocks.STEAM_TURBINE_VENT.get())
-    private val PIPE_CASING = SimpleMember.forBlock(AGBlocks.PIPE_CASING.get())
-    private val CASING = SimpleMember.forBlock(AGBlocks.STEAM_TURBINE_CASING.get())
-    private val PORTS =
-        PortFlags(
-            PortBlockType.FLUID_INPUT,
-            PortBlockType.FLUID_OUTPUT,
-            PortBlockType.ENERGY_OUTPUT,
-        )
-
     val SHAPE =
         ShapeTemplate.Builder(AGBlocks.STEAM_TURBINE_CASING.defaultState)
-            // Bottom
-            .add3by3(-1, CASING, false, PORTS)
             .apply {
-                for (x in -1..1) {
-                    add(x, 0, 3, CASING, PORTS)
+                val steamTurbineVent = SimpleMember.forBlock(AGBlocks.STEAM_TURBINE_VENT.get())
+                val pipeCasing = SimpleMember.forBlock(AGBlocks.PIPE_CASING.get())
+                val casing = SimpleMember.forBlock(AGBlocks.STEAM_TURBINE_CASING.get())
+                val ports =
+                    PortFlags(
+                        PortBlockType.FLUID_INPUT,
+                        PortBlockType.FLUID_OUTPUT,
+                        PortBlockType.ENERGY_OUTPUT,
+                    )
+
+                // Bottom
+                add3by3(-1, casing, false, ports)
+                apply {
+                    for (x in -1..1) {
+                        add(x, 0, 3, casing, ports)
+                    }
                 }
-            }
-            // Middle
-            .apply {
-                for (z in 0..3) {
-                    add(-1, 0, z, CASING, PORTS)
-                    add(1, 0, z, CASING, PORTS)
+                // Middle
+                apply {
+                    for (z in 0..3) {
+                        add(-1, 0, z, casing, ports)
+                        add(1, 0, z, casing, ports)
+                    }
                 }
-            }
-            .add(0, 0, 0, CASING)
-            .add(0, 0, 1, PIPE_CASING)
-            .add(0, 0, 2, PIPE_CASING)
-            .add(0, 0, 3, STEAM_TURBINE_VENT)
-            // Top
-            .add3by3(1, CASING, false, PORTS)
-            .apply {
-                for (x in -1..1) {
-                    add(x, 1, 3, CASING, PORTS)
+                add(0, 0, 0, casing)
+                add(0, 0, 1, pipeCasing)
+                add(0, 0, 2, pipeCasing)
+                add(0, 0, 3, steamTurbineVent)
+                // Top
+                add3by3(1, casing, false, ports)
+                apply {
+                    for (x in -1..1) {
+                        add(x, 1, 3, casing, ports)
+                    }
                 }
             }
             .build()
