@@ -3,11 +3,10 @@ package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockType
 import dev.tobynguyen27.astralgenerators.contents.ports.buses.BusBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.hatches.fluid.FluidHatchBlockEntity
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils.toBool
 import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.registry.AGFluids
 import dev.tobynguyen27.astralgenerators.registry.AGSounds
+import dev.tobynguyen27.sense.util.PrimitiveUtils.toBoolean
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.core.BlockPos
@@ -50,7 +49,7 @@ object BoilerControllerLogical {
         blockState: BlockState,
         blockEntity: BoilerControllerBlockEntity,
     ) {
-        if (!blockEntity.isEnabled.toBool()) {
+        if (!blockEntity.isEnabled.toBoolean()) {
             blockEntity.updateActiveState(false)
             blockEntity.updateFireboxActiveState(false)
             return

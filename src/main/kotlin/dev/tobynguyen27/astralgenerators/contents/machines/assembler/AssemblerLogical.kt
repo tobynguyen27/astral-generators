@@ -1,7 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils.toBool
+import dev.tobynguyen27.sense.util.PrimitiveUtils.toBoolean
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
@@ -24,7 +23,7 @@ object AssemblerLogical {
         blockState: BlockState,
         blockEntity: AssemblerBlockEntity,
     ) {
-        if (!blockEntity.isEnabled.toBool()) {
+        if (!blockEntity.isEnabled.toBoolean()) {
             updateActiveState(level, blockEntity, false)
             return
         }

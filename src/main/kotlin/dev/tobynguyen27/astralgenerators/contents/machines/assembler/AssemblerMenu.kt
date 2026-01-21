@@ -1,7 +1,6 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.assembler
 
 import dev.tobynguyen27.astralgenerators.core.network.Packets
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.core.util.Identifier
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
@@ -9,6 +8,7 @@ import dev.tobynguyen27.astralgenerators.gui.widgets.FluidBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.ProgressBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
+import dev.tobynguyen27.sense.util.PrimitiveUtils.toInt
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -97,7 +97,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
                 val powerButton = PowerButton(IS_ENABLED_INDEX)
                 powerButton.onToggle = {
                     sendPacketFromClient(Packets.TOGGLE_MACHINE) { buf ->
-                        buf.writeInt(BooleanUtils.toInt(it))
+                        buf.writeInt(it.toInt())
                     }
                 }
                 this.add(powerButton, 24, 11, 3, 3)

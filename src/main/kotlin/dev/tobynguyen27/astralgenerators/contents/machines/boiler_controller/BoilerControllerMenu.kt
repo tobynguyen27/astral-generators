@@ -1,13 +1,13 @@
 package dev.tobynguyen27.astralgenerators.contents.machines.boiler_controller
 
 import dev.tobynguyen27.astralgenerators.core.network.Packets
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.core.util.FormattingUtil
 import dev.tobynguyen27.astralgenerators.data.config.ConfigHolder.CONFIG
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.PowerButton
 import dev.tobynguyen27.astralgenerators.gui.widgets.TemperatureBar
 import dev.tobynguyen27.astralgenerators.registry.AGMenus
+import dev.tobynguyen27.sense.util.PrimitiveUtils.toInt
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel
@@ -85,7 +85,7 @@ class BoilerControllerMenu(syncId: Int, playerInventory: Inventory, val ctx: Con
         val powerButton = PowerButton(IS_ENABLED_INDEX)
         powerButton.onToggle = {
             ScreenNetworking.of(this, NetworkSide.CLIENT).send(Packets.TOGGLE_MACHINE) { packet ->
-                packet.writeInt(BooleanUtils.toInt(it))
+                packet.writeInt(it.toInt())
             }
         }
         ScreenNetworking.of(this, NetworkSide.SERVER).receive(Packets.TOGGLE_MACHINE) { packet ->

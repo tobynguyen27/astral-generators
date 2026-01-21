@@ -3,10 +3,10 @@ package dev.tobynguyen27.astralgenerators.contents.ports.hatches.energy
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockEntity
 import dev.tobynguyen27.astralgenerators.contents.ports.PortBlockSpecification
 import dev.tobynguyen27.astralgenerators.core.network.Packets
-import dev.tobynguyen27.astralgenerators.core.util.BooleanUtils
 import dev.tobynguyen27.astralgenerators.gui.MachineGUI
 import dev.tobynguyen27.astralgenerators.gui.widgets.EnergyBar
 import dev.tobynguyen27.astralgenerators.gui.widgets.IOButton
+import dev.tobynguyen27.sense.util.PrimitiveUtils.toInt
 import io.github.cottonmc.cotton.gui.networking.NetworkSide
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -118,7 +118,7 @@ class EnergyHatchMenu(
         val button = IOButton(buttonType, containerIndex)
         button.onToggle = {
             ScreenNetworking.of(this, NetworkSide.CLIENT).send(togglePacket) { packet ->
-                packet.writeInt(BooleanUtils.toInt(it))
+                packet.writeInt((it.toInt()))
             }
         }
         ScreenNetworking.of(this, NetworkSide.SERVER).receive(togglePacket) { packet ->
