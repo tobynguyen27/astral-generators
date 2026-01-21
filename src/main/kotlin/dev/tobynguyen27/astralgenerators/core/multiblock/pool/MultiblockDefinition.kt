@@ -1,7 +1,6 @@
 package dev.tobynguyen27.astralgenerators.core.multiblock.pool
 
 import dev.tobynguyen27.astralgenerators.AstralGenerators
-import it.unimi.dsi.fastutil.chars.Char2ObjectMap
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
@@ -10,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 data class MultiblockDefinition(
     val origin: Origin,
-    val keys: Char2ObjectMap<Block>,
+    val keys: HashMap<Char, Block>,
     val pattern: List<List<String>>,
 ) {
     fun getBlocks(): HashMap<BlockPos, BlockState> {

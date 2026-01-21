@@ -33,24 +33,26 @@ class MultiblocksPool : SimpleResourceReloadListener<Multiblocks> {
         return CompletableFuture.supplyAsync(
             {
                 val multiblocks =
-                    buildMap {
-                            manager
-                                .listResources("multiblocks") { it.endsWith(".json") }
-                                .filter { it.namespace == AstralGenerators.MOD_ID }
-                                .forEach { resource ->
-                                    runCatching {
-                                            manager.getResource(resource).inputStream.reader().use {
-                                                GSON.fromJson(it, MultiblockDefinition::class.java)
-                                            }
-                                        }
-                                        .onSuccess { put(resource, it) }
-                                        .onFailure {
-                                            AstralGenerators.LOGGER.error(
-                                                "Failed to load multiblock definition from $resource",
-                                                it,
-                                            )
-                                        }
+                    manager
+                        .listResources("multiblocks") { it.endsWith(".json") }
+                        .asSequence()
+                        .filter { it.namespace == AstralGenerators.MOD_ID }
+                        .mapNotNull { resourceLocation ->
+                            runCatching {
+                                    manager.getResource(resourceLocation).inputStream.reader().use {
+                                        GSON.fromJson(it, MultiblockDefinition::class.java)
+                                    }
                                 }
+                                .fold(
+                                    { resourceLocation to it },
+                                    {
+                                        AstralGenerators.LOGGER.error(
+                                            "Failed to load multiblock definition from $resourceLocation",
+                                            it,
+                                        )
+                                        null
+                                    },
+                                )
                         }
                         .toMap()
 
