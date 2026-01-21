@@ -96,9 +96,7 @@ class AssemblerMenu(syncId: Int, playerInventory: Inventory, val ctx: ContainerL
 
                 val powerButton = PowerButton(IS_ENABLED_INDEX)
                 powerButton.onToggle = {
-                    sendPacketFromClient(Packets.TOGGLE_MACHINE) { buf ->
-                        buf.writeInt(it.toInt())
-                    }
+                    sendPacketFromClient(Packets.TOGGLE_MACHINE) { buf -> buf.writeInt(it.toInt()) }
                 }
                 this.add(powerButton, 24, 11, 3, 3)
 
