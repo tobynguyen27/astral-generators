@@ -1,17 +1,28 @@
-<img align="left" style="width:260px" src="src/main/resources/assets/astralgenerators/icon.png" width="288px">
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/astralgenerators-logo-dark.png">
+        <img src="assets/astralgenerators-logo-dark.png">
+    </picture>
+</p>
 
-**Astral Generators is a Create: Astral addon. It adds energy generators and various multiblocks for crafting**
-
-Astral Generators is entirely made just for Create: Astral so issues which are not related to Create: Astral and this mod will be not supported.
-
-*NOTE for ADVENTURERS: Astral Generators is heavily depending on [CodeBebeLib](https://github.com/tobynguyen27/CodeBebeLib) so this is another source to see CodeBebeLib examples.*
-
-Ready to play? Download Create: Astral [here](https://www.curseforge.com/minecraft/modpacks/create-astral).
+<p align="center">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/astral-generators-for-create-astral"><img src="https://img.shields.io/curseforge/dt/1109754?style=for-the-badge&logo=curseforge&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
+    <a href="https://www.curseforge.com/minecraft/mc-mods/astral-generators-for-create-astral"><img src="https://img.shields.io/curseforge/v/1109754?style=for-the-badge&logo=curseforge&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
+    <a href="https://discord.gg/RcFhzWGN33"><img src="https://img.shields.io/discord/1466132187286995067?style=for-the-badge&logo=discord&logoColor=ffffff&labelColor=6A44F2&color=eff1f5
+" /></a>
+</p>
 
 ---
 
-> [!WARNING]
-> THIS MOD IS A WORK IN PROGRESS!
+Astral Generators is a Create: Astral addon. It adds energy generators and various multiblocks for crafting.
+
+This mod is entirely made just for Create: Astral so issues which are not related to Create: Astral and this mod will be not supported.
+
+Ready to play? Download Create: Astral [here](https://www.curseforge.com/minecraft/modpacks/create-astral).
+
+*NOTE for ADVENTURERS: Astral Generators is heavily depending on [CodeBebeLib](https://github.com/tobynguyen27/CodeBebeLib) so this is another source to see CodeBebeLib examples.*
+
+---
 
 Contents
 ---
