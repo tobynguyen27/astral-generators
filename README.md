@@ -6,6 +6,7 @@
 </p>
 
 <p align="center">
+    <a href="https://discord.gg/RcFhzWGN33"><img src="https://img.shields.io/github/actions/workflow/status/tobynguyen27/astral-generators/build-publish.yml?style=for-the-badge&logo=github&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
     <a href="https://www.curseforge.com/minecraft/mc-mods/astral-generators-for-create-astral"><img src="https://img.shields.io/curseforge/dt/1109754?style=for-the-badge&logo=curseforge&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
     <a href="https://www.curseforge.com/minecraft/mc-mods/astral-generators-for-create-astral"><img src="https://img.shields.io/curseforge/v/1109754?style=for-the-badge&logo=curseforge&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
     <a href="https://discord.gg/RcFhzWGN33"><img src="https://img.shields.io/discord/1466132187286995067?style=for-the-badge&logo=discord&logoColor=ffffff&labelColor=6A44F2&color=eff1f5" /></a>
