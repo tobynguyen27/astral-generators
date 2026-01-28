@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="assets/astralgenerators-logo-dark.png">
-        <img src="assets/astralgenerators-logo-dark.png">
+        <img src="assets/astralgenerators-logo-light.png">
     </picture>
 </p>
 
