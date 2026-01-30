@@ -6,7 +6,7 @@
     "description": "${mod_description}",
     "authors": ["tobynguyen27", "MikoTheBoi"],
     "contact": {
-        "email": "hi@tobynguyen.dev",
+        "email": "hi@tobynguyen.org",
         "homepage": "https://github.com/tobynguyen27/astral-generators",
         "issues": "https://github.com/tobynguyen27/astral-generators/issues",
         "sources": "https://github.com/tobynguyen27/astral-generators"
