@@ -32,7 +32,6 @@ repositories {
             "https://maven.terraformersmc.com/",
             "https://mvn.devos.one/snapshots/",
             "https://maven.jamieswhiteshirt.com/libs-release",
-            "https://server.bbkr.space/artifactory/libs-release",
             "https://maven.shedaniel.me/",
             "https://staging.alexiil.uk/maven/",
             "https://jitpack.io",
