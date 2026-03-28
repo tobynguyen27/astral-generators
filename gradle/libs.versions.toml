@@ -14,7 +14,7 @@ rei = "8.4.737"
 portinglib = "1.2.1304-beta+1.18.2"
 forgetags = "2.1"
 registrate = "MC1.18.2-1.1.11"
-libgui = "5.4.2+1.18.2"
+libgui = "5.4.3+1.18.2"
 energyapi = "2.3.0"
 jade-api = "4573441"
 
