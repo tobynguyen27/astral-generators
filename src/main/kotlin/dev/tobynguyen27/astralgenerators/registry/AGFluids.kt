@@ -9,7 +9,6 @@ object AGFluids {
     val STEAM =
         REGISTRATE.fluid("steam", Identifier("fluid/steam"), Identifier("fluid/steam_flow"))
             .lang("Steam")
-            .noBucket()
             .tag(AGFluidTags.STEAM)
             .removeTag(FluidTags.WATER)
             .register()
